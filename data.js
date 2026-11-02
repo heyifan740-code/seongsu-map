@@ -29,22 +29,22 @@ const POPS=[
   type:'deal',g:'最低2折',perks:[['第一周：经典款档案特卖，最高 8 折扣（约 2 折价）','折扣'],['第二周：FW 新款外套和联名系列','新品']],src:'https://popply.co.kr/popup/6457'},
  {id:'deadflt',name:'DEADFLT 성수 팝업',zh:'DEADFLT 圣水快闪',brand:'DEADFLT',cat:'服装',addr:'서울 성동구 성수이로 58, 착한구두 성수 스페이스 B1',ll:[37.5401239,127.0556244],est:false,
   start:'10.08',endTxt:'11.08',end:'2026-11-08T19:00:00+09:00',hours:'每天 11:00–19:00',entry:'walkin',entryNote:'从착한구두店内楼梯下到 B1，在无信社旁边',
-  type:'info',g:'新品',perks:[['卫衣、拉链卫衣、T 恤、帽子、袜子（售卖，未公布赠品）','售卖']],src:'https://popply.co.kr/popup/6303'},
+  type:'deal',g:'半价',perks:[['圣水快闪店独有半价（50% OFF）','折扣'],['卫衣、拉链卫衣、T 恤、帽子、袜子','售卖']],src:'https://popply.co.kr/popup/6303',src2:'小红书 @Popvia「11月首尔圣水快闪攻略」'},
  {id:'flareup',name:'플레어업 팝업 : IN A DAZE',zh:'FLAREUP · IN A DAZE',brand:'FLAREUP',cat:'服装',addr:'서울 성동구 성수이로 74 (대림창고)',ll:[37.541595,127.0564109],est:false,
   start:'10.16',endTxt:'11.05',end:'2026-11-05T22:00:00+09:00',hours:'每天 11:00–22:00',entry:'walkin',entryNote:'',
   type:'deal',g:'额外9折',perks:[['无信社线上折扣价再减 10%','折扣'],['瑕疵品统一价特卖 9,900–79,000 韩元（不退不换）','折扣']],src:'https://popply.co.kr/popup/6371'},
- {id:'torriden',name:'토리든 커넥트 성수',zh:'Torriden Connect 圣水',brand:'Torriden',cat:'美妆',addr:'서울 성동구 성수이로7가길 17',ll:[37.5418318,127.0553011],est:false,
+ {id:'torriden',name:'토리든 커넥트 성수 : CONNECT DEEP DIVE',zh:'Torriden CONNECT DEEP DIVE',brand:'Torriden',cat:'美妆',addr:'서울 성동구 성수이로7가길 17',ll:[37.5418318,127.0553011],est:false,
   start:'07.15',endTxt:'12.31',end:'2026-12-31T20:00:00+09:00',hours:'每天 11:00–20:00',entry:'walkin',entryNote:'',
-  type:'exp',g:'皮肤检测',perks:[['皮肤诊断机','体验'],['"吸收球"游戏、吸收瀑布拍照区','体验']],src:'https://popply.co.kr/popup/5790'},
+  type:'exp',g:'皮肤检测',perks:[['沉浸式拍照装置（CORTIS 主题照片墙）','体验'],['互动游戏、肌肤状态检测','体验'],['了解成分理念的 K-Beauty 空间','体验']],src:'https://popply.co.kr/popup/5790',src2:'小红书 @Popvia「11月首尔圣水快闪攻略」'},
  {id:'romand',name:'롬앤 팝업 : 10주년 생일파티',zh:'rom&nd 10 周年生日派对',brand:'rom&nd',cat:'美妆',addr:'서울 성동구 연무장길 88 (롬앤 핑크오피스)',ll:[37.5412902,127.0588878],est:false,
-  start:'10.10',endTxt:'11.10',end:'2026-11-10T22:00:00+09:00',hours:'每天 10:00–22:00',entry:'walkin',entryNote:'',
-  type:'info',g:'10周年',perks:[['10 周年生日派对主题快闪（官方未公布赠品）','体验']],src:'https://popply.co.kr/popup/6252'},
+  start:'10.10',endTxt:'11.10',end:'2026-11-10T22:00:00+09:00',hours:'每天 11:00–21:00',entry:'walkin',entryNote:'营业时间按小红书笔记写的 11:00–21:00；Popply 写 10:00–22:00，以现场为准',
+  type:'exp',g:'蛋糕拍照',perks:[['粉色生日派对主题：蛋糕主题拍照区','体验'],['互动游戏和 DIY 体验','体验'],['回顾品牌十年彩妆风格，现场试唇釉、腮红','体验']],src:'https://popply.co.kr/popup/6252',src2:'小红书 @Popvia「11月首尔圣水快闪攻略」'},
  {id:'riot',name:'라이엇게임즈 뮤직 & 월즈26 팝업',zh:'Riot Games 音乐 & 全球总决赛 2026',brand:'Riot Games',cat:'联名',addr:'서울 성동구 연무장7길 13 (트렌드팟 바이 올리브영 N성수)',ll:[37.544177,127.0544868],est:false,
   start:'10.29',endTxt:'11.08',end:'2026-11-08T20:00:00+09:00',hours:'每天 11:00–20:00',entry:'walkin',entryNote:'官方说明：不接受预约，现场排队入场',
   type:'gift',g:'限定奖励',perks:[['只在这个快闪提供的特别奖励（官方未写具体内容）','赠品']],src:'https://popply.co.kr/popup/6454'},
  {id:'shinchan',name:'짱구는 못말려 전시 : 시공간 대모험',zh:'蜡笔小新展 · 时空大冒险',brand:'蜡笔小新',cat:'联名',addr:'서울 성동구 연무장5길 9-29',ll:[37.5444463,127.0520483],est:false,
-  start:'10.17',endTxt:'2027.01.24',end:'2027-01-24T20:00:00+09:00',hours:'每天 10:00–20:00',entry:'ticket',entryNote:'收费展览，页面标有"사전예약"，票价未公布',
-  type:'info',g:'展览',perks:[['付费展览（官方未公布赠品）','体验']],src:'https://popply.co.kr/popup/5949'},
+  start:'10.17',endTxt:'2027.01.24',end:'2027-01-24T20:00:00+09:00',hours:'每天 11:00–20:00（19:00 停止入场）',entry:'ticket',entryNote:'收费展览，通过 bemill 或官方 linktree 购票预约；韩国首场蜡笔小新互动沉浸展',
+  type:'exp',g:'AR闯关',perks:[['巨型小新打卡立牌、剧场版名场景展区','体验'],['拯救双叶镇 AR 扫码任务、小新同款姿势体感互动','体验'],['可以跑动参与解谜闯关，不只是看展','体验']],src:'https://popply.co.kr/popup/5949',src2:'小红书 @FELIX果味实验室'},
  {id:'kpopgoods',name:'Kpop 굿즈스토어 (맵달)',zh:'K-pop 周边店（mapdal）',brand:'mapdal',cat:'K-pop',addr:'서울 성동구 성수이로16길 5 4층',ll:[37.541288,127.0572471],est:false,
   start:'06.01',endTxt:'2027.12.31',end:'2027-12-31T18:00:00+09:00',hours:'每天 09:00–18:00',entry:'walkin',entryNote:'',
   type:'exp',g:'K-pop周边',perks:[['圣水唯一的 K-pop 周边店（自称）','售卖'],['1 楼可寄存物品（21:00 前取回）','便利']],src:'https://popply.co.kr/popup/5377'}
@@ -109,8 +109,8 @@ const POPS=[
   type:'exp',g:'密室逃脱',perks:[['免费策划展览','体验'],['密室逃脱游戏（需预约）','体验']],src:'https://popply.co.kr/popup/6378'}
  ,{id:'skt',name:'SK텔레콤 X 랜덤 다이버시티 전시 : Emotion Lab',zh:'SKT × Random Diversity 情绪实验室',brand:'SKT',cat:'其他',addr:'서울 성동구 연무장1길 7-1 (T 팩토리 성수)',ll:[37.5449383,127.0505364],est:false,
   start:'09.19',endTxt:'11.15',end:'2026-11-15T20:00:00+09:00',hours:'每天 11:00–20:00（19:30 停止入场）',entry:'walkin',entryNote:'1 楼香气体验免费（每天 1 次）；B1 色彩体验收费，经 T Factory 主页链接预约',
-  type:'exp',g:'免费体验',perks:[['1F Scent of Emotion 免费体验','体验'],['B1 Color of Emotion 收费，SKT 用户 8 折','折扣']],src:'https://popply.co.kr/popup/6100'}
- ,{id:'levi4u',name:'리바이포유 10주년 팝업',zh:'Levi4U 10 周年快闪',brand:'Levi4U',cat:'其他',addr:'서울 성동구 연무장길 65 (LECT성수)',ll:[37.5422281,127.0568117],est:false,
+  type:'exp',g:'免费体验',perks:[['1F Scent of Emotion：戴 VR 测脑波，按情绪生成专属香气，可配手写信送人（免费，每天 1 次）','体验'],['B1 Color of Emotion：AI 分析脑波提取情绪颜色（需线上预约）','体验'],['SKT 用户 B1 体验 8 折','折扣']],src:'https://popply.co.kr/popup/6100',src2:'小红书 @FELIX果味实验室'}
+ ,{id:'levi4u',name:'리바이포유 (Rbfy) 10주년 팝업',zh:'Rbfy 10 周年快闪',brand:'Rbfy',cat:'美妆',addr:'서울 성동구 연무장길 65 (LECT성수)',ll:[37.5422281,127.0568117],est:false,
   start:'10.28',endTxt:'11.12',end:'2026-11-12T19:00:00+09:00',hours:'每天 11:00–19:00',entry:'walkin',entryNote:'事前预约期已过（10.21–10.27）',
-  type:'info',g:'10周年',perks:[['"特别优惠、礼物和活动"陆续公布（官方未写具体内容）','体验']],src:'https://popply.co.kr/popup/6432'}
+  type:'gift',g:'送安瓶',perks:[['满 1 万韩元送 45ml 补水安瓶正装','赠品'],['满 7 万韩元送 45ml 安瓶 + 60ml 补水面霜正装','赠品'],['全品最高 7 折；迷你精华钥匙扣套装 55% OFF','折扣'],['幸运游戏区 100% 中奖（优惠券 / 面霜 / 补水棉片）','抽奖'],['快闪专属镜子钥匙扣和周边','周边']],src:'https://popply.co.kr/popup/6432',src2:'小红书 @FELIX果味实验室'}
 ];
