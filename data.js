@@ -113,4 +113,7 @@ const POPS=[
  ,{id:'levi4u',name:'리바이포유 (Rbfy) 10주년 팝업',zh:'Rbfy 10 周年快闪',brand:'Rbfy',cat:'美妆',addr:'서울 성동구 연무장길 65 (LECT성수)',ll:[37.5422281,127.0568117],est:false,
   start:'10.28',endTxt:'11.12',end:'2026-11-12T19:00:00+09:00',hours:'每天 11:00–19:00',entry:'walkin',entryNote:'事前预约期已过（10.21–10.27）',
   type:'gift',g:'送安瓶',perks:[['满 1 万韩元送 45ml 补水安瓶正装','赠品'],['满 7 万韩元送 45ml 安瓶 + 60ml 补水面霜正装','赠品'],['全品最高 7 折；迷你精华钥匙扣套装 55% OFF','折扣'],['幸运游戏区 100% 中奖（优惠券 / 面霜 / 补水棉片）','抽奖'],['快闪专属镜子钥匙扣和周边','周边']],src:'https://popply.co.kr/popup/6432',src2:'小红书 @FELIX果味实验室'}
+ ,{id:'dralthea',name:'닥터엘시아 345 시크릿 프로젝트 (올리브영 뷰티 맨션 성수)',zh:'Dr.Althea 345 秘密项目快闪',brand:'Dr.Althea',cat:'美妆',addr:'서울 성동구 성수이로 108 (올리브영 뷰티 맨션 성수)',ll:[37.5450426,127.0558154],est:false,
+  start:'11.01',endTxt:'11.28',end:'2026-11-28T22:00:00+09:00',hours:'每天 10:00–22:00（体验和购买活动只在 11:00–19:00）',entry:'walkin',entryNote:'在 Olive Young Beauty Mansion 圣水内，和 LONGTAKE 快闪同一栋楼',
+  type:'gift',g:'送洁面乳',perks:[['FIND 345：关注 Instagram 和 KakaoTalk 后 10 秒内找出真的 345 洁面乳，成功送正装、失败送 2 个小样','赠品'],['345 LUCKY DRAW：买 1 件即可抽，100% 中奖（舒缓面霜正装或迷你公文包挑战），每人 1 次','抽奖'],['购买即送购物袋；满 3 万送精华 15ml，5 万送面膜 2 片，7 万送面膜 1 盒，10 万送洁面乳 + 4 件小样，20 万送旅行套装（不叠加）','赠品'],['研究员拍照区，发 Ins 快拍可参加评选（仅限韩国居住者）','体验']],src:'https://www.instagram.com/dr.althea_korea_official/',src2:'小红书 @首尔学姐情报便利店'}
 ];
