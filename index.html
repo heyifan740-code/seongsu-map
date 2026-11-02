@@ -1,0 +1,1218 @@
+<!doctype html>
+<html lang="zh-CN"><head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>圣水快闪线</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wght@500;700;800&display=swap">
+<style>
+/* required styles */
+
+.leaflet-pane,
+.leaflet-tile,
+.leaflet-marker-icon,
+.leaflet-marker-shadow,
+.leaflet-tile-container,
+.leaflet-pane > svg,
+.leaflet-pane > canvas,
+.leaflet-zoom-box,
+.leaflet-image-layer,
+.leaflet-layer {
+	position: absolute;
+	left: 0;
+	top: 0;
+	}
+.leaflet-container {
+	overflow: hidden;
+	}
+.leaflet-tile,
+.leaflet-marker-icon,
+.leaflet-marker-shadow {
+	-webkit-user-select: none;
+	   -moz-user-select: none;
+	        user-select: none;
+	  -webkit-user-drag: none;
+	}
+/* Prevents IE11 from highlighting tiles in blue */
+.leaflet-tile::selection {
+	background: transparent;
+}
+/* Safari renders non-retina tile on retina better with this, but Chrome is worse */
+.leaflet-safari .leaflet-tile {
+	image-rendering: -webkit-optimize-contrast;
+	}
+/* hack that prevents hw layers "stretching" when loading new tiles */
+.leaflet-safari .leaflet-tile-container {
+	width: 1600px;
+	height: 1600px;
+	-webkit-transform-origin: 0 0;
+	}
+.leaflet-marker-icon,
+.leaflet-marker-shadow {
+	display: block;
+	}
+/* .leaflet-container svg: reset svg max-width decleration shipped in Joomla! (joomla.org) 3.x */
+/* .leaflet-container img: map is broken in FF if you have max-width: 100% on tiles */
+.leaflet-container .leaflet-overlay-pane svg {
+	max-width: none !important;
+	max-height: none !important;
+	}
+.leaflet-container .leaflet-marker-pane img,
+.leaflet-container .leaflet-shadow-pane img,
+.leaflet-container .leaflet-tile-pane img,
+.leaflet-container img.leaflet-image-layer,
+.leaflet-container .leaflet-tile {
+	max-width: none !important;
+	max-height: none !important;
+	width: auto;
+	padding: 0;
+	}
+
+.leaflet-container img.leaflet-tile {
+	/* See: https://bugs.chromium.org/p/chromium/issues/detail?id=600120 */
+	mix-blend-mode: plus-lighter;
+}
+
+.leaflet-container.leaflet-touch-zoom {
+	-ms-touch-action: pan-x pan-y;
+	touch-action: pan-x pan-y;
+	}
+.leaflet-container.leaflet-touch-drag {
+	-ms-touch-action: pinch-zoom;
+	/* Fallback for FF which doesn't support pinch-zoom */
+	touch-action: none;
+	touch-action: pinch-zoom;
+}
+.leaflet-container.leaflet-touch-drag.leaflet-touch-zoom {
+	-ms-touch-action: none;
+	touch-action: none;
+}
+.leaflet-container {
+	-webkit-tap-highlight-color: transparent;
+}
+.leaflet-container a {
+	-webkit-tap-highlight-color: rgba(51, 181, 229, 0.4);
+}
+.leaflet-tile {
+	filter: inherit;
+	visibility: hidden;
+	}
+.leaflet-tile-loaded {
+	visibility: inherit;
+	}
+.leaflet-zoom-box {
+	width: 0;
+	height: 0;
+	-moz-box-sizing: border-box;
+	     box-sizing: border-box;
+	z-index: 800;
+	}
+/* workaround for https://bugzilla.mozilla.org/show_bug.cgi?id=888319 */
+.leaflet-overlay-pane svg {
+	-moz-user-select: none;
+	}
+
+.leaflet-pane         { z-index: 400; }
+
+.leaflet-tile-pane    { z-index: 200; }
+.leaflet-overlay-pane { z-index: 400; }
+.leaflet-shadow-pane  { z-index: 500; }
+.leaflet-marker-pane  { z-index: 600; }
+.leaflet-tooltip-pane   { z-index: 650; }
+.leaflet-popup-pane   { z-index: 700; }
+
+.leaflet-map-pane canvas { z-index: 100; }
+.leaflet-map-pane svg    { z-index: 200; }
+
+.leaflet-vml-shape {
+	width: 1px;
+	height: 1px;
+	}
+.lvml {
+	behavior: url(#default#VML);
+	display: inline-block;
+	position: absolute;
+	}
+
+
+/* control positioning */
+
+.leaflet-control {
+	position: relative;
+	z-index: 800;
+	pointer-events: visiblePainted; /* IE 9-10 doesn't have auto */
+	pointer-events: auto;
+	}
+.leaflet-top,
+.leaflet-bottom {
+	position: absolute;
+	z-index: 1000;
+	pointer-events: none;
+	}
+.leaflet-top {
+	top: 0;
+	}
+.leaflet-right {
+	right: 0;
+	}
+.leaflet-bottom {
+	bottom: 0;
+	}
+.leaflet-left {
+	left: 0;
+	}
+.leaflet-control {
+	float: left;
+	clear: both;
+	}
+.leaflet-right .leaflet-control {
+	float: right;
+	}
+.leaflet-top .leaflet-control {
+	margin-top: 10px;
+	}
+.leaflet-bottom .leaflet-control {
+	margin-bottom: 10px;
+	}
+.leaflet-left .leaflet-control {
+	margin-left: 10px;
+	}
+.leaflet-right .leaflet-control {
+	margin-right: 10px;
+	}
+
+
+/* zoom and fade animations */
+
+.leaflet-fade-anim .leaflet-popup {
+	opacity: 0;
+	-webkit-transition: opacity 0.2s linear;
+	   -moz-transition: opacity 0.2s linear;
+	        transition: opacity 0.2s linear;
+	}
+.leaflet-fade-anim .leaflet-map-pane .leaflet-popup {
+	opacity: 1;
+	}
+.leaflet-zoom-animated {
+	-webkit-transform-origin: 0 0;
+	    -ms-transform-origin: 0 0;
+	        transform-origin: 0 0;
+	}
+svg.leaflet-zoom-animated {
+	will-change: transform;
+}
+
+.leaflet-zoom-anim .leaflet-zoom-animated {
+	-webkit-transition: -webkit-transform 0.25s cubic-bezier(0,0,0.25,1);
+	   -moz-transition:    -moz-transform 0.25s cubic-bezier(0,0,0.25,1);
+	        transition:         transform 0.25s cubic-bezier(0,0,0.25,1);
+	}
+.leaflet-zoom-anim .leaflet-tile,
+.leaflet-pan-anim .leaflet-tile {
+	-webkit-transition: none;
+	   -moz-transition: none;
+	        transition: none;
+	}
+
+.leaflet-zoom-anim .leaflet-zoom-hide {
+	visibility: hidden;
+	}
+
+
+/* cursors */
+
+.leaflet-interactive {
+	cursor: pointer;
+	}
+.leaflet-grab {
+	cursor: -webkit-grab;
+	cursor:    -moz-grab;
+	cursor:         grab;
+	}
+.leaflet-crosshair,
+.leaflet-crosshair .leaflet-interactive {
+	cursor: crosshair;
+	}
+.leaflet-popup-pane,
+.leaflet-control {
+	cursor: auto;
+	}
+.leaflet-dragging .leaflet-grab,
+.leaflet-dragging .leaflet-grab .leaflet-interactive,
+.leaflet-dragging .leaflet-marker-draggable {
+	cursor: move;
+	cursor: -webkit-grabbing;
+	cursor:    -moz-grabbing;
+	cursor:         grabbing;
+	}
+
+/* marker & overlays interactivity */
+.leaflet-marker-icon,
+.leaflet-marker-shadow,
+.leaflet-image-layer,
+.leaflet-pane > svg path,
+.leaflet-tile-container {
+	pointer-events: none;
+	}
+
+.leaflet-marker-icon.leaflet-interactive,
+.leaflet-image-layer.leaflet-interactive,
+.leaflet-pane > svg path.leaflet-interactive,
+svg.leaflet-image-layer.leaflet-interactive path {
+	pointer-events: visiblePainted; /* IE 9-10 doesn't have auto */
+	pointer-events: auto;
+	}
+
+/* visual tweaks */
+
+.leaflet-container {
+	background: #ddd;
+	outline-offset: 1px;
+	}
+.leaflet-container a {
+	color: #0078A8;
+	}
+.leaflet-zoom-box {
+	border: 2px dotted #38f;
+	background: rgba(255,255,255,0.5);
+	}
+
+
+/* general typography */
+.leaflet-container {
+	font-family: "Helvetica Neue", Arial, Helvetica, sans-serif;
+	font-size: 12px;
+	font-size: 0.75rem;
+	line-height: 1.5;
+	}
+
+
+/* general toolbar styles */
+
+.leaflet-bar {
+	box-shadow: 0 1px 5px rgba(0,0,0,0.65);
+	border-radius: 4px;
+	}
+.leaflet-bar a {
+	background-color: #fff;
+	border-bottom: 1px solid #ccc;
+	width: 26px;
+	height: 26px;
+	line-height: 26px;
+	display: block;
+	text-align: center;
+	text-decoration: none;
+	color: black;
+	}
+.leaflet-bar a,
+.leaflet-control-layers-toggle {
+	background-position: 50% 50%;
+	background-repeat: no-repeat;
+	display: block;
+	}
+.leaflet-bar a:hover,
+.leaflet-bar a:focus {
+	background-color: #f4f4f4;
+	}
+.leaflet-bar a:first-child {
+	border-top-left-radius: 4px;
+	border-top-right-radius: 4px;
+	}
+.leaflet-bar a:last-child {
+	border-bottom-left-radius: 4px;
+	border-bottom-right-radius: 4px;
+	border-bottom: none;
+	}
+.leaflet-bar a.leaflet-disabled {
+	cursor: default;
+	background-color: #f4f4f4;
+	color: #bbb;
+	}
+
+.leaflet-touch .leaflet-bar a {
+	width: 30px;
+	height: 30px;
+	line-height: 30px;
+	}
+.leaflet-touch .leaflet-bar a:first-child {
+	border-top-left-radius: 2px;
+	border-top-right-radius: 2px;
+	}
+.leaflet-touch .leaflet-bar a:last-child {
+	border-bottom-left-radius: 2px;
+	border-bottom-right-radius: 2px;
+	}
+
+/* zoom control */
+
+.leaflet-control-zoom-in,
+.leaflet-control-zoom-out {
+	font: bold 18px 'Lucida Console', Monaco, monospace;
+	text-indent: 1px;
+	}
+
+.leaflet-touch .leaflet-control-zoom-in, .leaflet-touch .leaflet-control-zoom-out  {
+	font-size: 22px;
+	}
+
+
+/* layers control */
+
+.leaflet-control-layers {
+	box-shadow: 0 1px 5px rgba(0,0,0,0.4);
+	background: #fff;
+	border-radius: 5px;
+	}
+.leaflet-control-layers-toggle {
+	background-image: none;
+	width: 36px;
+	height: 36px;
+	}
+.leaflet-retina .leaflet-control-layers-toggle {
+	background-image: none;
+	background-size: 26px 26px;
+	}
+.leaflet-touch .leaflet-control-layers-toggle {
+	width: 44px;
+	height: 44px;
+	}
+.leaflet-control-layers .leaflet-control-layers-list,
+.leaflet-control-layers-expanded .leaflet-control-layers-toggle {
+	display: none;
+	}
+.leaflet-control-layers-expanded .leaflet-control-layers-list {
+	display: block;
+	position: relative;
+	}
+.leaflet-control-layers-expanded {
+	padding: 6px 10px 6px 6px;
+	color: #333;
+	background: #fff;
+	}
+.leaflet-control-layers-scrollbar {
+	overflow-y: scroll;
+	overflow-x: hidden;
+	padding-right: 5px;
+	}
+.leaflet-control-layers-selector {
+	margin-top: 2px;
+	position: relative;
+	top: 1px;
+	}
+.leaflet-control-layers label {
+	display: block;
+	font-size: 13px;
+	font-size: 1.08333em;
+	}
+.leaflet-control-layers-separator {
+	height: 0;
+	border-top: 1px solid #ddd;
+	margin: 5px -10px 5px -6px;
+	}
+
+/* Default icon URLs */
+.leaflet-default-icon-path { /* used only in path-guessing heuristic, see L.Icon.Default */
+	background-image: none;
+	}
+
+
+/* attribution and scale controls */
+
+.leaflet-container .leaflet-control-attribution {
+	background: #fff;
+	background: rgba(255, 255, 255, 0.8);
+	margin: 0;
+	}
+.leaflet-control-attribution,
+.leaflet-control-scale-line {
+	padding: 0 5px;
+	color: #333;
+	line-height: 1.4;
+	}
+.leaflet-control-attribution a {
+	text-decoration: none;
+	}
+.leaflet-control-attribution a:hover,
+.leaflet-control-attribution a:focus {
+	text-decoration: underline;
+	}
+.leaflet-attribution-flag {
+	display: inline !important;
+	vertical-align: baseline !important;
+	width: 1em;
+	height: 0.6669em;
+	}
+.leaflet-left .leaflet-control-scale {
+	margin-left: 5px;
+	}
+.leaflet-bottom .leaflet-control-scale {
+	margin-bottom: 5px;
+	}
+.leaflet-control-scale-line {
+	border: 2px solid #777;
+	border-top: none;
+	line-height: 1.1;
+	padding: 2px 5px 1px;
+	white-space: nowrap;
+	-moz-box-sizing: border-box;
+	     box-sizing: border-box;
+	background: rgba(255, 255, 255, 0.8);
+	text-shadow: 1px 1px #fff;
+	}
+.leaflet-control-scale-line:not(:first-child) {
+	border-top: 2px solid #777;
+	border-bottom: none;
+	margin-top: -2px;
+	}
+.leaflet-control-scale-line:not(:first-child):not(:last-child) {
+	border-bottom: 2px solid #777;
+	}
+
+.leaflet-touch .leaflet-control-attribution,
+.leaflet-touch .leaflet-control-layers,
+.leaflet-touch .leaflet-bar {
+	box-shadow: none;
+	}
+.leaflet-touch .leaflet-control-layers,
+.leaflet-touch .leaflet-bar {
+	border: 2px solid rgba(0,0,0,0.2);
+	background-clip: padding-box;
+	}
+
+
+/* popup */
+
+.leaflet-popup {
+	position: absolute;
+	text-align: center;
+	margin-bottom: 20px;
+	}
+.leaflet-popup-content-wrapper {
+	padding: 1px;
+	text-align: left;
+	border-radius: 12px;
+	}
+.leaflet-popup-content {
+	margin: 13px 24px 13px 20px;
+	line-height: 1.3;
+	font-size: 13px;
+	font-size: 1.08333em;
+	min-height: 1px;
+	}
+.leaflet-popup-content p {
+	margin: 17px 0;
+	margin: 1.3em 0;
+	}
+.leaflet-popup-tip-container {
+	width: 40px;
+	height: 20px;
+	position: absolute;
+	left: 50%;
+	margin-top: -1px;
+	margin-left: -20px;
+	overflow: hidden;
+	pointer-events: none;
+	}
+.leaflet-popup-tip {
+	width: 17px;
+	height: 17px;
+	padding: 1px;
+
+	margin: -10px auto 0;
+	pointer-events: auto;
+
+	-webkit-transform: rotate(45deg);
+	   -moz-transform: rotate(45deg);
+	    -ms-transform: rotate(45deg);
+	        transform: rotate(45deg);
+	}
+.leaflet-popup-content-wrapper,
+.leaflet-popup-tip {
+	background: white;
+	color: #333;
+	box-shadow: 0 3px 14px rgba(0,0,0,0.4);
+	}
+.leaflet-container a.leaflet-popup-close-button {
+	position: absolute;
+	top: 0;
+	right: 0;
+	border: none;
+	text-align: center;
+	width: 24px;
+	height: 24px;
+	font: 16px/24px Tahoma, Verdana, sans-serif;
+	color: #757575;
+	text-decoration: none;
+	background: transparent;
+	}
+.leaflet-container a.leaflet-popup-close-button:hover,
+.leaflet-container a.leaflet-popup-close-button:focus {
+	color: #585858;
+	}
+.leaflet-popup-scrolled {
+	overflow: auto;
+	}
+
+.leaflet-oldie .leaflet-popup-content-wrapper {
+	-ms-zoom: 1;
+	}
+.leaflet-oldie .leaflet-popup-tip {
+	width: 24px;
+	margin: 0 auto;
+
+	-ms-filter: "progid:DXImageTransform.Microsoft.Matrix(M11=0.70710678, M12=0.70710678, M21=-0.70710678, M22=0.70710678)";
+	filter: progid:DXImageTransform.Microsoft.Matrix(M11=0.70710678, M12=0.70710678, M21=-0.70710678, M22=0.70710678);
+	}
+
+.leaflet-oldie .leaflet-control-zoom,
+.leaflet-oldie .leaflet-control-layers,
+.leaflet-oldie .leaflet-popup-content-wrapper,
+.leaflet-oldie .leaflet-popup-tip {
+	border: 1px solid #999;
+	}
+
+
+/* div icon */
+
+.leaflet-div-icon {
+	background: #fff;
+	border: 1px solid #666;
+	}
+
+
+/* Tooltip */
+/* Base styles for the element that has a tooltip */
+.leaflet-tooltip {
+	position: absolute;
+	padding: 6px;
+	background-color: #fff;
+	border: 1px solid #fff;
+	border-radius: 3px;
+	color: #222;
+	white-space: nowrap;
+	-webkit-user-select: none;
+	-moz-user-select: none;
+	-ms-user-select: none;
+	user-select: none;
+	pointer-events: none;
+	box-shadow: 0 1px 3px rgba(0,0,0,0.4);
+	}
+.leaflet-tooltip.leaflet-interactive {
+	cursor: pointer;
+	pointer-events: auto;
+	}
+.leaflet-tooltip-top:before,
+.leaflet-tooltip-bottom:before,
+.leaflet-tooltip-left:before,
+.leaflet-tooltip-right:before {
+	position: absolute;
+	pointer-events: none;
+	border: 6px solid transparent;
+	background: transparent;
+	content: "";
+	}
+
+/* Directions */
+
+.leaflet-tooltip-bottom {
+	margin-top: 6px;
+}
+.leaflet-tooltip-top {
+	margin-top: -6px;
+}
+.leaflet-tooltip-bottom:before,
+.leaflet-tooltip-top:before {
+	left: 50%;
+	margin-left: -6px;
+	}
+.leaflet-tooltip-top:before {
+	bottom: 0;
+	margin-bottom: -12px;
+	border-top-color: #fff;
+	}
+.leaflet-tooltip-bottom:before {
+	top: 0;
+	margin-top: -12px;
+	margin-left: -6px;
+	border-bottom-color: #fff;
+	}
+.leaflet-tooltip-left {
+	margin-left: -6px;
+}
+.leaflet-tooltip-right {
+	margin-left: 6px;
+}
+.leaflet-tooltip-left:before,
+.leaflet-tooltip-right:before {
+	top: 50%;
+	margin-top: -6px;
+	}
+.leaflet-tooltip-left:before {
+	right: 0;
+	margin-right: -12px;
+	border-left-color: #fff;
+	}
+.leaflet-tooltip-right:before {
+	left: 0;
+	margin-left: -12px;
+	border-right-color: #fff;
+	}
+
+/* Printing */
+
+@media print {
+	/* Prevent printers from removing background-images of controls. */
+	.leaflet-control {
+		-webkit-print-color-adjust: exact;
+		print-color-adjust: exact;
+		}
+	}
+
+
+html,body{margin:0}
+[hidden]{display:none!important}
+:root{padding-top:env(safe-area-inset-top,0px)}
+
+/* Layout: map-first home (search + locate + 50m radius, gift labels on pins), station-style detail page per pop-up.
+   Phone: full-bleed map, search on top, nearby sheet at bottom. Wide: left panel (search + nearby), map on the right. */
+:root{
+  --bg:#ffffff; --panel:#f4f7f5; --surface:#ffffff; --ink:#1c201e; --muted:#77807b; --faint:#a9b1ac; --line:#e3e9e5;
+  --green:#2ea84a; --green-deep:#1d7d35; --green-soft:#e6f5ea; --green-ink:#ffffff;
+  --red:#e2412e; --amber:#c47a00; --amber-soft:#fff3dc; --sub:#e8b500;
+  --gold:#a8750f; --gold-soft:#fff4dc; --vip:#d9a53a; --vip-ink:#2a2216;
+  --m-bg:#eef2ef; --m-block:#e4eae6; --m-road:#ffffff; --m-road2:#f7f9f8; --m-park:#cfe6d2; --m-river:#cde2f0; --m-text:#8b958f;
+  --shadow:0 2px 10px rgba(20,40,28,.12);
+  --f-ui:"Pretendard","PingFang SC","Hiragino Sans GB","Noto Sans SC","Noto Sans CJK SC","Apple SD Gothic Neo","Microsoft YaHei",system-ui,sans-serif;
+  --f-num:"Archivo","PingFang SC","Noto Sans SC",system-ui,sans-serif;
+}
+@media (prefers-color-scheme: dark){:root:not([data-theme="light"]){
+  --bg:#111513; --panel:#171c19; --surface:#1b211e; --ink:#eef3f0; --muted:#9aa49f; --faint:#69736e; --line:#2a322e;
+  --green:#3cc25a; --green-deep:#6fd987; --green-soft:#183324; --green-ink:#0e1a12;
+  --red:#ff6b57; --amber:#f0b04a; --amber-soft:#33291a; --sub:#f0c43a;
+  --gold:#e4bd62; --gold-soft:#31291a; --vip:#e2b656; --vip-ink:#221b12;
+  --m-bg:#171d1a; --m-block:#1d2420; --m-road:#2c3530; --m-road2:#252d29; --m-park:#1e3324; --m-river:#182a37; --m-text:#7d8883;
+  --shadow:0 2px 10px rgba(0,0,0,.45); color-scheme:dark;}}
+:root[data-theme="dark"]{
+  --bg:#111513; --panel:#171c19; --surface:#1b211e; --ink:#eef3f0; --muted:#9aa49f; --faint:#69736e; --line:#2a322e;
+  --green:#3cc25a; --green-deep:#6fd987; --green-soft:#183324; --green-ink:#0e1a12;
+  --red:#ff6b57; --amber:#f0b04a; --amber-soft:#33291a; --sub:#f0c43a;
+  --gold:#e4bd62; --gold-soft:#31291a; --vip:#e2b656; --vip-ink:#221b12;
+  --m-bg:#171d1a; --m-block:#1d2420; --m-road:#2c3530; --m-road2:#252d29; --m-park:#1e3324; --m-river:#182a37; --m-text:#7d8883;
+  --shadow:0 2px 10px rgba(0,0,0,.45); color-scheme:dark;}
+
+*{box-sizing:border-box}
+html,body{height:100%}
+body{background:var(--bg);color:var(--ink);font-family:var(--f-ui);font-size:15px;line-height:1.5;-webkit-tap-highlight-color:transparent}
+body::before{content:"";position:fixed;inset:0 0 auto;height:env(safe-area-inset-top,0px);z-index:30;background:var(--bg)}
+button,input{font:inherit;color:inherit}
+button{background:none;border:0;padding:0;cursor:pointer}
+button:focus-visible,input:focus-visible{outline:2px solid var(--green);outline-offset:2px}
+.num{font-family:var(--f-num);font-variant-numeric:tabular-nums}
+.pad{padding-left:max(18px,env(safe-area-inset-left,0px));padding-right:max(18px,env(safe-area-inset-right,0px))}
+
+.bar{position:sticky;top:env(safe-area-inset-top,0px);z-index:20;background:var(--bg);border-bottom:1px solid var(--line)}
+.bar .in{height:52px;display:flex;align-items:center;gap:10px}
+.logo{display:flex;align-items:center;gap:8px;font-weight:800;font-size:17px}
+.badge{width:26px;height:26px;border-radius:50%;background:var(--green);color:var(--green-ink);display:grid;place-items:center;font-family:var(--f-num);font-weight:800;font-size:14px;flex:none}
+.proto{margin-left:auto;font-size:11.5px;color:var(--muted);border:1px solid var(--line);border-radius:12px;padding:2px 9px;white-space:nowrap}
+
+/* ---------- HOME ---------- */
+.home{position:relative;height:calc(100vh - 52px - env(safe-area-inset-top,0px) - env(safe-area-inset-bottom,0px));height:calc(100dvh - 52px - env(safe-area-inset-top,0px) - env(safe-area-inset-bottom,0px));min-height:520px;overflow:hidden}
+.mapwrap{position:absolute;inset:0;background:var(--m-bg)}
+.topov{position:absolute;left:0;right:0;top:0;z-index:5;padding-top:12px}
+.search{display:flex;align-items:center;gap:10px;height:50px;border-radius:25px;background:var(--surface);box-shadow:var(--shadow);border:1px solid var(--line);padding:0 8px 0 16px;position:relative}
+.search svg{width:20px;height:20px;stroke:var(--green);fill:none;stroke-width:2.2;flex:none}
+.search input{flex:1;min-width:0;border:0;background:none;height:100%;font-size:16px;outline:none}
+.search .clr{width:30px;height:30px;border-radius:50%;color:var(--muted);font-size:18px}
+.chips{display:flex;gap:6px;overflow-x:auto;scrollbar-width:none;margin-top:10px;padding-bottom:4px}
+.chips::-webkit-scrollbar{display:none}
+.fl{flex:none;height:34px;padding:0 14px;border-radius:17px;border:1px solid var(--line);background:var(--surface);font-size:14px;display:inline-flex;align-items:center;gap:4px;color:var(--ink);box-shadow:0 1px 3px rgba(0,0,0,.06)}
+.fl.on{background:var(--green);border-color:var(--green);color:var(--green-ink);font-weight:700}
+.vip{font-family:var(--f-num);font-size:9.5px;font-weight:800;background:var(--vip);color:var(--vip-ink);border-radius:3px;padding:0 3px;line-height:14px}
+.results{margin-top:8px;background:var(--surface);border-radius:14px;box-shadow:var(--shadow);border:1px solid var(--line);overflow:hidden;max-height:50vh;overflow-y:auto}
+.res{display:flex;gap:12px;align-items:center;padding:11px 14px;border-bottom:1px solid var(--line);width:100%;text-align:left}
+.res:last-child{border:0}
+.res .pi{width:30px;height:30px;border-radius:50%;background:var(--green-soft);display:grid;place-items:center;flex:none}
+.res .pi svg{width:16px;height:16px;stroke:var(--green-deep);fill:none;stroke-width:2}
+.res b{display:block;font-size:15px}
+.res small{color:var(--muted);font-size:12.5px}
+.res .d{margin-left:auto;font-size:12.5px;color:var(--muted);white-space:nowrap}
+.res mark{background:none;color:var(--green-deep);font-weight:800}
+
+.locate{bottom:calc(44% + 14px);position:absolute;right:max(14px,env(safe-area-inset-right,0px));z-index:4;width:46px;height:46px;border-radius:50%;background:var(--surface);box-shadow:var(--shadow);border:1px solid var(--line);display:grid;place-items:center}
+.locate svg{width:22px;height:22px;stroke:var(--green);fill:none;stroke-width:2}
+.hint{position:absolute;left:50%;transform:translateX(-50%);z-index:4;background:rgba(20,26,22,.78);color:#fff;font-size:12px;padding:4px 12px;border-radius:12px;white-space:nowrap}
+
+.sheetov{position:absolute;left:0;right:0;bottom:0;z-index:5;background:var(--bg);border-radius:20px 20px 0 0;box-shadow:0 -4px 18px rgba(0,0,0,.12);max-height:44%;display:flex;flex-direction:column}
+.grab{width:40px;height:4px;border-radius:2px;background:var(--line);margin:8px auto 0;flex:none}
+.sh{display:flex;align-items:baseline;gap:8px;padding-block:10px 6px;flex:none}
+.sh h2{font-size:18px;margin:0;font-weight:800}
+.sh h2 em{font-style:normal;color:var(--green)}
+.sh small{color:var(--muted);font-size:12.5px}
+.near{overflow-y:auto;padding-bottom:calc(14px + env(safe-area-inset-bottom,0px));display:flex;flex-direction:column;gap:10px}
+.nc{border:1px solid var(--line);border-radius:14px;padding:12px 14px;background:var(--surface);text-align:left;width:100%;display:flex;flex-direction:column;gap:6px}
+.nc .t{display:flex;align-items:baseline;gap:8px}
+.nc .t b{font-size:16px;flex:1;min-width:0;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.nc .t .c{color:var(--green);font-weight:800;font-size:13px}
+.nc .t .dm{font-family:var(--f-num);font-weight:700;font-size:13px;color:var(--muted);white-space:nowrap}
+.gifts{display:flex;flex-wrap:wrap;gap:6px}
+.gift{display:inline-flex;align-items:center;gap:4px;font-size:13px;border-radius:8px;padding:3px 9px;background:var(--green-soft);color:var(--green-deep)}
+.gift svg{width:14px;height:14px;stroke:currentColor;fill:none;stroke-width:2}
+.gift.a{background:var(--amber-soft);color:var(--amber)}
+.nc .ft{display:flex;justify-content:space-between;align-items:center;font-size:12.5px;color:var(--muted)}
+.nc .ft span b{color:var(--red);font-family:var(--f-num)}
+.nc .ft .more{color:var(--green-deep);font-weight:700}
+.emptyn{border:1px dashed var(--line);border-radius:14px;padding:14px;color:var(--muted);font-size:14px}
+.emptyn button{color:var(--green-deep);font-weight:700;margin-top:6px;display:block}
+
+@media (min-width:880px){
+  .home{display:grid;grid-template-columns:400px 1fr;grid-template-rows:auto 1fr}
+  .mapwrap{position:relative;grid-column:2;grid-row:1/3}
+  .topov{position:relative;grid-column:1;grid-row:1;background:var(--bg);padding-bottom:4px;border-right:1px solid var(--line)}
+  .sheetov{position:relative;grid-column:1;grid-row:2;max-height:none;border-radius:0;box-shadow:none;border-right:1px solid var(--line);min-height:0}
+  .grab{display:none}
+  .search{box-shadow:none}
+  .results{position:absolute;left:18px;right:18px;z-index:6}
+  .fl{box-shadow:none}
+  .locate{bottom:24px}
+}
+
+/* ---------- DETAIL (station page) ---------- */
+.wrap{max-width:1080px;margin:0 auto}
+@media (min-width:880px){
+  .grid{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:0 28px;align-items:start}
+  .aside{position:sticky;top:calc(52px + env(safe-area-inset-top,0px));max-height:calc(100vh - 52px);overflow:auto;border-left:1px solid var(--line)}
+}
+.backrow{display:flex;align-items:center;gap:6px;padding-top:12px;color:var(--muted);font-size:14px}
+.backrow button{display:flex;align-items:center;gap:4px;height:34px;padding-right:10px}
+.backrow svg{width:20px;height:20px;stroke:currentColor;fill:none;stroke-width:2}
+.head{padding-block:10px 6px}
+.title{display:flex;align-items:baseline;gap:10px;flex-wrap:wrap}
+.title h1{font-size:28px;margin:0;font-weight:800;letter-spacing:-.3px;text-wrap:balance}
+.title .cat{font-size:26px;font-weight:800;color:var(--green)}
+.addr{color:var(--muted);font-size:15px;margin-top:4px}
+.star{margin-left:auto;width:40px;height:40px;display:grid;place-items:center;flex:none}
+.star svg{width:28px;height:28px;stroke:var(--ink);stroke-width:1.6;fill:none}
+.star.on svg{fill:var(--sub);stroke:var(--sub)}
+.chiprow{display:flex;gap:8px;overflow-x:auto;padding-block:16px 18px;scrollbar-width:none}
+.chiprow::-webkit-scrollbar{display:none}
+.chipb{flex:none;height:44px;padding:0 20px;border-radius:22px;font-size:15.5px;font-weight:600;border:1px solid var(--line);background:var(--surface);display:inline-flex;align-items:center;gap:6px;white-space:nowrap}
+.chipb.p{background:var(--green);border-color:var(--green);color:var(--green-ink)}
+.chipb.s{background:var(--green-soft);border-color:var(--green-soft);color:var(--green-deep)}
+.chipb svg{width:18px;height:18px;stroke:currentColor;fill:none;stroke-width:1.8}
+.sep{height:10px;background:var(--panel);border-top:1px solid var(--line)}
+.lineb{position:relative;margin-top:20px;height:52px;border-radius:26px;background:var(--green);display:flex;align-items:center;justify-content:space-between;color:var(--green-ink);font-size:14.5px}
+.lineb .side{height:100%;display:flex;align-items:center;gap:4px;padding:0 16px;max-width:34%;min-width:0;color:var(--green-ink)}
+.lineb .side span{white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.lineb .side.r{justify-content:flex-end}
+.lineb .side[disabled]{opacity:.55;cursor:default}
+.lineb .cur{position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);height:62px;min-width:36%;max-width:44%;padding:0 18px;border-radius:31px;background:var(--surface);border:4px solid var(--green);color:var(--ink);display:flex;align-items:center;justify-content:center;gap:8px;font-weight:700;font-size:17px}
+.lineb .cur b{white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.lineb .cur .badge{width:24px;height:24px;font-size:13px}
+.rt{display:flex;align-items:center;gap:10px;margin-top:18px}
+.seg{display:inline-flex;border:1px solid var(--line);border-radius:22px;padding:2px}
+.seg button{height:36px;padding:0 18px;border-radius:18px;font-size:15px;color:var(--muted);font-weight:600}
+.seg button.on{border:2px solid var(--green);color:var(--green-deep);background:var(--surface)}
+.clock{margin-left:auto;color:var(--muted);font-size:15px}
+.refresh{width:38px;height:38px;border-radius:50%;border:1px solid var(--line);display:grid;place-items:center}
+.refresh svg{width:20px;height:20px;stroke:var(--muted);fill:none;stroke-width:2}
+.cards{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px;margin-top:12px}
+.card{border:1px solid var(--line);border-radius:14px;padding:14px 16px;background:var(--surface);text-align:left;width:100%;display:flex;flex-direction:column;justify-content:flex-start}
+.card h3{margin:0;font-size:15.5px;display:flex;align-items:center;justify-content:space-between;gap:6px;padding-bottom:10px;border-bottom:1px solid var(--line)}
+.card h3 svg{width:16px;height:16px;stroke:var(--ink);fill:none;stroke-width:2;flex:none}
+.kv{display:flex;justify-content:space-between;align-items:baseline;flex-wrap:wrap;gap:2px 8px;font-size:14.5px;color:var(--muted);margin-top:10px}
+.kv span{white-space:nowrap}
+.kv b{font-family:var(--f-num);font-weight:800;color:var(--red);white-space:nowrap;margin-left:auto}
+.kv b.g{color:var(--green)} .kv b.a{color:var(--amber)} .kv b.k{color:var(--ink)}
+.src{font-size:11.5px;color:var(--faint);margin-top:8px}
+.remind{margin-top:10px;width:100%;height:34px;border-radius:17px;background:var(--gold-soft);color:var(--gold);font-size:13px;font-weight:700}
+@media (max-width:370px){.cards{grid-template-columns:1fr}}
+.sec{padding-block:22px}
+.sec h2{font-size:20px;margin:0 0 14px;font-weight:800}
+.sec h2 small{font-size:13px;font-weight:400;color:var(--muted);margin-left:6px}
+.mapbox{border:1px solid var(--line);border-radius:14px;background:var(--panel);position:relative;overflow:hidden}
+.mapscroll{overflow-x:auto;padding:58px 8px 18px}
+.track{display:flex;position:relative;width:max-content}
+.track::before{content:"";position:absolute;left:46px;right:46px;top:9px;height:6px;border-radius:3px;background:var(--green)}
+.st{position:relative;width:92px;flex:none;display:flex;flex-direction:column;align-items:center;gap:8px;text-align:center}
+.st .dot{width:24px;height:24px;border-radius:50%;background:var(--surface);border:4px solid var(--green);position:relative;z-index:1}
+.st.cur .dot{width:34px;height:34px;margin-top:-5px;border-width:6px}
+.st .nm{font-size:12.5px;color:var(--muted);line-height:1.3;padding:0 4px}
+.st.cur .nm{color:var(--ink);font-weight:800;font-size:13.5px}
+.st .q{font-size:11.5px;color:var(--green-deep)}
+.st.term .dot{border-color:var(--ink);border-width:3px;width:22px;height:22px;margin-top:1px}
+.st.term .nm{color:var(--ink);font-weight:700}
+.st .sub{position:absolute;top:-30px;font-size:10.5px;font-weight:800;border-radius:9px;padding:0 6px;line-height:18px;white-space:nowrap}
+.sub2{background:var(--green);color:var(--green-ink)} .subs{background:var(--sub);color:#2a2410}
+.facts{display:grid;grid-template-columns:1fr 1fr;gap:14px 12px}
+.fact{display:flex;gap:10px;align-items:flex-start;font-size:14.5px}
+.fact .ic{width:34px;height:34px;border-radius:50%;border:1px solid var(--line);display:grid;place-items:center;flex:none}
+.fact .ic svg{width:18px;height:18px;stroke:var(--muted);fill:none;stroke-width:1.8}
+.fact small{display:block;color:var(--muted);font-size:12px}
+.hl{background:var(--green-soft);border-radius:3px;padding:0 3px}
+.guide{list-style:none;margin:0;padding:0;display:flex;flex-direction:column;gap:10px;counter-reset:g}
+.guide li{counter-increment:g;position:relative;padding-left:34px;font-size:14.5px}
+.guide li::before{content:counter(g);position:absolute;left:0;top:0;width:24px;height:24px;border-radius:50%;background:var(--green);color:var(--green-ink);font-family:var(--f-num);font-weight:800;font-size:13px;display:grid;place-items:center}
+.ko{border:1px solid var(--line);border-radius:5px;padding:0 5px;font-size:13px;background:var(--panel)}
+.perk{display:flex;justify-content:space-between;gap:10px;padding:10px 0;border-bottom:1px solid var(--line);font-size:14.5px}
+.perk:last-child{border:0}
+.tag{font-size:12px;border-radius:6px;padding:1px 8px;white-space:nowrap;align-self:center}
+.t-g{background:var(--green-soft);color:var(--green-deep)} .t-a{background:var(--amber-soft);color:var(--amber)}
+.foot{color:var(--muted);font-size:12px;line-height:1.7;padding-block:18px 40px}
+
+/* sheet + toast */
+.mask{position:fixed;inset:0;background:rgba(0,0,0,.42);z-index:40;display:flex;align-items:flex-end;justify-content:center}
+@media (min-width:880px){.mask{align-items:center}.vsheet{border-radius:18px!important}}
+.vsheet{width:min(460px,100%);max-height:92%;overflow:auto;background:var(--bg);border-radius:18px 18px 0 0;padding-bottom:calc(18px + env(safe-area-inset-bottom,0px))}
+.shead{background:var(--green);color:var(--green-ink);padding-block:18px 28px;position:relative}
+.shead h3{margin:0;font-size:20px}
+.shead p{margin:4px 0 0;font-size:13px;opacity:.92}
+.shead .why{display:inline-block;margin-top:8px;font-size:12px;background:rgba(255,255,255,.2);border-radius:8px;padding:3px 9px}
+.shead .x{position:absolute;right:12px;top:10px;width:34px;height:34px;font-size:24px;color:var(--green-ink)}
+.plans{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin-top:-16px;position:relative}
+.plan{background:var(--surface);border:2px solid var(--line);border-radius:12px;padding:10px 4px;text-align:center}
+.plan.on{border-color:var(--green);background:var(--green-soft)}
+.plan .pr{font-family:var(--f-num);font-weight:800;font-size:22px;color:var(--green-deep)}
+.plan .pr small{font-size:12px}
+.plan .ds{font-size:11.5px;color:var(--muted)}
+.tbl{width:100%;border-collapse:collapse;font-size:13.5px;margin-top:14px}
+.tbl th{font-size:12px;color:var(--muted);font-weight:400;text-align:center;padding:4px 0}
+.tbl th:first-child,.tbl td:first-child{text-align:left}
+.tbl td{padding:8px 0;border-top:1px solid var(--line);text-align:center}
+.y{color:var(--green);font-weight:800}
+.buy{width:100%;height:48px;border-radius:24px;background:var(--green);color:var(--green-ink);font-weight:800;font-size:16px;margin-top:14px}
+.fine{font-size:11.5px;color:var(--muted);text-align:center;margin-top:6px}
+.toast{position:fixed;left:50%;bottom:calc(24px + env(safe-area-inset-bottom,0px));transform:translateX(-50%);background:rgba(20,26,22,.92);color:#fff;font-size:14px;padding:9px 16px;border-radius:20px;z-index:60;max-width:calc(100% - 36px);text-align:center}
+
+a{color:inherit;text-decoration:none}
+#map{position:absolute;inset:0;background:var(--m-bg)}
+.leaflet-container{font-family:var(--f-ui)}
+.gm-wrap{background:none;border:0}
+.gm{position:relative;width:60px;display:flex;flex-direction:column;align-items:center;filter:drop-shadow(0 2px 4px rgba(0,0,0,.22))}
+.gm .bub{width:54px;height:54px;border-radius:50%;background:var(--surface);border:3px solid var(--green);display:flex;flex-direction:column;align-items:center;justify-content:center;gap:1px;color:var(--green-deep);font-weight:800;font-size:13px;line-height:1.1}
+.gm .bub svg{width:18px;height:18px;stroke:currentColor;fill:none;stroke-width:2}
+.gm i{width:0;height:0;border-left:8px solid transparent;border-right:8px solid transparent;border-top:12px solid var(--green);margin-top:-2px}
+.gm em{font-style:normal;font-size:11px;font-weight:700;color:var(--ink);background:var(--surface);border-radius:8px;padding:0 6px;margin-top:3px;white-space:nowrap;opacity:.92}
+.gm.on .bub{background:var(--green);color:var(--green-ink)}
+.me-wrap{background:none;border:0}
+.me-dot{position:absolute;left:8px;top:8px;width:14px;height:14px;border-radius:50%;background:#3478f6;border:3px solid #fff;box-shadow:0 1px 3px rgba(0,0,0,.3)}
+.me-pulse{position:absolute;inset:0;border-radius:50%;background:rgba(52,120,246,.22)}
+.stn-wrap{background:none;border:0}
+.stn{display:inline-flex;align-items:center;gap:4px;height:24px;padding:0 9px 0 3px;border-radius:12px;background:var(--surface);border:2px solid var(--green);font-size:12px;font-weight:800;color:var(--ink);white-space:nowrap}
+.stn b{width:17px;height:17px;border-radius:50%;background:var(--green);color:#fff;font-size:10.5px;display:grid;place-items:center}
+.stn.y{border-color:var(--sub)} .stn.y b{background:var(--sub);color:#2a2410}
+.locate{z-index:500}
+.topov,.sheetov{z-index:600}
+.leaflet-control-attribution{font-size:10px}
+@media (max-width:879px){.leaflet-bottom{bottom:calc(44% + 2px)}.leaflet-control-zoom{display:none}}
+@media (min-width:880px){.leaflet-bottom.leaflet-right{margin-right:4px}.leaflet-right .leaflet-control-zoom{margin-bottom:84px}}
+
+.gm.t-deal .bub{border-color:var(--amber);color:var(--amber)} .gm.t-deal i{border-top-color:var(--amber)} .gm.t-deal.on .bub{background:var(--amber);color:#fff}
+.gm.t-info .bub{border-color:var(--faint);color:var(--muted)} .gm.t-info i{border-top-color:var(--faint)} .gm.t-info.on .bub{background:var(--muted);color:var(--bg)}
+.gm .bub span{max-width:50px;text-align:center;font-size:12px;letter-spacing:-.3px}
+.datanote{font-size:11.5px;color:var(--muted);margin:10px 0 0;line-height:1.6}
+.datanote a{color:var(--green-deep);text-decoration:underline}
+.ko-name{font-size:13.5px}
+.rep2{display:flex;flex-wrap:wrap;gap:6px;align-items:center;margin-top:10px;font-size:12.5px;color:var(--muted)}
+.rep2 button{border:1px solid var(--line);border-radius:12px;padding:2px 10px;background:var(--panel);color:var(--ink)}
+.copy{display:inline-flex;align-items:center;gap:4px;margin-top:4px;font-size:12px;color:var(--green-deep);font-weight:600}
+.copy svg{width:14px;height:14px;stroke:currentColor;fill:none;stroke-width:2}
+.tilewarn{position:absolute;left:50%;top:46%;transform:translate(-50%,-50%);z-index:450;background:var(--surface);border:1px solid var(--line);border-radius:12px;padding:10px 14px;font-size:12.5px;color:var(--muted);max-width:260px;text-align:center;box-shadow:var(--shadow)}
+.facts{grid-template-columns:1fr 1fr}
+@media (max-width:420px){.facts{grid-template-columns:1fr}}
+
+.gm.t-food .bub{border-color:#d4552f;color:#c2471f} .gm.t-food i{border-top-color:#d4552f} .gm.t-food.on .bub{background:#d4552f;color:#fff}
+.gm.t-sweet .bub{border-color:#c46a9a;color:#b0507f} .gm.t-sweet i{border-top-color:#c46a9a} .gm.t-sweet.on .bub{background:#c46a9a;color:#fff}
+</style></head><body>
+<header class="bar"><div class="in pad">
+ <button class="logo" data-act="home"><span class="badge">S</span>圣水快闪线</button>
+ <span class="proto">课堂原型 · 信息以官方为准</span>
+</div></header>
+<div class="home" id="home">
+ <div class="mapwrap"><div id="map" aria-label="圣水洞地图"></div>
+  <div class="tilewarn" id="tilewarn" hidden>地图底图加载不出来：当前环境拦截了外部地图。下载 HTML 文件或部署到网站后打开即可显示。</div>
+  <button class="locate" data-act="locate" aria-label="定位到我"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="4"/><path d="M12 2v4M12 18v4M2 12h4M18 12h4"/></svg></button></div>
+ <div class="topov pad">
+  <label class="search"><svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="6.5"/><path d="M16 16l4.5 4.5"/></svg><input id="q" type="search" placeholder="搜索快闪、餐厅、甜品或福利" autocomplete="off"><button class="clr" id="clr" data-act="clear" aria-label="清除" hidden>×</button></label>
+  <div id="res"></div>
+  <div class="chips" id="chips"></div>
+ </div>
+ <div class="sheetov" id="near"></div>
+</div>
+<div id="detail" hidden></div>
+<div id="sheetHost"></div>
+<div class="toast" id="toast" hidden></div>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.min.js"></script>
+<script>
+/* ===== 快闪数据（2026-11-01 从 Popply 查询整理）=====
+   以后更新只改这里：每家一项。
+   ll   = [纬度, 经度]。⚠ 目前按地址估算，误差可能 50–200m；请用 Google 地图长按该地址复制准确坐标替换，并把 est 改成 false。
+   end  = 最后一天的闭店时间（韩国时间）
+   type = 主页圆圈里显示的福利类型：gift 赠品 / deal 折扣 / exp 体验 / info 暂无福利信息
+   entry= walkin 现场排队 / naver 네이버 사전예약 / ticket 需购票 */
+const DATA_DATE='2026-11-01';
+const POPS=[
+ {id:'snoopy',name:'탐정 스누피의 잃어버린 단서 in 유니세프 정원',zh:'侦探史努比 · 首尔林联合国儿童基金会花园',brand:'史努比',cat:'联名',addr:'서울 성동구 뚝섬로 273 (서울숲)',ll:[37.5443,127.0381],est:true,
+  start:'09.10',endTxt:'11.16',end:'2026-11-16T19:00:00+09:00',hours:'每天 12:00–19:00',entry:'walkin',entryNote:'页面标有"사전예약"，细节未公布',
+  type:'gift',g:'环保袋',perks:[['和侦探史努比一起破案，送环保袋、贴纸包等（限量，先到先得）','赠品'],['可顺便参观首尔国际庭园博览会展区','体验']],src:'https://popply.co.kr/popup/5962'},
+ {id:'coach',name:'COACH 팝업 : LIVE YOUR STORY',zh:'COACH 快闪 · LIVE YOUR STORY',brand:'COACH',cat:'服装',addr:'서울 성동구 서울숲2길 43',ll:[37.5471,127.0418],est:true,
+  start:'10.19',endTxt:'11.07',end:'2026-11-07T20:00:00+09:00',hours:'周一–周四 11:00–19:00 · 周五–周日 11:00–20:00',entry:'naver',entryNote:'Naver 事前预约（链接见来源页）',
+  type:'exp',g:'限定包',perks:[['5 款全球代言人灵感特别版 Tabby 包','限定商品'],['演出门票主题挂饰系列','限定商品'],['无信社独家 Lana 23 / Reed 托特包','限定商品'],['试听亭、故事墙、明信片 DIY','体验']],src:'https://popply.co.kr/popup/6433'},
+ {id:'shinramyun',name:'신라면분식 더 팩토리 팝업',zh:'辛拉面分食 · The Factory',brand:'辛拉面',cat:'其他',addr:'서울 성동구 성수일로4길 52',ll:[37.5457,127.0502],est:true,
+  start:'06.16',endTxt:'12.16',end:'2026-12-16T18:00:00+09:00',hours:'每天 09:00–18:00',entry:'walkin',entryNote:'',
+  type:'exp',g:'DIY拉面',perks:[['自选面、汤料、配料的 DIY 拉面体验','体验'],['海外拉面试吃','体验'],['工厂现炸拉面、周边与特别菜单','售卖']],src:'https://popply.co.kr/popup/5243'},
+ {id:'vitalbeauty',name:'바이탈뷰티 팝업 : SUPER GLOW SAUNA',zh:'Vital Beauty · SUPER GLOW SAUNA',brand:'Vital Beauty',cat:'美妆',addr:'서울 성동구 연무장길 31-1 103호',ll:[37.54285,127.05355],est:true,
+  start:'10.28',endTxt:'11.03',end:'2026-11-03T19:00:00+09:00',hours:'周三 14:00–19:00 · 其他日 10:00–19:00',entry:'walkin',entryNote:'',
+  type:'gift',g:'限定周边',perks:[['"不容错过的特别周边"（官方未写具体内容）','周边'],['新品超级视黄醇系列试用','体验']],src:'https://popply.co.kr/popup/6442'},
+ {id:'sie',name:'시에 X 에세이즈 팝업',zh:'SIE × ESSAIS 快闪',brand:'SIE×ESSAIS',cat:'服装',addr:'서울 성동구 연무장길 35 (스테이지 35)',ll:[37.54282,127.05392],est:true,
+  start:'10.27',endTxt:'11.10',end:'2026-11-10T20:00:00+09:00',hours:'每天 12:00–20:00',entry:'walkin',entryNote:'',
+  type:'gift',g:'抽礼物',perks:[['加 KakaoTalk 好友后在拍照亭拍照，拍到"幸运相框"可任选店内一件商品','赠品'],['购买有优惠（官方未写具体内容）','折扣']],src:'https://popply.co.kr/popup/6409'},
+ {id:'offbeauty',name:'오푸리스 X 오프뷰티 팝업',zh:'OPURIS × OFF BEAUTY',brand:'OPURIS',cat:'美妆',addr:'서울 성동구 연무장3길 9 (오프뷰티 성수메가팩토리점)',ll:[37.54355,127.05470],est:true,
+  start:'10.23',endTxt:'11.07',end:'2026-11-07T22:00:00+09:00',hours:'每天 10:00–22:00',entry:'walkin',entryNote:'',
+  type:'deal',g:'专属优惠',perks:[['"只有 OFF BEAUTY 圣水店才有的特别优惠"（官方未写具体内容）','折扣']],src:'https://popply.co.kr/popup/6416'},
+ {id:'champion',name:'Champion 팝업',zh:'Champion 快闪',brand:'Champion',cat:'运动',addr:'서울 성동구 성수이로 62 (무신사 메가스토어 성수)',ll:[37.54105,127.05640],est:true,
+  start:'10.26',endTxt:'11.08',end:'2026-11-08T22:00:00+09:00',hours:'每天 11:00–22:00',entry:'walkin',entryNote:'',
+  type:'deal',g:'最低2折',perks:[['第一周：经典款档案特卖，最高 8 折扣（约 2 折价）','折扣'],['第二周：FW 新款外套和联名系列','新品']],src:'https://popply.co.kr/popup/6457'},
+ {id:'deadflt',name:'DEADFLT 성수 팝업',zh:'DEADFLT 圣水快闪',brand:'DEADFLT',cat:'服装',addr:'서울 성동구 성수이로 58, 착한구두 성수 스페이스 B1',ll:[37.54088,127.05652],est:true,
+  start:'10.08',endTxt:'11.08',end:'2026-11-08T19:00:00+09:00',hours:'每天 11:00–19:00',entry:'walkin',entryNote:'从착한구두店内楼梯下到 B1，在无信社旁边',
+  type:'info',g:'新品',perks:[['卫衣、拉链卫衣、T 恤、帽子、袜子（售卖，未公布赠品）','售卖']],src:'https://popply.co.kr/popup/6303'},
+ {id:'flareup',name:'플레어업 팝업 : IN A DAZE',zh:'FLAREUP · IN A DAZE',brand:'FLAREUP',cat:'服装',addr:'서울 성동구 성수이로 74 (대림창고)',ll:[37.54175,127.05650],est:true,
+  start:'10.16',endTxt:'11.05',end:'2026-11-05T22:00:00+09:00',hours:'每天 11:00–22:00',entry:'walkin',entryNote:'',
+  type:'deal',g:'额外9折',perks:[['无信社线上折扣价再减 10%','折扣'],['瑕疵品统一价特卖 9,900–79,000 韩元（不退不换）','折扣']],src:'https://popply.co.kr/popup/6371'},
+ {id:'torriden',name:'토리든 커넥트 성수',zh:'Torriden Connect 圣水',brand:'Torriden',cat:'美妆',addr:'서울 성동구 성수이로7가길 17',ll:[37.54240,127.05790],est:true,
+  start:'07.15',endTxt:'12.31',end:'2026-12-31T20:00:00+09:00',hours:'每天 11:00–20:00',entry:'walkin',entryNote:'',
+  type:'exp',g:'皮肤检测',perks:[['皮肤诊断机','体验'],['"吸收球"游戏、吸收瀑布拍照区','体验']],src:'https://popply.co.kr/popup/5790'},
+ {id:'romand',name:'롬앤 팝업 : 10주년 생일파티',zh:'rom&nd 10 周年生日派对',brand:'rom&nd',cat:'美妆',addr:'서울 성동구 연무장길 88 (롬앤 핑크오피스)',ll:[37.54300,127.05760],est:true,
+  start:'10.10',endTxt:'11.10',end:'2026-11-10T22:00:00+09:00',hours:'每天 10:00–22:00',entry:'walkin',entryNote:'',
+  type:'info',g:'10周年',perks:[['10 周年生日派对主题快闪（官方未公布赠品）','体验']],src:'https://popply.co.kr/popup/6252'},
+ {id:'riot',name:'라이엇게임즈 뮤직 & 월즈26 팝업',zh:'Riot Games 音乐 & 全球总决赛 2026',brand:'Riot Games',cat:'联名',addr:'서울 성동구 연무장7길 13 (트렌드팟 바이 올리브영 N성수)',ll:[37.54365,127.05850],est:true,
+  start:'10.29',endTxt:'11.08',end:'2026-11-08T20:00:00+09:00',hours:'每天 11:00–20:00',entry:'walkin',entryNote:'官方说明：不接受预约，现场排队入场',
+  type:'gift',g:'限定奖励',perks:[['只在这个快闪提供的特别奖励（官方未写具体内容）','赠品']],src:'https://popply.co.kr/popup/6454'},
+ {id:'shinchan',name:'짱구는 못말려 전시 : 시공간 대모험',zh:'蜡笔小新展 · 时空大冒险',brand:'蜡笔小新',cat:'联名',addr:'서울 성동구 연무장5길 9-29',ll:[37.54405,127.05720],est:true,
+  start:'10.17',endTxt:'2027.01.24',end:'2027-01-24T20:00:00+09:00',hours:'每天 10:00–20:00',entry:'ticket',entryNote:'收费展览，页面标有"사전예약"，票价未公布',
+  type:'info',g:'展览',perks:[['付费展览（官方未公布赠品）','体验']],src:'https://popply.co.kr/popup/5949'},
+ {id:'kpopgoods',name:'Kpop 굿즈스토어 (맵달)',zh:'K-pop 周边店（mapdal）',brand:'mapdal',cat:'K-pop',addr:'서울 성동구 성수이로16길 5 4층',ll:[37.54620,127.05700],est:true,
+  start:'06.01',endTxt:'2027.12.31',end:'2027-12-31T18:00:00+09:00',hours:'每天 09:00–18:00',entry:'walkin',entryNote:'',
+  type:'exp',g:'K-pop周边',perks:[['圣水唯一的 K-pop 周边店（自称）','售卖'],['1 楼可寄存物品（21:00 前取回）','便利']],src:'https://popply.co.kr/popup/5377'}
+ /* ===== 餐厅与甜品（2026-11-01 整理；预约方式：已查到的照写，查不到线上排队的标为现场排队）===== */
+ ,{id:'minari',name:'능동미나리 성수점',zh:'能动水芹 圣水店',brand:'能动水芹',cat:'餐厅',addr:'서울 성동구 연무장길 42 (1, 2층)',ll:[37.54280,127.05440],est:true,
+  start:'常设',endTxt:'常设',end:'2099-12-31T23:00:00+09:00',hours:'每天 11:00–23:00',entry:'walkin',entryNote:'未查到线上排队，现场排队；TikTok 爆红后排队较长',
+  type:'food',g:'水芹汤',perks:[['水芹牛骨汤 15,000 韩元','招牌'],['水芹生拌 9,000 韩元','菜单'],['水芹白切肉火锅 48,000–85,000 韩元','菜单']],src:'https://hotplacehunter.co.kr/msn/article/89312/'}
+ ,{id:'gamjatang',name:'소문난성수감자탕',zh:'小闻圣水土豆排骨汤',brand:'土豆排骨汤',cat:'餐厅',addr:'서울 성동구 연무장길 45 1층',ll:[37.54268,127.05452],est:true,
+  start:'常设',endTxt:'常设',end:'2099-12-31T23:59:00+09:00',hours:'24 小时营业',entry:'walkin',entryNote:'没有排队系统，直接到门口排队（用户评价）；外国客人很多',
+  type:'food',g:'土豆汤',perks:[['土豆排骨汤（小）32,000 韩元，可加面片','招牌'],['单人土豆汤饭 12,000 韩元','菜单'],['可外带（1 人份 15,000 韩元）','便利']],src:'https://hotplacehunter.co.kr/sns/article/86310/'}
+ ,{id:'jayeondo',name:'자연도소금빵in성수',zh:'自然岛盐面包 圣水',brand:'自然岛盐面包',cat:'甜品',addr:'서울 성동구 연무장길 56-1 1층',ll:[37.54286,127.05522],est:true,
+  start:'常设',endTxt:'常设',end:'2099-12-31T22:00:00+09:00',hours:'每天 09:00–22:00',entry:'walkin',entryNote:'每天分 6 次出炉，经常售罄，出炉前排队',
+  type:'sweet',g:'盐面包',perks:[['盐面包 4 个一盒 12,000 韩元（只卖这一款）','招牌'],['每天 6 次出炉，常售罄','提示']],src:'https://hotplacehunter.co.kr/msn/article/89312/'}
+ ,{id:'betong',name:'베통 성수 플래그십',zh:'Betong 圣水旗舰店',brand:'Betong',cat:'甜品',addr:'서울 성동구 연무장7가길 8',ll:[37.54392,127.05828],est:true,
+  start:'常设',endTxt:'常设',end:'2099-12-31T18:30:00+09:00',hours:'每天 11:00–18:30',entry:'walkin',entryNote:'排队较长，未查到线上排队',
+  type:'sweet',g:'松露盐包',perks:[['松露风味盐面包 3,900 韩元','招牌'],['咸巧克力盐面包 4,500 韩元','菜单']],src:'https://hotplacehunter.co.kr/msn/article/89312/'}
+ ,{id:'onion',name:'어니언 성수',zh:'Onion 圣水',brand:'Onion',cat:'甜品',addr:'서울 성동구 아차산로9길 8',ll:[37.54500,127.05385],est:true,
+  start:'常设',endTxt:'常设',end:'2099-12-31T22:00:00+09:00',hours:'周一–周五 08:00–22:00 · 周末 10:00–22:00（最后点单 21:30）',entry:'walkin',entryNote:'旧工厂改造的面包咖啡店，现场点单',
+  type:'sweet',g:'潘多洛',perks:[['潘多洛 Pandoro 6,000 韩元','招牌'],['红豆黄油面包 5,500 韩元','菜单']],src:'https://hotplacehunter.co.kr/sns/article/65671/'}
+ ,{id:'5to7',name:'5to7 성수',zh:'5to7 舒芙蕾',brand:'5to7',cat:'甜品',addr:'서울 성동구 서울숲2길 44-13',ll:[37.54712,127.04205],est:true,
+  start:'常设',endTxt:'常设',end:'2099-12-31T21:30:00+09:00',hours:'每天 12:00–21:30',entry:'walkin',entryNote:'未查到线上排队',
+  type:'sweet',g:'舒芙蕾',perks:[['舒芙蕾松饼（Time Out 推荐珍珠舒芙蕾）','招牌'],['无花果舒芙蕾（外国客人多）','招牌']],src:'https://www.timeout.com/seoul/restaurants/5to7'}
+ ,{id:'paperplate',name:'페이퍼플레이트',zh:'Paper Plate 纽约披萨',brand:'Paper Plate',cat:'餐厅',addr:'서울 성동구 성수이로14길 15',ll:[37.54565,127.05625],est:true,
+  start:'常设',endTxt:'常设',end:'2099-12-31T21:00:00+09:00',hours:'周二–周日 11:30–21:00 · 周一休息',entry:'walkin',entryNote:'按片卖，适合逛街中途吃',
+  type:'food',g:'纽约披萨',perks:[['芝士披萨 5,700 韩元 / 片','招牌'],['奶油披萨 7,800 韩元、纽约至尊 8,000 韩元 / 片','菜单']],src:'https://hotplacehunter.co.kr/sns/article/86310/'}
+ ,{id:'jungidam',name:'정이담',zh:'情怡潭 时令韩餐',brand:'情怡潭',cat:'餐厅',addr:'서울 성동구 왕십리로 83-21 디타워 서울포레스트 B1',ll:[37.54498,127.04470],est:true,
+  start:'常设',endTxt:'常设',end:'2099-12-31T22:00:00+09:00',hours:'每天 11:00–22:00 · 工作日 15:30–17:00 休息',entry:'walkin',entryNote:'"排队名店"，未查到线上预约方式',
+  type:'food',g:'LA排骨',perks:[['LA 排骨 35,000 韩元','招牌'],['韩牛薄切烤肉 42,000 韩元','菜单']],src:'https://hotplacehunter.co.kr/sns/article/86310/'}
+];
+
+(function(){
+const M=60e3,H=60*M,D=24*H;
+const FALLBACK=[37.54285,127.05410]; // 延武场街（연무장길）31–35 号附近，演示位置
+const SEONGSU_ST=[37.54457,127.05571];
+const CATS=['餐厅','甜品','美妆','服装','运动','联名','K-pop','其他'];
+const TYPE={gift:'赠品',deal:'折扣',exp:'体验',info:'暂无福利信息'};
+const ENTRY={walkin:'现场排队',naver:'Naver 事前预约',ticket:'购票入场'};
+const PLANS=[{k:'day',nm:'日包',pr:'9.9',ds:'单日逛圣水'},{k:'week',nm:'周包',pr:'29',ds:'短期旅行'},{k:'month',nm:'月包',pr:'59',ds:'在韩生活'}];
+POPS.forEach(p=>{p.endTs=Date.parse(p.end);p.rep=null;});
+const live=POPS.filter(p=>p.endTs>Date.now());
+const S={view:'home',i:0,mode:'live',cat:'全部',member:false,sel:'week',sheet:null,fav:{},me:FALLBACK.slice(),q:'',real:false,clock:Date.now()};
+const esc=s=>String(s).replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
+const LINE=live.slice().sort((a,b)=>a.ll[1]-b.ll[1]); // 线路顺序：西（首尔林）→ 东
+const P=()=>LINE[S.i];
+function meters(a,b){const R=6371000,r=x=>x*Math.PI/180;const dLa=r(b[0]-a[0]),dLo=r(b[1]-a[1]);const h=Math.sin(dLa/2)**2+Math.cos(r(a[0]))*Math.cos(r(b[0]))*Math.sin(dLo/2)**2;return Math.round(2*R*Math.asin(Math.sqrt(h)));}
+const distM=p=>meters(S.me,p.ll);
+const fmtD=m=>m<1000?m+'m':(m/1000).toFixed(1)+'km';
+function left(ts){let t=Math.max(0,ts-Date.now());const d=Math.floor(t/D);t-=d*D;const h=Math.floor(t/H);t-=h*H;const m=Math.floor(t/M);
+  if(d)return `${d}天${h}小时`; if(h)return `${h}小时${m}分`; return `${m}分钟`;}
+function clock(ts){const d=new Date(ts);let h=d.getHours();const ap=h<12?'上午':'下午';h=h%12||12;return `${ap} ${h}:${String(d.getMinutes()).padStart(2,'0')}`;}
+const visible=()=>live.filter(p=>S.cat==='全部'||p.cat===S.cat);
+const naver=p=>'https://map.naver.com/p/search/'+encodeURIComponent(p.addr.replace(/\s*\(.*?\)\s*/g,' ').replace(/,.*$/,'').trim());
+const ICON={
+ back:'<svg viewBox="0 0 24 24"><path d="M15 6l-6 6 6 6"/></svg>',
+ star:'<svg viewBox="0 0 24 24"><path d="M12 3l2.7 5.6 6.1.9-4.4 4.3 1 6.1L12 17l-5.4 2.9 1-6.1L3.2 9.5l6.1-.9z"/></svg>',
+ pin:'<svg viewBox="0 0 24 24"><path d="M12 21s-7-6.2-7-11a7 7 0 0 1 14 0c0 4.8-7 11-7 11z"/><circle cx="12" cy="10" r="2.5"/></svg>',
+ cal:'<svg viewBox="0 0 24 24"><rect x="4" y="5" width="16" height="15" rx="2"/><path d="M4 10h16M9 3v4M15 3v4"/></svg>',
+ gift:'<svg viewBox="0 0 24 24"><rect x="4" y="9" width="16" height="11" rx="1"/><path d="M4 13h16M12 9v11M12 9c-2-4-6-3-5-1s5 1 5 1zm0 0c2-4 6-3 5-1s-5 1-5 1z"/></svg>',
+ deal:'<svg viewBox="0 0 24 24"><path d="M3 12V4h8l10 10-8 8z"/><circle cx="7.5" cy="8.5" r="1.5"/></svg>',
+ exp:'<svg viewBox="0 0 24 24"><path d="M12 3l2.5 5.5L20 9l-4 4 1 6-5-3-5 3 1-6-4-4 5.5-.5z"/></svg>',
+ info:'<svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="8"/><path d="M12 11v5M12 8v.5"/></svg>',
+ food:'<svg viewBox="0 0 24 24"><path d="M7 3v8M5 3v5a2 2 0 0 0 4 0V3M7 11v10M17 21V3c-2 0-4 2-4 6v4h4"/></svg>',
+ sweet:'<svg viewBox="0 0 24 24"><path d="M4 13h16l-2 7H6zM6 13c0-4 2.7-7 6-7s6 3 6 7M12 6V3"/></svg>',
+ ref:'<svg viewBox="0 0 24 24"><path d="M20 12a8 8 0 1 1-2.3-5.7M20 4v5h-5"/></svg>',
+ door:'<svg viewBox="0 0 24 24"><path d="M6 21V4h12v17M3 21h18"/><circle cx="14.5" cy="12.5" r="1"/></svg>',
+ clock:'<svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="8"/><path d="M12 8v4l3 2"/></svg>',
+ link:'<svg viewBox="0 0 24 24"><path d="M10 14a4 4 0 0 0 5.7 0l3-3a4 4 0 0 0-5.7-5.7l-1 1M14 10a4 4 0 0 0-5.7 0l-3 3a4 4 0 0 0 5.7 5.7l1-1"/></svg>',
+ copy:'<svg viewBox="0 0 24 24"><rect x="8" y="8" width="12" height="12" rx="2"/><path d="M16 8V5a1 1 0 0 0-1-1H5a1 1 0 0 0-1 1v10a1 1 0 0 0 1 1h3"/></svg>'
+};
+let tt; function toast(t){const el=document.getElementById('toast');el.textContent=t;el.hidden=false;clearTimeout(tt);tt=setTimeout(()=>el.hidden=true,2600);}
+
+/* ---------- MAP ---------- */
+const homeEl=document.getElementById('home'), detEl=document.getElementById('detail');
+const wide=()=>matchMedia('(min-width:880px)').matches;
+const dark=()=>document.documentElement.dataset.theme==='dark'||(document.documentElement.dataset.theme!=='light'&&matchMedia('(prefers-color-scheme: dark)').matches);
+const map=L.map('map',{zoomControl:false,zoomSnap:.5,minZoom:14,maxZoom:19,maxBounds:[[37.530,127.025],[37.556,127.075]],maxBoundsViscosity:.8}).setView(FALLBACK,17);
+let tileFail=0;
+L.tileLayer(`https://{s}.basemaps.cartocdn.com/${dark()?'dark_all':'light_all'}/{z}/{x}/{y}{r}.png`,{subdomains:'abcd',maxZoom:20,attribution:'&copy; <a href="https://www.openstreetmap.org/copyright" target="_blank" rel="noopener">OpenStreetMap</a> &copy; <a href="https://carto.com/attributions" target="_blank" rel="noopener">CARTO</a>'})
+ .on('tileerror',()=>{if(++tileFail===3)document.getElementById('tilewarn').hidden=false;}).on('tileload',()=>{document.getElementById('tilewarn').hidden=true;tileFail=-99;}).addTo(map);
+L.control.zoom({position:'bottomright'}).addTo(map);
+map.attributionControl.setPrefix(false);
+const ring=L.circle(S.me,{radius:50,color:'#2ea84a',weight:2,dashArray:'6 5',fillColor:'#2ea84a',fillOpacity:.08,interactive:false}).addTo(map);
+const meDot=L.marker(S.me,{icon:L.divIcon({className:'me-wrap',html:'<span class="me-pulse"></span><span class="me-dot"></span>',iconSize:[30,30],iconAnchor:[15,15]}),interactive:false,zIndexOffset:1000}).addTo(map);
+L.marker(SEONGSU_ST,{icon:L.divIcon({className:'stn-wrap',html:'<span class="stn"><b>2</b>圣水站</span>',iconSize:[74,24],iconAnchor:[37,12]}),interactive:false}).addTo(map);
+L.marker([37.54360,127.04460],{icon:L.divIcon({className:'stn-wrap',html:'<span class="stn y"><b>水</b>首尔林站</span>',iconSize:[84,24],iconAnchor:[42,12]}),interactive:false}).addTo(map);
+const layer=L.layerGroup().addTo(map);
+function giftIcon(p,near){return L.divIcon({className:'gm-wrap',html:`<div class="gm${near?' on':''} t-${p.type}"><div class="bub">${ICON[p.type]}<span>${esc(p.g)}</span></div><i></i><em>${esc(p.brand)}</em></div>`,iconSize:[64,86],iconAnchor:[32,68]});}
+function drawMarkers(){layer.clearLayers();visible().forEach(p=>{const near=distM(p)<=50;
+  L.marker(p.ll,{icon:giftIcon(p,near),title:p.zh+' · '+p.g,riseOnHover:true,zIndexOffset:near?500:0}).on('click',()=>openPop(p.id)).addTo(layer);});}
+function setMe(ll,recenter){S.me=ll;ring.setLatLng(ll);meDot.setLatLng(ll);drawMarkers();renderNear();if(recenter)centerMe();}
+function centerMe(){const z=Math.max(map.getZoom(),17);let off=0;if(!wide()){const sh=document.getElementById('near').offsetHeight,tp=document.querySelector('.topov').offsetHeight;off=(sh-tp)/2;}
+  map.setView(map.unproject(map.project(S.me,z).add([0,off]),z),z,{animate:true});}
+map.on('click',e=>{setMe([e.latlng.lat,e.latlng.lng],false);toast('已把你的位置移到这里（演示）');});
+
+/* ---------- HOME ---------- */
+function nearList(){
+  const vs=visible().map(p=>({p,d:distM(p)})).sort((a,b)=>a.d-b.d);
+  const inR=vs.filter(x=>x.d<=50);
+  const cards=inR.map(({p,d})=>`<button class="nc" data-act="open" data-id="${p.id}">
+    <div class="t"><b>${esc(p.zh)}</b><span class="c">${p.cat}</span><span class="dm">${d}m</span></div>
+    <div class="gifts">${p.perks.map(x=>`<span class="gift${/折扣|新品|售卖|菜单|提示|便利/.test(x[1])?' a':''}">${ICON[/food|sweet/.test(p.type)?p.type:'gift']}${esc(x[0])}</span>`).join('')}</div>
+    <div class="ft"><span>${ENTRY[p.entry]}${p.start==='常设'?' · '+esc(p.hours.split('·')[0]):` · 剩 <b data-end="${p.endTs}">${left(p.endTs)}</b>`}</span><span class="more">详情 ›</span></div></button>`).join('');
+  const nearest=vs[0];
+  const empty=`<div class="emptyn">50m 内暂时没有快闪和美食${nearest?`<button data-act="open" data-id="${nearest.p.id}">最近的是 ${esc(nearest.p.zh)} · ${fmtD(nearest.d)} ›</button>`:''}</div>`;
+  return `<div class="grab"></div><div class="sh pad"><h2>附近 50m · <em>${inR.length}</em> 家</h2><small>${S.real?'当前定位':'演示位置'} · 点地图可移动</small></div>
+   <div class="near pad">${inR.length?cards:empty}<p class="datanote">共收录圣水 ${live.filter(p=>!/food|sweet/.test(p.type)).length} 家快闪、${live.filter(p=>/food|sweet/.test(p.type)).length} 家餐厅甜品 · 信息查询于 ${DATA_DATE}，以官方为准 · 店铺位置为估算</p></div>`;}
+function renderNear(){document.getElementById('near').innerHTML=nearList();}
+function results(){
+  const q=S.q.trim().toLowerCase(); if(!q)return '';
+  const hit=live.filter(p=>(p.name+p.zh+p.brand+p.cat+p.addr+p.g+p.perks.map(x=>x[0]).join('')).toLowerCase().includes(q));
+  const hl=s=>{const i=s.toLowerCase().indexOf(q);return i<0?esc(s):esc(s.slice(0,i))+'<mark>'+esc(s.slice(i,i+q.length))+'</mark>'+esc(s.slice(i+q.length));};
+  return `<div class="results" role="listbox">${hit.length?hit.map(p=>`<button class="res" data-act="open" data-id="${p.id}"><span class="pi">${ICON.pin}</span><span><b>${hl(p.zh)}</b><small>${p.cat} · ${esc(p.g)} · ${p.start==='常设'?'常设':p.start+'–'+p.endTxt}</small></span><span class="d">${fmtD(distM(p))}</span></button>`).join('')
+    :`<div class="res" style="color:var(--muted)">圣水暂时没有找到「${esc(S.q)}」</div>`}</div>`;}
+function renderChips(){document.getElementById('chips').innerHTML=['全部',...CATS].map(c=>{const lock=c!=='全部'&&!S.member;return `<button class="fl${S.cat===c?' on':''}" data-act="cat" data-v="${c}">${c}${lock?'<span class="vip">VIP</span>':''}</button>`}).join('');}
+const qEl=document.getElementById('q');
+qEl.addEventListener('input',()=>{S.q=qEl.value;document.getElementById('res').innerHTML=results();document.getElementById('clr').hidden=!S.q;});
+function locate(){
+  if(!navigator.geolocation){toast('这个浏览器不支持定位，已使用圣水演示位置');setMe(FALLBACK,true);return;}
+  toast('正在定位…');
+  navigator.geolocation.getCurrentPosition(pos=>{const ll=[pos.coords.latitude,pos.coords.longitude];
+    if(meters(ll,SEONGSU_ST)>2500){S.real=false;toast('你现在不在圣水附近，先用圣水演示位置');setMe(FALLBACK,true);}
+    else{S.real=true;toast('已定位到你的位置');setMe(ll,true);}},
+   ()=>{S.real=false;toast('没有拿到定位权限，已使用圣水演示位置');setMe(FALLBACK,true);},{enableHighAccuracy:true,timeout:8000});}
+
+/* ---------- DETAIL ---------- */
+function head(p){
+  return `<div class="backrow pad"><button data-act="home">${ICON.back}返回地图</button></div>
+   <section class="head pad">
+   <div style="display:flex;align-items:flex-start;gap:8px"><div style="flex:1;min-width:0">
+    <div class="title"><h1>${esc(p.zh)}</h1><span class="cat">${p.cat}</span></div>
+    <div class="addr ko-name">${esc(p.name)}</div>
+    <div class="addr">${p.start==='常设'?'常设店铺':p.start+' – '+p.endTxt} · 距你约 ${fmtD(distM(p))}</div></div>
+    <button class="star${S.fav[p.id]?' on':''}" data-act="fav" aria-label="收藏">${ICON.star}</button></div>
+   <div class="chiprow"><a class="chipb p" href="${naver(p)}" target="_blank" rel="noopener">${ICON.pin}Naver 地图导航</a>
+    ${p.entry==='naver'?`<a class="chipb s" href="${p.src}" target="_blank" rel="noopener">${ICON.cal}查看预约方式</a>`:''}
+    <button class="chipb" data-act="perks">${ICON.gift}福利</button><a class="chipb" href="${p.src}" target="_blank" rel="noopener">${ICON.link}信息来源</a></div>
+  </section><div class="sep"></div>`;}
+function lineBar(){const prev=LINE[S.i-1],next=LINE[S.i+1],p=P();
+  return `<div class="lineb" role="group" aria-label="切换快闪">
+   <button class="side" data-act="step" data-v="-1" ${prev?'':'disabled'}>‹ <span>${prev?esc(prev.brand):'首尔林站'}</span></button>
+   <div class="cur"><span class="badge">${S.i+1}</span><b>${esc(p.brand)}</b></div>
+   <button class="side r" data-act="step" data-v="1" ${next?'':'disabled'}><span>${next?esc(next.brand):'圣水站'}</span> ›</button></div>`;}
+function cards(p){
+  if(S.mode==='live'){
+    const q=p.rep?`<div class="kv"><span>现场情况</span><b class="${p.rep==='人少'?'g':p.rep==='一般'?'a':''}">${p.rep}</b></div><div class="src">刚刚由你上报 · 正式版会汇总所有用户的上报</div>`
+      :`<div class="kv"><span>排队时长</span><b class="k">暂无上报</b></div><div class="rep2">我在现场：${['人少','一般','很多'].map(x=>`<button data-act="report" data-v="${x}">${x}</button>`).join('')}</div>`;
+    return `<div class="cards">
+     <div class="card"><h3>现场排队</h3>${q}</div>
+     <div class="card"><h3>入场方式</h3><div class="kv"><span>方式</span><b class="${p.entry==='walkin'?'g':'a'}">${ENTRY[p.entry]}</b></div>${p.start==='常设'?'':`<div class="kv"><span>距结束</span><b data-end="${p.endTs}">${left(p.endTs)}</b></div>`}${p.entryNote?`<div class="src">${esc(p.entryNote)}</div>`:''}</div></div>`;}
+  return `<div class="cards">
+    <div class="card"><h3>营业时间</h3><div class="kv"><span style="white-space:normal">${esc(p.hours)}</span></div></div>
+    <div class="card"><h3>${p.start==='常设'?'店铺类型':'快闪期间'}</h3>${p.start==='常设'?'<div class="kv"><span>常设店铺</span></div>':`<div class="kv"><span>日期</span><b class="k">${p.start}–${p.endTxt}</b></div><div class="kv"><span>剩余</span><b data-end="${p.endTs}">${left(p.endTs)}</b></div>`}</div></div>`;}
+function lineMap(){
+  const st=LINE.map((p,i)=>`<button class="st${i===S.i?' cur':''}" data-act="go" data-v="${i}" aria-label="${esc(p.zh)}"><span class="dot"></span><span class="nm">${esc(p.brand)}</span><span class="q">${esc(p.g)}</span></button>`).join('');
+  return `<div class="mapbox"><div class="mapscroll"><div class="track">
+    <div class="st term"><span class="sub subs">水仁·盆唐线</span><span class="dot"></span><span class="nm">首尔林站</span></div>${st}
+    <div class="st term"><span class="sub sub2">2号线</span><span class="dot"></span><span class="nm">圣水站</span></div></div></div></div>`;}
+function guide(p){
+  if(p.entry==='naver')return `<ol class="guide"><li>打开"信息来源"页面，找到 <span class="ko">네이버 예약</span> 链接</li><li>用 Naver 账号登录，选择日期和时段完成预约</li><li>按预约时间到店，出示预约确认页面入场</li></ol>`;
+  if(p.entry==='ticket')return `<ol class="guide"><li>这是收费展览，需要购票入场</li><li>票价和预约方式请看"信息来源"页面里的官方链接</li><li>周末人多，建议工作日或开门时段去</li></ol>`;
+  return `<ol class="guide"><li>不用预约，直接到门口排队</li><li>人多时店员可能会让你登记手机号排号，留意短信或 KakaoTalk 通知</li><li>周末下午最挤，工作日或开门后一小时内去最省时间</li></ol>`;}
+function info(p){
+  return `<section class="sec pad" id="perks"><h2>${/food|sweet/.test(p.type)?'招牌与价格':'福利与亮点'}</h2><div>${p.perks.map(x=>`<div class="perk">${esc(x[0])}<span class="tag ${/赠品|周边|限定|招牌/.test(x[1])?'t-g':'t-a'}">${x[1]}</span></div>`).join('')}</div>
+    <p class="datanote">以上整理自 <a href="${p.src}" target="_blank" rel="noopener">${p.src.includes('popply')?'Popply 活动页':'来源页面'}</a>（查询于 ${DATA_DATE}），以官方公告为准</p></section><div class="sep"></div>
+   <section class="sec pad"><h2>快闪信息</h2><div class="facts">
+    <div class="fact"><span class="ic">${ICON.door}</span><div>入场方式<small><span class="hl">${ENTRY[p.entry]}</span></small></div></div>
+    <div class="fact"><span class="ic">${ICON.clock}</span><div>营业时间<small>${esc(p.hours)}</small></div></div>
+    <div class="fact"><span class="ic">${ICON.cal}</span><div>${p.start==='常设'?'类型':'快闪期间'}<small>${p.start==='常设'?'常设店铺':p.start+' – '+p.endTxt}</small></div></div>
+    <div class="fact"><span class="ic">${ICON.pin}</span><div>韩文地址<small>${esc(p.addr)}</small><button class="copy" data-act="copy" data-v="${esc(p.addr)}">${ICON.copy}复制，给出租车司机看</button></div></div>
+   </div></section><div class="sep"></div>
+   <section class="sec pad"><h2>怎么入场<small>中文指引</small></h2>${guide(p)}</section>`;}
+function vDetail(){const p=P();
+  return `<div class="wrap grid"><main>${head(p)}<section class="pad" style="padding-bottom:22px">${lineBar()}
+   <div class="rt"><div class="seg"><button class="${S.mode==='live'?'on':''}" data-act="mode" data-v="live">现场</button><button class="${S.mode==='info'?'on':''}" data-act="mode" data-v="info">营业</button></div>
+   <span class="clock">${clock(S.clock)}</span><button class="refresh" data-act="refresh" aria-label="刷新">${ICON.ref}</button></div>${cards(p)}</section>
+   <div class="sep"></div>${info(p)}</main>
+   <aside class="aside"><section class="sec pad"><h2>圣水线路图<small>从首尔林到圣水站 · 点站点切换</small></h2>${lineMap()}</section>
+   <p class="foot pad">课堂作业「快闪雷达」原型。快闪信息整理自 Popply（${DATA_DATE}），以官方公告为准；地图上的店铺位置按地址估算，导航请以 Naver 地图为准。排队上报为演示功能。</p></aside></div>`;}
+function vSheet(){
+  const why={filter:'分类筛选是会员功能'}[S.sheet]||'';const pl=PLANS.find(x=>x.k===S.sel);
+  return `<div class="mask" data-act="close"><div class="vsheet" role="dialog" aria-label="会员">
+   <div class="shead pad"><h3>逛圣水，一场都不错过</h3><p>按喜好筛选，新快闪和快结束的快闪第一时间提醒你</p>${why?`<span class="why">${why}</span>`:''}<button class="x" data-act="close" aria-label="关闭">×</button></div>
+   <div class="pad"><div class="plans">${PLANS.map(x=>`<button class="plan${S.sel===x.k?' on':''}" data-act="plan" data-v="${x.k}"><div>${x.nm}</div><div class="pr"><small>¥</small>${x.pr}</div><div class="ds">${x.ds}</div></button>`).join('')}</div>
+    <table class="tbl"><tr><th>功能</th><th>免费</th><th>会员</th></tr>
+     <tr><td>地图 · 搜索 · 50m 内福利</td><td class="y">✓</td><td class="y">✓</td></tr>
+     <tr><td>单店详情 · 导航 · 中文入场指引</td><td class="y">✓</td><td class="y">✓</td></tr>
+     <tr><td>分类筛选（餐厅/甜品/美妆/服装/运动/联名/K-pop）</td><td>—</td><td class="y">✓</td></tr>
+     <tr><td>新快闪 / 即将结束提醒</td><td>—</td><td class="y">✓</td></tr></table>
+    <button class="buy" data-act="buy">开通${pl.nm} ¥${pl.pr}（演示，不扣费）</button><div class="fine">定价为示意，正式价格待验证后确定</div></div></div></div>`;}
+
+function renderDetail(){detEl.innerHTML=vDetail();const c=document.querySelector('.st.cur');if(c){const sc=c.closest('.mapscroll');sc.scrollLeft=c.offsetLeft-sc.clientWidth/2+46;}}
+function renderSheet(){document.getElementById('sheetHost').innerHTML=S.sheet!==null?vSheet():'';}
+function rerender(){if(S.view==='detail'){const y=scrollY;renderDetail();scrollTo(0,y);}renderSheet();}
+function openPop(id){S.i=LINE.findIndex(x=>x.id===id);if(S.i<0)return;S.view='detail';S.mode='live';S.sheet=null;renderSheet();homeEl.hidden=true;detEl.hidden=false;renderDetail();scrollTo(0,0);try{history.replaceState(null,'','#'+id);}catch(e){}}
+function goHome(){S.view='home';detEl.hidden=true;detEl.innerHTML='';homeEl.hidden=false;map.invalidateSize();drawMarkers();renderNear();try{history.replaceState(null,'',location.pathname+location.search);}catch(e){}}
+
+document.addEventListener('click',e=>{
+  const el=e.target.closest('[data-act]'); if(!el)return;
+  const a=el.dataset.act, v=el.dataset.v, p=P();
+  if(a==='open')openPop(el.dataset.id);
+  else if(a==='home')goHome();
+  else if(a==='locate')locate();
+  else if(a==='clear'){S.q='';qEl.value='';document.getElementById('res').innerHTML='';el.hidden=true;}
+  else if(a==='step'){const n=LINE[S.i+(+v)];if(n)openPop(n.id);}
+  else if(a==='go')openPop(LINE[+v].id);
+  else if(a==='mode'){S.mode=v;rerender();}
+  else if(a==='refresh'){S.clock=Date.now();rerender();toast('已刷新');}
+  else if(a==='report'){p.rep=v;rerender();toast('感谢上报（演示）');}
+  else if(a==='perks'){const t=document.getElementById('perks');if(t)t.scrollIntoView({behavior:'smooth'});}
+  else if(a==='copy'){const t=v;(navigator.clipboard?navigator.clipboard.writeText(t):Promise.reject()).then(()=>toast('韩文地址已复制'),()=>toast('请长按地址手动复制'));}
+  else if(a==='fav'){S.fav[p.id]=!S.fav[p.id];rerender();toast(S.fav[p.id]?'已收藏':'已取消收藏');}
+  else if(a==='cat'){if(v!=='全部'&&!S.member){S.sheet='filter';renderSheet();}else{S.cat=v;renderChips();drawMarkers();renderNear();}}
+  else if(a==='close'){if(e.target===el||el.classList.contains('x')){S.sheet=null;renderSheet();}}
+  else if(a==='plan'){S.sel=v;renderSheet();}
+  else if(a==='buy'){S.member=true;S.sheet=null;renderSheet();renderChips();toast('已开通（演示）：分类筛选已解锁');}
+});
+window.addEventListener('hashchange',()=>{const id=location.hash.slice(1);if(LINE.some(x=>x.id===id))openPop(id);});
+setInterval(()=>{document.querySelectorAll('[data-end]').forEach(el=>{el.textContent=left(+el.dataset.end);});},30000);
+renderChips();drawMarkers();renderNear();
+setTimeout(()=>{map.invalidateSize();centerMe();},60);
+const h0=location.hash.slice(1); if(LINE.some(x=>x.id===h0))openPop(h0);
+})();
+
+</script>
+</body></html>
