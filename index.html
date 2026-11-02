@@ -945,7 +945,7 @@ a{color:inherit;text-decoration:none}
 <div id="sheetHost"></div>
 <div class="toast" id="toast" hidden></div>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.min.js"></script>
-<script src="data.js?v=20261102"></script>
+<script src="data.js?v=20261102b"></script>
 <script>
 (function(){
 const M=60e3,H=60*M,D=24*H;
@@ -1079,8 +1079,8 @@ function guide(p){
   if(p.entry==='ticket')return `<ol class="guide"><li>这是收费展览，需要购票入场</li><li>票价和预约方式请看"信息来源"页面里的官方链接</li><li>周末人多，建议工作日或开门时段去</li></ol>`;
   return `<ol class="guide"><li>不用预约，直接到门口排队</li><li>人多时店员可能会让你登记手机号排号，留意短信或 KakaoTalk 通知</li><li>周末下午最挤，工作日或开门后一小时内去最省时间</li></ol>`;}
 function info(p){
-  return `<section class="sec pad" id="perks"><h2>${/food|sweet/.test(p.type)?'招牌与价格':'福利与亮点'}</h2><div>${p.perks.map(x=>`<div class="perk">${esc(x[0])}<span class="tag ${/赠品|周边|限定|招牌/.test(x[1])?'t-g':'t-a'}">${x[1]}</span></div>`).join('')}</div>
-    <p class="datanote">以上整理自 <a href="${p.src}" target="_blank" rel="noopener">${p.src.includes('popply')?'Popply 活动页':'来源页面'}</a>（查询于 ${DATA_DATE}），以官方公告为准</p></section><div class="sep"></div>
+  return `<section class="sec pad" id="perks"><h2>${/food|sweet/.test(p.type)?'招牌与价格':'福利与亮点'}</h2><div>${p.perks.map(x=>`<div class="perk">${esc(x[0])}<span class="tag ${/赠品|周边|限定|招牌|试吃/.test(x[1])?'t-g':'t-a'}">${x[1]}</span></div>`).join('')}</div>
+    <p class="datanote">以上整理自 <a href="${p.src}" target="_blank" rel="noopener">${p.src.includes('popply')?'Popply 活动页':'来源页面'}</a>${p.src2?'、'+esc(p.src2):''}（查询于 ${DATA_DATE}），以官方公告为准</p></section><div class="sep"></div>
    <section class="sec pad"><h2>快闪信息</h2><div class="facts">
     <div class="fact"><span class="ic">${ICON.door}</span><div>入场方式<small><span class="hl">${ENTRY[p.entry]}</span></small></div></div>
     <div class="fact"><span class="ic">${ICON.clock}</span><div>营业时间<small>${esc(p.hours)}</small></div></div>

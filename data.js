@@ -83,9 +83,9 @@ const POPS=[
  ,{id:'buttershop',name:'버터샵 팝업 (이구홈 성수 1호점)',zh:'BUTTER SHOP 圣诞快闪',brand:'BUTTER SHOP',cat:'联名',addr:'서울 성동구 연무장길 57 (이구홈 성수 1호점)',ll:[37.5423855,127.055807],est:false,
   start:'10.30',endTxt:'11.26',end:'2026-11-26T22:00:00+09:00',hours:'每天 11:00–22:00',entry:'walkin',entryNote:'免费入场',
   type:'gift',g:'送钥匙扣',perks:[['购买 BUTTER SHOP 商品送黄油钥匙扣（前 100 名）','赠品'],['圣诞单品、芝麻街、天使系列','售卖']],src:'https://popply.co.kr/popup/6480'}
- ,{id:'fixpizza',name:'픽스피자 팝업',zh:'FIX PIZZA 快闪',brand:'FIX PIZZA',cat:'餐厅',addr:'서울 성동구 연무장길 5-9 1층, 2층',ll:[37.5442564,127.0503748],est:false,
-  start:'10.22',endTxt:'11.22',end:'2026-11-22T19:00:00+09:00',hours:'周二–周日 12:00–19:00（15:00–16:00 休息）· 周一休息',entry:'walkin',entryNote:'官方说明：现场排队',
-  type:'gift',g:'抽奖',perks:[['关注并发快拍认证送周边','赠品'],['每消费 1 万韩元抽奖 1 次（钥匙扣、照片卡、披萨券、Olive Young 化妆品）','抽奖'],['发帖活动有机会得 10 万韩元美妆礼品','抽奖']],src:'https://popply.co.kr/popup/6276'}
+ ,{id:'fixpizza',name:'픽스피자 성수 팝업스토어',zh:'FIX PIZZA 一餐披萨快闪',brand:'FIX PIZZA',cat:'餐厅',addr:'서울 성동구 연무장길 5-9 1층, 2층',ll:[37.5442564,127.0503748],est:false,
+  start:'10.22',endTxt:'11.22',end:'2026-11-22T19:00:00+09:00',hours:'周二–周日 12:00–19:00（15:00–16:00 休息）· 周一休息',entry:'walkin',entryNote:'现场排队。营业时间：Popply 写 11.3 起 12:00–19:00；小红书笔记（10.20）写 11:00–18:00、15:00–15:30 休息，以现场为准',
+  type:'gift',g:'免费试吃',perks:[['关注官方账号并发快拍（带指定标签），免费试吃 4 款披萨 + 柠檬苹果醋汽水','试吃'],['披萨 1,800 韩元起','招牌'],['每消费 1 万韩元抽奖 1 次','抽奖'],['满足关注、到店认证发帖等条件可抽 Gucci、Dior 香水、唇膏、面霜、咖啡券','抽奖']],src:'https://popply.co.kr/popup/6276',src2:'小红书 @在韩向日葵 笔记（10-20）'}
  ,{id:'fra422',name:'프라포투투 팝업',zh:'FRA422 香水快闪',brand:'FRA422',cat:'美妆',addr:'서울 성동구 성수이로 77',ll:[37.5419964,127.056009],est:false,
   start:'03.06',endTxt:'11.30',end:'2026-11-30T21:30:00+09:00',hours:'每天 10:30–21:30',entry:'walkin',entryNote:'',
   type:'gift',g:'购买送袋',perks:[['购买即送环保袋','赠品'],['买 Soul 香水送 1.5ml 小样','赠品'],['全场 9 折、钥匙扣套装特价','折扣']],src:'https://popply.co.kr/popup/5791'}
