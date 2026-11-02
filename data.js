@@ -116,4 +116,7 @@ const POPS=[
  ,{id:'dralthea',name:'닥터엘시아 345 시크릿 프로젝트 (올리브영 뷰티 맨션 성수)',zh:'Dr.Althea 345 秘密项目快闪',brand:'Dr.Althea',cat:'美妆',addr:'서울 성동구 성수이로 108 (올리브영 뷰티 맨션 성수)',ll:[37.5450426,127.0558154],est:false,
   start:'11.01',endTxt:'11.28',end:'2026-11-28T22:00:00+09:00',hours:'每天 10:00–22:00（体验和购买活动只在 11:00–19:00）',entry:'walkin',entryNote:'在 Olive Young Beauty Mansion 圣水内，和 LONGTAKE 快闪同一栋楼',
   type:'gift',g:'送洁面乳',perks:[['FIND 345：关注 Instagram 和 KakaoTalk 后 10 秒内找出真的 345 洁面乳，成功送正装、失败送 2 个小样','赠品'],['345 LUCKY DRAW：买 1 件即可抽，100% 中奖（舒缓面霜正装或迷你公文包挑战），每人 1 次','抽奖'],['购买即送购物袋；满 3 万送精华 15ml，5 万送面膜 2 片，7 万送面膜 1 盒，10 万送洁面乳 + 4 件小样，20 万送旅行套装（不叠加）','赠品'],['研究员拍照区，发 Ins 快拍可参加评选（仅限韩国居住者）','体验']],src:'https://www.instagram.com/dr.althea_korea_official/',src2:'小红书 @首尔学姐情报便利店'}
+ ,{id:'ongredients',name:'온그리디언츠 이너글로우 VIP 라운지',zh:'ongredients Inner Glow VIP 休息室',brand:'ongredients',cat:'美妆',addr:'서울 성동구 연무장17길 4',ll:[37.5414,127.0594],est:true,
+  start:'常设',endTxt:'常设',end:'2099-12-31T20:00:00+09:00',hours:'营业时间未查到，以现场为准',entry:'walkin',entryNote:'小红书笔记称送礼活动"一直有效"；地图位置按地址估算，导航以 Naver 地图为准',
+  type:'gift',g:'送正装乳液',perks:[['关注品牌小红书账号，送购物袋 + 黄油乳液 80ml 正装','赠品'],['Skin Barrier Calming Lotion EX 80ml 原价 17,000 → 7 折 11,900 韩元','折扣']],src:'https://popga.co.kr/popup/7286',src2:'小红书 @罗曼城luke'}
 ];
