@@ -4,7 +4,7 @@
    end  = 最后一天的闭店时间（韩国时间）
    type = 主页圆圈里显示的福利类型：gift 赠品 / deal 折扣 / exp 体验 / info 暂无福利信息
    entry= walkin 现场排队 / naver 네이버 사전예약 / ticket 需购票 */
-const DATA_DATE='2026-11-02';
+const DATA_DATE='2026-11-04';
 const POPS=[
  {id:'snoopy',name:'탐정 스누피의 잃어버린 단서 in 유니세프 정원',zh:'侦探史努比 · 首尔林联合国儿童基金会花园',brand:'史努比',cat:'联名',addr:'서울 성동구 뚝섬로 273 (서울숲)',ll:[37.5430697,127.0417999],est:false,
   start:'09.10',endTxt:'11.16',end:'2026-11-16T19:00:00+09:00',hours:'每天 12:00–19:00',entry:'walkin',entryNote:'页面标有"사전예약"，细节未公布',
@@ -119,4 +119,7 @@ const POPS=[
  ,{id:'ongredients',name:'온그리디언츠 이너글로우 VIP 라운지',zh:'ongredients Inner Glow VIP 休息室',brand:'ongredients',cat:'美妆',addr:'서울 성동구 연무장17길 4',ll:[37.5414,127.0594],est:true,
   start:'常设',endTxt:'常设',end:'2099-12-31T20:00:00+09:00',hours:'营业时间未查到，以现场为准',entry:'walkin',entryNote:'小红书笔记称送礼活动"一直有效"；地图位置按地址估算，导航以 Naver 地图为准',
   type:'gift',g:'送正装乳液',perks:[['关注品牌小红书账号，送购物袋 + 黄油乳液 80ml 正装','赠品'],['Skin Barrier Calming Lotion EX 80ml 原价 17,000 → 7 折 11,900 韩元','折扣']],src:'https://popga.co.kr/popup/7286',src2:'小红书 @罗曼城luke'}
+ ,{id:'aliexpress',name:'알리익스프레스 11초 팝업 (성수)',zh:'AliExpress 超大扭蛋机快闪',brand:'AliExpress',cat:'其他',addr:'서울 성동구 성수동2가 273-48',ll:[37.5430,127.0560],est:true,
+  start:'11.05',endTxt:'11.08',end:'2026-11-08T20:00:00+09:00',hours:'每天 10:00–20:00（11.5 当天 12:00 开门）',entry:'walkin',entryNote:'11 月 5 日开始，只开 4 天；地图位置按地址估算，导航以 Naver 地图为准',
+  type:'gift',g:'11秒装满',perks:[['入场即送购物袋','赠品'],['完成展区任务可扭蛋抽道具（篮子或夹子）','抽奖'],['"11 秒装满挑战"：限时内装进篮子 / 夹子的商品直接送','赠品'],['线上同步：11.1–11.18 在 App 内 110 韩元买参与权，可抽电动车和折扣券','抽奖']],src:'https://www.instagram.com/aliexpresskorea/',src2:'小红书 @Vv pocket'}
 ];
