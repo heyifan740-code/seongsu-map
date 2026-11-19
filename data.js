@@ -1,7 +1,7 @@
 /* 圣水快闪线 · Seongsu Pop-up Line — data file
    Edit this file to add / update places. Each text field has zh / en / ko.
    grp: pop (pop-ups) · eat (food) · shop (permanent stores)
-   sub: see SUBS in app.js
+   sub: see SUBS in app.js (pop: beauty scent fashion char kpop game life food · eat: korean western saltbread bakery bagel donut eggtart dessert cafe · shop: acc bstore fstore)
    type (marker colour): gift · deal · exp · info · food · sweet · shop
    entry: walkin · naver (Naver booking) · ticket · queue (on-site waiting list)
    rate: DiningCode user rating {s: score/5, n: reviews, u: DiningCode id}
@@ -66,13 +66,13 @@ const POPS = [
         [LG('满 3 万 / 5 万 / 7 万 / 10 万 / 20 万韩元分档送礼','Tiered gifts at ₩30k / 50k / 70k / 100k / 200k','3만 / 5만 / 7만 / 10만 / 20만 원 구매 금액별 사은품'),'gift']],
  src:'https://www.instagram.com/dr.althea_korea_official/',src2:'小红书 @首尔学姐情报便利店'},
 
-{id:'longtake',grp:'pop',sub:'beauty',name:'롱테이크 팝업',t:LG('LONGTAKE 香氛快闪','LONGTAKE fragrance pop-up','롱테이크 향수 팝업'),brand:'LONGTAKE',
+{id:'longtake',grp:'pop',sub:'scent',name:'롱테이크 팝업',t:LG('LONGTAKE 香氛快闪','LONGTAKE fragrance pop-up','롱테이크 향수 팝업'),brand:'LONGTAKE',
  addr:'서울 성동구 아차산로 103',ll:[37.5450426,127.0558154],start:'10.01',endTxt:'12.31',end:'2026-12-31T22:00:00+09:00',h:'10:00–22:00',entry:'walkin',type:'gift',
  g:LG('关注活动','Follow event','팔로우 이벤트'),note:LG('关注活动 20:00 前可参加','Follow event until 20:00','팔로우 이벤트는 20:00까지'),
  perks:[[LG('快闪限定活动和优惠（官方未写具体内容）','Pop-up-only events and offers (details not published)','팝업 한정 이벤트와 혜택 (세부 내용 미공개)'),'gift']],
  src:PP+'6451'},
 
-{id:'fra422',grp:'pop',sub:'beauty',name:'프라포투투 팝업',t:LG('FRA422 香水快闪','FRA422 perfume pop-up','프라포투투 향수 팝업'),brand:'FRA422',
+{id:'fra422',grp:'pop',sub:'scent',name:'프라포투투 팝업',t:LG('FRA422 香水快闪','FRA422 perfume pop-up','프라포투투 향수 팝업'),brand:'FRA422',
  addr:'서울 성동구 성수이로 77',ll:[37.5419964,127.056009],start:'03.06',endTxt:'11.30',end:'2026-11-30T21:30:00+09:00',h:'10:30–21:30',entry:'walkin',type:'gift',
  g:LG('购买送袋','Tote with purchase','구매 시 에코백'),
  perks:[[LG('购买即送环保袋；买 Soul 香水送 1.5ml 小样','Eco bag with any purchase; 1.5 ml sample with Soul perfume','구매 시 에코백, Soul 향수 구매 시 1.5ml 샘플'),'gift'],
@@ -230,13 +230,13 @@ const POPS = [
  perks:[[LG('Butty 招牌三明治（芝麻土豆米夏巴塔、松露蛋黄酱）12,000 韩元','Butty sandwich (sesame-potato ciabatta, truffle aioli) ₩12,000','버티 샌드위치 (세사미 감자 치아바타, 트러플 아이올리) 12,000원'),'sig'],[LG('蘑菇融化帕尼尼 16,000 韩元','Mushroom melt panini ₩16,000','머쉬룸 멜트 파니니 16,000원'),'menu']],
  rate:{s:4.5,n:19,u:'q3k2OSTmofzO'},src:'https://www.diningcode.com/profile.php?rid=q3k2OSTmofzO'},
 
-{id:'betong',grp:'eat',sub:'bakery',name:'베통 성수 플래그십',t:LG('Betong 圣水旗舰店','Betong Seongsu flagship','베통 성수 플래그십'),brand:'Betong',
+{id:'betong',grp:'eat',sub:'saltbread',name:'베통 성수 플래그십',t:LG('Betong 圣水旗舰店','Betong Seongsu flagship','베통 성수 플래그십'),brand:'Betong',
  addr:'서울 성동구 연무장7가길 8',ll:[37.5429356,127.0552214],perm:true,end:'2099-12-31T18:30:00+09:00',h:'11:00–18:30',entry:'walkin',type:'sweet',
  g:LG('松露盐包','Truffle salt bread','트러플 소금빵'),note:LG('排队较长','Expect a line','웨이팅 있음'),
  perks:[[LG('松露盐面包 3,900 韩元','Truffle salt bread ₩3,900','트러플 소금빵 3,900원'),'sig'],[LG('咸巧克力盐面包 4,500 韩元','Salted chocolate salt bread ₩4,500','솔티드 초코 소금빵 4,500원'),'menu']],
  rate:{s:4.6,n:82,u:'aPIjQptglPVI'},src:'https://hotplacehunter.co.kr/msn/article/89312/'},
 
-{id:'jayeondo',grp:'eat',sub:'bakery',name:'자연도소금빵 in 성수',t:LG('自然岛盐面包','Jayeondo Salt Bread','자연도소금빵 in 성수'),brand:'Jayeondo',
+{id:'jayeondo',grp:'eat',sub:'saltbread',name:'자연도소금빵 in 성수',t:LG('自然岛盐面包','Jayeondo Salt Bread','자연도소금빵 in 성수'),brand:'Jayeondo',
  addr:'서울 성동구 연무장길 56-1 1층',ll:[37.542326,127.0555087],perm:true,end:'2099-12-31T22:00:00+09:00',h:'09:00–22:00',entry:'walkin',type:'sweet',
  g:LG('盐面包','Salt bread','소금빵'),note:LG('每天 6 次出炉，常售罄，出炉前排队','6 bakes a day, often sells out — queue before each batch','하루 6번 굽고 자주 품절 — 나오는 시간 전에 줄 서기'),
  perks:[[LG('盐面包 4 个一盒 12,000 韩元（只卖这一款）','Box of 4 salt breads ₩12,000 (only item)','소금빵 4개 12,000원 (단일 메뉴)'),'sig']],
@@ -254,7 +254,7 @@ const POPS = [
  perks:[[LG('夏巴塔（评价里最常被夸）','Ciabatta — the most praised item in reviews','치아바타 — 리뷰에서 가장 칭찬 많은 메뉴'),'sig'],[LG('牛奶吐司 6,800 韩元、盐面包 3,400 韩元','Milk loaf ₩6,800, salt bread ₩3,400','우유식빵 6,800원, 소금빵 3,400원'),'menu']],
  rate:{s:4.4,n:17,u:'3UvdptpClaIz'},src:'https://www.diningcode.com/profile.php?rid=3UvdptpClaIz'},
 
-{id:'etre',grp:'eat',sub:'bakery',name:'에트레베이크하우스',t:LG('Être 烘焙屋（盐面包）','Être Bake House','에트레베이크하우스'),brand:'Être',
+{id:'etre',grp:'eat',sub:'saltbread',name:'에트레베이크하우스',t:LG('Être 烘焙屋（盐面包）','Être Bake House','에트레베이크하우스'),brand:'Être',
  addr:'서울 성동구 연무장길 37-5 1, 2층',ll:[37.5432722,127.0534511],perm:true,end:'2099-12-31T21:00:00+09:00',h:'10:00–21:00',entry:'walkin',type:'sweet',
  g:LG('盐面包','Salt bread','소금빵'),note:LG('在门口排队；满座时限坐 90 分钟','Wait at the door; 90-min seat limit when full','매장 앞에서 웨이팅, 만석 시 이용 90분'),
  perks:[[LG('法棍风盐面包 4,000 韩元','Baguette-style salt bread ₩4,000','바게트 스타일 소금빵 4,000원'),'sig'],[LG('明太子蛋黄酱盐面包 6,500 韩元','Mentaiko-mayo salt bread ₩6,500','명란마요 소금빵 6,500원'),'menu']],

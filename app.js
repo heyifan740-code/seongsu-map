@@ -4,7 +4,7 @@
 const LANGS=['zh','en','ko'];
 const LOCALE={zh:'zh-CN',en:'en',ko:'ko'};
 const T={
-zh:{title:'圣水快闪线',tag:'课堂原型 · 信息以官方为准',ph:'搜索快闪、美食、店铺或福利',all:'全部',
+zh:{filt:'筛选',fTitle:'按条件筛选',fSec:['福利','时间','入场','其他'],fOpt:{gift:'送礼',deal:'打折',taste:'试吃',draw:'抽奖',exp:'体验',new:'本周新开',ending:'3天内结束',perm:'常设店',walkin:'直接进',queue:'现场取号',book:'要预约/购票',tax:'可退税',r45:'评分 4.5+',r40:'评分 4.0+'},fClear:'清除',fShow:n=>`查看 ${n} 个结果`,fres:'筛选结果',title:'圣水快闪线',tag:'课堂原型 · 信息以官方为准',ph:'搜索快闪、美食、店铺或福利',all:'全部',
  grp:{pop:'快闪',eat:'美食',shop:'逛店'},
  near:n=>`附近 50m · <em>${n}</em> 家`,list:(l,n)=>`${l} · <em>${n}</em> 家`,demo:'演示位置 · 长按地图可移动',real:'当前定位 · 长按地图可移动',
  empty:'50m 内暂时没有',nearest:(n,d)=>`最近的是 ${n} · ${d} ›`,
@@ -36,7 +36,7 @@ zh:{title:'圣水快闪线',tag:'课堂原型 · 信息以官方为准',ph:'搜�
   naver:['打开“信息来源”页面，找到 <span class="ko">네이버 예약</span> 链接','用 Naver 账号登录，选择日期和时段完成预约','按预约时间到店，出示预约确认页面入场'],
   ticket:['这是收费展览，需要购票入场','票价和购票方式请看“信息来源”页面里的官方链接','周末人多，建议工作日或开门时段去']},
  taxStep:'结账时出示护照办理退税',lang:'中文'},
-en:{title:'Seongsu Pop-up Line',tag:'Class prototype · confirm with official sources',ph:'Search pop-ups, food, shops or freebies',all:'All',
+en:{filt:'Filters',fTitle:'Filter by',fSec:['Perks','When','Entry','Other'],fOpt:{gift:'Free gift',deal:'Discount',taste:'Tasting',draw:'Lucky draw',exp:'Experience',new:'New this week',ending:'Ends in 3 days',perm:'Permanent',walkin:'Walk in',queue:'Waiting list',book:'Booking / ticket',tax:'Tax refund',r45:'Rating 4.5+',r40:'Rating 4.0+'},fClear:'Clear',fShow:n=>`Show ${n} results`,fres:'Filtered',title:'Seongsu Pop-up Line',tag:'Class prototype · confirm with official sources',ph:'Search pop-ups, food, shops or freebies',all:'All',
  grp:{pop:'Pop-ups',eat:'Eat',shop:'Shops'},
  near:n=>`Within 50 m · <em>${n}</em>`,list:(l,n)=>`${l} · <em>${n}</em>`,demo:'Demo location · long-press the map to move',real:'Your location · long-press the map to move',
  empty:'Nothing within 50 m right now',nearest:(n,d)=>`Nearest: ${n} · ${d} ›`,
@@ -68,7 +68,7 @@ en:{title:'Seongsu Pop-up Line',tag:'Class prototype · confirm with official so
   naver:['Open the source page and find the <span class="ko">네이버 예약</span> (Naver booking) link','Sign in to Naver and pick a date and time','Show your booking confirmation at the door'],
   ticket:['This is a paid exhibition — you need a ticket','See the official link on the source page for prices and booking','Weekends are crowded; weekdays or opening time are best']},
  taxStep:'Show your passport at checkout for the tax refund',lang:'EN'},
-ko:{title:'성수 팝업라인',tag:'수업 프로토타입 · 정보는 공식 안내를 확인하세요',ph:'팝업, 맛집, 매장, 혜택 검색',all:'전체',
+ko:{filt:'필터',fTitle:'조건으로 찾기',fSec:['혜택','기간','입장','기타'],fOpt:{gift:'증정',deal:'할인',taste:'시식',draw:'추첨',exp:'체험',new:'이번 주 오픈',ending:'3일 내 종료',perm:'상시 매장',walkin:'바로 입장',queue:'현장 웨이팅',book:'예약/티켓',tax:'택스리펀',r45:'평점 4.5+',r40:'평점 4.0+'},fClear:'초기화',fShow:n=>`결과 ${n}곳 보기`,fres:'필터 결과',title:'성수 팝업라인',tag:'수업 프로토타입 · 정보는 공식 안내를 확인하세요',ph:'팝업, 맛집, 매장, 혜택 검색',all:'전체',
  grp:{pop:'팝업',eat:'맛집',shop:'매장'},
  near:n=>`주변 50m · <em>${n}</em>곳`,list:(l,n)=>`${l} · <em>${n}</em>곳`,demo:'데모 위치 · 지도를 길게 눌러 이동',real:'현재 위치 · 지도를 길게 눌러 이동',
  empty:'50m 안에 아직 없어요',nearest:(n,d)=>`가장 가까운 곳: ${n} · ${d} ›`,
@@ -101,8 +101,8 @@ ko:{title:'성수 팝업라인',tag:'수업 프로토타입 · 정보는 공식 
   ticket:['유료 전시라 티켓이 필요해요','가격과 예매 방법은 출처 페이지의 공식 링크에서 확인','주말은 붐벼요. 평일이나 오픈 시간대를 추천해요']},
  taxStep:'계산할 때 여권을 보여주고 택스리펀 받기',lang:'한국어'}
 };
-const SUBS={pop:['beauty','fashion','char','kpop','game','life','food'],eat:['korean','western','bakery','bagel','donut','eggtart','dessert','cafe'],shop:['acc','bstore','fstore']};
-const SUBL={beauty:['美妆','Beauty','뷰티'],fashion:['服饰','Fashion','패션'],char:['IP联名','Characters','캐릭터·콜라보'],kpop:['K-pop','K-pop','K-pop'],game:['展览游戏','Exhibits & games','전시·게임'],life:['生活市集','Lifestyle & local','라이프스타일·로컬'],food:['美食快闪','Food pop-ups','푸드 팝업'],
+const SUBS={pop:['beauty','scent','fashion','char','kpop','game','life','food'],eat:['korean','western','saltbread','bakery','bagel','donut','eggtart','dessert','cafe'],shop:['acc','bstore','fstore']};
+const SUBL={beauty:['美妆护肤','Beauty','뷰티'],scent:['香水香氛','Fragrance','향수'],saltbread:['盐面包','Salt bread','소금빵'],fashion:['服饰','Fashion','패션'],char:['IP联名','Characters','캐릭터·콜라보'],kpop:['K-pop','K-pop','K-pop'],game:['展览游戏','Exhibits & games','전시·게임'],life:['生活市集','Lifestyle & local','라이프스타일·로컬'],food:['美食快闪','Food pop-ups','푸드 팝업'],
  korean:['韩餐','Korean','한식'],western:['西餐披萨','Western & pizza','양식·피자'],bakery:['面包烘焙','Bakery','베이커리'],bagel:['贝果','Bagels','베이글'],donut:['甜甜圈','Donuts','도넛'],eggtart:['蛋挞','Egg tarts','에그타르트'],dessert:['甜品','Desserts','디저트'],cafe:['咖啡','Cafés','카페'],
  acc:['饰品杂货','Accessories','액세서리'],bstore:['美妆集合店','Beauty stores','뷰티 매장'],fstore:['服装集合店','Fashion stores','패션 매장']};
 
@@ -121,7 +121,7 @@ const live=POPS.filter(p=>p.endTs>Date.now());
 // spread markers that share an address so none are hidden
 (()=>{const g={};live.forEach(p=>{const k=p.ll[0].toFixed(5)+','+p.ll[1].toFixed(5);(g[k]=g[k]||[]).push(p);});
   Object.values(g).forEach(a=>a.forEach((p,i)=>{if(a.length<2){p.dl=p.ll;return;}const ang=2*Math.PI*i/a.length,r=0.00009;p.dl=[p.ll[0]+r*Math.cos(ang),p.ll[1]+r*1.26*Math.sin(ang)];}));})();
-const S={view:'home',i:0,mode:'live',grp:'all',sub:null,sort:'dist',member:false,sel:1,sheet:null,fav:{},me:FALLBACK.slice(),q:'',real:false,clock:Date.now()};
+const S={f:{perk:[],time:'',entry:'',tax:false,rate:0},view:'home',i:0,mode:'live',grp:'all',sub:null,sort:'dist',member:false,sel:1,sheet:null,fav:{},me:FALLBACK.slice(),q:'',real:false,clock:Date.now()};
 const esc=s=>String(s).replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
 const LINE=live.slice().sort((a,b)=>a.ll[1]-b.ll[1]);
 const P=()=>LINE[S.i];
@@ -130,7 +130,21 @@ const distM=p=>meters(S.me,p.ll);
 const fmtD=m=>m<1000?m+'m':(m/1000).toFixed(1)+t.km;
 function left(ts){let x=Math.max(0,ts-Date.now());const d=Math.floor(x/D);x-=d*D;const h=Math.floor(x/H);x-=h*H;return t.left(d,h,Math.floor(x/M));}
 const clock=ts=>new Date(ts).toLocaleTimeString(LOCALE[lang],{hour:'numeric',minute:'2-digit'});
-const match=p=>(S.grp==='all'||p.grp===S.grp)&&(!S.sub||p.sub===S.sub);
+const startTs=p=>{if(p.perm||!/^\d\d\.\d\d$/.test(p.start))return 0;const e=new Date(p.endTs),m=+p.start.slice(0,2),d=+p.start.slice(3);let y=e.getFullYear();if(m>e.getMonth()+1)y--;return Date.parse(`${y}-${p.start.slice(0,2)}-${p.start.slice(3)}T00:00:00+09:00`);};
+const hasPerk=(p,k)=>p.type===k||p.perks.some(x=>x[1]===k);
+const fCount=()=>S.f.perk.length+(S.f.time?1:0)+(S.f.entry?1:0)+(S.f.tax?1:0)+(S.f.rate?1:0);
+function fMatch(p){const f=S.f;
+  if(f.perk.length&&!f.perk.some(k=>hasPerk(p,k)))return false;
+  if(f.time==='new'){const s0=startTs(p);if(!s0||Date.now()-s0>7*D||Date.now()<s0-D)return false;}
+  if(f.time==='ending'&&(p.perm||p.endTs-Date.now()>3*D))return false;
+  if(f.time==='perm'&&!p.perm)return false;
+  if(f.entry==='walkin'&&p.entry!=='walkin')return false;
+  if(f.entry==='queue'&&p.entry!=='queue')return false;
+  if(f.entry==='book'&&!/naver|ticket/.test(p.entry))return false;
+  if(f.tax&&!p.tax)return false;
+  if(f.rate&&!(p.rate&&p.rate.s>=f.rate))return false;
+  return true;}
+const match=p=>(S.grp==='all'||p.grp===S.grp)&&(!S.sub||p.sub===S.sub)&&fMatch(p);
 const visible=()=>live.filter(match);
 const naverUrl=p=>'https://map.naver.com/p/search/'+encodeURIComponent(p.addr.replace(/\s*\(.*?\)\s*/g,' ').replace(/,.*$/,'').trim());
 const stars=p=>p.rate?`<span class="rt-s">★ ${p.rate.s.toFixed(1)}</span>`:'';
@@ -249,15 +263,15 @@ function nearList(){
   const vs=visible().map(p=>({p,d:distM(p)}));
   const cnt=g=>live.filter(p=>p.grp===g).length;
   const foot=`<p class="datanote">${t.note(cnt('pop'),cnt('eat'),cnt('shop'),DATA_DATE)}</p>`;
-  if(S.grp==='all'){
+  if(S.grp==='all'&&!S.sub&&!fCount()){
     vs.sort((a,b)=>a.d-b.d);const inR=vs.filter(x=>x.d<=50),nearest=vs[0];
     const empty=`<div class="emptyn">${t.empty}${nearest?`<button data-act="open" data-id="${nearest.p.id}">${esc(t.nearest(tx(nearest.p.t),fmtD(nearest.d)))}</button>`:''}</div>`;
     return `<button class="grabbtn" data-act="sheet" aria-label="${t.details}"><span class="grab"></span></button><div class="sh pad" data-act="sheet"><h2>${t.near(inR.length)}</h2><small>${S.real?t.real:t.demo}</small></div>
      <div class="near pad">${inR.length?inR.map(x=>card(x.p,x.d)).join(''):empty}${foot}</div>`;}
-  const rated=S.grp==='eat'&&S.sort==='rate';
+  const rated=(S.grp==='eat'||S.f.rate>0)&&S.sort==='rate';
   vs.sort(rated?(a,b)=>((b.p.rate?b.p.rate.s:0)-(a.p.rate?a.p.rate.s:0))||(b.p.rate?b.p.rate.n:0)-(a.p.rate?a.p.rate.n:0):(a,b)=>a.d-b.d);
-  const label=S.sub?subL(S.sub):t.grp[S.grp];
-  const sortSeg=S.grp==='eat'?`<div class="seg sm"><button class="${S.sort==='dist'?'on':''}" data-act="sort" data-v="dist">${t.sortD}</button><button class="${S.sort==='rate'?'on':''}" data-act="sort" data-v="rate">${t.sortR}</button></div>`:'';
+  const label=S.sub?subL(S.sub):S.grp==='all'?t.fres:t.grp[S.grp];
+  const sortSeg=(S.grp==='eat'||S.f.rate>0)?`<div class="seg sm"><button class="${S.sort==='dist'?'on':''}" data-act="sort" data-v="dist">${t.sortD}</button><button class="${S.sort==='rate'?'on':''}" data-act="sort" data-v="rate">${t.sortR}</button></div>`:'';
   return `<button class="grabbtn" data-act="sheet" aria-label="${t.details}"><span class="grab"></span></button><div class="sh pad" data-act="sheet"><h2>${t.list(esc(label),vs.length)}</h2>${sortSeg}</div>
    <div class="near pad">${vs.map(x=>card(x.p,x.d)).join('')}${foot}</div>`;}
 function renderNear(){$('near').innerHTML=nearList();}
@@ -270,13 +284,13 @@ function results(){
   return `<div class="results" role="listbox">${hit.length?hit.slice(0,30).map(p=>`<button class="res" data-act="open" data-id="${p.id}"><span class="pi">${ICON[p.grp==='eat'?p.type:p.grp==='shop'?'shop':'pin']}</span><span><b>${hl(tx(p.t))}</b><small>${subL(p.sub)} · ${esc(tx(p.g))}${p.rate?' · ★'+p.rate.s.toFixed(1):''} · ${period(p)}</small></span><span class="d">${fmtD(distM(p))}</span></button>`).join('')
     :`<div class="res" style="color:var(--muted)">${esc(t.nores(S.q))}</div>`}</div>`;}
 function renderChips(){
-  const g=['all','pop','eat','shop'].map(k=>`<button class="fl${S.grp===k?' on':''}" data-act="grp" data-v="${k}">${k==='all'?t.all:t.grp[k]}</button>`).join('');
-  $('chips').innerHTML=g;
-  const s=$('subchips');
-  if(S.grp==='all'){s.hidden=true;s.innerHTML='';return;}
-  s.hidden=false;
-  s.innerHTML=SUBS[S.grp].map(k=>{const n=live.filter(p=>p.grp===S.grp&&p.sub===k).length;if(!n)return '';
-    return `<button class="fl sub${S.sub===k?' on':''}" data-act="sub" data-v="${k}">${subL(k)}<small>${n}</small>${S.member?'':'<span class="vip">VIP</span>'}</button>`;}).join('');}
+  const n=fCount();
+  $('chips').innerHTML=['all','pop','eat','shop'].map(k=>`<button class="fl${S.grp===k&&!(k==='all'&&S.sub)?' on':''}" data-act="grp" data-v="${k}">${k==='all'?t.all:t.grp[k]}</button>`).join('')
+   +`<button class="fl ff${n?' on':''}" data-act="facets"><svg viewBox="0 0 24 24"><path d="M4 6h16M7 12h10M10 18h4"/></svg>${t.filt}${n?`<small>${n}</small>`:''}</button>`;
+  const s=$('subchips');s.hidden=false;
+  const groups=S.grp==='all'?['pop','eat','shop']:[S.grp];
+  s.innerHTML=groups.map(g=>(S.grp==='all'?`<span class="glab">${t.grp[g]}</span>`:'')+SUBS[g].map(k=>{const c=live.filter(p=>p.grp===g&&p.sub===k).length;if(!c)return '';
+    return `<button class="fl sub${S.sub===k?' on':''}" data-act="sub" data-v="${k}" data-g="${g}">${subL(k)}<small>${c}</small>${S.member?'':'<span class="vip">VIP</span>'}</button>`;}).join('')).join('');}
 function locate(){
   if(!navigator.geolocation){toast(t.nogeo);setMe(FALLBACK,true);return;}
   toast(t.locating);
@@ -346,7 +360,21 @@ function vSheet(){
     <button class="buy" data-act="buy">${esc(t.buy(pl[0],t.price[S.sel]))}</button><div class="fine">${t.fine}</div></div></div></div>`;}
 const homeEl=$('home'),detEl=$('detail');
 function renderDetail(){detEl.innerHTML=vDetail();const c=document.querySelector('.st.cur');if(c){const sc=c.closest('.mapscroll');sc.scrollLeft=c.offsetLeft-sc.clientWidth/2+46;}}
-function renderSheet(){$('sheetHost').innerHTML=S.sheet!==null?vSheet():'';}
+function vFacets(){
+  const f=S.f,on=(sec,k)=>sec==='perk'?f.perk.includes(k):sec==='tax'?f.tax:sec==='rate'?f.rate===(k==='r45'?4.5:4.0):f[sec]===k;
+  const row=(sec,keys)=>`<div class="fopts">${keys.map(([s2,k])=>`<button class="fl${on(s2,k)?' on':''}" data-act="facet" data-s="${s2}" data-v="${k}">${t.fOpt[k]}${S.member?'':'<span class="vip">VIP</span>'}</button>`).join('')}</div>`;
+  const cnt=live.filter(match).length;
+  return `<div class="mask" data-act="close"><div class="vsheet fsheet" role="dialog">
+   <div class="fhead pad"><h3>${t.fTitle}</h3><button class="x" data-act="close" aria-label="${t.close}">×</button></div>
+   <div class="pad">
+    <h4>${t.fSec[0]}</h4>${row('perk',[['perk','gift'],['perk','deal'],['perk','taste'],['perk','draw'],['perk','exp']])}
+    <h4>${t.fSec[1]}</h4>${row('time',[['time','new'],['time','ending'],['time','perm']])}
+    <h4>${t.fSec[2]}</h4>${row('entry',[['entry','walkin'],['entry','queue'],['entry','book']])}
+    <h4>${t.fSec[3]}</h4>${row('other',[['tax','tax'],['rate','r45'],['rate','r40']])}
+    <div class="fbtns"><button class="fclear" data-act="fclear">${t.fClear}</button><button class="buy" data-act="close" data-x="1">${t.fShow(cnt)}</button></div>
+   </div></div></div>`;}
+function renderSheet(){$('sheetHost').innerHTML=S.sheet==='facets'?vFacets():S.sheet!==null?vSheet():'';}
+function refresh(){renderChips();drawMarkers();renderNear();}
 function rerender(){if(S.view==='detail'){const y=scrollY;renderDetail();scrollTo(0,y);}renderSheet();}
 function openPop(id){S.i=LINE.findIndex(x=>x.id===id);if(S.i<0)return;S.view='detail';S.mode='live';S.sheet=null;renderSheet();homeEl.hidden=true;detEl.hidden=false;renderDetail();scrollTo(0,0);try{history.replaceState(null,'',location.pathname+location.search+'#'+id);}catch(e){}}
 function goHome(){S.view='home';detEl.hidden=true;detEl.innerHTML='';homeEl.hidden=false;if(MAP)MAP.resize();drawMarkers();renderNear();try{history.replaceState(null,'',location.pathname+location.search);}catch(e){}}
@@ -385,10 +413,18 @@ document.addEventListener('click',e=>{
   else if(a==='copy'){(navigator.clipboard?navigator.clipboard.writeText(v):Promise.reject()).then(()=>toast(t.copied),()=>toast(t.copyfail));}
   else if(a==='fav'){S.fav[p.id]=!S.fav[p.id];rerender();toast(S.fav[p.id]?t.fav:t.unfav);}
   else if(a==='grp'){setMin(false);S.grp=v;S.sub=null;if(v!=='eat')S.sort='dist';renderChips();drawMarkers();renderNear();}
-  else if(a==='sub'){if(!S.member){S.sheet='filter';renderSheet();}else{S.sub=S.sub===v?null:v;renderChips();drawMarkers();renderNear();}}
+  else if(a==='sub'){if(!S.member){S.sheet='filter';renderSheet();}else{setMin(false);if(S.sub===v){S.sub=null;}else{S.sub=v;S.grp=el.dataset.g;}refresh();}}
+  else if(a==='facets'){S.sheet='facets';renderSheet();}
+  else if(a==='facet'){if(!S.member){S.sheet='filter';renderSheet();return;}const s2=el.dataset.s,f=S.f;
+    if(s2==='perk'){f.perk=f.perk.includes(v)?f.perk.filter(x=>x!==v):[...f.perk,v];}
+    else if(s2==='tax')f.tax=!f.tax;
+    else if(s2==='rate'){const r=v==='r45'?4.5:4.0;f.rate=f.rate===r?0:r;}
+    else f[s2]=f[s2]===v?'':v;
+    setMin(false);refresh();renderSheet();}
+  else if(a==='fclear'){S.f={perk:[],time:'',entry:'',tax:false,rate:0};refresh();renderSheet();}
   else if(a==='sort'){S.sort=v;renderNear();}
   else if(a==='sheet'){if(!wide())setMin(!S.min);}
-  else if(a==='close'){if(e.target===el||el.classList.contains('x')){S.sheet=null;renderSheet();}}
+  else if(a==='close'){if(e.target===el||el.classList.contains('x')||el.dataset.x){S.sheet=null;renderSheet();}}
   else if(a==='plan'){S.sel=+v;renderSheet();}
   else if(a==='buy'){S.member=true;S.sheet=null;renderSheet();renderChips();toast(t.bought);}
 });
