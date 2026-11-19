@@ -6,7 +6,7 @@ const LOCALE={zh:'zh-CN',en:'en',ko:'ko'};
 const T={
 zh:{title:'圣水快闪线',tag:'课堂原型 · 信息以官方为准',ph:'搜索快闪、美食、店铺或福利',all:'全部',
  grp:{pop:'快闪',eat:'美食',shop:'逛店'},
- near:n=>`附近 50m · <em>${n}</em> 家`,list:(l,n)=>`${l} · <em>${n}</em> 家`,demo:'演示位置 · 点地图可移动',real:'当前定位 · 点地图可移动',
+ near:n=>`附近 50m · <em>${n}</em> 家`,list:(l,n)=>`${l} · <em>${n}</em> 家`,demo:'演示位置 · 长按地图可移动',real:'当前定位 · 长按地图可移动',
  empty:'50m 内暂时没有',nearest:(n,d)=>`最近的是 ${n} · ${d} ›`,
  note:(p,e,s,d)=>`共收录圣水 ${p} 家快闪、${e} 家美食、${s} 家店铺 · 信息查询于 ${d}，以官方为准`,
  ends:'剩',perm:'常设',details:'详情 ›',nores:q=>`圣水暂时没有找到「${q}」`,moved:'已把你的位置移到这里（演示）',
@@ -38,7 +38,7 @@ zh:{title:'圣水快闪线',tag:'课堂原型 · 信息以官方为准',ph:'搜�
  taxStep:'结账时出示护照办理退税',lang:'中文'},
 en:{title:'Seongsu Pop-up Line',tag:'Class prototype · confirm with official sources',ph:'Search pop-ups, food, shops or freebies',all:'All',
  grp:{pop:'Pop-ups',eat:'Eat',shop:'Shops'},
- near:n=>`Within 50 m · <em>${n}</em>`,list:(l,n)=>`${l} · <em>${n}</em>`,demo:'Demo location · tap the map to move',real:'Your location · tap the map to move',
+ near:n=>`Within 50 m · <em>${n}</em>`,list:(l,n)=>`${l} · <em>${n}</em>`,demo:'Demo location · long-press the map to move',real:'Your location · long-press the map to move',
  empty:'Nothing within 50 m right now',nearest:(n,d)=>`Nearest: ${n} · ${d} ›`,
  note:(p,e,s,d)=>`${p} pop-ups, ${e} food spots and ${s} shops in Seongsu · checked ${d}; always confirm with official sources`,
  ends:'Ends in',perm:'Permanent',details:'Details ›',nores:q=>`No results for “${q}” in Seongsu`,moved:'Moved your location here (demo)',
@@ -70,7 +70,7 @@ en:{title:'Seongsu Pop-up Line',tag:'Class prototype · confirm with official so
  taxStep:'Show your passport at checkout for the tax refund',lang:'EN'},
 ko:{title:'성수 팝업라인',tag:'수업 프로토타입 · 정보는 공식 안내를 확인하세요',ph:'팝업, 맛집, 매장, 혜택 검색',all:'전체',
  grp:{pop:'팝업',eat:'맛집',shop:'매장'},
- near:n=>`주변 50m · <em>${n}</em>곳`,list:(l,n)=>`${l} · <em>${n}</em>곳`,demo:'데모 위치 · 지도를 눌러 이동',real:'현재 위치 · 지도를 눌러 이동',
+ near:n=>`주변 50m · <em>${n}</em>곳`,list:(l,n)=>`${l} · <em>${n}</em>곳`,demo:'데모 위치 · 지도를 길게 눌러 이동',real:'현재 위치 · 지도를 길게 눌러 이동',
  empty:'50m 안에 아직 없어요',nearest:(n,d)=>`가장 가까운 곳: ${n} · ${d} ›`,
  note:(p,e,s,d)=>`성수 팝업 ${p}곳 · 맛집 ${e}곳 · 매장 ${s}곳 수록 · ${d} 확인, 공식 안내를 우선하세요`,
  ends:'종료까지',perm:'상시',details:'자세히 ›',nores:q=>`성수에서 「${q}」을(를) 찾지 못했어요`,moved:'내 위치를 여기로 옮겼어요 (데모)',
@@ -160,6 +160,7 @@ const $=id=>document.getElementById(id);
 
 /* ================= map adapters (Naver Maps when a key is set, OpenStreetMap otherwise) ================= */
 const CFG=window.SEONGSU_CONFIG||{};
+const coarse=()=>matchMedia('(pointer:coarse)').matches;
 const BOUNDS=[[37.530,127.025],[37.556,127.075]];
 function leafletAdapter(el){
   const map=L.map(el,{zoomControl:false,zoomSnap:.5,minZoom:14,maxZoom:19,maxBounds:BOUNDS,maxBoundsViscosity:.8}).setView(FALLBACK,17);
@@ -174,7 +175,8 @@ function leafletAdapter(el){
    clear(){layer.clearLayers();},
    circle(ll,r){const c=L.circle(ll,{radius:r,color:'#2ea84a',weight:2,dashArray:'6 5',fillColor:'#2ea84a',fillOpacity:.08,interactive:false}).addTo(map);return {move:x=>c.setLatLng(x)};},
    move(m,ll){m.setLatLng(ll);},
-   onClick(cb){map.on('click',e=>cb([e.latlng.lat,e.latlng.lng]));},
+   onClick(cb){const f=e=>cb([e.latlng.lat,e.latlng.lng]);map.on('contextmenu',f);if(!coarse())map.on('click',f);},
+   onDrag(cb){map.on('dragstart',cb);},
    onZoom(cb){map.on('zoomend',cb);},
    zoom(){return map.getZoom();},
    view(ll,z,off){map.setView(map.unproject(map.project(ll,z).add([0,off]),z),z,{animate:true});},
@@ -192,7 +194,8 @@ function naverAdapter(el){
    clear(){ms.forEach(m=>m.setMap(null));ms=[];},
    circle(ll,r){const c=new N.Circle({map,center:LL(ll),radius:r,strokeColor:'#2ea84a',strokeWeight:2,strokeStyle:'shortdash',fillColor:'#2ea84a',fillOpacity:.08,clickable:false});return {move:x=>c.setCenter(LL(x))};},
    move(m,ll){m.setPosition(LL(ll));},
-   onClick(cb){N.Event.addListener(map,'click',e=>cb([e.coord.lat(),e.coord.lng()]));},
+   onClick(cb){const f=e=>cb([e.coord.lat(),e.coord.lng()]);N.Event.addListener(map,coarse()?'longtap':'click',f);N.Event.addListener(map,'rightclick',f);},
+   onDrag(cb){N.Event.addListener(map,'dragstart',cb);},
    onZoom(cb){N.Event.addListener(map,'zoom_changed',cb);},
    zoom(){return map.getZoom();},
    view(ll,z,off){map.setZoom(z,false);const pr=map.getProjection();const pt=pr.fromCoordToOffset(LL(ll));const c=pr.fromOffsetToCoord(new N.Point(pt.x,pt.y+off));map.panTo(c);},
@@ -207,6 +210,7 @@ function buildMap(adapter){
   MAP.marker({ll:ST_B,html:`<span class="stn"><b>2</b>${t.stB}</span>`,w:96,h:24,ax:48,ay:12,fixed:true});
   MAP.marker({ll:ST_A,html:`<span class="stn y"><b>水</b>${t.stA}</span>`,w:110,h:24,ax:55,ay:12,fixed:true});
   MAP.onClick(ll=>{setMe(ll,false);toast(t.moved);});
+  MAP.onDrag(()=>{if(!wide()&&!S.min)setMin(true);});
   let big=null;MAP.onZoom(()=>{const b=MAP.zoom()>=18.5;if(b!==big){big=b;drawMarkers();}});
   drawMarkers();
   setTimeout(()=>{MAP.resize();centerMe();},60);
@@ -232,6 +236,7 @@ function drawMarkers(){if(!MAP)return;MAP.clear();const zoomed=MAP.zoom()>=18.5;
   else MAP.marker({ll:p.dl||p.ll,html:`<div class="dotm t-${p.type}"></div>`,w:16,h:16,ax:8,ay:8,z:0,title:tx(p.t),onClick:()=>openPop(p.id)});});}
 function setMe(ll,recenter){S.me=ll;if(ring)ring.move(ll);if(meDot)MAP.move(meDot,ll);drawMarkers();renderNear();if(recenter)centerMe();}
 const wide=()=>matchMedia('(min-width:880px)').matches;
+function setMin(v){S.min=v;homeEl.classList.toggle('min',v);}
 function centerMe(){if(!MAP)return;const z=Math.max(MAP.zoom(),17);let off=0;if(!wide()){const sh=$('near').offsetHeight,tp=document.querySelector('.topov').offsetHeight;off=(sh-tp)/2;}MAP.view(S.me,z,off);}
 
 /* ================= home ================= */
@@ -247,13 +252,13 @@ function nearList(){
   if(S.grp==='all'){
     vs.sort((a,b)=>a.d-b.d);const inR=vs.filter(x=>x.d<=50),nearest=vs[0];
     const empty=`<div class="emptyn">${t.empty}${nearest?`<button data-act="open" data-id="${nearest.p.id}">${esc(t.nearest(tx(nearest.p.t),fmtD(nearest.d)))}</button>`:''}</div>`;
-    return `<div class="grab"></div><div class="sh pad"><h2>${t.near(inR.length)}</h2><small>${S.real?t.real:t.demo}</small></div>
+    return `<button class="grabbtn" data-act="sheet" aria-label="${t.details}"><span class="grab"></span></button><div class="sh pad" data-act="sheet"><h2>${t.near(inR.length)}</h2><small>${S.real?t.real:t.demo}</small></div>
      <div class="near pad">${inR.length?inR.map(x=>card(x.p,x.d)).join(''):empty}${foot}</div>`;}
   const rated=S.grp==='eat'&&S.sort==='rate';
   vs.sort(rated?(a,b)=>((b.p.rate?b.p.rate.s:0)-(a.p.rate?a.p.rate.s:0))||(b.p.rate?b.p.rate.n:0)-(a.p.rate?a.p.rate.n:0):(a,b)=>a.d-b.d);
   const label=S.sub?subL(S.sub):t.grp[S.grp];
   const sortSeg=S.grp==='eat'?`<div class="seg sm"><button class="${S.sort==='dist'?'on':''}" data-act="sort" data-v="dist">${t.sortD}</button><button class="${S.sort==='rate'?'on':''}" data-act="sort" data-v="rate">${t.sortR}</button></div>`:'';
-  return `<div class="grab"></div><div class="sh pad"><h2>${t.list(esc(label),vs.length)}</h2>${sortSeg}</div>
+  return `<button class="grabbtn" data-act="sheet" aria-label="${t.details}"><span class="grab"></span></button><div class="sh pad" data-act="sheet"><h2>${t.list(esc(label),vs.length)}</h2>${sortSeg}</div>
    <div class="near pad">${vs.map(x=>card(x.p,x.d)).join('')}${foot}</div>`;}
 function renderNear(){$('near').innerHTML=nearList();}
 function hay(p){return [p.name,p.brand,p.addr,...LANGS.map(l=>[p.t[l],p.g[l],SUBL[p.sub].join(' '),T[l].grp[p.grp],...p.perks.map(x=>x[0][l])].join(' '))].join(' ').toLowerCase();}
@@ -379,9 +384,10 @@ document.addEventListener('click',e=>{
   else if(a==='perks'){const x=$('perks');if(x)x.scrollIntoView({behavior:'smooth'});}
   else if(a==='copy'){(navigator.clipboard?navigator.clipboard.writeText(v):Promise.reject()).then(()=>toast(t.copied),()=>toast(t.copyfail));}
   else if(a==='fav'){S.fav[p.id]=!S.fav[p.id];rerender();toast(S.fav[p.id]?t.fav:t.unfav);}
-  else if(a==='grp'){S.grp=v;S.sub=null;if(v!=='eat')S.sort='dist';renderChips();drawMarkers();renderNear();}
+  else if(a==='grp'){setMin(false);S.grp=v;S.sub=null;if(v!=='eat')S.sort='dist';renderChips();drawMarkers();renderNear();}
   else if(a==='sub'){if(!S.member){S.sheet='filter';renderSheet();}else{S.sub=S.sub===v?null:v;renderChips();drawMarkers();renderNear();}}
   else if(a==='sort'){S.sort=v;renderNear();}
+  else if(a==='sheet'){if(!wide())setMin(!S.min);}
   else if(a==='close'){if(e.target===el||el.classList.contains('x')){S.sheet=null;renderSheet();}}
   else if(a==='plan'){S.sel=+v;renderSheet();}
   else if(a==='buy'){S.member=true;S.sheet=null;renderSheet();renderChips();toast(t.bought);}
