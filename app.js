@@ -243,6 +243,7 @@ function leafletAdapter(el){
    onClick(cb){const f=e=>cb([e.latlng.lat,e.latlng.lng]);map.on('contextmenu',f);if(!coarse())map.on('click',f);},
    onDrag(cb){map.on('dragstart',cb);},
    px(ll){const p=map.latLngToContainerPoint(ll);return [p.x,p.y];},
+   fit(lls,pad){map.fitBounds(L.latLngBounds(lls),{paddingTopLeft:[pad[3],pad[0]],paddingBottomRight:[pad[1],pad[2]],maxZoom:17.5,animate:true});},
    onZoom(cb){map.on('zoomend',cb);},
    zoom(){return map.getZoom();},
    view(ll,z,off){map.setView(map.unproject(map.project(ll,z).add([0,off]),z),z,{animate:true});},
@@ -262,6 +263,7 @@ function naverAdapter(el){
    move(m,ll){m.setPosition(LL(ll));},
    onClick(cb){const f=e=>cb([e.coord.lat(),e.coord.lng()]);N.Event.addListener(map,coarse()?'longtap':'click',f);N.Event.addListener(map,'rightclick',f);},
    onDrag(cb){N.Event.addListener(map,'dragstart',cb);},
+   fit(lls,pad){const b=new N.LatLngBounds(LL(lls[0]),LL(lls[0]));lls.forEach(x=>b.extend(LL(x)));map.fitBounds(b,{top:pad[0],right:pad[1],bottom:pad[2],left:pad[3]});},
    onZoom(cb){N.Event.addListener(map,'zoom_changed',cb);},
    zoom(){return map.getZoom();},
    view(ll,z,off){map.setZoom(z,false);const pr=map.getProjection();const pt=pr.fromCoordToOffset(LL(ll));const c=pr.fromOffsetToCoord(new N.Point(pt.x,pt.y+off));map.panTo(c);},
@@ -436,7 +438,10 @@ function vFacets(){
     <div class="fbtns"><button class="fclear" data-act="fclear">${t.fClear}</button><button class="buy" data-act="close" data-x="1">${t.fShow(cnt)}</button></div>
    </div></div></div>`;}
 function renderSheet(){$('sheetHost').innerHTML=S.sheet==='facets'?vFacets():S.sheet!==null?vSheet():'';}
-function refresh(){renderChips();drawMarkers();renderNear();}
+function fitResults(){if(!MAP||!MAP.fit||!(S.cat||S.sub||fCount()))return;const v=visible();if(!v.length)return;
+  let top=20,bottom=20;if(!wide()){top=document.querySelector('.topov').offsetHeight+70;bottom=$('near').offsetHeight+20;}
+  MAP.fit(v.map(p=>p.dl||p.ll),[top,40,bottom,40]);}
+function refresh(){renderChips();drawMarkers();renderNear();setTimeout(fitResults,30);}
 function rerender(){if(S.view==='detail'){const y=scrollY;renderDetail();scrollTo(0,y);}renderSheet();}
 function openPop(id){S.i=LINE.findIndex(x=>x.id===id);if(S.i<0)return;S.view='detail';S.mode='live';S.sheet=null;renderSheet();homeEl.hidden=true;detEl.hidden=false;renderDetail();scrollTo(0,0);try{history.replaceState(null,'',location.pathname+location.search+'#'+id);}catch(e){}}
 function goHome(){S.view='home';detEl.hidden=true;detEl.innerHTML='';homeEl.hidden=false;if(MAP)MAP.resize();drawMarkers();renderNear();try{history.replaceState(null,'',location.pathname+location.search);}catch(e){}}
