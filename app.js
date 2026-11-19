@@ -243,7 +243,12 @@ function leafletAdapter(el){
    onClick(cb){const f=e=>cb([e.latlng.lat,e.latlng.lng]);map.on('contextmenu',f);if(!coarse())map.on('click',f);},
    onDrag(cb){map.on('dragstart',cb);},
    px(ll){const p=map.latLngToContainerPoint(ll);return [p.x,p.y];},
-   fit(lls,pad){map.fitBounds(L.latLngBounds(lls),{paddingTopLeft:[pad[3],pad[0]],paddingBottomRight:[pad[1],pad[2]],maxZoom:17.5,animate:true});},
+   fit(lls,pad){const b=L.latLngBounds(lls),z=map.getBoundsZoom(b,false,L.point(pad[1]+pad[3],pad[0]+pad[2]));
+     if(z>=16){map.fitBounds(b,{paddingTopLeft:[pad[3],pad[0]],paddingBottomRight:[pad[1],pad[2]],maxZoom:17.5,animate:true});return;}
+     // results spread too far: centre on where most of them are instead of zooming out to street-name level
+     const med=a=>{const x=a.slice().sort((p,q)=>p-q);return x[Math.floor(x.length/2)];};
+     const c=[med(lls.map(x=>x[0])),med(lls.map(x=>x[1]))],off=(pad[2]-pad[0])/2;
+     map.setView(map.unproject(map.project(c,16.5).add([0,off]),16.5),16.5,{animate:true});},
    onZoom(cb){map.on('zoomend',cb);},
    zoom(){return map.getZoom();},
    view(ll,z,off){map.setView(map.unproject(map.project(ll,z).add([0,off]),z),z,{animate:true});},
