@@ -4,7 +4,7 @@
 const LANGS=['zh','en','ko'];
 const LOCALE={zh:'zh-CN',en:'en',ko:'ko'};
 const T={
-zh:{giftOnly:'有赠品',tbd:'结束日期未公布',from:s=>`${s} 起`,imgBy:'图片',filt:'筛选',fTitle:'按条件筛选',fSec:['福利','时间','入场','其他'],fOpt:{popup:'只看快闪',gift:'送礼',deal:'打折',taste:'试吃',draw:'抽奖',exp:'体验',new:'本周新开',ending:'3天内结束',perm:'常设店',walkin:'直接进',queue:'现场取号',book:'要预约/购票',tax:'可退税',r45:'评分 4.5+',r40:'评分 4.0+'},fClear:'清除',fShow:n=>`查看 ${n} 个结果`,fres:'筛选结果',title:'圣水快闪线',tag:'课堂原型 · 信息以官方为准',ph:'搜索快闪、美食、店铺或福利',all:'全部',
+zh:{photos:'图片',pk:{o:'外景',i:'店内',f:'产品',food:'美食',p:'活动图'},giftOnly:'有赠品',tbd:'结束日期未公布',from:s=>`${s} 起`,imgBy:'图片',filt:'筛选',fTitle:'按条件筛选',fSec:['福利','时间','入场','其他'],fOpt:{popup:'只看快闪',gift:'送礼',deal:'打折',taste:'试吃',draw:'抽奖',exp:'体验',new:'本周新开',ending:'3天内结束',perm:'常设店',walkin:'直接进',queue:'现场取号',book:'要预约/购票',tax:'可退税',r45:'评分 4.5+',r40:'评分 4.0+'},fClear:'清除',fShow:n=>`查看 ${n} 个结果`,fres:'筛选结果',title:'圣水快闪线',tag:'课堂原型 · 信息以官方为准',ph:'搜索快闪、美食、店铺或福利',all:'全部',
  grp:{pop:'快闪',eat:'美食',shop:'逛店'},
  near:n=>`附近 50m · <em>${n}</em> 家`,list:(l,n)=>`${l} · <em>${n}</em> 家`,demo:'演示位置 · 长按地图可移动',real:'当前定位 · 长按地图可移动',
  empty:'50m 内暂时没有',nearest:(n,d)=>`最近的是 ${n} · ${d} ›`,
@@ -36,7 +36,7 @@ zh:{giftOnly:'有赠品',tbd:'结束日期未公布',from:s=>`${s} 起`,imgBy:'�
   naver:['打开“信息来源”页面，找到 <span class="ko">네이버 예약</span> 链接','用 Naver 账号登录，选择日期和时段完成预约','按预约时间到店，出示预约确认页面入场'],
   ticket:['这是收费展览，需要购票入场','票价和购票方式请看“信息来源”页面里的官方链接','周末人多，建议工作日或开门时段去']},
  taxStep:'结账时出示护照办理退税',lang:'中文'},
-en:{giftOnly:'Free gifts',tbd:'End date TBA',from:s=>`From ${s}`,imgBy:'Photo',filt:'Filters',fTitle:'Filter by',fSec:['Perks','When','Entry','Other'],fOpt:{popup:'Pop-ups only',gift:'Free gift',deal:'Discount',taste:'Tasting',draw:'Lucky draw',exp:'Experience',new:'New this week',ending:'Ends in 3 days',perm:'Permanent',walkin:'Walk in',queue:'Waiting list',book:'Booking / ticket',tax:'Tax refund',r45:'Rating 4.5+',r40:'Rating 4.0+'},fClear:'Clear',fShow:n=>`Show ${n} results`,fres:'Filtered',title:'Seongsu Pop-up Line',tag:'Class prototype · confirm with official sources',ph:'Search pop-ups, food, shops or freebies',all:'All',
+en:{photos:'Photos',pk:{o:'Outside',i:'Inside',f:'Products',food:'Food',p:'Pop-up'},giftOnly:'Free gifts',tbd:'End date TBA',from:s=>`From ${s}`,imgBy:'Photo',filt:'Filters',fTitle:'Filter by',fSec:['Perks','When','Entry','Other'],fOpt:{popup:'Pop-ups only',gift:'Free gift',deal:'Discount',taste:'Tasting',draw:'Lucky draw',exp:'Experience',new:'New this week',ending:'Ends in 3 days',perm:'Permanent',walkin:'Walk in',queue:'Waiting list',book:'Booking / ticket',tax:'Tax refund',r45:'Rating 4.5+',r40:'Rating 4.0+'},fClear:'Clear',fShow:n=>`Show ${n} results`,fres:'Filtered',title:'Seongsu Pop-up Line',tag:'Class prototype · confirm with official sources',ph:'Search pop-ups, food, shops or freebies',all:'All',
  grp:{pop:'Pop-ups',eat:'Eat',shop:'Shops'},
  near:n=>`Within 50 m · <em>${n}</em>`,list:(l,n)=>`${l} · <em>${n}</em>`,demo:'Demo location · long-press the map to move',real:'Your location · long-press the map to move',
  empty:'Nothing within 50 m right now',nearest:(n,d)=>`Nearest: ${n} · ${d} ›`,
@@ -68,7 +68,7 @@ en:{giftOnly:'Free gifts',tbd:'End date TBA',from:s=>`From ${s}`,imgBy:'Photo',f
   naver:['Open the source page and find the <span class="ko">네이버 예약</span> (Naver booking) link','Sign in to Naver and pick a date and time','Show your booking confirmation at the door'],
   ticket:['This is a paid exhibition — you need a ticket','See the official link on the source page for prices and booking','Weekends are crowded; weekdays or opening time are best']},
  taxStep:'Show your passport at checkout for the tax refund',lang:'EN'},
-ko:{giftOnly:'증정 있음',tbd:'종료일 미정',from:s=>`${s}부터`,imgBy:'사진',filt:'필터',fTitle:'조건으로 찾기',fSec:['혜택','기간','입장','기타'],fOpt:{popup:'팝업만',gift:'증정',deal:'할인',taste:'시식',draw:'추첨',exp:'체험',new:'이번 주 오픈',ending:'3일 내 종료',perm:'상시 매장',walkin:'바로 입장',queue:'현장 웨이팅',book:'예약/티켓',tax:'택스리펀',r45:'평점 4.5+',r40:'평점 4.0+'},fClear:'초기화',fShow:n=>`결과 ${n}곳 보기`,fres:'필터 결과',title:'성수 팝업라인',tag:'수업 프로토타입 · 정보는 공식 안내를 확인하세요',ph:'팝업, 맛집, 매장, 혜택 검색',all:'전체',
+ko:{photos:'사진',pk:{o:'외관',i:'내부',f:'상품',food:'메뉴',p:'팝업 이미지'},giftOnly:'증정 있음',tbd:'종료일 미정',from:s=>`${s}부터`,imgBy:'사진',filt:'필터',fTitle:'조건으로 찾기',fSec:['혜택','기간','입장','기타'],fOpt:{popup:'팝업만',gift:'증정',deal:'할인',taste:'시식',draw:'추첨',exp:'체험',new:'이번 주 오픈',ending:'3일 내 종료',perm:'상시 매장',walkin:'바로 입장',queue:'현장 웨이팅',book:'예약/티켓',tax:'택스리펀',r45:'평점 4.5+',r40:'평점 4.0+'},fClear:'초기화',fShow:n=>`결과 ${n}곳 보기`,fres:'필터 결과',title:'성수 팝업라인',tag:'수업 프로토타입 · 정보는 공식 안내를 확인하세요',ph:'팝업, 맛집, 매장, 혜택 검색',all:'전체',
  grp:{pop:'팝업',eat:'맛집',shop:'매장'},
  near:n=>`주변 50m · <em>${n}</em>곳`,list:(l,n)=>`${l} · <em>${n}</em>곳`,demo:'데모 위치 · 지도를 길게 눌러 이동',real:'현재 위치 · 지도를 길게 눌러 이동',
  empty:'50m 안에 아직 없어요',nearest:(n,d)=>`가장 가까운 곳: ${n} · ${d} ›`,
@@ -162,7 +162,11 @@ const subKL=k=>subL(k.split('/')[1]);
 const M=60e3,H=60*M,D=24*H;
 const FALLBACK=[37.54275,127.05420];
 const ST_B=[37.54457,127.05571], ST_A=[37.54360,127.04460];
-POPS.forEach(p=>{p.endTs=Date.parse(p.end);p.rep=null;p.cat=catOf(p);});
+POPS.forEach(p=>{p.endTs=Date.parse(p.end);p.rep=null;p.cat=catOf(p);
+  p.pics=(typeof PICS!=='undefined'&&PICS[p.id])||{};
+  if(!p.img){const g=[...(p.pics.o||[]),...(p.pics.f||[]),...(p.pics.i||[]),...(p.pics.p||[])];if(g.length)p.img=g[0];}});
+const gallery=p=>{const g=[];['o','i','f','p'].forEach(k=>(p.pics[k]||[]).forEach(u=>g.push({k,u})));if(!g.length&&p.img)g.push({k:'p',u:p.img});return g;};
+const kindL=(p,k)=>k==='f'?(p.grp==='eat'?t.pk.food:t.pk.f):t.pk[k];
 const live=POPS.filter(p=>p.endTs>Date.now());
 // spread markers that share an address so none are hidden
 (()=>{const g={};live.forEach(p=>{const k=p.ll[0].toFixed(5)+','+p.ll[1].toFixed(5);(g[k]=g[k]||[]).push(p);});
@@ -198,7 +202,7 @@ const stars=p=>p.rate?`<span class="rt-s">★ ${p.rate.s.toFixed(1)}</span>`:'';
 const rangeTxt=p=>p.endUnk?t.from(p.start):`${p.start} – ${p.endTxt}`;
 const leftHtml=p=>p.endUnk?`<b class="k">${t.tbd}</b>`:`<b data-end="${p.endTs}">${left(p.endTs)}</b>`;
 const period=p=>p.perm?t.perm:rangeTxt(p);
-const credit=u=>u.includes('d8nffddmkwqeq')?'Popply':u.includes('d12zq4w4guyljn')?'DiningCode':'';
+const credit=u=>u.includes('d8nffddmkwqeq')?'Popply':u.includes('d12zq4w4guyljn')?'DiningCode':u.includes('kakaocdn')?'Kakao Map':'';
 const thumb=(p,cls)=>`<span class="thumb ${cls||''} c-${p.cat}">${cIcon(p.cat)}${p.gk?`<span class="tg">${gIcon(p.gk)}</span>`:''}${p.img?`<img src="${esc(p.img)}" alt="" loading="lazy" referrerpolicy="no-referrer" onerror="this.remove()">`:''}</span>`;
 const hoursTxt=p=>(p.h==='24h'?(lang==='zh'?'24 小时':lang==='ko'?'24시간':'24 hours'):t.daily+' '+p.h)+(p.hx?' · '+tx(p.hx):'');
 const ICON={
@@ -323,7 +327,9 @@ function card(p,d){
   return `<button class="nc has-th" data-act="open" data-id="${p.id}">${thumb(p)}<span class="ncb">
     <div class="t"><b>${esc(tx(p.t))}</b>${stars(p)}<span class="c">${catL(p.cat)}</span><span class="dm">${fmtD(d)}</span></div>
     <div class="gifts">${p.perks.slice(0,3).map(x=>`<span class="gift${/deal|menu|tip|sale/.test(x[1])?' a':''}">${ICON[p.grp==='eat'?p.type:p.grp==='shop'?'shop':'gift']}${esc(tx(x[0]))}</span>`).join('')}</div>
-    <div class="ft"><span>${t.entry[p.entry]}${p.tax?' · '+t.tax:''}${p.perm?' · '+esc(p.h==='24h'?'24h':p.h):` · ${p.endUnk?t.tbd:`${t.ends} <b data-end="${p.endTs}">${left(p.endTs)}</b>`}`}</span><span class="more">${t.details}</span></div></span></button>`;}
+    <div class="ft"><span>${t.entry[p.entry]}${p.tax?' · '+t.tax:''}${p.perm?' · '+esc(p.h==='24h'?'24h':p.h):` · ${p.endUnk?t.tbd:`${t.ends} <b data-end="${p.endTs}">${left(p.endTs)}</b>`}`}</span><span class="more">${t.details}</span></div>${strip(p)}</span></button>`;}
+function strip(p){const g=gallery(p);if(g.length<2)return '';const pick=[];['o','i','f','p'].forEach(k=>{const x=g.find(y=>y.k===k);if(x)pick.push(x);});g.forEach(x=>{if(pick.length<4&&!pick.includes(x))pick.push(x);});
+  return `<span class="strip">${pick.slice(0,4).map(x=>`<span class="sp"><img src="${esc(x.u)}" alt="" loading="lazy" referrerpolicy="no-referrer" onerror="this.parentNode.remove()"><i>${kindL(p,x.k)}</i></span>`).join('')}</span>`;}
 function nearList(){
   const vs=visible().map(p=>({p,d:distM(p)}));
   const cnt=g=>live.filter(p=>p.grp===g).length;
@@ -381,7 +387,14 @@ function head(p){
    <div class="chiprow"><a class="chipb p" href="${naverUrl(p)}" target="_blank" rel="noopener">${ICON.pin}${t.nav}</a>
     ${p.entry==='naver'?`<a class="chipb s" href="${p.src}" target="_blank" rel="noopener">${ICON.cal}${t.book}</a>`:''}
     <button class="chipb" data-act="perks">${ICON.gift}${t.perks}</button><a class="chipb" href="${p.src}" target="_blank" rel="noopener">${ICON.link}${t.source}</a></div>
-  </section><div class="sep"></div>`;}
+  </section>${galHtml(p)}<div class="sep"></div>`;}
+function galHtml(p){const g=gallery(p);if(!g.length)return '';
+  return `<section class="gal pad"><h2>${t.photos}<small>${g.length}</small></h2>${['o','i','f','p'].map(k=>{const xs=g.map((x,i)=>({...x,i})).filter(x=>x.k===k);if(!xs.length)return '';
+    return `<div class="grow"><span class="gk">${kindL(p,k)}</span><div class="gscroll">${xs.map(x=>`<button class="gi" data-act="lb" data-v="${x.i}"><img src="${esc(x.u)}" alt="${esc(kindL(p,k))}" loading="lazy" referrerpolicy="no-referrer" onerror="this.parentNode.remove()"></button>`).join('')}</div></div>`;}).join('')}
+   <p class="gcredit">${t.imgBy}: ${[...new Set(g.map(x=>credit(x.u)).filter(Boolean))].join(' · ')}</p></section>`;}
+function lightbox(){const host=$('lbHost');if(S.lb==null){host.innerHTML='';return;}const p=P(),g=gallery(p),x=g[S.lb];if(!x){S.lb=null;host.innerHTML='';return;}
+  host.innerHTML=`<div class="lb" data-act="lbclose"><img src="${esc(x.u)}" alt="" referrerpolicy="no-referrer"><div class="lbcap">${kindL(p,x.k)} · ${S.lb+1}/${g.length} · ${t.imgBy}: ${credit(x.u)}</div>
+   <button class="lbx" data-act="lbclose" aria-label="${t.close}">×</button>${S.lb>0?`<button class="lbn l" data-act="lbstep" data-v="-1">‹</button>`:''}${S.lb<g.length-1?`<button class="lbn r" data-act="lbstep" data-v="1">›</button>`:''}</div>`;}
 function lineBar(){const prev=LINE[S.i-1],next=LINE[S.i+1],p=P();
   return `<div class="lineb" role="group">
    <button class="side" data-act="step" data-v="-1" ${prev?'':'disabled'}>‹ <span>${prev?esc(prev.brand):t.stA}</span></button>
@@ -449,7 +462,7 @@ function fitResults(){if(!MAP||!MAP.fit||!(S.cat||S.sub||fCount()))return;const 
 function refresh(){renderChips();drawMarkers();renderNear();setTimeout(fitResults,30);}
 function rerender(){if(S.view==='detail'){const y=scrollY;renderDetail();scrollTo(0,y);}renderSheet();}
 function openPop(id){S.i=LINE.findIndex(x=>x.id===id);if(S.i<0)return;S.view='detail';S.mode='live';S.sheet=null;renderSheet();homeEl.hidden=true;detEl.hidden=false;renderDetail();scrollTo(0,0);try{history.replaceState(null,'',location.pathname+location.search+'#'+id);}catch(e){}}
-function goHome(){S.view='home';detEl.hidden=true;detEl.innerHTML='';homeEl.hidden=false;if(MAP)MAP.resize();drawMarkers();renderNear();try{history.replaceState(null,'',location.pathname+location.search);}catch(e){}}
+function goHome(){S.lb=null;lightbox();S.view='home';detEl.hidden=true;detEl.innerHTML='';homeEl.hidden=false;if(MAP)MAP.resize();drawMarkers();renderNear();try{history.replaceState(null,'',location.pathname+location.search);}catch(e){}}
 
 /* ================= language ================= */
 function applyStatic(){
@@ -473,6 +486,9 @@ document.addEventListener('click',e=>{
   const a=el.dataset.act, v=el.dataset.v, p=P();
   if(a==='open')openPop(el.dataset.id);
   else if(a==='home')goHome();
+  else if(a==='lb'){S.lb=+v;lightbox();}
+  else if(a==='lbstep'){S.lb+=+v;lightbox();}
+  else if(a==='lbclose'){if(e.target===el||el.classList.contains('lbx')){S.lb=null;lightbox();}}
   else if(a==='locate')locate();
   else if(a==='lang')setLang(v);
   else if(a==='clear'){S.q='';qEl.value='';$('res').innerHTML='';el.hidden=true;}
@@ -500,6 +516,7 @@ document.addEventListener('click',e=>{
   else if(a==='plan'){S.sel=+v;renderSheet();}
   else if(a==='buy'){S.member=true;S.sheet=null;renderSheet();renderChips();toast(t.bought);}
 });
+document.addEventListener('keydown',e=>{if(S.lb==null)return;const n=gallery(P()).length;if(e.key==='Escape'){S.lb=null;lightbox();}else if(e.key==='ArrowRight'&&S.lb<n-1){S.lb++;lightbox();}else if(e.key==='ArrowLeft'&&S.lb>0){S.lb--;lightbox();}});
 window.addEventListener('hashchange',()=>{const id=location.hash.slice(1);if(LINE.some(x=>x.id===id))openPop(id);});
 setInterval(()=>{document.querySelectorAll('[data-end]').forEach(el=>{el.textContent=left(+el.dataset.end);});},30000);
 applyStatic();renderChips();renderNear();startMap();
