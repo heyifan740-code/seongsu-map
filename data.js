@@ -5,6 +5,7 @@
    type (marker colour): gift · deal · exp · info · food · sweet · shop
    entry: walkin · naver (Naver booking) · ticket · queue (on-site waiting list)
    img: photo URL (Popply poster / DiningCode photo); leave out to show a category illustration
+   gk: what the free gift is (lotion cleanser lip bag keyring coffee sample showerball draw taste gift) — shows a gift pin on the map
    endUnk: true when the end date is not announced
    rate: DiningCode user rating {s: score/5, n: reviews, u: DiningCode id}
 */
@@ -14,14 +15,14 @@ const PP = 'https://popply.co.kr/popup/';
 const POPS = [
 
 /* =================== POP-UPS =================== */
-{id:'ongredients',grp:'pop',sub:'beauty',name:'온그리디언츠 팝업 : ddalgi HOUSE',t:LG('ongredients 草莓屋快闪','ongredients ddalgi HOUSE','온그리디언츠 딸기 HOUSE'),brand:'ongredients',
+{id:'ongredients',gk:'lotion',grp:'pop',sub:'beauty',name:'온그리디언츠 팝업 : ddalgi HOUSE',t:LG('ongredients 草莓屋快闪','ongredients ddalgi HOUSE','온그리디언츠 딸기 HOUSE'),brand:'ongredients',
  addr:'서울 성동구 연무장길 65',ll:[37.5422281,127.0568117],start:'11.13',endTxt:'2027.02.10',end:'2027-02-10T21:00:00+09:00',h:'12:00–21:00',entry:'walkin',type:'gift',
  g:LG('到店送礼','Free gift','방문 선물'),
  perks:[[LG('到店即送：粉色帆布袋、粉色乳液 80ml 正装（送完为止）','Just visit: pink tarp bag + pink lotion 80 ml full size (while stocks last)','방문만 해도 핑크 타포린백 + 핑크 로션 80ml 본품 (소진 시 종료)'),'gift'],
         [LG('草莓主题拍照空间','Strawberry-themed photo space','딸기 테마 포토존'),'exp']],
  img:'https://d8nffddmkwqeq.cloudfront.net/store/35272493%2C85e4%2C4133%2Cb1c0%2Cf816481bec6a',src:PP+'6651'},
 
-{id:'centelle',grp:'pop',sub:'beauty',name:'센슬 마켓 팝업 (무신사 뷰티 스페이스1)',t:LG('센슬 Market 美妆市集','센슬 Market beauty pop-up','센슬 마켓 뷰티 팝업'),brand:'센슬 Market',
+{id:'centelle',gk:'sample',grp:'pop',sub:'beauty',name:'센슬 마켓 팝업 (무신사 뷰티 스페이스1)',t:LG('센슬 Market 美妆市集','센슬 Market beauty pop-up','센슬 마켓 뷰티 팝업'),brand:'센슬 Market',
  addr:'서울 성동구 연무장길 81 (무신사 뷰티 스페이스1)',ll:[37.5417012,127.0582575],start:'11.18',endTxt:'11.29',end:'2026-11-29T19:00:00+09:00',h:'11:00–19:00',entry:'walkin',type:'gift',
  g:LG('不买也送','Gift, no purchase','구매 없이 선물'),
  perks:[[LG('不买也能领随机赠品','Random gift even without buying','구매하지 않아도 랜덤 사은품'),'gift'],
@@ -36,14 +37,14 @@ const POPS = [
         [LG('11/19–11/22 带准考证可挑战大号“抓抓乐”','19–22 Nov: bring a suneung exam ticket for the large scoop challenge','11/19–11/22 수험표 인증 시 스쿱 L 사이즈 도전'),'exp']],
  img:'https://d8nffddmkwqeq.cloudfront.net/store/640583cb%2C0323%2C4c3a%2Cb4f4%2Cb624113f3dfa',src:PP+'6671'},
 
-{id:'bray',grp:'pop',sub:'beauty',name:'브레이 성수 팝업',t:LG('BRAY 唇妆快闪','BRAY lip pop-up','브레이 립 팝업'),brand:'BRAY',
+{id:'bray',gk:'coffee',grp:'pop',sub:'beauty',name:'브레이 성수 팝업',t:LG('BRAY 唇妆快闪','BRAY lip pop-up','브레이 립 팝업'),brand:'BRAY',
  addr:'서울 성동구 성수이로 88',ll:[37.5426727,127.0567771],start:'11.12',endTxt:'11.25',end:'2026-11-25T20:00:00+09:00',h:'11:00–20:00',entry:'walkin',type:'gift',
  g:LG('免费咖啡','Free coffee','무료 커피'),
  perks:[[LG('发现场 Instagram 快拍，免费领咖啡或蜂蜜洋甘菊茶（不用买）','Post a story on Instagram → free coffee or honey chamomile tea (no purchase needed)','인스타 스토리 업로드 시 커피 또는 꿀캐모마일티 무료 (구매 불필요)'),'gift'],
         [LG('唇部产品买一送一、3 秒抓抓乐','Lip products 1+1, 3-second scoop event','립 1+1, 3초 스쿱 이벤트'),'deal']],
  img:'https://d8nffddmkwqeq.cloudfront.net/store/06151d29%2C8bda%2C437c%2C9f7a%2C5a13f03cf99a',src:PP+'6635'},
 
-{id:'zzappy',grp:'pop',sub:'beauty',name:'째피 팝업 (OFF BEAUTY 성수)',t:LG('ZZAPPY 身体护理快闪','ZZAPPY body-care pop-up','째피 바디케어 팝업'),brand:'ZZAPPY',
+{id:'zzappy',gk:'showerball',grp:'pop',sub:'beauty',name:'째피 팝업 (OFF BEAUTY 성수)',t:LG('ZZAPPY 身体护理快闪','ZZAPPY body-care pop-up','째피 바디케어 팝업'),brand:'ZZAPPY',
  addr:'서울 성동구 연무장3길 9 (OFF BEAUTY)',ll:[37.5446694,127.051352],start:'11.11',endTxt:'12.08',end:'2026-12-08T22:00:00+09:00',h:'10:00–22:00',entry:'walkin',type:'gift',
  g:LG('送浴球','Shower ball gift','샤워볼 증정'),
  perks:[[LG('买 1 件 300ml 身体护理产品送随机浴球','Buy one 300 ml body-care item → random shower ball','바디케어 300ml 1개 구매 시 샤워볼 랜덤 증정'),'gift'],
@@ -51,7 +52,7 @@ const POPS = [
         [LG('部分产品最高 6 折','Selected items up to 40% off','일부 제품 최대 40% 할인'),'deal']],
  img:'https://d8nffddmkwqeq.cloudfront.net/store/e2d6f039%2Ca4b0%2C44f7%2Cbdb7%2C328b356d6bac',src:PP+'6673'},
 
-{id:'heartpercent',grp:'pop',sub:'beauty',name:'하트퍼센트 × 이니미니 LIPSKIN 팝업',t:LG('Heart Percent × inimini 唇妆快闪','Heart Percent × inimini LIPSKIN','하트퍼센트 × 이니미니 LIPSKIN'),brand:'Heart Percent',
+{id:'heartpercent',gk:'lip',grp:'pop',sub:'beauty',name:'하트퍼센트 × 이니미니 LIPSKIN 팝업',t:LG('Heart Percent × inimini 唇妆快闪','Heart Percent × inimini LIPSKIN','하트퍼센트 × 이니미니 LIPSKIN'),brand:'Heart Percent',
  addr:'서울 성동구 성수이로7가길 8',ll:[37.5408783,127.0551998],start:'11.12',endTxt:'11.26',end:'2026-11-26T20:30:00+09:00',h:'11:30–20:30',entry:'walkin',type:'gift',
  g:LG('送唇釉','Lip gift','립 증정'),
  note:LG('Popply 提到预约后到店可领随机化妆品，具体以官方 Instagram 为准','Popply mentions a random cosmetic for visitors who book first — check the brand’s Instagram','Popply에 사전 예약 후 방문 시 랜덤 화장품 증정 안내 — 공식 인스타그램 확인'),
@@ -59,7 +60,7 @@ const POPS = [
         [LG('快闪价 75 折 + inimini 跳蚤市集','25% off + inimini flea market','25% 할인 + 이니미니 플리마켓'),'deal']],
  img:'https://d8nffddmkwqeq.cloudfront.net/store/30adbfae%2C7fbd%2C42ac%2Cac0f%2C367e7f3d8b9e',src:PP+'6677'},
 
-{id:'dralthea',grp:'pop',sub:'beauty',name:'닥터엘시아 345 시크릿 프로젝트 (올리브영 뷰티 맨션 성수)',t:LG('Dr.Althea 345 秘密项目','Dr.Althea 345 Secret Project','닥터엘시아 345 시크릿 프로젝트'),brand:'Dr.Althea',
+{id:'dralthea',gk:'cleanser',grp:'pop',sub:'beauty',name:'닥터엘시아 345 시크릿 프로젝트 (올리브영 뷰티 맨션 성수)',t:LG('Dr.Althea 345 秘密项目','Dr.Althea 345 Secret Project','닥터엘시아 345 시크릿 프로젝트'),brand:'Dr.Althea',
  addr:'서울 성동구 성수이로 108 (올리브영 뷰티 맨션 성수)',ll:[37.5445395,127.0573705],start:'11.01',endTxt:'11.28',end:'2026-11-28T22:00:00+09:00',h:'10:00–22:00',
  hx:LG('体验和购买活动只在 11:00–19:00','Games & purchase events 11:00–19:00 only','체험·구매 이벤트는 11:00–19:00'),entry:'walkin',type:'gift',
  g:LG('送洁面乳','Free cleanser','클렌저 증정'),
@@ -68,13 +69,13 @@ const POPS = [
         [LG('满 3 万 / 5 万 / 7 万 / 10 万 / 20 万韩元分档送礼','Tiered gifts at ₩30k / 50k / 70k / 100k / 200k','3만 / 5만 / 7만 / 10만 / 20만 원 구매 금액별 사은품'),'gift']],
  src:'https://www.instagram.com/dr.althea_korea_official/',src2:'小红书 @首尔学姐情报便利店'},
 
-{id:'longtake',grp:'pop',sub:'scent',name:'롱테이크 팝업',t:LG('LONGTAKE 香氛快闪','LONGTAKE fragrance pop-up','롱테이크 향수 팝업'),brand:'LONGTAKE',
+{id:'longtake',gk:'gift',grp:'pop',sub:'scent',name:'롱테이크 팝업',t:LG('LONGTAKE 香氛快闪','LONGTAKE fragrance pop-up','롱테이크 향수 팝업'),brand:'LONGTAKE',
  addr:'서울 성동구 아차산로 103',ll:[37.5450426,127.0558154],start:'10.01',endTxt:'12.31',end:'2026-12-31T22:00:00+09:00',h:'10:00–22:00',entry:'walkin',type:'gift',
  g:LG('关注活动','Follow event','팔로우 이벤트'),note:LG('关注活动 20:00 前可参加','Follow event until 20:00','팔로우 이벤트는 20:00까지'),
  perks:[[LG('快闪限定活动和优惠（官方未写具体内容）','Pop-up-only events and offers (details not published)','팝업 한정 이벤트와 혜택 (세부 내용 미공개)'),'gift']],
  img:'https://d8nffddmkwqeq.cloudfront.net/store/12731ec8%2C087d%2C490c%2C91bd%2C6330ce856c01',src:PP+'6451'},
 
-{id:'fra422',grp:'pop',sub:'scent',name:'프라포투투 팝업',t:LG('FRA422 香水快闪','FRA422 perfume pop-up','프라포투투 향수 팝업'),brand:'FRA422',
+{id:'fra422',gk:'bag',grp:'pop',sub:'scent',name:'프라포투투 팝업',t:LG('FRA422 香水快闪','FRA422 perfume pop-up','프라포투투 향수 팝업'),brand:'FRA422',
  addr:'서울 성동구 성수이로 77',ll:[37.5419964,127.056009],start:'03.06',endTxt:'11.30',end:'2026-11-30T21:30:00+09:00',h:'10:30–21:30',entry:'walkin',type:'gift',
  g:LG('购买送袋','Tote with purchase','구매 시 에코백'),
  perks:[[LG('购买即送环保袋；买 Soul 香水送 1.5ml 小样','Eco bag with any purchase; 1.5 ml sample with Soul perfume','구매 시 에코백, Soul 향수 구매 시 1.5ml 샘플'),'gift'],
@@ -114,7 +115,7 @@ const POPS = [
  perks:[[LG('快闪限定：轻薄羽绒服圣水配色','Pop-up only: Seongsu-edition light padded jacket','팝업 한정: 경량패딩 성수 에디션 컬러'),'sale'],[LG('线上品牌首次可现场试穿','Try on the online-only brand in person','온라인 브랜드를 직접 입어보기'),'exp']],
  img:'https://d8nffddmkwqeq.cloudfront.net/store/78f84d99%2C3e03%2C4dc4%2Cb89b%2Ce7a4e01a7539',src:PP+'6725'},
 
-{id:'ronron',grp:'pop',sub:'fashion',name:'론론 블랙 프라이데이 세일 팝업',t:LG('RONRON 黑五特卖','RONRON Black Friday sale','론론 블랙프라이데이 세일'),brand:'RONRON',
+{id:'ronron',gk:'bag',grp:'pop',sub:'fashion',name:'론론 블랙 프라이데이 세일 팝업',t:LG('RONRON 黑五特卖','RONRON Black Friday sale','론론 블랙프라이데이 세일'),brand:'RONRON',
  addr:'서울 성동구 아차산로5길 24-18',ll:[37.5473017,127.0533301],start:'11.05',endTxt:'12.04',end:'2026-12-04T20:00:00+09:00',h:'11:00–20:00',entry:'walkin',type:'deal',
  g:LG('最低1.5折','Up to 85% off','최대 85% 할인'),
  perks:[[LG('特价区最低 1.5 折，其余全场 7 折','Special zone up to 85% off, everything else 30% off','특가존 최대 85% 할인, 그 외 전 품목 30% 할인'),'deal'],
@@ -135,7 +136,7 @@ const POPS = [
  perks:[[LG('AR 扫码任务、体感互动、解谜闯关','AR missions, motion games, puzzles','AR 미션, 체감형 게임, 방탈출'),'exp'],[LG('巨型小新立牌和剧场版名场景','Giant Shin-chan photo spots and movie scenes','대형 짱구 포토존과 극장판 명장면'),'exp']],
  img:'https://d8nffddmkwqeq.cloudfront.net/store/8252c35b%2C7ae0%2C4e65%2C9703%2C1383e25e3018',src:PP+'5949',src2:'小红书 @FELIX果味实验室'},
 
-{id:'buttershop',grp:'pop',sub:'char',name:'버터샵 팝업 (이구홈 성수 1호점)',t:LG('BUTTER SHOP 圣诞快闪','BUTTER SHOP Christmas pop-up','버터샵 크리스마스 팝업'),brand:'BUTTER SHOP',
+{id:'buttershop',gk:'keyring',grp:'pop',sub:'char',name:'버터샵 팝업 (이구홈 성수 1호점)',t:LG('BUTTER SHOP 圣诞快闪','BUTTER SHOP Christmas pop-up','버터샵 크리스마스 팝업'),brand:'BUTTER SHOP',
  addr:'서울 성동구 연무장길 57 (이구홈 성수)',ll:[37.5423855,127.055807],start:'10.30',endTxt:'11.26',end:'2026-11-26T22:00:00+09:00',h:'11:00–22:00',entry:'walkin',type:'gift',
  g:LG('送钥匙扣','Keyring gift','키링 증정'),
  perks:[[LG('购买送黄油钥匙扣（前 100 名）','Butter keyring with purchase (first 100)','구매 시 버터 키링 (선착순 100명)'),'gift'],[LG('圣诞单品、芝麻街系列','Christmas items, Sesame Street','크리스마스 상품, 세서미 스트리트'),'sale']],
@@ -153,7 +154,7 @@ const POPS = [
  perks:[[LG('用视觉、触感、光线、香气等五种感官找自己的喜好','Find your taste through sight, touch, light, scent and more','시각·촉감·빛·향기로 내 취향 찾기'),'exp']],
  img:'https://d8nffddmkwqeq.cloudfront.net/store/1cef96e4%2Cca65%2C45b5%2C87a9%2Ced36777150bb',src:PP+'6684'},
 
-{id:'gyeongbuk',grp:'pop',sub:'life',name:'경북 투 더 넥스트 성수 팝업',t:LG('庆尚北道好物快闪','Gyeongbuk To The Next pop-up','경북 투 더 넥스트 팝업'),brand:'Gyeongbuk',
+{id:'gyeongbuk',gk:'draw',grp:'pop',sub:'life',name:'경북 투 더 넥스트 성수 팝업',t:LG('庆尚北道好物快闪','Gyeongbuk To The Next pop-up','경북 투 더 넥스트 팝업'),brand:'Gyeongbuk',
  addr:'서울 성동구 연무장길 5-9 메종 앨리 2층',ll:[37.5442564,127.0503748],start:'11.18',endTxt:'11.22',end:'2026-11-22T19:00:00+09:00',h:'12:00–19:00',
  hx:LG('周三–周日，15:00–16:00 休息','Wed–Sun, break 15:00–16:00','수–일, 15:00–16:00 브레이크'),entry:'walkin',type:'gift',
  g:LG('100%抽奖','100% win draw','100% 당첨'),
@@ -173,14 +174,14 @@ const POPS = [
  perks:[[LG('自选面、汤料、配料的 DIY 拉面','Build-your-own ramyun','면·스프·토핑을 고르는 DIY 라면'),'exp'],[LG('海外版拉面试吃','Tasting of overseas editions','해외 라면 시식'),'taste']],
  img:'https://d8nffddmkwqeq.cloudfront.net/store/2c923895%2Ca8ac%2C4228%2Cb846%2Cea19aad9f929',src:PP+'5243'},
 
-{id:'fixpizza',grp:'pop',sub:'food',name:'픽스피자 성수 팝업스토어',t:LG('FIX PIZZA 披萨快闪','FIX PIZZA pop-up','픽스피자 팝업'),brand:'FIX PIZZA',
+{id:'fixpizza',gk:'taste',grp:'pop',sub:'food',name:'픽스피자 성수 팝업스토어',t:LG('FIX PIZZA 披萨快闪','FIX PIZZA pop-up','픽스피자 팝업'),brand:'FIX PIZZA',
  addr:'서울 성동구 연무장길 5-9 1층, 2층',ll:[37.5442564,127.0503748],start:'10.22',endTxt:'11.22',end:'2026-11-22T19:00:00+09:00',h:'12:00–19:00',
  hx:LG('15:00–16:00 休息，周一休息','Break 15:00–16:00, closed Mon','15:00–16:00 브레이크, 월요일 휴무'),entry:'walkin',type:'gift',
  g:LG('免费试吃','Free tasting','무료 시식'),
  perks:[[LG('关注官方账号并发快拍，免费试吃 4 款披萨 + 汽水','Follow + post a story → taste 4 pizzas + a soda free','팔로우 + 스토리 업로드 시 피자 4종 + 음료 무료 시식'),'taste'],[LG('披萨 1,800 韩元起；每消费 1 万韩元抽奖 1 次','Pizza from ₩1,800; one draw per ₩10,000 spent','피자 1,800원부터, 1만 원당 추첨 1회'),'draw']],
  src:PP+'6276',src2:'小红书 @在韩向日葵'},
 
-{id:'badabites',grp:'pop',sub:'food',name:'BADA BITES K-씨푸드 팝업',t:LG('BADA BITES 韩国海鲜快闪','BADA BITES K-seafood pop-up','BADA BITES K-씨푸드 팝업'),brand:'BADA BITES',
+{id:'badabites',gk:'taste',grp:'pop',sub:'food',name:'BADA BITES K-씨푸드 팝업',t:LG('BADA BITES 韩国海鲜快闪','BADA BITES K-seafood pop-up','BADA BITES K-씨푸드 팝업'),brand:'BADA BITES',
  addr:'서울 성동구 연무장9길 4 (노스 성수점 1층)',ll:[37.5427012,127.0559718],start:'11.19',endTxt:'11.28',end:'2026-11-28T19:00:00+09:00',h:'11:30–19:00',entry:'walkin',type:'gift',
  g:LG('免费试吃','Free tasting','무료 시식'),
  perks:[[LG('韩国水产食品现场免费试吃','Free tastings of Korean seafood products','한국 수산식품 무료 시식'),'taste'],[LG('主厨菜单、烹饪表演和体验活动','Chef menu, cooking show and activities','셰프 메뉴, 쿠킹 퍼포먼스, 체험'),'exp']],

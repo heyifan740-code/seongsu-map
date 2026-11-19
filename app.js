@@ -4,7 +4,7 @@
 const LANGS=['zh','en','ko'];
 const LOCALE={zh:'zh-CN',en:'en',ko:'ko'};
 const T={
-zh:{tbd:'结束日期未公布',from:s=>`${s} 起`,imgBy:'图片',filt:'筛选',fTitle:'按条件筛选',fSec:['福利','时间','入场','其他'],fOpt:{popup:'只看快闪',gift:'送礼',deal:'打折',taste:'试吃',draw:'抽奖',exp:'体验',new:'本周新开',ending:'3天内结束',perm:'常设店',walkin:'直接进',queue:'现场取号',book:'要预约/购票',tax:'可退税',r45:'评分 4.5+',r40:'评分 4.0+'},fClear:'清除',fShow:n=>`查看 ${n} 个结果`,fres:'筛选结果',title:'圣水快闪线',tag:'课堂原型 · 信息以官方为准',ph:'搜索快闪、美食、店铺或福利',all:'全部',
+zh:{giftOnly:'有赠品',tbd:'结束日期未公布',from:s=>`${s} 起`,imgBy:'图片',filt:'筛选',fTitle:'按条件筛选',fSec:['福利','时间','入场','其他'],fOpt:{popup:'只看快闪',gift:'送礼',deal:'打折',taste:'试吃',draw:'抽奖',exp:'体验',new:'本周新开',ending:'3天内结束',perm:'常设店',walkin:'直接进',queue:'现场取号',book:'要预约/购票',tax:'可退税',r45:'评分 4.5+',r40:'评分 4.0+'},fClear:'清除',fShow:n=>`查看 ${n} 个结果`,fres:'筛选结果',title:'圣水快闪线',tag:'课堂原型 · 信息以官方为准',ph:'搜索快闪、美食、店铺或福利',all:'全部',
  grp:{pop:'快闪',eat:'美食',shop:'逛店'},
  near:n=>`附近 50m · <em>${n}</em> 家`,list:(l,n)=>`${l} · <em>${n}</em> 家`,demo:'演示位置 · 长按地图可移动',real:'当前定位 · 长按地图可移动',
  empty:'50m 内暂时没有',nearest:(n,d)=>`最近的是 ${n} · ${d} ›`,
@@ -36,7 +36,7 @@ zh:{tbd:'结束日期未公布',from:s=>`${s} 起`,imgBy:'图片',filt:'筛选',
   naver:['打开“信息来源”页面，找到 <span class="ko">네이버 예약</span> 链接','用 Naver 账号登录，选择日期和时段完成预约','按预约时间到店，出示预约确认页面入场'],
   ticket:['这是收费展览，需要购票入场','票价和购票方式请看“信息来源”页面里的官方链接','周末人多，建议工作日或开门时段去']},
  taxStep:'结账时出示护照办理退税',lang:'中文'},
-en:{tbd:'End date TBA',from:s=>`From ${s}`,imgBy:'Photo',filt:'Filters',fTitle:'Filter by',fSec:['Perks','When','Entry','Other'],fOpt:{popup:'Pop-ups only',gift:'Free gift',deal:'Discount',taste:'Tasting',draw:'Lucky draw',exp:'Experience',new:'New this week',ending:'Ends in 3 days',perm:'Permanent',walkin:'Walk in',queue:'Waiting list',book:'Booking / ticket',tax:'Tax refund',r45:'Rating 4.5+',r40:'Rating 4.0+'},fClear:'Clear',fShow:n=>`Show ${n} results`,fres:'Filtered',title:'Seongsu Pop-up Line',tag:'Class prototype · confirm with official sources',ph:'Search pop-ups, food, shops or freebies',all:'All',
+en:{giftOnly:'Free gifts',tbd:'End date TBA',from:s=>`From ${s}`,imgBy:'Photo',filt:'Filters',fTitle:'Filter by',fSec:['Perks','When','Entry','Other'],fOpt:{popup:'Pop-ups only',gift:'Free gift',deal:'Discount',taste:'Tasting',draw:'Lucky draw',exp:'Experience',new:'New this week',ending:'Ends in 3 days',perm:'Permanent',walkin:'Walk in',queue:'Waiting list',book:'Booking / ticket',tax:'Tax refund',r45:'Rating 4.5+',r40:'Rating 4.0+'},fClear:'Clear',fShow:n=>`Show ${n} results`,fres:'Filtered',title:'Seongsu Pop-up Line',tag:'Class prototype · confirm with official sources',ph:'Search pop-ups, food, shops or freebies',all:'All',
  grp:{pop:'Pop-ups',eat:'Eat',shop:'Shops'},
  near:n=>`Within 50 m · <em>${n}</em>`,list:(l,n)=>`${l} · <em>${n}</em>`,demo:'Demo location · long-press the map to move',real:'Your location · long-press the map to move',
  empty:'Nothing within 50 m right now',nearest:(n,d)=>`Nearest: ${n} · ${d} ›`,
@@ -68,7 +68,7 @@ en:{tbd:'End date TBA',from:s=>`From ${s}`,imgBy:'Photo',filt:'Filters',fTitle:'
   naver:['Open the source page and find the <span class="ko">네이버 예약</span> (Naver booking) link','Sign in to Naver and pick a date and time','Show your booking confirmation at the door'],
   ticket:['This is a paid exhibition — you need a ticket','See the official link on the source page for prices and booking','Weekends are crowded; weekdays or opening time are best']},
  taxStep:'Show your passport at checkout for the tax refund',lang:'EN'},
-ko:{tbd:'종료일 미정',from:s=>`${s}부터`,imgBy:'사진',filt:'필터',fTitle:'조건으로 찾기',fSec:['혜택','기간','입장','기타'],fOpt:{popup:'팝업만',gift:'증정',deal:'할인',taste:'시식',draw:'추첨',exp:'체험',new:'이번 주 오픈',ending:'3일 내 종료',perm:'상시 매장',walkin:'바로 입장',queue:'현장 웨이팅',book:'예약/티켓',tax:'택스리펀',r45:'평점 4.5+',r40:'평점 4.0+'},fClear:'초기화',fShow:n=>`결과 ${n}곳 보기`,fres:'필터 결과',title:'성수 팝업라인',tag:'수업 프로토타입 · 정보는 공식 안내를 확인하세요',ph:'팝업, 맛집, 매장, 혜택 검색',all:'전체',
+ko:{giftOnly:'증정 있음',tbd:'종료일 미정',from:s=>`${s}부터`,imgBy:'사진',filt:'필터',fTitle:'조건으로 찾기',fSec:['혜택','기간','입장','기타'],fOpt:{popup:'팝업만',gift:'증정',deal:'할인',taste:'시식',draw:'추첨',exp:'체험',new:'이번 주 오픈',ending:'3일 내 종료',perm:'상시 매장',walkin:'바로 입장',queue:'현장 웨이팅',book:'예약/티켓',tax:'택스리펀',r45:'평점 4.5+',r40:'평점 4.0+'},fClear:'초기화',fShow:n=>`결과 ${n}곳 보기`,fres:'필터 결과',title:'성수 팝업라인',tag:'수업 프로토타입 · 정보는 공식 안내를 확인하세요',ph:'팝업, 맛집, 매장, 혜택 검색',all:'전체',
  grp:{pop:'팝업',eat:'맛집',shop:'매장'},
  near:n=>`주변 50m · <em>${n}</em>곳`,list:(l,n)=>`${l} · <em>${n}</em>곳`,demo:'데모 위치 · 지도를 길게 눌러 이동',real:'현재 위치 · 지도를 길게 눌러 이동',
  empty:'50m 안에 아직 없어요',nearest:(n,d)=>`가장 가까운 곳: ${n} · ${d} ›`,
@@ -135,6 +135,20 @@ const CICON={
  bread:'<path d="M4 13a8 5 0 0 1 16 0v6H4z"/><path d="M9 10v3M12 9v4M15 10v3"/>',
  sweet:'<path d="M4 13h16l-2 7H6zM6 13c0-4 2.7-7 6-7s6 3 6 7M12 6V3"/>',
  cafe:'<path d="M4 9h13v5a5 5 0 0 1-5 5H9a5 5 0 0 1-5-5zM17 11h2a2 2 0 0 1 0 4h-2M8 3v3M12 3v3"/>'};
+const GICON={
+ lotion:'<path d="M9 8h6v12a1 1 0 0 1-1 1h-4a1 1 0 0 1-1-1zM10 8V5h4v3M12 2v3"/>',
+ cleanser:'<path d="M8 3h8l-1 14H9zM10 17h4v4h-4z"/>',
+ lip:'<path d="M9 21h6V11H9zM10 11V6l4-3v8"/>',
+ bag:'<path d="M5 8h14l-1 13H6zM9 8V6a3 3 0 0 1 6 0v2"/>',
+ keyring:'<circle cx="8" cy="8" r="4"/><path d="M11 11l7 7M15 15l2-2M17 17l2-2"/>',
+ coffee:'<path d="M4 9h13v5a5 5 0 0 1-5 5H9a5 5 0 0 1-5-5zM17 11h2a2 2 0 0 1 0 4h-2M8 3v3M12 3v3"/>',
+ sample:'<path d="M5 10h5v10H5zM6 7h3v3H6zM14 8h5v12h-5zM15 5h3v3h-3z"/>',
+ showerball:'<circle cx="12" cy="13" r="7"/><path d="M7 9c3 2 7 2 10 0M6 14c4 2 8 2 12 0M12 6V3"/>',
+ draw:'<path d="M3 7h18v3a2 2 0 0 0 0 4v3H3v-3a2 2 0 0 0 0-4z"/><path d="M12 9.5l.9 1.8 2 .3-1.5 1.4.4 2-1.8-1-1.8 1 .4-2-1.5-1.4 2-.3z"/>',
+ taste:'<path d="M7 3v8M5 3v5a2 2 0 0 0 4 0V3M7 11v10M17 21V3c-2 0-4 2-4 6v4h4"/>',
+ gift:'<rect x="4" y="9" width="16" height="11" rx="1"/><path d="M4 13h16M12 9v11M12 9c-2-4-6-3-5-1s5 1 5 1zm0 0c2-4 6-3 5-1s-5 1-5 1z"/>'};
+const gIcon=k=>`<svg viewBox="0 0 24 24">${GICON[k]||GICON.gift}</svg>`;
+const GIFTBADGE='<span class="gb"><svg viewBox="0 0 24 24"><rect x="4" y="9" width="16" height="11" rx="1"/><path d="M4 13h16M12 9v11M12 9c-2-4-6-3-5-1s5 1 5 1zm0 0c2-4 6-3 5-1s-5 1-5 1z"/></svg></span>';
 const cIcon=k=>`<svg viewBox="0 0 24 24">${CICON[k]||CICON.life}</svg>`;
 let lang=(()=>{try{const q=new URLSearchParams(location.search).get('lang');if(LANGS.includes(q))return q;const s=localStorage.getItem('ss_lang');if(LANGS.includes(s))return s;}catch(e){}
   const n=(navigator.language||'en').toLowerCase();return n.startsWith('zh')?'zh':n.startsWith('ko')?'ko':'en';})();
@@ -163,7 +177,7 @@ const fmtD=m=>m<1000?m+'m':(m/1000).toFixed(1)+t.km;
 function left(ts){let x=Math.max(0,ts-Date.now());const d=Math.floor(x/D);x-=d*D;const h=Math.floor(x/H);x-=h*H;return t.left(d,h,Math.floor(x/M));}
 const clock=ts=>new Date(ts).toLocaleTimeString(LOCALE[lang],{hour:'numeric',minute:'2-digit'});
 const startTs=p=>{if(p.perm||!/^\d\d\.\d\d$/.test(p.start))return 0;const e=new Date(p.endTs),m=+p.start.slice(0,2),d=+p.start.slice(3);let y=e.getFullYear();if(m>e.getMonth()+1)y--;return Date.parse(`${y}-${p.start.slice(0,2)}-${p.start.slice(3)}T00:00:00+09:00`);};
-const hasPerk=(p,k)=>p.type===k||p.perks.some(x=>x[1]===k);
+const hasPerk=(p,k)=>k==='gift'?!!p.gk||p.perks.some(x=>x[1]==='gift'):(p.type===k||p.perks.some(x=>x[1]===k));
 const fCount=()=>S.f.perk.length+(S.f.time?1:0)+(S.f.entry?1:0)+(S.f.tax?1:0)+(S.f.rate?1:0);
 function fMatch(p){const f=S.f;
   if(f.perk.length&&!f.perk.some(k=>hasPerk(p,k)))return false;
@@ -185,7 +199,7 @@ const rangeTxt=p=>p.endUnk?t.from(p.start):`${p.start} – ${p.endTxt}`;
 const leftHtml=p=>p.endUnk?`<b class="k">${t.tbd}</b>`:`<b data-end="${p.endTs}">${left(p.endTs)}</b>`;
 const period=p=>p.perm?t.perm:rangeTxt(p);
 const credit=u=>u.includes('d8nffddmkwqeq')?'Popply':u.includes('d12zq4w4guyljn')?'DiningCode':'';
-const thumb=(p,cls)=>`<span class="thumb ${cls||''} c-${p.cat}">${cIcon(p.cat)}${p.img?`<img src="${esc(p.img)}" alt="" loading="lazy" referrerpolicy="no-referrer" onerror="this.remove()">`:''}</span>`;
+const thumb=(p,cls)=>`<span class="thumb ${cls||''} c-${p.cat}">${cIcon(p.cat)}${p.gk?`<span class="tg">${gIcon(p.gk)}</span>`:''}${p.img?`<img src="${esc(p.img)}" alt="" loading="lazy" referrerpolicy="no-referrer" onerror="this.remove()">`:''}</span>`;
 const hoursTxt=p=>(p.h==='24h'?(lang==='zh'?'24 小时':lang==='ko'?'24시간':'24 hours'):t.daily+' '+p.h)+(p.hx?' · '+tx(p.hx):'');
 const ICON={
  back:'<svg viewBox="0 0 24 24"><path d="M15 6l-6 6 6 6"/></svg>',
@@ -282,6 +296,7 @@ function startMap(){
 const pimg=p=>p.img?`<img src="${esc(p.img)}" alt="" loading="lazy" referrerpolicy="no-referrer" onerror="this.remove()">`:'';
 function pinHtml(p,near){
   const lab=esc(p.brand)+(p.rate?` <b>★${p.rate.s.toFixed(1)}</b>`:'');
+  if(p.gk)return `<div class="pm gift${near?' on':''}"><div class="ph">${gIcon(p.gk)}${GIFTBADGE}<span class="gl">${esc(tx(p.g))}</span></div><i></i><em>${lab}</em></div>`;
   return `<div class="pm t-${p.type}${near?' on':''}"><div class="ph c-${p.cat}">${cIcon(p.cat)}${pimg(p)}<span class="gl">${esc(tx(p.g))}</span></div><i></i><em>${lab}</em></div>`;}
 // full gift bubbles for places within 50 m, when a category is chosen, or when zoomed in; small dots otherwise (keeps the map readable)
 function drawMarkers(){if(!MAP)return;MAP.clear();const zoomed=MAP.zoom()>=18.5,filtered=S.cat||S.sub||fCount();
@@ -289,8 +304,8 @@ function drawMarkers(){if(!MAP)return;MAP.clear();const zoomed=MAP.zoom()>=18.5,
   const vs=visible().map(p=>({p,d:distM(p)})).sort((a,b)=>a.d-b.d);const placed=[];
   vs.forEach(({p,d})=>{const near=d<=50;let full=near||zoomed||filtered;
     if(full&&MAP.px){const q=MAP.px(p.dl||p.ll);if(placed.some(o=>Math.abs(o[0]-q[0])<58&&Math.abs(o[1]-q[1])<70))full=false;else placed.push(q);}
-    if(full)MAP.marker({ll:p.dl||p.ll,html:pinHtml(p,near),w:96,h:104,ax:48,ay:76,z:near?500:100,title:tx(p.t),onClick:()=>openPop(p.id)});
-    else MAP.marker({ll:p.dl||p.ll,html:`<div class="pdot t-${p.type} c-${p.cat}">${cIcon(p.cat)}${pimg(p)}</div>`,w:30,h:30,ax:15,ay:15,z:0,title:tx(p.t),onClick:()=>openPop(p.id)});});}
+    if(full)MAP.marker({ll:p.dl||p.ll,html:pinHtml(p,near),w:96,h:104,ax:48,ay:76,z:(near?500:100)+(p.gk?50:0),title:tx(p.t),onClick:()=>openPop(p.id)});
+    else MAP.marker({ll:p.dl||p.ll,html:p.gk?`<div class="pdot gift">${gIcon(p.gk)}</div>`:`<div class="pdot t-${p.type} c-${p.cat}">${cIcon(p.cat)}${pimg(p)}</div>`,w:30,h:30,ax:15,ay:15,z:0,title:tx(p.t),onClick:()=>openPop(p.id)});});}
 function setMe(ll,recenter){S.me=ll;if(ring)ring.move(ll);if(meDot)MAP.move(meDot,ll);drawMarkers();renderNear();if(recenter)centerMe();}
 const wide=()=>matchMedia('(min-width:880px)').matches;
 function setMin(v){S.min=v;homeEl.classList.toggle('min',v);}
@@ -334,7 +349,8 @@ function renderChips(){
   const s=$('subchips');
   const subs=S.cat?[...new Set(live.filter(p=>p.cat===S.cat).map(p=>p.grp+'/'+p.sub))]:[];
   s.hidden=false;
-  s.innerHTML=`<button class="fl ff${n?' on':''}" data-act="facets"><svg viewBox="0 0 24 24"><path d="M4 6h16M7 12h10M10 18h4"/></svg>${t.filt}${n?`<small>${n}</small>`:''}</button>`
+  const gOn=S.f.perk.includes('gift');
+  s.innerHTML=`<button class="fl gq${gOn?' on':''}" data-act="facet" data-s="perk" data-v="gift">${gIcon('gift')}${t.giftOnly}<small>${live.filter(p=>p.gk).length}</small></button><button class="fl ff${n?' on':''}" data-act="facets"><svg viewBox="0 0 24 24"><path d="M4 6h16M7 12h10M10 18h4"/></svg>${t.filt}${n?`<small>${n}</small>`:''}</button>`
    +(subs.length>1?subs.map(k=>`<button class="fl sub${S.sub===k?' on':''}" data-act="sub" data-v="${k}">${subKL(k)}<small>${live.filter(p=>p.grp+'/'+p.sub===k&&p.cat===S.cat).length}</small></button>`).join(''):'');}
 function locate(){
   if(!navigator.geolocation){toast(t.nogeo);setMe(FALLBACK,true);return;}
