@@ -278,13 +278,14 @@ function startMap(){
     document.head.appendChild(s);
   } else buildMap(leafletAdapter);
 }
+const pimg=p=>p.img?`<img src="${esc(p.img)}" alt="" loading="lazy" referrerpolicy="no-referrer" onerror="this.remove()">`:'';
 function pinHtml(p,near){
   const lab=esc(p.brand)+(p.rate?` <b>★${p.rate.s.toFixed(1)}</b>`:'');
-  return `<div class="gm${near?' on':''} t-${p.type}"><div class="bub">${ICON[p.type]||ICON.gift}<span>${esc(tx(p.g))}</span></div><i></i><em>${lab}</em></div>`;}
+  return `<div class="pm t-${p.type}${near?' on':''}"><div class="ph c-${p.cat}">${cIcon(p.cat)}${pimg(p)}<span class="gl">${esc(tx(p.g))}</span></div><i></i><em>${lab}</em></div>`;}
 // full gift bubbles for places within 50 m, when a category is chosen, or when zoomed in; small dots otherwise (keeps the map readable)
 function drawMarkers(){if(!MAP)return;MAP.clear();const zoomed=MAP.zoom()>=18.5;visible().forEach(p=>{const near=distM(p)<=50;
-  if(near||zoomed||S.cat||S.sub||fCount())MAP.marker({ll:p.dl||p.ll,html:pinHtml(p,near),w:70,h:86,ax:35,ay:68,z:near?500:100,title:tx(p.t),onClick:()=>openPop(p.id)});
-  else MAP.marker({ll:p.dl||p.ll,html:`<div class="dotm t-${p.type}"></div>`,w:16,h:16,ax:8,ay:8,z:0,title:tx(p.t),onClick:()=>openPop(p.id)});});}
+  if(near||zoomed||S.cat||S.sub||fCount())MAP.marker({ll:p.dl||p.ll,html:pinHtml(p,near),w:96,h:104,ax:48,ay:76,z:near?500:100,title:tx(p.t),onClick:()=>openPop(p.id)});
+  else MAP.marker({ll:p.dl||p.ll,html:`<div class="pdot t-${p.type} c-${p.cat}">${cIcon(p.cat)}${pimg(p)}</div>`,w:30,h:30,ax:15,ay:15,z:0,title:tx(p.t),onClick:()=>openPop(p.id)});});}
 function setMe(ll,recenter){S.me=ll;if(ring)ring.move(ll);if(meDot)MAP.move(meDot,ll);drawMarkers();renderNear();if(recenter)centerMe();}
 const wide=()=>matchMedia('(min-width:880px)').matches;
 function setMin(v){S.min=v;homeEl.classList.toggle('min',v);}

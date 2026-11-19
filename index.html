@@ -1000,6 +1000,21 @@ a{color:inherit;text-decoration:none}
 .c-acc{--tbg:#fff1df;--tfg:#c47a00}.c-char{--tbg:#fff6d6;--tfg:#b58a00}.c-kpop{--tbg:#f6e6fb;--tfg:#a24bc0}.c-exhibit{--tbg:#e9f4ff;--tfg:#3c7fc6}
 .c-life{--tbg:#eaf5e4;--tfg:#4c8b2f}.c-meal{--tbg:#fde9e1;--tfg:#c2471f}.c-bread{--tbg:#f8eedd;--tfg:#a9701c}.c-sweet{--tbg:#fbe9f2;--tfg:#b0507f}.c-cafe{--tbg:#efe8e1;--tfg:#7a5a3d}
 @media (prefers-color-scheme: dark){:root:not([data-theme="light"]) .thumb,:root:not([data-theme="light"]) .hero{background:var(--panel)}}
+.pm{--mc:#2ea84a;position:relative;width:96px;display:flex;flex-direction:column;align-items:center;cursor:pointer}
+.pm.t-deal{--mc:#d98a00}.pm.t-info{--mc:#9aa49f}.pm.t-food{--mc:#d4552f}.pm.t-sweet{--mc:#c46a9a}.pm.t-shop{--mc:#4f63d2}
+.pm .ph{position:relative;width:58px;height:58px;border-radius:50%;border:3px solid var(--mc);background:var(--tbg,#fff);display:grid;place-items:center;box-shadow:0 2px 6px rgba(0,0,0,.25)}
+.pm .ph>svg{width:24px;height:24px;stroke:var(--tfg,#2ea84a);fill:none;stroke-width:2}
+.pm .ph img{position:absolute;inset:0;width:100%;height:100%;border-radius:50%;object-fit:cover;object-position:center 30%}
+.pm .gl{position:absolute;left:50%;bottom:-9px;transform:translateX(-50%);max-width:92px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;background:var(--mc);color:#fff;font-size:11px;font-weight:800;line-height:17px;padding:0 7px;border-radius:9px;z-index:2}
+.pm i{width:0;height:0;border-left:7px solid transparent;border-right:7px solid transparent;border-top:10px solid var(--mc);margin-top:9px}
+.pm em{font-style:normal;font-size:11px;font-weight:700;color:var(--ink);background:var(--surface);border-radius:8px;padding:0 6px;margin-top:2px;white-space:nowrap;max-width:96px;overflow:hidden;text-overflow:ellipsis;opacity:.94}
+.pm em b{color:#c47a00;font-family:var(--f-num)}
+.pm.on .ph{width:64px;height:64px;border-width:4px}
+.pdot{position:relative;width:30px;height:30px;border-radius:50%;border:2.5px solid var(--mc,#2ea84a);background:var(--tbg,#fff);display:grid;place-items:center;overflow:hidden;box-shadow:0 1px 4px rgba(0,0,0,.3);cursor:pointer}
+.pdot.t-deal{--mc:#d98a00}.pdot.t-info{--mc:#9aa49f}.pdot.t-food{--mc:#d4552f}.pdot.t-sweet{--mc:#c46a9a}.pdot.t-shop{--mc:#4f63d2}
+.pdot svg{width:14px;height:14px;stroke:var(--tfg,#2ea84a);fill:none;stroke-width:2.2}
+.pdot img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
+.thumb.sm{width:56px;height:56px}
 .fclear{height:48px;padding:0 18px;border-radius:24px;border:1px solid var(--line);font-weight:700;color:var(--muted)}
 .logo{min-width:0;flex:0 1 auto}
 .logo #brand{white-space:nowrap;overflow:hidden;text-overflow:ellipsis;min-width:0}
@@ -1028,8 +1043,8 @@ input[type=search]::-webkit-search-cancel-button{-webkit-appearance:none;display
 <div id="detail" hidden></div>
 <div id="sheetHost"></div>
 <div class="toast" id="toast" hidden></div>
-<script src="config.js?v=20261119e"></script>
+<script src="config.js?v=20261119f"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.min.js"></script>
-<script src="data.js?v=20261119e"></script>
-<script src="app.js?v=20261119e"></script>
+<script src="data.js?v=20261119f"></script>
+<script src="app.js?v=20261119f"></script>
 </body></html>
