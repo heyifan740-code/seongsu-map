@@ -178,7 +178,7 @@ const POPS = [
  hx:LG('15:00–16:00 休息，周一休息','Break 15:00–16:00, closed Mon','15:00–16:00 브레이크, 월요일 휴무'),entry:'walkin',type:'gift',
  g:LG('免费试吃','Free tasting','무료 시식'),
  perks:[[LG('关注官方账号并发快拍，免费试吃 4 款披萨 + 汽水','Follow + post a story → taste 4 pizzas + a soda free','팔로우 + 스토리 업로드 시 피자 4종 + 음료 무료 시식'),'taste'],[LG('披萨 1,800 韩元起；每消费 1 万韩元抽奖 1 次','Pizza from ₩1,800; one draw per ₩10,000 spent','피자 1,800원부터, 1만 원당 추첨 1회'),'draw']],
- img:'https://d8nffddmkwqeq.cloudfront.net/store/86aed499%2C72c0%2C4ed4%2Ca346%2Ca8e81889654a',src:PP+'6276',src2:'小红书 @在韩向日葵'},
+ src:PP+'6276',src2:'小红书 @在韩向日葵'},
 
 {id:'badabites',grp:'pop',sub:'food',name:'BADA BITES K-씨푸드 팝업',t:LG('BADA BITES 韩国海鲜快闪','BADA BITES K-seafood pop-up','BADA BITES K-씨푸드 팝업'),brand:'BADA BITES',
  addr:'서울 성동구 연무장9길 4 (노스 성수점 1층)',ll:[37.5427012,127.0559718],start:'11.19',endTxt:'11.28',end:'2026-11-28T19:00:00+09:00',h:'11:30–19:00',entry:'walkin',type:'gift',
@@ -191,13 +191,13 @@ const POPS = [
  hx:LG('最后点单 20:30','Last order 20:30','라스트오더 20:30'),entry:'walkin',type:'sweet',
  g:LG('麻薯芝士','Mochi cheesecake','모찌치즈케이크'),note:LG('可以坐下吃；另一家是外带店（成水二路7街路 19）','Sit-down spot; a takeout counter is at 성수이로7가길 19','매장 취식 가능, 테이크아웃점은 성수이로7가길 19'),
  perks:[[LG('首尔麻薯芝士蛋糕（快闪限定）','Seoul Mochi Cheesecake (pop-up only)','서울모찌치즈케이크 (팝업 한정)'),'sig']],
- img:'https://d8nffddmkwqeq.cloudfront.net/store/f5992d8e%2Cb9f2%2C4e95%2Cb9f8%2C0a61a7d961df',src:PP+'6675'},
+ src:PP+'6675'},
 
 {id:'doredore2',grp:'pop',sub:'food',name:'도레도레 팝업 : 서울모찌치즈케이크 (테이크아웃점)',t:LG('DOREDORE 麻薯芝士蛋糕（外带）','DOREDORE Mochi Cheesecake (takeout)','도레도레 서울모찌치즈케이크 (테이크아웃)'),brand:'DOREDORE',
  addr:'서울 성동구 성수이로7가길 19',ll:[37.5419452,127.055372],start:'11.18',endTxt:'12.31',end:'2026-12-31T21:00:00+09:00',h:'12:00–21:00',entry:'walkin',type:'sweet',
  g:LG('外带','Takeout','테이크아웃'),
  perks:[[LG('首尔麻薯芝士蛋糕外带','Seoul Mochi Cheesecake to go','서울모찌치즈케이크 포장'),'sig']],
- img:'https://d8nffddmkwqeq.cloudfront.net/store/a3998080%2Cb0bf%2C4f23%2Caff3%2C7d4dbf939f7d',src:PP+'6674'},
+ src:PP+'6674'},
 
 /* =================== FOOD =================== */
 {id:'minari',grp:'eat',sub:'korean',name:'능동미나리 성수점',t:LG('能洞水芹 圣水店','Neungdong Minari','능동미나리 성수점'),brand:'Neungdong Minari',
@@ -326,7 +326,7 @@ const POPS = [
  addr:'서울 성동구 성수이로16길 5 1층',ll:[37.541288,127.0572471],perm:true,end:'2027-12-31T21:00:00+09:00',h:'11:00–21:00',entry:'walkin',type:'sweet',
  g:LG('奶油甜甜圈','Cream donuts','크림 도넛'),
  perks:[[LG('人气奶油甜甜圈','Popular cream-filled donuts','인기 크림 도넛'),'sig']],
- img:'https://d8nffddmkwqeq.cloudfront.net/store/5e7c41a6%2C251d%2C40c6%2Cac94%2C98e8d2c3fb90',src:PP+'5434'},
+ src:PP+'5434'},
 
 {id:'pickbake',grp:'eat',sub:'eggtart',name:'픽베이크',t:LG('Pick Bake 蛋挞','Pick Bake egg tarts','픽베이크 에그타르트'),brand:'Pick Bake',
  addr:'서울 성동구 서울숲2길 20-1',ll:[37.5469532,127.0409292],perm:true,end:'2099-12-31T20:30:00+09:00',h:'09:00–20:30',entry:'walkin',type:'sweet',
