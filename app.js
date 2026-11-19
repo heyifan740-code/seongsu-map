@@ -330,7 +330,7 @@ function card(p,d){
     <div class="gifts">${p.perks.slice(0,3).map(x=>`<span class="gift${/deal|menu|tip|sale/.test(x[1])?' a':''}">${ICON[p.grp==='eat'?p.type:p.grp==='shop'?'shop':'gift']}${esc(tx(x[0]))}</span>`).join('')}</div>
     <div class="ft"><span>${t.entry[p.entry]}${p.tax?' · '+t.tax:''}${p.perm?' · '+esc(p.h==='24h'?'24h':p.h):` · ${p.endUnk?t.tbd:`${t.ends} <b data-end="${p.endTs}">${left(p.endTs)}</b>`}`}</span><span class="more">${t.details}</span></div>${strip(p)}</span></button>`;}
 function strip(p){const g=gallery(p);if(g.length<2)return '';const pick=[];['o','i','f','p'].forEach(k=>{const x=g.find(y=>y.k===k);if(x)pick.push(x);});g.forEach(x=>{if(pick.length<4&&!pick.includes(x))pick.push(x);});
-  return `<span class="strip">${pick.slice(0,4).map(x=>`<span class="sp"><img src="${esc(small(x.u))}" alt="" loading="lazy" referrerpolicy="no-referrer" onerror="this.parentNode.remove()"><i>${kindL(p,x.k)}</i></span>`).join('')}</span>`;}
+  return `<span class="strip">${pick.slice(0,3).map(x=>`<span class="sp"><img src="${esc(small(x.u))}" alt="" loading="lazy" referrerpolicy="no-referrer" onerror="this.parentNode.remove()"><i>${kindL(p,x.k)}</i></span>`).join('')}</span>`;}
 function nearList(){
   const vs=visible().map(p=>({p,d:distM(p)}));
   const cnt=g=>live.filter(p=>p.grp===g).length;
