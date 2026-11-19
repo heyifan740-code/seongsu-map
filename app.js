@@ -165,6 +165,7 @@ const ST_B=[37.54457,127.05571], ST_A=[37.54360,127.04460];
 POPS.forEach(p=>{p.endTs=Date.parse(p.end);p.rep=null;p.cat=catOf(p);
   p.pics=(typeof PICS!=='undefined'&&PICS[p.id])||{};
   if(!p.img){const g=[...(p.pics.o||[]),...(p.pics.f||[]),...(p.pics.i||[]),...(p.pics.p||[])];if(g.length)p.img=g[0];}});
+const small=u=>u.replace('/750_750_','/300_300_').replace('/C544x408.q60/','/C280x280.q50/');
 const gallery=p=>{const g=[];['o','i','f','p'].forEach(k=>(p.pics[k]||[]).forEach(u=>g.push({k,u})));if(!g.length&&p.img)g.push({k:'p',u:p.img});return g;};
 const kindL=(p,k)=>k==='f'?(p.grp==='eat'?t.pk.food:t.pk.f):t.pk[k];
 const live=POPS.filter(p=>p.endTs>Date.now());
@@ -203,7 +204,7 @@ const rangeTxt=p=>p.endUnk?t.from(p.start):`${p.start} – ${p.endTxt}`;
 const leftHtml=p=>p.endUnk?`<b class="k">${t.tbd}</b>`:`<b data-end="${p.endTs}">${left(p.endTs)}</b>`;
 const period=p=>p.perm?t.perm:rangeTxt(p);
 const credit=u=>u.includes('d8nffddmkwqeq')?'Popply':u.includes('d12zq4w4guyljn')?'DiningCode':u.includes('kakaocdn')?'Kakao Map':'';
-const thumb=(p,cls)=>`<span class="thumb ${cls||''} c-${p.cat}">${cIcon(p.cat)}${p.gk?`<span class="tg">${gIcon(p.gk)}</span>`:''}${p.img?`<img src="${esc(p.img)}" alt="" loading="lazy" referrerpolicy="no-referrer" onerror="this.remove()">`:''}</span>`;
+const thumb=(p,cls)=>`<span class="thumb ${cls||''} c-${p.cat}">${cIcon(p.cat)}${p.gk?`<span class="tg">${gIcon(p.gk)}</span>`:''}${p.img?`<img src="${esc(small(p.img))}" alt="" loading="lazy" referrerpolicy="no-referrer" onerror="this.remove()">`:''}</span>`;
 const hoursTxt=p=>(p.h==='24h'?(lang==='zh'?'24 小时':lang==='ko'?'24시간':'24 hours'):t.daily+' '+p.h)+(p.hx?' · '+tx(p.hx):'');
 const ICON={
  back:'<svg viewBox="0 0 24 24"><path d="M15 6l-6 6 6 6"/></svg>',
@@ -304,7 +305,7 @@ function startMap(){
     document.head.appendChild(s);
   } else buildMap(leafletAdapter);
 }
-const pimg=p=>p.img?`<img src="${esc(p.img)}" alt="" loading="lazy" referrerpolicy="no-referrer" onerror="this.remove()">`:'';
+const pimg=p=>p.img?`<img src="${esc(small(p.img))}" alt="" loading="lazy" referrerpolicy="no-referrer" onerror="this.remove()">`:'';
 function pinHtml(p,near){
   const lab=esc(p.brand)+(p.rate?` <b>★${p.rate.s.toFixed(1)}</b>`:'');
   if(p.gk)return `<div class="pm gift${near?' on':''}"><div class="ph">${gIcon(p.gk)}${GIFTBADGE}<span class="gl">${esc(tx(p.g))}</span></div><i></i><em>${lab}</em></div>`;
@@ -329,7 +330,7 @@ function card(p,d){
     <div class="gifts">${p.perks.slice(0,3).map(x=>`<span class="gift${/deal|menu|tip|sale/.test(x[1])?' a':''}">${ICON[p.grp==='eat'?p.type:p.grp==='shop'?'shop':'gift']}${esc(tx(x[0]))}</span>`).join('')}</div>
     <div class="ft"><span>${t.entry[p.entry]}${p.tax?' · '+t.tax:''}${p.perm?' · '+esc(p.h==='24h'?'24h':p.h):` · ${p.endUnk?t.tbd:`${t.ends} <b data-end="${p.endTs}">${left(p.endTs)}</b>`}`}</span><span class="more">${t.details}</span></div>${strip(p)}</span></button>`;}
 function strip(p){const g=gallery(p);if(g.length<2)return '';const pick=[];['o','i','f','p'].forEach(k=>{const x=g.find(y=>y.k===k);if(x)pick.push(x);});g.forEach(x=>{if(pick.length<4&&!pick.includes(x))pick.push(x);});
-  return `<span class="strip">${pick.slice(0,4).map(x=>`<span class="sp"><img src="${esc(x.u)}" alt="" loading="lazy" referrerpolicy="no-referrer" onerror="this.parentNode.remove()"><i>${kindL(p,x.k)}</i></span>`).join('')}</span>`;}
+  return `<span class="strip">${pick.slice(0,4).map(x=>`<span class="sp"><img src="${esc(small(x.u))}" alt="" loading="lazy" referrerpolicy="no-referrer" onerror="this.parentNode.remove()"><i>${kindL(p,x.k)}</i></span>`).join('')}</span>`;}
 function nearList(){
   const vs=visible().map(p=>({p,d:distM(p)}));
   const cnt=g=>live.filter(p=>p.grp===g).length;
@@ -390,7 +391,7 @@ function head(p){
   </section>${galHtml(p)}<div class="sep"></div>`;}
 function galHtml(p){const g=gallery(p);if(!g.length)return '';
   return `<section class="gal pad"><h2>${t.photos}<small>${g.length}</small></h2>${['o','i','f','p'].map(k=>{const xs=g.map((x,i)=>({...x,i})).filter(x=>x.k===k);if(!xs.length)return '';
-    return `<div class="grow"><span class="gk">${kindL(p,k)}</span><div class="gscroll">${xs.map(x=>`<button class="gi" data-act="lb" data-v="${x.i}"><img src="${esc(x.u)}" alt="${esc(kindL(p,k))}" loading="lazy" referrerpolicy="no-referrer" onerror="this.parentNode.remove()"></button>`).join('')}</div></div>`;}).join('')}
+    return `<div class="grow"><span class="gk">${kindL(p,k)}</span><div class="gscroll">${xs.map(x=>`<button class="gi" data-act="lb" data-v="${x.i}"><img src="${esc(small(x.u))}" alt="${esc(kindL(p,k))}" loading="lazy" referrerpolicy="no-referrer" onerror="this.parentNode.remove()"></button>`).join('')}</div></div>`;}).join('')}
    <p class="gcredit">${t.imgBy}: ${[...new Set(g.map(x=>credit(x.u)).filter(Boolean))].join(' · ')}</p></section>`;}
 function lightbox(){const host=$('lbHost');if(S.lb==null){host.innerHTML='';return;}const p=P(),g=gallery(p),x=g[S.lb];if(!x){S.lb=null;host.innerHTML='';return;}
   host.innerHTML=`<div class="lb" data-act="lbclose"><img src="${esc(x.u)}" alt="" referrerpolicy="no-referrer"><div class="lbcap">${kindL(p,x.k)} · ${S.lb+1}/${g.length} · ${t.imgBy}: ${credit(x.u)}</div>
