@@ -228,6 +228,7 @@ function leafletAdapter(el){
    move(m,ll){m.setLatLng(ll);},
    onClick(cb){const f=e=>cb([e.latlng.lat,e.latlng.lng]);map.on('contextmenu',f);if(!coarse())map.on('click',f);},
    onDrag(cb){map.on('dragstart',cb);},
+   px(ll){const p=map.latLngToContainerPoint(ll);return [p.x,p.y];},
    onZoom(cb){map.on('zoomend',cb);},
    zoom(){return map.getZoom();},
    view(ll,z,off){map.setView(map.unproject(map.project(ll,z).add([0,off]),z),z,{animate:true});},
@@ -262,7 +263,7 @@ function buildMap(adapter){
   MAP.marker({ll:ST_A,html:`<span class="stn y"><b>水</b>${t.stA}</span>`,w:110,h:24,ax:55,ay:12,fixed:true});
   MAP.onClick(ll=>{setMe(ll,false);toast(t.moved);});
   MAP.onDrag(()=>{if(!wide()&&!S.min)setMin(true);});
-  let big=null;MAP.onZoom(()=>{const b=MAP.zoom()>=18.5;if(b!==big){big=b;drawMarkers();}});
+  MAP.onZoom(()=>drawMarkers());
   drawMarkers();
   setTimeout(()=>{MAP.resize();centerMe();},60);
 }
@@ -283,9 +284,13 @@ function pinHtml(p,near){
   const lab=esc(p.brand)+(p.rate?` <b>★${p.rate.s.toFixed(1)}</b>`:'');
   return `<div class="pm t-${p.type}${near?' on':''}"><div class="ph c-${p.cat}">${cIcon(p.cat)}${pimg(p)}<span class="gl">${esc(tx(p.g))}</span></div><i></i><em>${lab}</em></div>`;}
 // full gift bubbles for places within 50 m, when a category is chosen, or when zoomed in; small dots otherwise (keeps the map readable)
-function drawMarkers(){if(!MAP)return;MAP.clear();const zoomed=MAP.zoom()>=18.5;visible().forEach(p=>{const near=distM(p)<=50;
-  if(near||zoomed||S.cat||S.sub||fCount())MAP.marker({ll:p.dl||p.ll,html:pinHtml(p,near),w:96,h:104,ax:48,ay:76,z:near?500:100,title:tx(p.t),onClick:()=>openPop(p.id)});
-  else MAP.marker({ll:p.dl||p.ll,html:`<div class="pdot t-${p.type} c-${p.cat}">${cIcon(p.cat)}${pimg(p)}</div>`,w:30,h:30,ax:15,ay:15,z:0,title:tx(p.t),onClick:()=>openPop(p.id)});});}
+function drawMarkers(){if(!MAP)return;MAP.clear();const zoomed=MAP.zoom()>=18.5,filtered=S.cat||S.sub||fCount();
+  // nearest / best-rated first; a photo pin that would cover another becomes a small photo dot
+  const vs=visible().map(p=>({p,d:distM(p)})).sort((a,b)=>a.d-b.d);const placed=[];
+  vs.forEach(({p,d})=>{const near=d<=50;let full=near||zoomed||filtered;
+    if(full&&MAP.px){const q=MAP.px(p.dl||p.ll);if(placed.some(o=>Math.abs(o[0]-q[0])<58&&Math.abs(o[1]-q[1])<70))full=false;else placed.push(q);}
+    if(full)MAP.marker({ll:p.dl||p.ll,html:pinHtml(p,near),w:96,h:104,ax:48,ay:76,z:near?500:100,title:tx(p.t),onClick:()=>openPop(p.id)});
+    else MAP.marker({ll:p.dl||p.ll,html:`<div class="pdot t-${p.type} c-${p.cat}">${cIcon(p.cat)}${pimg(p)}</div>`,w:30,h:30,ax:15,ay:15,z:0,title:tx(p.t),onClick:()=>openPop(p.id)});});}
 function setMe(ll,recenter){S.me=ll;if(ring)ring.move(ll);if(meDot)MAP.move(meDot,ll);drawMarkers();renderNear();if(recenter)centerMe();}
 const wide=()=>matchMedia('(min-width:880px)').matches;
 function setMin(v){S.min=v;homeEl.classList.toggle('min',v);}
