@@ -1,125 +1,423 @@
-/* ===== 快闪数据（2026-11-01 从 Popply 查询整理）=====
-   以后更新只改这里：每家一项。
-   ll   = [纬度, 经度]：快闪取自 Popply 活动页，餐厅取自 DiningCode（2026-11-02 核对）。
-   end  = 最后一天的闭店时间（韩国时间）
-   type = 主页圆圈里显示的福利类型：gift 赠品 / deal 折扣 / exp 体验 / info 暂无福利信息
-   entry= walkin 现场排队 / naver 네이버 사전예약 / ticket 需购票 */
-const DATA_DATE='2026-11-04';
-const POPS=[
- {id:'snoopy',name:'탐정 스누피의 잃어버린 단서 in 유니세프 정원',zh:'侦探史努比 · 首尔林联合国儿童基金会花园',brand:'史努比',cat:'联名',addr:'서울 성동구 뚝섬로 273 (서울숲)',ll:[37.5430697,127.0417999],est:false,
-  start:'09.10',endTxt:'11.16',end:'2026-11-16T19:00:00+09:00',hours:'每天 12:00–19:00',entry:'walkin',entryNote:'页面标有"사전예약"，细节未公布',
-  type:'gift',g:'环保袋',perks:[['和侦探史努比一起破案，送环保袋、贴纸包等（限量，先到先得）','赠品'],['可顺便参观首尔国际庭园博览会展区','体验']],src:'https://popply.co.kr/popup/5962'},
- {id:'coach',name:'COACH 팝업 : LIVE YOUR STORY',zh:'COACH 快闪 · LIVE YOUR STORY',brand:'COACH',cat:'服装',addr:'서울 성동구 서울숲2길 43',ll:[37.5465048,127.043467],est:false,
-  start:'10.19',endTxt:'11.07',end:'2026-11-07T20:00:00+09:00',hours:'周一–周四 11:00–19:00 · 周五–周日 11:00–20:00',entry:'naver',entryNote:'Naver 事前预约（链接见来源页）',
-  type:'exp',g:'限定包',perks:[['5 款全球代言人灵感特别版 Tabby 包','限定商品'],['演出门票主题挂饰系列','限定商品'],['无信社独家 Lana 23 / Reed 托特包','限定商品'],['试听亭、故事墙、明信片 DIY','体验']],src:'https://popply.co.kr/popup/6433'},
- {id:'shinramyun',name:'신라면분식 더 팩토리 팝업',zh:'辛拉面分食 · The Factory',brand:'辛拉面',cat:'其他',addr:'서울 성동구 성수일로4길 52',ll:[37.5424984,127.0543264],est:false,
-  start:'06.16',endTxt:'12.16',end:'2026-12-16T18:00:00+09:00',hours:'每天 09:00–18:00',entry:'walkin',entryNote:'',
-  type:'exp',g:'DIY拉面',perks:[['自选面、汤料、配料的 DIY 拉面体验','体验'],['海外拉面试吃','体验'],['工厂现炸拉面、周边与特别菜单','售卖']],src:'https://popply.co.kr/popup/5243'},
- {id:'vitalbeauty',name:'바이탈뷰티 팝업 : SUPER GLOW SAUNA',zh:'Vital Beauty · SUPER GLOW SAUNA',brand:'Vital Beauty',cat:'美妆',addr:'서울 성동구 연무장길 31-1 103호',ll:[37.5432681,127.0529768],est:false,
-  start:'10.28',endTxt:'11.03',end:'2026-11-03T19:00:00+09:00',hours:'周三 14:00–19:00 · 其他日 10:00–19:00',entry:'walkin',entryNote:'',
-  type:'gift',g:'限定周边',perks:[['"不容错过的特别周边"（官方未写具体内容）','周边'],['新品超级视黄醇系列试用','体验']],src:'https://popply.co.kr/popup/6442'},
- {id:'sie',name:'시에 X 에세이즈 팝업',zh:'SIE × ESSAIS 快闪',brand:'SIE×ESSAIS',cat:'服装',addr:'서울 성동구 연무장길 35 (스테이지 35)',ll:[37.543115,127.0534919],est:false,
-  start:'10.27',endTxt:'11.10',end:'2026-11-10T20:00:00+09:00',hours:'每天 12:00–20:00',entry:'walkin',entryNote:'',
-  type:'gift',g:'抽礼物',perks:[['加 KakaoTalk 好友后在拍照亭拍照，拍到"幸运相框"可任选店内一件商品','赠品'],['购买有优惠（官方未写具体内容）','折扣']],src:'https://popply.co.kr/popup/6409'},
- {id:'offbeauty',name:'오푸리스 X 오프뷰티 팝업',zh:'OPURIS × OFF BEAUTY',brand:'OPURIS',cat:'美妆',addr:'서울 성동구 연무장3길 9 (오프뷰티 성수메가팩토리점)',ll:[37.5446694,127.051352],est:false,
-  start:'10.23',endTxt:'11.07',end:'2026-11-07T22:00:00+09:00',hours:'每天 10:00–22:00',entry:'walkin',entryNote:'',
-  type:'deal',g:'专属优惠',perks:[['"只有 OFF BEAUTY 圣水店才有的特别优惠"（官方未写具体内容）','折扣']],src:'https://popply.co.kr/popup/6416'},
- {id:'champion',name:'Champion 팝업',zh:'Champion 快闪',brand:'Champion',cat:'运动',addr:'서울 성동구 성수이로 62 (무신사 메가스토어 성수)',ll:[37.5403145,127.0558768],est:false,
-  start:'10.26',endTxt:'11.08',end:'2026-11-08T22:00:00+09:00',hours:'每天 11:00–22:00',entry:'walkin',entryNote:'',
-  type:'deal',g:'最低2折',perks:[['第一周：经典款档案特卖，最高 8 折扣（约 2 折价）','折扣'],['第二周：FW 新款外套和联名系列','新品']],src:'https://popply.co.kr/popup/6457'},
- {id:'deadflt',name:'DEADFLT 성수 팝업',zh:'DEADFLT 圣水快闪',brand:'DEADFLT',cat:'服装',addr:'서울 성동구 성수이로 58, 착한구두 성수 스페이스 B1',ll:[37.5401239,127.0556244],est:false,
-  start:'10.08',endTxt:'11.08',end:'2026-11-08T19:00:00+09:00',hours:'每天 11:00–19:00',entry:'walkin',entryNote:'从착한구두店内楼梯下到 B1，在无信社旁边',
-  type:'deal',g:'半价',perks:[['圣水快闪店独有半价（50% OFF）','折扣'],['卫衣、拉链卫衣、T 恤、帽子、袜子','售卖']],src:'https://popply.co.kr/popup/6303',src2:'小红书 @Popvia「11月首尔圣水快闪攻略」'},
- {id:'flareup',name:'플레어업 팝업 : IN A DAZE',zh:'FLAREUP · IN A DAZE',brand:'FLAREUP',cat:'服装',addr:'서울 성동구 성수이로 74 (대림창고)',ll:[37.541595,127.0564109],est:false,
-  start:'10.16',endTxt:'11.05',end:'2026-11-05T22:00:00+09:00',hours:'每天 11:00–22:00',entry:'walkin',entryNote:'',
-  type:'deal',g:'额外9折',perks:[['无信社线上折扣价再减 10%','折扣'],['瑕疵品统一价特卖 9,900–79,000 韩元（不退不换）','折扣']],src:'https://popply.co.kr/popup/6371'},
- {id:'torriden',name:'토리든 커넥트 성수 : CONNECT DEEP DIVE',zh:'Torriden CONNECT DEEP DIVE',brand:'Torriden',cat:'美妆',addr:'서울 성동구 성수이로7가길 17',ll:[37.5418318,127.0553011],est:false,
-  start:'07.15',endTxt:'12.31',end:'2026-12-31T20:00:00+09:00',hours:'每天 11:00–20:00',entry:'walkin',entryNote:'',
-  type:'exp',g:'皮肤检测',perks:[['沉浸式拍照装置（CORTIS 主题照片墙）','体验'],['互动游戏、肌肤状态检测','体验'],['了解成分理念的 K-Beauty 空间','体验']],src:'https://popply.co.kr/popup/5790',src2:'小红书 @Popvia「11月首尔圣水快闪攻略」'},
- {id:'romand',name:'롬앤 팝업 : 10주년 생일파티',zh:'rom&nd 10 周年生日派对',brand:'rom&nd',cat:'美妆',addr:'서울 성동구 연무장길 88 (롬앤 핑크오피스)',ll:[37.5412902,127.0588878],est:false,
-  start:'10.10',endTxt:'11.10',end:'2026-11-10T22:00:00+09:00',hours:'每天 11:00–21:00',entry:'walkin',entryNote:'营业时间按小红书笔记写的 11:00–21:00；Popply 写 10:00–22:00，以现场为准',
-  type:'exp',g:'蛋糕拍照',perks:[['粉色生日派对主题：蛋糕主题拍照区','体验'],['互动游戏和 DIY 体验','体验'],['回顾品牌十年彩妆风格，现场试唇釉、腮红','体验']],src:'https://popply.co.kr/popup/6252',src2:'小红书 @Popvia「11月首尔圣水快闪攻略」'},
- {id:'riot',name:'라이엇게임즈 뮤직 & 월즈26 팝업',zh:'Riot Games 音乐 & 全球总决赛 2026',brand:'Riot Games',cat:'联名',addr:'서울 성동구 연무장7길 13 (트렌드팟 바이 올리브영 N성수)',ll:[37.544177,127.0544868],est:false,
-  start:'10.29',endTxt:'11.08',end:'2026-11-08T20:00:00+09:00',hours:'每天 11:00–20:00',entry:'walkin',entryNote:'官方说明：不接受预约，现场排队入场',
-  type:'gift',g:'限定奖励',perks:[['只在这个快闪提供的特别奖励（官方未写具体内容）','赠品']],src:'https://popply.co.kr/popup/6454'},
- {id:'shinchan',name:'짱구는 못말려 전시 : 시공간 대모험',zh:'蜡笔小新展 · 时空大冒险',brand:'蜡笔小新',cat:'联名',addr:'서울 성동구 연무장5길 9-29',ll:[37.5444463,127.0520483],est:false,
-  start:'10.17',endTxt:'2027.01.24',end:'2027-01-24T20:00:00+09:00',hours:'每天 11:00–20:00（19:00 停止入场）',entry:'ticket',entryNote:'收费展览，通过 bemill 或官方 linktree 购票预约；韩国首场蜡笔小新互动沉浸展',
-  type:'exp',g:'AR闯关',perks:[['巨型小新打卡立牌、剧场版名场景展区','体验'],['拯救双叶镇 AR 扫码任务、小新同款姿势体感互动','体验'],['可以跑动参与解谜闯关，不只是看展','体验']],src:'https://popply.co.kr/popup/5949',src2:'小红书 @FELIX果味实验室'},
- {id:'kpopgoods',name:'Kpop 굿즈스토어 (맵달)',zh:'K-pop 周边店（mapdal）',brand:'mapdal',cat:'K-pop',addr:'서울 성동구 성수이로16길 5 4층',ll:[37.541288,127.0572471],est:false,
-  start:'06.01',endTxt:'2027.12.31',end:'2027-12-31T18:00:00+09:00',hours:'每天 09:00–18:00',entry:'walkin',entryNote:'',
-  type:'exp',g:'K-pop周边',perks:[['圣水唯一的 K-pop 周边店（自称）','售卖'],['1 楼可寄存物品（21:00 前取回）','便利']],src:'https://popply.co.kr/popup/5377'}
- /* ===== 餐厅与甜品（2026-11-01 整理；预约方式：已查到的照写，查不到线上排队的标为现场排队）===== */
- ,{id:'minari',name:'능동미나리 성수점',zh:'能动水芹 圣水店',brand:'能动水芹',cat:'餐厅',addr:'서울 성동구 연무장길 42 (1, 2층)',ll:[37.5427551,127.0539622],est:false,
-  start:'常设',endTxt:'常设',end:'2099-12-31T23:00:00+09:00',hours:'每天 11:00–23:00',entry:'walkin',entryNote:'未查到线上排队，现场排队；TikTok 爆红后排队较长',
-  type:'food',g:'水芹汤',perks:[['水芹牛骨汤 15,000 韩元','招牌'],['水芹生拌 9,000 韩元','菜单'],['水芹白切肉火锅 48,000–85,000 韩元','菜单']],src:'https://hotplacehunter.co.kr/msn/article/89312/'}
- ,{id:'gamjatang',name:'소문난성수감자탕',zh:'小闻圣水土豆排骨汤',brand:'土豆排骨汤',cat:'餐厅',addr:'서울 성동구 연무장길 45 1층',ll:[37.542837,127.054387],est:false,
-  start:'常设',endTxt:'常设',end:'2099-12-31T23:59:00+09:00',hours:'24 小时营业',entry:'walkin',entryNote:'没有排队系统，直接到门口排队（用户评价）；外国客人很多',
-  type:'food',g:'土豆汤',perks:[['土豆排骨汤（小）32,000 韩元，可加面片','招牌'],['单人土豆汤饭 12,000 韩元','菜单'],['可外带（1 人份 15,000 韩元）','便利']],src:'https://hotplacehunter.co.kr/sns/article/86310/'}
- ,{id:'jayeondo',name:'자연도소금빵in성수',zh:'自然岛盐面包 圣水',brand:'自然岛盐面包',cat:'甜品',addr:'서울 성동구 연무장길 56-1 1층',ll:[37.542326,127.0555087],est:false,
-  start:'常设',endTxt:'常设',end:'2099-12-31T22:00:00+09:00',hours:'每天 09:00–22:00',entry:'walkin',entryNote:'每天分 6 次出炉，经常售罄，出炉前排队',
-  type:'sweet',g:'盐面包',perks:[['盐面包 4 个一盒 12,000 韩元（只卖这一款）','招牌'],['每天 6 次出炉，常售罄','提示']],src:'https://hotplacehunter.co.kr/msn/article/89312/'}
- ,{id:'betong',name:'베통 성수 플래그십',zh:'Betong 圣水旗舰店',brand:'Betong',cat:'甜品',addr:'서울 성동구 연무장7가길 8',ll:[37.5429356,127.0552214],est:false,
-  start:'常设',endTxt:'常设',end:'2099-12-31T18:30:00+09:00',hours:'每天 11:00–18:30',entry:'walkin',entryNote:'排队较长，未查到线上排队',
-  type:'sweet',g:'松露盐包',perks:[['松露风味盐面包 3,900 韩元','招牌'],['咸巧克力盐面包 4,500 韩元','菜单']],src:'https://hotplacehunter.co.kr/msn/article/89312/'}
- ,{id:'onion',name:'어니언 성수',zh:'Onion 圣水',brand:'Onion',cat:'甜品',addr:'서울 성동구 아차산로9길 8',ll:[37.5446909,127.0581051],est:false,
-  start:'常设',endTxt:'常设',end:'2099-12-31T22:00:00+09:00',hours:'周一–周五 08:00–22:00 · 周末 10:00–22:00（最后点单 21:30）',entry:'walkin',entryNote:'旧工厂改造的面包咖啡店，现场点单',
-  type:'sweet',g:'潘多洛',perks:[['潘多洛 Pandoro 6,000 韩元','招牌'],['红豆黄油面包 5,500 韩元','菜单']],src:'https://hotplacehunter.co.kr/sns/article/65671/'}
- ,{id:'5to7',name:'5to7 성수',zh:'5to7 舒芙蕾',brand:'5to7',cat:'甜品',addr:'서울 성동구 서울숲2길 44-13',ll:[37.5461191,127.0432656],est:false,
-  start:'常设',endTxt:'常设',end:'2099-12-31T21:30:00+09:00',hours:'每天 12:00–21:30',entry:'walkin',entryNote:'未查到线上排队',
-  type:'sweet',g:'舒芙蕾',perks:[['舒芙蕾松饼（Time Out 推荐珍珠舒芙蕾）','招牌'],['无花果舒芙蕾（外国客人多）','招牌']],src:'https://www.timeout.com/seoul/restaurants/5to7'}
- ,{id:'paperplate',name:'페이퍼플레이트',zh:'Paper Plate 纽约披萨',brand:'Paper Plate',cat:'餐厅',addr:'서울 성동구 성수이로14길 15',ll:[37.5417281,127.0566909],est:false,
-  start:'常设',endTxt:'常设',end:'2099-12-31T21:00:00+09:00',hours:'周二–周日 11:30–21:00 · 周一休息',entry:'walkin',entryNote:'按片卖，适合逛街中途吃',
-  type:'food',g:'纽约披萨',perks:[['芝士披萨 5,700 韩元 / 片','招牌'],['奶油披萨 7,800 韩元、纽约至尊 8,000 韩元 / 片','菜单']],src:'https://hotplacehunter.co.kr/sns/article/86310/'}
- ,{id:'jungidam',name:'정이담',zh:'情怡潭 时令韩餐',brand:'情怡潭',cat:'餐厅',addr:'서울 성동구 왕십리로 83-21 디타워 서울포레스트 B1',ll:[37.544357,127.0441654],est:false,
-  start:'常设',endTxt:'常设',end:'2099-12-31T22:00:00+09:00',hours:'每天 11:00–22:00 · 工作日 15:30–17:00 休息',entry:'walkin',entryNote:'"排队名店"，未查到线上预约方式',
-  type:'food',g:'LA排骨',perks:[['LA 排骨 35,000 韩元','招牌'],['韩牛薄切烤肉 42,000 韩元','菜单']],src:'https://hotplacehunter.co.kr/sns/article/86310/'}
- /* ===== 2026-11-02 补充的快闪（Popply）===== */
- ,{id:'bodana',name:'보다나 팝업 : 초대형 버블 @ 성수',zh:'VODANA 快闪 · 超大泡泡',brand:'VODANA',cat:'美妆',addr:'서울 성동구 아차산로 100',ll:[37.5445024,127.0560905],est:false,
-  start:'10.29',endTxt:'11.06',end:'2026-11-06T17:30:00+09:00',hours:'每天 11:30–17:30',entry:'walkin',entryNote:'',
-  type:'gift',g:'抽卷发器',perks:[['抽奖送 Easy Up 造型器和免洗泡泡护发','抽奖']],src:'https://popply.co.kr/popup/6517'}
- ,{id:'freeber',name:'프리버07 팝업',zh:'FREEBER07 快闪',brand:'FREEBER07',cat:'服装',addr:'서울 성동구 성수이로 62 (무신사 메가스토어 성수)',ll:[37.5403145,127.0558768],est:false,
-  start:'10.26',endTxt:'11.08',end:'2026-11-08T22:00:00+09:00',hours:'每天 11:00–22:00',entry:'walkin',entryNote:'在无信社 Mega Store 圣水店内',
-  type:'gift',g:'满赠T恤',perks:[['满 15 万韩元送法式条纹 T 恤（先到先得）','赠品'],['满 20 万韩元送图案插肩 T 恤（先到先得）','赠品'],['圣水店独家再减 10%，档案款最高 65% 折扣','折扣']],src:'https://popply.co.kr/popup/6456'}
- ,{id:'buttershop',name:'버터샵 팝업 (이구홈 성수 1호점)',zh:'BUTTER SHOP 圣诞快闪',brand:'BUTTER SHOP',cat:'联名',addr:'서울 성동구 연무장길 57 (이구홈 성수 1호점)',ll:[37.5423855,127.055807],est:false,
-  start:'10.30',endTxt:'11.26',end:'2026-11-26T22:00:00+09:00',hours:'每天 11:00–22:00',entry:'walkin',entryNote:'免费入场',
-  type:'gift',g:'送钥匙扣',perks:[['购买 BUTTER SHOP 商品送黄油钥匙扣（前 100 名）','赠品'],['圣诞单品、芝麻街、天使系列','售卖']],src:'https://popply.co.kr/popup/6480'}
- ,{id:'fixpizza',name:'픽스피자 성수 팝업스토어',zh:'FIX PIZZA 一餐披萨快闪',brand:'FIX PIZZA',cat:'餐厅',addr:'서울 성동구 연무장길 5-9 1층, 2층',ll:[37.5442564,127.0503748],est:false,
-  start:'10.22',endTxt:'11.22',end:'2026-11-22T19:00:00+09:00',hours:'周二–周日 12:00–19:00（15:00–16:00 休息）· 周一休息',entry:'walkin',entryNote:'现场排队。营业时间：Popply 写 11.3 起 12:00–19:00；小红书笔记（10.20）写 11:00–18:00、15:00–15:30 休息，以现场为准',
-  type:'gift',g:'免费试吃',perks:[['关注官方账号并发快拍（带指定标签），免费试吃 4 款披萨 + 柠檬苹果醋汽水','试吃'],['披萨 1,800 韩元起','招牌'],['每消费 1 万韩元抽奖 1 次','抽奖'],['满足关注、到店认证发帖等条件可抽 Gucci、Dior 香水、唇膏、面霜、咖啡券','抽奖']],src:'https://popply.co.kr/popup/6276',src2:'小红书 @在韩向日葵 笔记（10-20）'}
- ,{id:'fra422',name:'프라포투투 팝업',zh:'FRA422 香水快闪',brand:'FRA422',cat:'美妆',addr:'서울 성동구 성수이로 77',ll:[37.5419964,127.056009],est:false,
-  start:'03.06',endTxt:'11.30',end:'2026-11-30T21:30:00+09:00',hours:'每天 10:30–21:30',entry:'walkin',entryNote:'',
-  type:'gift',g:'购买送袋',perks:[['购买即送环保袋','赠品'],['买 Soul 香水送 1.5ml 小样','赠品'],['全场 9 折、钥匙扣套装特价','折扣']],src:'https://popply.co.kr/popup/5791'}
- ,{id:'madeby',name:'메이드바이 X 맘마 햄스토어 팝업 @ 성수',zh:'MADEBY × 妈妈火腿店',brand:'MADEBY',cat:'联名',addr:'서울 성동구 서울숲길 38',ll:[37.5478975,127.0416827],est:false,
-  start:'09.08',endTxt:'11.04',end:'2026-11-04T20:00:00+09:00',hours:'每天 12:00–20:00',entry:'walkin',entryNote:'Popply 写到 11.05，官方说明写圣水店到 11.04（周三），以 11.04 为准',
-  type:'gift',g:'限定随机包',perks:[['限定随机包和"送很多礼物"的活动','赠品'],['先行发售新品和联名商品','售卖']],src:'https://popply.co.kr/popup/5984'}
- ,{id:'equa',name:'에쿠아 팝업 (EQL 성수)',zh:'EQUA 首个线下快闪',brand:'EQUA',cat:'服装',addr:'서울 성동구 연무장15길 11 (EQL 성수점)',ll:[37.54283,127.0589872],est:false,
-  start:'10.21',endTxt:'11.03',end:'2026-11-03T20:00:00+09:00',hours:'每天 11:00–20:00',entry:'walkin',entryNote:'',
-  type:'deal',g:'85折',perks:[['全场 85 折','折扣'],['店内实付满 10 万韩元送蕾丝丝巾（前 30 名）','赠品']],src:'https://popply.co.kr/popup/6400'}
- ,{id:'lensis',name:'렌시스 팝업',zh:'LENSIS 美瞳快闪',brand:'LENSIS',cat:'美妆',addr:'서울 성동구 연무장길 44',ll:[37.542723,127.0540819],est:false,
-  start:'09.29',endTxt:'11.29',end:'2026-11-29T22:00:00+09:00',hours:'每天 10:00–22:00',entry:'walkin',entryNote:'',
-  type:'deal',g:'专属优惠',perks:[['新品和人气隐形眼镜，"只有快闪店才有的专属优惠和活动"（官方未写具体内容）','折扣']],src:'https://popply.co.kr/popup/6226'}
- ,{id:'longtake',name:'롱테이크 팝업 (올리브영 뷰티 더 맨션 성수)',zh:'LONGTAKE 香氛快闪',brand:'LONGTAKE',cat:'美妆',addr:'서울 성동구 아차산로 103 (올리브영 뷰티 더 맨션 성수)',ll:[37.5450426,127.0558154],est:false,
-  start:'10.01',endTxt:'12.31',end:'2026-12-31T22:00:00+09:00',hours:'每天 10:00–22:00',entry:'walkin',entryNote:'关注活动 20:00 前可参加',
-  type:'gift',g:'关注活动',perks:[['快闪限定活动和特别优惠（官方未写具体内容）','赠品']],src:'https://popply.co.kr/popup/6451'}
- ,{id:'oldferry',name:'올드페리도넛 성수',zh:'Old Ferry Donut 圣水',brand:'Old Ferry',cat:'甜品',addr:'서울 성동구 성수이로16길 5 1층',ll:[37.541288,127.0572471],est:false,
-  start:'06.29',endTxt:'2027.12.31',end:'2027-12-31T21:00:00+09:00',hours:'每天 11:00–21:00',entry:'walkin',entryNote:'',
-  type:'sweet',g:'甜甜圈',perks:[['人气奶油甜甜圈（Popply 未列菜单和价格）','招牌']],src:'https://popply.co.kr/popup/5434'}
- ,{id:'miriweek',name:'2026 미리위크 팝업',zh:'2026 MIRIWEEK · 密室逃脱与展览',brand:'MIRIWEEK',cat:'其他',addr:'서울 성동구 성수이로18길 5',ll:[37.5429356,127.0578871],est:false,
-  start:'10.24',endTxt:'11.08',end:'2026-11-08T21:00:00+09:00',hours:'周一–周五 11:50–21:00 · 周末 09:50–21:00',entry:'walkin',entryNote:'展览免费、无需预约；密室逃脱需事先预约（12 岁以上）',
-  type:'exp',g:'密室逃脱',perks:[['免费策划展览','体验'],['密室逃脱游戏（需预约）','体验']],src:'https://popply.co.kr/popup/6378'}
- ,{id:'skt',name:'SK텔레콤 X 랜덤 다이버시티 전시 : Emotion Lab',zh:'SKT × Random Diversity 情绪实验室',brand:'SKT',cat:'其他',addr:'서울 성동구 연무장1길 7-1 (T 팩토리 성수)',ll:[37.5449383,127.0505364],est:false,
-  start:'09.19',endTxt:'11.15',end:'2026-11-15T20:00:00+09:00',hours:'每天 11:00–20:00（19:30 停止入场）',entry:'walkin',entryNote:'1 楼香气体验免费（每天 1 次）；B1 色彩体验收费，经 T Factory 主页链接预约',
-  type:'exp',g:'免费体验',perks:[['1F Scent of Emotion：戴 VR 测脑波，按情绪生成专属香气，可配手写信送人（免费，每天 1 次）','体验'],['B1 Color of Emotion：AI 分析脑波提取情绪颜色（需线上预约）','体验'],['SKT 用户 B1 体验 8 折','折扣']],src:'https://popply.co.kr/popup/6100',src2:'小红书 @FELIX果味实验室'}
- ,{id:'levi4u',name:'리바이포유 (Rbfy) 10주년 팝업',zh:'Rbfy 10 周年快闪',brand:'Rbfy',cat:'美妆',addr:'서울 성동구 연무장길 65 (LECT성수)',ll:[37.5422281,127.0568117],est:false,
-  start:'10.28',endTxt:'11.12',end:'2026-11-12T19:00:00+09:00',hours:'每天 11:00–19:00',entry:'walkin',entryNote:'事前预约期已过（10.21–10.27）',
-  type:'gift',g:'送安瓶',perks:[['满 1 万韩元送 45ml 补水安瓶正装','赠品'],['满 7 万韩元送 45ml 安瓶 + 60ml 补水面霜正装','赠品'],['全品最高 7 折；迷你精华钥匙扣套装 55% OFF','折扣'],['幸运游戏区 100% 中奖（优惠券 / 面霜 / 补水棉片）','抽奖'],['快闪专属镜子钥匙扣和周边','周边']],src:'https://popply.co.kr/popup/6432',src2:'小红书 @FELIX果味实验室'}
- ,{id:'dralthea',name:'닥터엘시아 345 시크릿 프로젝트 (올리브영 뷰티 맨션 성수)',zh:'Dr.Althea 345 秘密项目快闪',brand:'Dr.Althea',cat:'美妆',addr:'서울 성동구 성수이로 108 (올리브영 뷰티 맨션 성수)',ll:[37.5450426,127.0558154],est:false,
-  start:'11.01',endTxt:'11.28',end:'2026-11-28T22:00:00+09:00',hours:'每天 10:00–22:00（体验和购买活动只在 11:00–19:00）',entry:'walkin',entryNote:'在 Olive Young Beauty Mansion 圣水内，和 LONGTAKE 快闪同一栋楼',
-  type:'gift',g:'送洁面乳',perks:[['FIND 345：关注 Instagram 和 KakaoTalk 后 10 秒内找出真的 345 洁面乳，成功送正装、失败送 2 个小样','赠品'],['345 LUCKY DRAW：买 1 件即可抽，100% 中奖（舒缓面霜正装或迷你公文包挑战），每人 1 次','抽奖'],['购买即送购物袋；满 3 万送精华 15ml，5 万送面膜 2 片，7 万送面膜 1 盒，10 万送洁面乳 + 4 件小样，20 万送旅行套装（不叠加）','赠品'],['研究员拍照区，发 Ins 快拍可参加评选（仅限韩国居住者）','体验']],src:'https://www.instagram.com/dr.althea_korea_official/',src2:'小红书 @首尔学姐情报便利店'}
- ,{id:'ongredients',name:'온그리디언츠 이너글로우 VIP 라운지',zh:'ongredients Inner Glow VIP 休息室',brand:'ongredients',cat:'美妆',addr:'서울 성동구 연무장17길 4',ll:[37.5414,127.0594],est:true,
-  start:'常设',endTxt:'常设',end:'2099-12-31T20:00:00+09:00',hours:'营业时间未查到，以现场为准',entry:'walkin',entryNote:'小红书笔记称送礼活动"一直有效"；地图位置按地址估算，导航以 Naver 地图为准',
-  type:'gift',g:'送正装乳液',perks:[['关注品牌小红书账号，送购物袋 + 黄油乳液 80ml 正装','赠品'],['Skin Barrier Calming Lotion EX 80ml 原价 17,000 → 7 折 11,900 韩元','折扣']],src:'https://popga.co.kr/popup/7286',src2:'小红书 @罗曼城luke'}
- ,{id:'aliexpress',name:'알리익스프레스 11초 팝업 (성수)',zh:'AliExpress 超大扭蛋机快闪',brand:'AliExpress',cat:'其他',addr:'서울 성동구 성수동2가 273-48',ll:[37.5430,127.0560],est:true,
-  start:'11.05',endTxt:'11.08',end:'2026-11-08T20:00:00+09:00',hours:'每天 10:00–20:00（11.5 当天 12:00 开门）',entry:'walkin',entryNote:'11 月 5 日开始，只开 4 天；地图位置按地址估算，导航以 Naver 地图为准',
-  type:'gift',g:'11秒装满',perks:[['入场即送购物袋','赠品'],['完成展区任务可扭蛋抽道具（篮子或夹子）','抽奖'],['"11 秒装满挑战"：限时内装进篮子 / 夹子的商品直接送','赠品'],['线上同步：11.1–11.18 在 App 内 110 韩元买参与权，可抽电动车和折扣券','抽奖']],src:'https://www.instagram.com/aliexpresskorea/',src2:'小红书 @Vv pocket'}
+/* 圣水快闪线 · Seongsu Pop-up Line — data file
+   Edit this file to add / update places. Each text field has zh / en / ja.
+   grp: pop (pop-ups) · eat (food) · shop (permanent stores)
+   sub: see SUBS in app.js
+   type (marker colour): gift · deal · exp · info · food · sweet · shop
+   entry: walkin · naver (Naver booking) · ticket · queue (on-site waiting list)
+   rate: DiningCode user rating {s: score/5, n: reviews, u: DiningCode id}
+*/
+const DATA_DATE = '2026-11-19';
+const LG = (zh, en, ja) => ({ zh, en, ja });  // (not "L": Leaflet uses window.L)
+const PP = 'https://popply.co.kr/popup/';
+const POPS = [
+
+/* =================== POP-UPS =================== */
+{id:'ongredients',grp:'pop',sub:'beauty',name:'온그리디언츠 팝업 : ddalgi HOUSE',t:LG('ongredients 草莓屋快闪','ongredients ddalgi HOUSE','ongredients いちごハウス'),brand:'ongredients',
+ addr:'서울 성동구 연무장길 65',ll:[37.5422281,127.0568117],start:'11.13',endTxt:'2027.02.10',end:'2027-02-10T21:00:00+09:00',h:'12:00–21:00',entry:'walkin',type:'gift',
+ g:LG('到店送礼','Free gift','来店特典'),
+ perks:[[LG('到店即送：粉色帆布袋、粉色乳液 80ml 正装（送完为止）','Just visit: pink tarp bag + pink lotion 80 ml full size (while stocks last)','来店でピンクのターポリンバッグとピンクローション80ml本品（なくなり次第終了）'),'gift'],
+        [LG('草莓主题拍照空间','Strawberry-themed photo space','いちごテーマのフォトスポット'),'exp']],
+ src:PP+'6651'},
+
+{id:'centelle',grp:'pop',sub:'beauty',name:'센슬 마켓 팝업 (무신사 뷰티 스페이스1)',t:LG('센슬 Market 美妆市集','센슬 Market beauty pop-up','센슬 Market コスメマーケット'),brand:'센슬 Market',
+ addr:'서울 성동구 연무장길 81 (무신사 뷰티 스페이스1)',ll:[37.5417012,127.0582575],start:'11.18',endTxt:'11.29',end:'2026-11-29T19:00:00+09:00',h:'11:00–19:00',entry:'walkin',type:'gift',
+ g:LG('不买也送','Gift, no purchase','購入なしでも特典'),
+ perks:[[LG('不买也能领随机赠品','Random gift even without buying','購入なしでもランダムギフト'),'gift'],
+        [LG('购买再加赠品，最低 6.5 折','Extra gifts with purchase, up to 35% off','購入でさらに特典、最大35%OFF'),'deal'],
+        [LG('幸运抽奖','Lucky draw','ラッキードロー'),'draw']],
+ src:PP+'6721'},
+
+{id:'bbia',grp:'pop',sub:'beauty',name:'삐아 팝업 : 11월 프로모션',t:LG('bbia 11 月快闪','bbia November pop-up','bbia 11月ポップアップ'),brand:'bbia',
+ addr:'서울 성동구 연무장3길 17',ll:[37.5451508,127.0517327],start:'11.10',endTxt:'11.30',end:'2026-11-30T21:00:00+09:00',h:'11:00–21:00',entry:'walkin',type:'deal',
+ g:LG('最高4折','Up to 60% off','最大60%OFF'),
+ perks:[[LG('黑五最高 4 折，黑五套装 17,900 韩元','Black Friday up to 60% off; BF set ₩17,900','ブラックフライデー最大60%OFF、BFセット17,900ウォン'),'deal'],
+        [LG('11/19–11/22 带准考证可挑战大号“抓抓乐”','19–22 Nov: bring a suneung exam ticket for the large scoop challenge','11/19〜22 修能受験票でLサイズすくい取りに挑戦'),'exp']],
+ src:PP+'6671'},
+
+{id:'bray',grp:'pop',sub:'beauty',name:'브레이 성수 팝업',t:LG('BRAY 唇妆快闪','BRAY lip pop-up','BRAY リップポップアップ'),brand:'BRAY',
+ addr:'서울 성동구 성수이로 88',ll:[37.5426727,127.0567771],start:'11.12',endTxt:'11.25',end:'2026-11-25T20:00:00+09:00',h:'11:00–20:00',entry:'walkin',type:'gift',
+ g:LG('免费咖啡','Free coffee','無料コーヒー'),
+ perks:[[LG('发现场 Instagram 快拍，免费领咖啡或蜂蜜洋甘菊茶（不用买）','Post a story on Instagram → free coffee or honey chamomile tea (no purchase needed)','インスタのストーリー投稿でコーヒーかハニーカモミールティー無料（購入不要）'),'gift'],
+        [LG('唇部产品买一送一、3 秒抓抓乐','Lip products 1+1, 3-second scoop event','リップ1+1、3秒すくい取りイベント'),'deal']],
+ src:PP+'6635'},
+
+{id:'zzappy',grp:'pop',sub:'beauty',name:'째피 팝업 (OFF BEAUTY 성수)',t:LG('ZZAPPY 身体护理快闪','ZZAPPY body-care pop-up','ZZAPPY ボディケアポップアップ'),brand:'ZZAPPY',
+ addr:'서울 성동구 연무장3길 9 (OFF BEAUTY)',ll:[37.5446694,127.051352],start:'11.11',endTxt:'12.08',end:'2026-12-08T22:00:00+09:00',h:'10:00–22:00',entry:'walkin',type:'gift',
+ g:LG('送浴球','Shower ball gift','シャワーボール'),
+ perks:[[LG('买 1 件 300ml 身体护理产品送随机浴球','Buy one 300 ml body-care item → random shower ball','300mlボディケア1点購入でシャワーボール'),'gift'],
+        [LG('满 5 万韩元送旅行套装','₩50,000+ → travel kit','5万ウォン以上でトラベルキット'),'gift'],
+        [LG('部分产品最高 6 折','Selected items up to 40% off','一部商品最大40%OFF'),'deal']],
+ src:PP+'6673'},
+
+{id:'heartpercent',grp:'pop',sub:'beauty',name:'하트퍼센트 × 이니미니 LIPSKIN 팝업',t:LG('Heart Percent × inimini 唇妆快闪','Heart Percent × inimini LIPSKIN','ハートパーセント × inimini'),brand:'Heart Percent',
+ addr:'서울 성동구 성수이로7가길 8',ll:[37.5408783,127.0551998],start:'11.12',endTxt:'11.26',end:'2026-11-26T20:30:00+09:00',h:'11:30–20:30',entry:'walkin',type:'gift',
+ g:LG('送唇釉','Lip gift','リップ特典'),
+ note:LG('Popply 提到预约后到店可领随机化妆品，具体以官方 Instagram 为准','Popply mentions a random cosmetic for visitors who book first — check the brand’s Instagram','事前予約で来店するとランダムコスメの案内あり（公式インスタで確認）'),
+ perks:[[LG('到店唇部产品正装赠送活动','Full-size lip product giveaway for visitors','来店者にリップ本品プレゼント'),'gift'],
+        [LG('快闪价 75 折 + inimini 跳蚤市集','25% off + inimini flea market','25%OFF + inimini フリマ'),'deal']],
+ src:PP+'6677'},
+
+{id:'dralthea',grp:'pop',sub:'beauty',name:'닥터엘시아 345 시크릿 프로젝트 (올리브영 뷰티 맨션 성수)',t:LG('Dr.Althea 345 秘密项目','Dr.Althea 345 Secret Project','ドクターエルシア 345 シークレット'),brand:'Dr.Althea',
+ addr:'서울 성동구 성수이로 108 (올리브영 뷰티 맨션 성수)',ll:[37.5445395,127.0573705],start:'11.01',endTxt:'11.28',end:'2026-11-28T22:00:00+09:00',h:'10:00–22:00',
+ hx:LG('体验和购买活动只在 11:00–19:00','Games & purchase events 11:00–19:00 only','体験・購入イベントは11:00〜19:00'),entry:'walkin',type:'gift',
+ g:LG('送洁面乳','Free cleanser','洗顔料'),
+ perks:[[LG('10 秒内找出真的 345 洁面乳：成功送正装，失败送 2 个小样','Find the real 345 cleanser in 10 s: win full size, or 2 samples','10秒で本物の345洗顔を探す：成功で本品、失敗でもサンプル2個'),'gift'],
+        [LG('买 1 件即可抽奖，100% 中奖','Buy any item → 100% win lucky draw','1点購入で必ず当たる抽選'),'draw'],
+        [LG('满 3 万 / 5 万 / 7 万 / 10 万 / 20 万韩元分档送礼','Tiered gifts at ₩30k / 50k / 70k / 100k / 200k','3万〜20万ウォンの購入額別プレゼント'),'gift']],
+ src:'https://www.instagram.com/dr.althea_korea_official/',src2:'小红书 @首尔学姐情报便利店'},
+
+{id:'longtake',grp:'pop',sub:'beauty',name:'롱테이크 팝업',t:LG('LONGTAKE 香氛快闪','LONGTAKE fragrance pop-up','LONGTAKE フレグランス'),brand:'LONGTAKE',
+ addr:'서울 성동구 아차산로 103',ll:[37.5450426,127.0558154],start:'10.01',endTxt:'12.31',end:'2026-12-31T22:00:00+09:00',h:'10:00–22:00',entry:'walkin',type:'gift',
+ g:LG('关注活动','Follow event','フォロー特典'),note:LG('关注活动 20:00 前可参加','Follow event until 20:00','フォローイベントは20:00まで'),
+ perks:[[LG('快闪限定活动和优惠（官方未写具体内容）','Pop-up-only events and offers (details not published)','ポップアップ限定イベント・特典（詳細未公開）'),'gift']],
+ src:PP+'6451'},
+
+{id:'fra422',grp:'pop',sub:'beauty',name:'프라포투투 팝업',t:LG('FRA422 香水快闪','FRA422 perfume pop-up','FRA422 香水ポップアップ'),brand:'FRA422',
+ addr:'서울 성동구 성수이로 77',ll:[37.5419964,127.056009],start:'03.06',endTxt:'11.30',end:'2026-11-30T21:30:00+09:00',h:'10:30–21:30',entry:'walkin',type:'gift',
+ g:LG('购买送袋','Tote with purchase','購入でエコバッグ'),
+ perks:[[LG('购买即送环保袋；买 Soul 香水送 1.5ml 小样','Eco bag with any purchase; 1.5 ml sample with Soul perfume','購入でエコバッグ、Soul香水で1.5mlサンプル'),'gift'],
+        [LG('全场 9 折','10% off everything','全品10%OFF'),'deal']],
+ src:PP+'5791'},
+
+{id:'lensis',grp:'pop',sub:'beauty',name:'렌시스 팝업',t:LG('LENSIS 美瞳快闪','LENSIS contact lens pop-up','LENSIS カラコン'),brand:'LENSIS',
+ addr:'서울 성동구 연무장길 44',ll:[37.542723,127.0540819],start:'09.29',endTxt:'11.29',end:'2026-11-29T22:00:00+09:00',h:'10:00–22:00',entry:'walkin',type:'deal',
+ g:LG('专属优惠','Pop-up deals','限定特典'),
+ perks:[[LG('新品和人气款，快闪专属优惠（官方未写具体内容）','New & best-selling lenses with pop-up-only offers (details not published)','新作・人気レンズ、限定特典（詳細未公開）'),'deal']],
+ src:PP+'6226'},
+
+{id:'torriden',grp:'pop',sub:'beauty',name:'토리든 커넥트 성수 : CONNECT DEEP DIVE',t:LG('Torriden 沉浸式肌肤体验','Torriden CONNECT DEEP DIVE','トリデン CONNECT DEEP DIVE'),brand:'Torriden',
+ addr:'서울 성동구 성수이로7가길 17',ll:[37.5418318,127.0553011],start:'07.15',endTxt:'12.31',end:'2026-12-31T20:00:00+09:00',h:'11:00–20:00',entry:'walkin',type:'exp',
+ g:LG('皮肤检测','Skin test','肌診断'),
+ perks:[[LG('互动游戏和肌肤状态检测','Games and skin check','ゲームと肌チェック'),'exp'],
+        [LG('沉浸式拍照装置','Immersive photo installation','没入型フォトスポット'),'exp']],
+ src:PP+'5790',src2:'小红书 @Popvia'},
+
+{id:'mama',grp:'pop',sub:'kpop',name:'2026 MAMA AWARDS 공식 팝업 (올리브영N 성수)',t:LG('2026 MAMA AWARDS 官方快闪','2026 MAMA AWARDS official pop-up','2026 MAMA AWARDS 公式ポップアップ'),brand:'MAMA',
+ addr:'서울 성동구 연무장7길 13 (올리브영N 성수)',ll:[37.544177,127.0544868],start:'11.14',endTxt:'11.23',end:'2026-11-23T22:30:00+09:00',h:'10:00–22:30',
+ hx:LG('可能视现场情况提前结束','May close early depending on crowds','混雑状況により早く終了する場合あり'),entry:'walkin',type:'exp',
+ g:LG('官方周边','Official goods','公式グッズ'),
+ perks:[[LG('MAMA 官方周边 + 花生漫画 / 史努比联名周边','Official MAMA goods + Peanuts / Snoopy collab goods','MAMA公式グッズ＋ピーナッツ／スヌーピーコラボ'),'sale'],
+        [LG('CASETiFY 联名','CASETiFY collab','CASETiFYコラボ'),'sale']],
+ src:PP+'6683'},
+
+{id:'kpopgoods',grp:'pop',sub:'kpop',name:'Kpop 굿즈스토어 (맵달)',t:LG('K-pop 周边店 mapdal','mapdal K-pop goods store','mapdal K-POPグッズ'),brand:'mapdal',
+ addr:'서울 성동구 성수이로16길 5 4층',ll:[37.541288,127.0572471],start:'06.01',endTxt:'2027.12.31',end:'2027-12-31T18:00:00+09:00',h:'09:00–18:00',entry:'walkin',type:'exp',
+ g:LG('K-pop周边','K-pop goods','K-POPグッズ'),
+ perks:[[LG('K-pop 周边专卖','K-pop merchandise','K-POPグッズ専門'),'sale'],[LG('1 楼可寄存行李（21:00 前取回）','Luggage storage on 1F (pick up by 21:00)','1階で荷物預かり（21時まで）'),'tip']],
+ src:PP+'5377'},
+
+{id:'moodinside',grp:'pop',sub:'fashion',name:'무드인사이드 팝업',t:LG('MOODINSIDE 首家快闪','MOODINSIDE first pop-up','MOODINSIDE 初ポップアップ'),brand:'MOODINSIDE',
+ addr:'서울 성동구 아차산로 116 1층',ll:[37.5440478,127.0566421],start:'11.18',endTxt:'12.27',end:'2026-12-27T20:00:00+09:00',h:'11:00–20:00',entry:'walkin',type:'exp',
+ g:LG('限定配色','Exclusive colour','限定カラー'),note:LG('圣水站 3 号出口附近','Near Seongsu Stn. exit 3','聖水駅3番出口すぐ'),
+ perks:[[LG('快闪限定：轻薄羽绒服圣水配色','Pop-up only: Seongsu-edition light padded jacket','限定：軽量ダウン聖水エディション'),'sale'],[LG('线上品牌首次可现场试穿','Try on the online-only brand in person','オンラインブランドを試着できる'),'exp']],
+ src:PP+'6725'},
+
+{id:'ronron',grp:'pop',sub:'fashion',name:'론론 블랙 프라이데이 세일 팝업',t:LG('RONRON 黑五特卖','RONRON Black Friday sale','RONRON ブラックフライデー'),brand:'RONRON',
+ addr:'서울 성동구 아차산로5길 24-18',ll:[37.5473017,127.0533301],start:'11.05',endTxt:'12.04',end:'2026-12-04T20:00:00+09:00',h:'11:00–20:00',entry:'walkin',type:'deal',
+ g:LG('最低1.5折','Up to 85% off','最大85%OFF'),
+ perks:[[LG('特价区最低 1.5 折，其余全场 7 折','Special zone up to 85% off, everything else 30% off','特価ゾーン最大85%OFF、その他30%OFF'),'deal'],
+        [LG('购买即送红色帆布袋；满 7 万韩元送钥匙扣（每天前 30 名）','Red tarp bag with any purchase; ₩70,000+ keyring (first 30 a day)','購入で赤いバッグ、7万ウォン以上でキーリング（毎日先着30名）'),'gift']],
+ src:PP+'6715'},
+
+{id:'sansan',grp:'pop',sub:'fashion',name:'산산기어 아카이브 세일 : SHELTER',t:LG('SAN SAN GEAR 往季特卖','SAN SAN GEAR archive sale','SAN SAN GEAR アーカイブセール'),brand:'SAN SAN GEAR',
+ addr:'서울 성동구 연무장길 35',ll:[37.543115,127.0534919],start:'11.14',endTxt:'11.22',end:'2026-11-22T20:00:00+09:00',h:'11:00–20:00',entry:'queue',type:'deal',
+ g:LG('5–7折','30–50% off','30〜50%OFF'),
+ note:LG('现场登记排队；每人限逛 40 分钟，同款每人限买 1 件','On-site waiting list; 40 min per person, 1 piece per style','現地でウェイティング登録、1人40分まで、同一商品は1点まで'),
+ perks:[[LG('2022–2025 年往季款 5–7 折','2022–2025 archive pieces 30–50% off','2022〜2025年アーカイブ30〜50%OFF'),'deal']],
+ src:PP+'6636'},
+
+{id:'shinchan',grp:'pop',sub:'char',name:'짱구는 못말려 전시 : 시공간 대모험',t:LG('蜡笔小新展 · 时空大冒险','Crayon Shin-chan: Space-Time Adventure','クレヨンしんちゃん展 時空大冒険'),brand:'蜡笔小新',
+ addr:'서울 성동구 연무장5길 9-29',ll:[37.5444463,127.0520483],start:'10.17',endTxt:'2027.01.24',end:'2027-01-24T20:00:00+09:00',h:'11:00–20:00',
+ hx:LG('19:00 停止入场','Last entry 19:00','最終入場19:00'),entry:'ticket',type:'exp',
+ g:LG('AR闯关','AR quest','ARミッション'),note:LG('收费展览，官方 linktree 购票','Paid exhibition — tickets via the official linktree','有料展示、公式linktreeでチケット購入'),
+ perks:[[LG('AR 扫码任务、体感互动、解谜闯关','AR missions, motion games, puzzles','ARミッション、体感ゲーム、謎解き'),'exp'],[LG('巨型小新立牌和剧场版名场景','Giant Shin-chan photo spots and movie scenes','巨大しんちゃんと映画の名場面'),'exp']],
+ src:PP+'5949',src2:'小红书 @FELIX果味实验室'},
+
+{id:'buttershop',grp:'pop',sub:'char',name:'버터샵 팝업 (이구홈 성수 1호점)',t:LG('BUTTER SHOP 圣诞快闪','BUTTER SHOP Christmas pop-up','BUTTER SHOP クリスマス'),brand:'BUTTER SHOP',
+ addr:'서울 성동구 연무장길 57 (이구홈 성수)',ll:[37.5423855,127.055807],start:'10.30',endTxt:'11.26',end:'2026-11-26T22:00:00+09:00',h:'11:00–22:00',entry:'walkin',type:'gift',
+ g:LG('送钥匙扣','Keyring gift','キーリング'),
+ perks:[[LG('购买送黄油钥匙扣（前 100 名）','Butter keyring with purchase (first 100)','購入でバターキーリング（先着100名）'),'gift'],[LG('圣诞单品、芝麻街系列','Christmas items, Sesame Street','クリスマス、セサミストリート'),'sale']],
+ src:PP+'6480'},
+
+{id:'pubg',grp:'pop',sub:'game',name:'배틀그라운드 팝업 (PUBG 성수)',t:LG('绝地求生 PUBG 快闪','PUBG: BATTLEGROUNDS pop-up','PUBG バトルグラウンド'),brand:'PUBG',
+ addr:'서울 성동구 왕십리로4길 5',ll:[37.5459016,127.0456147],start:'11.17',endTxt:'11.29',end:'2026-11-29T20:00:00+09:00',h:'11:00–20:00',entry:'walkin',type:'exp',
+ g:LG('VR任务','VR mission','VRミッション'),
+ perks:[[LG('VR 生存任务、AR 小卡、咖啡挑战','VR survival mission, AR photo card, café challenge','VRサバイバル、ARフォトカード、カフェチャレンジ'),'exp'],[LG('幸运抽奖','Lucky draw','ラッキードロー'),'draw']],
+ src:PP+'6692'},
+
+{id:'obang',grp:'pop',sub:'life',name:'오방, 오감: 취향을 찾는 다섯 가지 감각 팝업',t:LG('五方·五感 生活方式快闪','Obang, Five Senses lifestyle pop-up','五方・五感 ライフスタイル'),brand:'오방, 오감',
+ addr:'서울 성동구 연무장17길 10',ll:[37.5417311,127.0615528],start:'11.19',endTxt:'11.29',end:'2026-11-29T20:00:00+09:00',h:'11:00–20:00',entry:'walkin',type:'exp',
+ g:LG('五感体验','5 senses','五感体験'),
+ perks:[[LG('用视觉、触感、光线、香气等五种感官找自己的喜好','Find your taste through sight, touch, light, scent and more','視覚・触感・光・香りなど五感で好みを探す'),'exp']],
+ src:PP+'6684'},
+
+{id:'gyeongbuk',grp:'pop',sub:'life',name:'경북 투 더 넥스트 성수 팝업',t:LG('庆尚北道好物快闪','Gyeongbuk To The Next pop-up','慶尚北道ブランドポップアップ'),brand:'Gyeongbuk',
+ addr:'서울 성동구 연무장길 5-9 메종 앨리 2층',ll:[37.5442564,127.0503748],start:'11.18',endTxt:'11.22',end:'2026-11-22T19:00:00+09:00',h:'12:00–19:00',
+ hx:LG('周三–周日，15:00–16:00 休息','Wed–Sun, break 15:00–16:00','水〜日、15:00〜16:00休憩'),entry:'walkin',type:'gift',
+ g:LG('100%抽奖','100% win draw','全員当たる抽選'),
+ perks:[[LG('庆尚北道 9 个小品牌的地方好物','Goods from 9 small Gyeongbuk brands','慶尚北道の小さなブランド9社'),'sale'],[LG('100% 中奖抽奖 + 免费 AI 小票照片','100%-win lucky draw + free AI receipt photo','全員当たる抽選＋無料AIレシート写真'),'draw']],
+ src:PP+'6726'},
+
+{id:'sodam',grp:'pop',sub:'life',name:'소담상회 로컬 팝업 Vol.2 : 식탁으로 떠나는 제주여행',t:LG('小潭商会 · 餐桌上的济州旅行','Sodam Local pop-up: Jeju on your table','ソダム商会 食卓で済州旅行'),brand:'Sodam',
+ addr:'서울 성동구 왕십리로 63 (언더스탠드에비뉴)',ll:[37.5435618,127.0435817],start:'10.27',endTxt:'11.22',end:'2026-11-22T20:00:00+09:00',h:'11:00–20:00',
+ hx:LG('周一休息','Closed Mon','月曜定休'),entry:'walkin',type:'info',
+ g:LG('济州好物','Jeju goods','済州グルメ'),
+ perks:[[LG('济州食品品牌 민들레마음 × 제주마미 联合展卖','Jeju food brands 민들레마음 × 제주마미','済州の食品ブランド 민들레마음 × 제주마미'),'sale']],
+ src:PP+'6691'},
+
+{id:'shinramyun',grp:'pop',sub:'food',name:'신라면분식 더 팩토리 팝업',t:LG('辛拉面分食 The Factory','Shin Ramyun Bunsik: The Factory','辛ラーメン粉食 The Factory'),brand:'Shin Ramyun',
+ addr:'서울 성동구 성수일로4길 52',ll:[37.5424984,127.0543264],start:'06.16',endTxt:'12.16',end:'2026-12-16T18:00:00+09:00',h:'09:00–18:00',entry:'walkin',type:'exp',
+ g:LG('DIY拉面','DIY ramyun','DIYラーメン'),
+ perks:[[LG('自选面、汤料、配料的 DIY 拉面','Build-your-own ramyun','麺・スープ・具を選ぶDIYラーメン'),'exp'],[LG('海外版拉面试吃','Tasting of overseas editions','海外版ラーメン試食'),'taste']],
+ src:PP+'5243'},
+
+{id:'fixpizza',grp:'pop',sub:'food',name:'픽스피자 성수 팝업스토어',t:LG('FIX PIZZA 披萨快闪','FIX PIZZA pop-up','FIX PIZZA ポップアップ'),brand:'FIX PIZZA',
+ addr:'서울 성동구 연무장길 5-9 1층, 2층',ll:[37.5442564,127.0503748],start:'10.22',endTxt:'11.22',end:'2026-11-22T19:00:00+09:00',h:'12:00–19:00',
+ hx:LG('15:00–16:00 休息，周一休息','Break 15:00–16:00, closed Mon','15:00〜16:00休憩、月曜休み'),entry:'walkin',type:'gift',
+ g:LG('免费试吃','Free tasting','無料試食'),
+ perks:[[LG('关注官方账号并发快拍，免费试吃 4 款披萨 + 汽水','Follow + post a story → taste 4 pizzas + a soda free','フォロー＆ストーリー投稿でピザ4種＋ソーダ無料'),'taste'],[LG('披萨 1,800 韩元起；每消费 1 万韩元抽奖 1 次','Pizza from ₩1,800; one draw per ₩10,000 spent','ピザ1,800ウォン〜、1万ウォンごとに抽選1回'),'draw']],
+ src:PP+'6276',src2:'小红书 @在韩向日葵'},
+
+{id:'badabites',grp:'pop',sub:'food',name:'BADA BITES K-씨푸드 팝업',t:LG('BADA BITES 韩国海鲜快闪','BADA BITES K-seafood pop-up','BADA BITES Kシーフード'),brand:'BADA BITES',
+ addr:'서울 성동구 연무장9길 4 (노스 성수점 1층)',ll:[37.5427012,127.0559718],start:'11.19',endTxt:'11.28',end:'2026-11-28T19:00:00+09:00',h:'11:30–19:00',entry:'walkin',type:'gift',
+ g:LG('免费试吃','Free tasting','無料試食'),
+ perks:[[LG('韩国水产食品现场免费试吃','Free tastings of Korean seafood products','韓国水産食品の無料試食'),'taste'],[LG('主厨菜单、烹饪表演和体验活动','Chef menu, cooking show and activities','シェフメニュー、料理ショー、体験'),'exp']],
+ src:PP+'6669'},
+
+{id:'doredore',grp:'pop',sub:'food',name:'도레도레 팝업 : 서울모찌치즈케이크 (카페 파벤점)',t:LG('DOREDORE 首尔麻薯芝士蛋糕（堂食）','DOREDORE Seoul Mochi Cheesecake (café)','ドレドレ ソウルもちチーズケーキ（カフェ）'),brand:'DOREDORE',
+ addr:'서울 성동구 성수이로 65 (카페 파벤)',ll:[37.5409762,127.0554539],start:'11.18',endTxt:'12.31',end:'2026-12-31T21:00:00+09:00',h:'10:00–21:00',
+ hx:LG('最后点单 20:30','Last order 20:30','ラストオーダー20:30'),entry:'walkin',type:'sweet',
+ g:LG('麻薯芝士','Mochi cheesecake','もちチーズ'),note:LG('可以坐下吃；另一家是外带店（成水二路7街路 19）','Sit-down spot; a takeout counter is at 성수이로7가길 19','イートイン店。テイクアウト店は성수이로7가길19'),
+ perks:[[LG('首尔麻薯芝士蛋糕（快闪限定）','Seoul Mochi Cheesecake (pop-up only)','ソウルもちチーズケーキ（期間限定）'),'sig']],
+ src:PP+'6675'},
+
+{id:'doredore2',grp:'pop',sub:'food',name:'도레도레 팝업 : 서울모찌치즈케이크 (테이크아웃점)',t:LG('DOREDORE 麻薯芝士蛋糕（外带）','DOREDORE Mochi Cheesecake (takeout)','ドレドレ もちチーズ（テイクアウト）'),brand:'DOREDORE',
+ addr:'서울 성동구 성수이로7가길 19',ll:[37.5419452,127.055372],start:'11.18',endTxt:'12.31',end:'2026-12-31T21:00:00+09:00',h:'12:00–21:00',entry:'walkin',type:'sweet',
+ g:LG('外带','Takeout','テイクアウト'),
+ perks:[[LG('首尔麻薯芝士蛋糕外带','Seoul Mochi Cheesecake to go','ソウルもちチーズケーキ持ち帰り'),'sig']],
+ src:PP+'6674'},
+
+/* =================== FOOD =================== */
+{id:'minari',grp:'eat',sub:'korean',name:'능동미나리 성수점',t:LG('能洞水芹 圣水店','Neungdong Minari','ヌンドンミナリ 聖水店'),brand:'Neungdong Minari',
+ addr:'서울 성동구 연무장길 42',ll:[37.5427551,127.0539622],perm:true,end:'2099-12-31T23:00:00+09:00',h:'11:00–23:00',entry:'walkin',type:'food',
+ g:LG('水芹汤','Minari gomtang','セリのコムタン'),note:LG('TikTok 爆红后排队较长','Long lines since going viral on TikTok','TikTokで話題、行列あり'),
+ perks:[[LG('水芹牛骨汤 15,000 韩元','Minari beef-bone soup ₩15,000','セリ牛骨スープ 15,000ウォン'),'sig'],[LG('水芹生拌 9,000 韩元','Minari yukhoe-style salad ₩9,000','セリの和え物 9,000ウォン'),'menu']],
+ rate:{s:4.5,n:109,u:'4VzaA9lYCxTz'},src:'https://hotplacehunter.co.kr/msn/article/89312/'},
+
+{id:'gamjatang',grp:'eat',sub:'korean',name:'소문난성수감자탕',t:LG('小闻圣水土豆排骨汤','Somunnan Seongsu Gamjatang','ソムンナン聖水カムジャタン'),brand:'Gamjatang',
+ addr:'서울 성동구 연무장길 45 1층',ll:[37.542837,127.054387],perm:true,end:'2099-12-31T23:59:00+09:00',h:'24h',entry:'walkin',type:'food',
+ g:LG('土豆汤','Pork-bone stew','カムジャタン'),note:LG('24 小时营业，没有排队系统，直接排队','Open 24 h; no waiting app, just line up','24時間営業、並んで待つ'),
+ perks:[[LG('土豆排骨汤（小）32,000 韩元','Gamjatang (small) ₩32,000','カムジャタン（小）32,000ウォン'),'sig'],[LG('单人汤饭 12,000 韩元','Single-serve rice soup ₩12,000','1人前クッパ 12,000ウォン'),'menu']],
+ rate:{s:4.0,n:245,u:'jAL2mG45kQKq'},src:'https://hotplacehunter.co.kr/sns/article/86310/'},
+
+{id:'jungidam',grp:'eat',sub:'korean',name:'정이담',t:LG('情怡潭 时令韩餐','Jeongidam','チョンイダム'),brand:'Jeongidam',
+ addr:'서울 성동구 왕십리로 83-21 디타워 서울포레스트 B1',ll:[37.544357,127.0441654],perm:true,end:'2099-12-31T22:00:00+09:00',h:'11:00–22:00',
+ hx:LG('工作日 15:30–17:00 休息','Weekday break 15:30–17:00','平日15:30〜17:00休憩'),entry:'walkin',type:'food',
+ g:LG('LA排骨','LA galbi','LAカルビ'),
+ perks:[[LG('LA 排骨 35,000 韩元','LA galbi ₩35,000','LAカルビ 35,000ウォン'),'sig'],[LG('韩牛薄切烤肉 42,000 韩元','Thin-sliced Hanwoo ₩42,000','韓牛薄切り焼肉 42,000ウォン'),'menu']],
+ rate:{s:4.2,n:5,u:'EJnsA3qXB0NG'},src:'https://hotplacehunter.co.kr/sns/article/86310/'},
+
+{id:'paperplate',grp:'eat',sub:'western',name:'페이퍼플레이트',t:LG('Paper Plate 纽约披萨','Paper Plate NY pizza','ペーパープレート NYピザ'),brand:'Paper Plate',
+ addr:'서울 성동구 성수이로14길 15',ll:[37.5417281,127.0566909],perm:true,end:'2099-12-31T21:00:00+09:00',h:'11:30–21:00',
+ hx:LG('周一休息','Closed Mon','月曜定休'),entry:'walkin',type:'food',
+ g:LG('纽约披萨','NY pizza slice','NYピザ'),note:LG('按片卖，逛街中途吃很方便','Sold by the slice — easy mid-walk stop','1切れから買える'),
+ perks:[[LG('芝士披萨 5,700 韩元 / 片','Cheese slice ₩5,700','チーズ 1切れ 5,700ウォン'),'sig'],[LG('纽约至尊 8,000 韩元 / 片','NY Supreme slice ₩8,000','NYシュプリーム 8,000ウォン'),'menu']],
+ rate:{s:4.5,n:29,u:'OAFbE8dWO7tD'},src:'https://hotplacehunter.co.kr/sns/article/86310/'},
+
+{id:'butty',grp:'eat',sub:'western',name:'버티샌드위치하우스',t:LG('Butty 三明治屋','Butty Sandwich House','バティ サンドイッチハウス'),brand:'Butty',
+ addr:'서울 성동구 뚝섬로17길 31-22 1층',ll:[37.5407545,127.0602197],perm:true,end:'2099-12-31T19:00:00+09:00',h:'09:00–19:00',hx:LG('最后点单 18:30','Last order 18:30','LO 18:30'),entry:'walkin',type:'food',
+ g:LG('夏巴塔三明治','Ciabatta sandwich','チャバタサンド'),
+ perks:[[LG('Butty 招牌三明治（芝麻土豆米夏巴塔、松露蛋黄酱）12,000 韩元','Butty sandwich (sesame-potato ciabatta, truffle aioli) ₩12,000','バティサンド（ごまポテトチャバタ、トリュフアイオリ）12,000ウォン'),'sig'],[LG('蘑菇融化帕尼尼 16,000 韩元','Mushroom melt panini ₩16,000','マッシュルームメルトパニーニ 16,000ウォン'),'menu']],
+ rate:{s:4.5,n:19,u:'q3k2OSTmofzO'},src:'https://www.diningcode.com/profile.php?rid=q3k2OSTmofzO'},
+
+{id:'betong',grp:'eat',sub:'bakery',name:'베통 성수 플래그십',t:LG('Betong 圣水旗舰店','Betong Seongsu flagship','ベトン 聖水フラッグシップ'),brand:'Betong',
+ addr:'서울 성동구 연무장7가길 8',ll:[37.5429356,127.0552214],perm:true,end:'2099-12-31T18:30:00+09:00',h:'11:00–18:30',entry:'walkin',type:'sweet',
+ g:LG('松露盐包','Truffle salt bread','トリュフ塩パン'),note:LG('排队较长','Expect a line','行列あり'),
+ perks:[[LG('松露盐面包 3,900 韩元','Truffle salt bread ₩3,900','トリュフ塩パン 3,900ウォン'),'sig'],[LG('咸巧克力盐面包 4,500 韩元','Salted chocolate salt bread ₩4,500','塩チョコ塩パン 4,500ウォン'),'menu']],
+ rate:{s:4.6,n:82,u:'aPIjQptglPVI'},src:'https://hotplacehunter.co.kr/msn/article/89312/'},
+
+{id:'jayeondo',grp:'eat',sub:'bakery',name:'자연도소금빵 in 성수',t:LG('自然岛盐面包','Jayeondo Salt Bread','自然島 塩パン'),brand:'Jayeondo',
+ addr:'서울 성동구 연무장길 56-1 1층',ll:[37.542326,127.0555087],perm:true,end:'2099-12-31T22:00:00+09:00',h:'09:00–22:00',entry:'walkin',type:'sweet',
+ g:LG('盐面包','Salt bread','塩パン'),note:LG('每天 6 次出炉，常售罄，出炉前排队','6 bakes a day, often sells out — queue before each batch','1日6回焼き上げ、売り切れ多い'),
+ perks:[[LG('盐面包 4 个一盒 12,000 韩元（只卖这一款）','Box of 4 salt breads ₩12,000 (only item)','塩パン4個入り 12,000ウォン（これのみ）'),'sig']],
+ rate:{s:4.6,n:97,u:'jftm0RNQyfDp'},src:'https://hotplacehunter.co.kr/msn/article/89312/'},
+
+{id:'onion',grp:'eat',sub:'bakery',name:'어니언 성수',t:LG('Onion 圣水','Onion Seongsu','オニオン 聖水'),brand:'Onion',
+ addr:'서울 성동구 아차산로9길 8',ll:[37.5446909,127.0581051],perm:true,end:'2099-12-31T22:00:00+09:00',h:'08:00–22:00',hx:LG('周末 10:00 开门','Weekends from 10:00','週末は10:00〜'),entry:'walkin',type:'sweet',
+ g:LG('潘多洛','Pandoro','パンドーロ'),note:LG('旧工厂改造的面包咖啡店','Bakery-café in a converted factory','工場を改装したベーカリーカフェ'),
+ perks:[[LG('潘多洛 6,000 韩元','Pandoro ₩6,000','パンドーロ 6,000ウォン'),'sig'],[LG('红豆黄油面包 5,500 韩元','Red-bean butter bread ₩5,500','あんバターパン 5,500ウォン'),'menu']],
+ rate:{s:3.9,n:106,u:'gwMOA9twBJDG'},src:'https://hotplacehunter.co.kr/sns/article/65671/'},
+
+{id:'lealaska',grp:'eat',sub:'bakery',name:'르 알레스카',t:LG('Le Alaska 面包店','Le Alaska','ル・アラスカ'),brand:'Le Alaska',
+ addr:'서울 성동구 연무장길 20-1',ll:[37.543423,127.0517839],perm:true,end:'2099-12-31T20:00:00+09:00',h:'08:00–20:00',entry:'walkin',type:'sweet',
+ g:LG('夏巴塔','Ciabatta','チャバタ'),
+ perks:[[LG('夏巴塔（评价里最常被夸）','Ciabatta — the most praised item in reviews','チャバタ（レビューで一番人気）'),'sig'],[LG('牛奶吐司 6,800 韩元、盐面包 3,400 韩元','Milk loaf ₩6,800, salt bread ₩3,400','牛乳食パン 6,800ウォン、塩パン 3,400ウォン'),'menu']],
+ rate:{s:4.4,n:17,u:'3UvdptpClaIz'},src:'https://www.diningcode.com/profile.php?rid=3UvdptpClaIz'},
+
+{id:'etre',grp:'eat',sub:'bakery',name:'에트레베이크하우스',t:LG('Être 烘焙屋（盐面包）','Être Bake House','エトレ ベイクハウス'),brand:'Être',
+ addr:'서울 성동구 연무장길 37-5 1, 2층',ll:[37.5432722,127.0534511],perm:true,end:'2099-12-31T21:00:00+09:00',h:'10:00–21:00',entry:'walkin',type:'sweet',
+ g:LG('盐面包','Salt bread','塩パン'),note:LG('在门口排队；满座时限坐 90 分钟','Wait at the door; 90-min seat limit when full','店前で待つ、満席時90分制'),
+ perks:[[LG('法棍风盐面包 4,000 韩元','Baguette-style salt bread ₩4,000','バゲット風塩パン 4,000ウォン'),'sig'],[LG('明太子蛋黄酱盐面包 6,500 韩元','Mentaiko-mayo salt bread ₩6,500','明太マヨ塩パン 6,500ウォン'),'menu']],
+ rate:{s:4.3,n:15,u:'BXwGH88kaduv'},src:'https://www.diningcode.com/profile.php?rid=BXwGH88kaduv'},
+
+{id:'etf',grp:'eat',sub:'bakery',name:'ETF베이커리 성수점',t:LG('ETF 烘焙 圣水店','ETF Bakery','ETFベーカリー'),brand:'ETF Bakery',
+ addr:'서울 성동구 성수이로16길 32',ll:[37.5401557,127.0599385],perm:true,end:'2099-12-31T20:00:00+09:00',h:'10:30–20:00',entry:'walkin',type:'sweet',
+ g:LG('平价面包','Budget bakes','お手頃パン'),
+ perks:[[LG('原味黄油糕 690 韩元、高级盐面包 1,980 韩元','Butter mochi bread ₩690, premium salt bread ₩1,980','バター餅 690ウォン、塩パン 1,980ウォン'),'sig'],[LG('焦糖布蕾盐面包 3,180 韩元','Crème brûlée salt bread ₩3,180','クレームブリュレ塩パン 3,180ウォン'),'menu']],
+ rate:{s:4.0,n:32,u:'1uRd5DYqz4EG'},src:'https://www.diningcode.com/profile.php?rid=1uRd5DYqz4EG'},
+
+{id:'ssbaking',grp:'eat',sub:'bakery',name:'성수베이킹스튜디오',t:LG('圣水烘焙工作室（法式面包）','Seongsu Baking Studio','聖水ベーキングスタジオ'),brand:'Seongsu Baking Studio',
+ addr:'서울 성동구 서울숲2길 46 B1층',ll:[37.5462657,127.0437033],perm:true,end:'2099-12-31T19:00:00+09:00',h:'08:00–19:00',entry:'walkin',type:'sweet',
+ g:LG('法棍','Baguette','バゲット'),
+ perks:[[LG('天然酵种法棍 3,500 韩元','Sourdough-levain baguette ₩3,500','天然酵母バゲット 3,500ウォン'),'sig'],[LG('杏仁可颂 4,300 韩元、红豆黄油 4,700 韩元','Almond croissant ₩4,300, anbutter ₩4,700','アーモンドクロワッサン 4,300ウォン、あんバター 4,700ウォン'),'menu']],
+ rate:{s:4.3,n:32,u:'IUpAMOCNzZhd'},src:'https://www.diningcode.com/profile.php?rid=IUpAMOCNzZhd'},
+
+{id:'standardbread',grp:'eat',sub:'bakery',name:'스탠다드브레드 성수',t:LG('Standard Bread 吐司','Standard Bread','スタンダードブレッド'),brand:'Standard Bread',
+ addr:'서울 성동구 성수이로18길 37 1층',ll:[37.5416005,127.0612036],perm:true,end:'2099-12-31T21:00:00+09:00',h:'09:00–21:00',hx:LG('最后点单 20:30','Last order 20:30','LO 20:30'),entry:'walkin',type:'sweet',
+ g:LG('生吐司','Fresh loaf','生食パン'),
+ perks:[[LG('千层手撕吐司 7,900 韩元','Tissue (pastry) loaf ₩7,900','ティッシュ食パン 7,900ウォン'),'sig'],[LG('焦糖布蕾法式吐司 14,900 韩元','Crème brûlée French toast ₩14,900','クレームブリュレフレンチトースト 14,900ウォン'),'menu']],
+ rate:{s:4.4,n:21,u:'NxVjggYF16WC'},src:'https://www.diningcode.com/profile.php?rid=NxVjggYF16WC'},
+
+{id:'erze',grp:'eat',sub:'bakery',name:'에르제 성수점',t:LG('Erzé 欧包','Erzé','エルゼ'),brand:'Erzé',
+ addr:'서울 성동구 아차산로 135 1층',ll:[37.5438913,127.0589443],perm:true,end:'2099-12-31T19:20:00+09:00',h:'08:00–19:20',hx:LG('卖完提前关门','May close early when sold out','売り切れ次第終了'),entry:'walkin',type:'sweet',
+ g:LG('乡村面包','Campagne','カンパーニュ'),
+ perks:[[LG('无花果乡村面包 8,300 韩元','Fig campagne ₩8,300','いちじくカンパーニュ 8,300ウォン'),'sig'],[LG('开心果可颂 8,800 韩元','Pistachio croissant ₩8,800','ピスタチオクロワッサン 8,800ウォン'),'menu']],
+ rate:{s:4.2,n:20,u:'mMsqBp3qKOZV'},src:'https://www.diningcode.com/profile.php?rid=mMsqBp3qKOZV'},
+
+{id:'ferment',grp:'eat',sub:'bakery',name:'퍼먼트',t:LG('Ferment 面包咖啡（有纯素）','Ferment (vegan options)','ファーメント（ヴィーガンあり）'),brand:'Ferment',
+ addr:'서울 성동구 서울숲2길 37 1층',ll:[37.5466123,127.0427013],perm:true,end:'2099-12-31T19:00:00+09:00',h:'09:00–19:00',hx:LG('最后点单 18:30','Last order 18:30','LO 18:30'),entry:'walkin',type:'sweet',
+ g:LG('焦糖酥','Kouign-amann','クイニーアマン'),
+ perks:[[LG('焦糖酥 4,400 韩元','Kouign-amann ₩4,400','クイニーアマン 4,400ウォン'),'sig'],[LG('纯素法棍 4,000 韩元、纯素全麦乡村面包 7,000 韩元','Vegan baguette ₩4,000, vegan whole-wheat campagne ₩7,000','ヴィーガンバゲット 4,000ウォン'),'menu']],
+ rate:{s:4.3,n:44,u:'Vo0mi83qfhLE'},src:'https://www.diningcode.com/profile.php?rid=Vo0mi83qfhLE'},
+
+{id:'childish',grp:'eat',sub:'bakery',name:'차일디쉬',t:LG('Childish 盐面包鲷鱼烧','Childish (salt-bread bungeoppang)','チャイルディッシュ'),brand:'Childish',
+ addr:'서울 성동구 연무장길 114 2층',ll:[37.5404568,127.0615718],perm:true,end:'2099-12-31T21:00:00+09:00',h:'11:00–21:00',entry:'walkin',type:'sweet',
+ g:LG('盐面包鲷鱼烧','Salt bungeoppang','塩パンたい焼き'),
+ perks:[[LG('披萨盐面包鲷鱼烧 5,500 韩元','Pizza salt-bread bungeoppang ₩5,500','ピザ塩パンたい焼き 5,500ウォン'),'sig'],[LG('迷你盐面包 900 韩元、普通鲷鱼烧 1,000 韩元','Mini salt bread ₩900, classic bungeoppang ₩1,000','ミニ塩パン 900ウォン、たい焼き 1,000ウォン'),'menu']],
+ rate:{s:4.2,n:20,u:'SWokzqlH8UgL'},src:'https://www.diningcode.com/profile.php?rid=SWokzqlH8UgL'},
+
+{id:'kokkiri',grp:'eat',sub:'bagel',name:'코끼리베이글 성수',t:LG('大象贝果 圣水','Kokkiri Bagel','コッキリベーグル'),brand:'Kokkiri Bagel',
+ addr:'서울 성동구 성수이로26길 17 1층',ll:[37.5460779,127.0595824],perm:true,end:'2099-12-31T18:30:00+09:00',h:'08:30–18:30',hx:LG('部分日子到 20:00','Until 20:00 on some days','日によって20:00まで'),entry:'walkin',type:'sweet',
+ g:LG('黄油盐贝果','Butter-salt bagel','バター塩ベーグル'),
+ perks:[[LG('黄油盐贝果 3,900 韩元','Butter-salt bagel ₩3,900','バター塩ベーグル 3,900ウォン'),'sig'],[LG('三文鱼三明治 8,600 韩元','Salmon sandwich ₩8,600','サーモンサンド 8,600ウォン'),'menu']],
+ rate:{s:4.3,n:85,u:'SnyY20AoGrgK'},src:'https://www.diningcode.com/profile.php?rid=SnyY20AoGrgK'},
+
+{id:'haz',grp:'eat',sub:'bagel',name:'하츠베이커리 성수점',t:LG('HAZ Bakery 圣水店','HAZ Bakery','ハズベーカリー'),brand:'HAZ Bakery',
+ addr:'서울 성동구 연무장길 37-14 1-3층',ll:[37.5432906,127.0537597],perm:true,end:'2099-12-31T20:30:00+09:00',h:'10:30–20:30',hx:LG('最后点单 20:00','Last order 20:00','LO 20:00'),entry:'walkin',type:'sweet',
+ g:LG('贝果','Bagels','ベーグル'),note:LG('2025 年 12 月搬到更大的三层店面','Moved to a bigger 3-floor store in Dec 2025','2025年12月に3フロアの店舗へ移転'),
+ perks:[[LG('贝果和面包，3 层座位','Bagels & breads, 3 floors of seating','ベーグルとパン、3フロア'),'sig'],[LG('美式咖啡 5,000 韩元','Americano ₩5,000','アメリカーノ 5,000ウォン'),'menu']],
+ rate:{s:4.2,n:42,u:'WWFFRXz0wjyF'},src:'https://www.diningcode.com/profile.php?rid=WWFFRXz0wjyF'},
+
+{id:'bagelland',grp:'eat',sub:'bagel',name:'베이글랜드 성수점',t:LG('Bagel Land 圣水','Bagel Land','ベーグルランド'),brand:'Bagel Land',
+ addr:'서울 성동구 연무장길 43-1 2층',ll:[37.5428822,127.0541274],perm:true,end:'2099-12-31T22:00:00+09:00',h:'10:00–22:00',entry:'walkin',type:'sweet',
+ g:LG('布蕾贝果','Brûlée bagel','ブリュレベーグル'),
+ perks:[[LG('焦糖布蕾贝果 7,900 韩元','Crème brûlée bagel ₩7,900','クレームブリュレベーグル 7,900ウォン'),'sig'],[LG('迪拜贝果（开心果）11,500 韩元','Dubai (pistachio) bagel ₩11,500','ドバイベーグル 11,500ウォン'),'menu']],
+ rate:{s:3.8,n:10,u:'SI0hXPnFackw'},src:'https://www.diningcode.com/profile.php?rid=SI0hXPnFackw'},
+
+{id:'imdonut',grp:'eat',sub:'donut',name:'아임도넛 성수점',t:LG('I’m donut ? 圣水店','I’m donut ?','アイムドーナツ'),brand:'I’m donut ?',
+ addr:'서울 성동구 연무장길 37-30 1층',ll:[37.543672,127.0539378],perm:true,end:'2099-12-31T20:00:00+09:00',h:'10:00–20:00',entry:'walkin',type:'sweet',
+ g:LG('生甜甜圈','Fresh donuts','生ドーナツ'),
+ perks:[[LG('糖霜甜甜圈 2,800 韩元','Glazed ₩2,800','グレーズド 2,800ウォン'),'sig'],[LG('开心果奶油 4,800 韩元','Pistachio cream ₩4,800','ピスタチオクリーム 4,800ウォン'),'menu']],
+ rate:{s:4.2,n:38,u:'472cHYOx7VPE'},src:'https://www.diningcode.com/profile.php?rid=472cHYOx7VPE'},
+
+{id:'oldferry',grp:'eat',sub:'donut',name:'올드페리도넛 성수',t:LG('Old Ferry 甜甜圈','Old Ferry Donut','オールドフェリードーナツ'),brand:'Old Ferry',
+ addr:'서울 성동구 성수이로16길 5 1층',ll:[37.541288,127.0572471],perm:true,end:'2027-12-31T21:00:00+09:00',h:'11:00–21:00',entry:'walkin',type:'sweet',
+ g:LG('奶油甜甜圈','Cream donuts','クリームドーナツ'),
+ perks:[[LG('人气奶油甜甜圈','Popular cream-filled donuts','人気のクリームドーナツ'),'sig']],
+ src:PP+'5434'},
+
+{id:'pickbake',grp:'eat',sub:'eggtart',name:'픽베이크',t:LG('Pick Bake 蛋挞','Pick Bake egg tarts','ピックベイク エッグタルト'),brand:'Pick Bake',
+ addr:'서울 성동구 서울숲2길 20-1',ll:[37.5469532,127.0409292],perm:true,end:'2099-12-31T20:30:00+09:00',h:'09:00–20:30',entry:'walkin',type:'sweet',
+ g:LG('经典蛋挞','Classic tart','エッグタルト'),
+ perks:[[LG('经典蛋挞 3,300 韩元，4 个装 11,000 韩元','Classic egg tart ₩3,300, box of 4 ₩11,000','クラシック 3,300ウォン、4個入り 11,000ウォン'),'sig'],[LG('早餐套餐（蛋挞 + 美式）5,000 韩元，9–11 点','Morning set (tart + americano) ₩5,000, 9–11 am','モーニングセット 5,000ウォン（9〜11時）'),'tip']],
+ rate:{s:4.1,n:36,u:'TAomc4ctI2qz'},src:'https://www.diningcode.com/profile.php?rid=TAomc4ctI2qz'},
+
+{id:'meitawang',grp:'eat',sub:'eggtart',name:'메이타왕에그타르트스토어 성수본점',t:LG('梅塔王 盐蛋挞','Mei Ta Wang Egg Tart','メイタワン エッグタルト'),brand:'Mei Ta Wang',
+ addr:'서울 성동구 연무장길 43-1 1층',ll:[37.5428806,127.0542012],perm:true,end:'2099-12-31T22:00:00+09:00',h:'10:00–22:00',entry:'walkin',type:'sweet',
+ g:LG('盐蛋挞','Salt egg tart','塩エッグタルト'),
+ perks:[[LG('盐蛋挞 5,800 韩元','Salt egg tart ₩5,800','塩エッグタルト 5,800ウォン'),'sig'],[LG('3 个礼盒装 17,400 韩元（含礼盒和袋子）','Gift box of 3 ₩17,400','3個ギフトボックス 17,400ウォン'),'menu']],
+ rate:{s:3.9,n:30,u:'IXfms7oSvxDM'},src:'https://www.diningcode.com/profile.php?rid=IXfms7oSvxDM'},
+
+{id:'5to7',grp:'eat',sub:'dessert',name:'5to7 성수',t:LG('5to7 舒芙蕾','5to7 soufflé pancakes','5to7 スフレパンケーキ'),brand:'5to7',
+ addr:'서울 성동구 서울숲2길 44-13',ll:[37.5461191,127.0432656],perm:true,end:'2099-12-31T21:30:00+09:00',h:'12:00–21:30',entry:'walkin',type:'sweet',
+ g:LG('舒芙蕾','Soufflé','スフレ'),
+ perks:[[LG('舒芙蕾松饼（Time Out 推荐）','Soufflé pancakes (Time Out pick)','スフレパンケーキ（Time Out推薦）'),'sig'],[LG('无花果舒芙蕾','Fig soufflé','いちじくスフレ'),'menu']],
+ rate:{s:4.2,n:44,u:'QsxWvvDRD7ay'},src:'https://www.timeout.com/seoul/restaurants/5to7'},
+
+{id:'dalimmak',grp:'eat',sub:'dessert',name:'달임막',t:LG('Dalim 卡伊马克','Dalimmak kaymak café','タリムマッ カイマク'),brand:'Dalimmak',
+ addr:'서울 성동구 연무장길 38-2 1층',ll:[37.5428147,127.0537556],perm:true,end:'2099-12-31T21:30:00+09:00',h:'09:00–21:30',entry:'walkin',type:'sweet',
+ g:LG('卡伊马克','Kaymak','カイマク'),
+ perks:[[LG('卡伊马克配整块蜂巢蜜 + 小熊面包 12,000 韩元','Kaymak with honeycomb + bear bread ₩12,000','カイマク＆巣蜜＋くまパン 12,000ウォン'),'sig'],[LG('小熊奶油面包 6,900 韩元','Bear cream bun ₩6,900','くまクリームパン 6,900ウォン'),'menu']],
+ rate:{s:3.8,n:19,u:'Fm5J3bLhY9ov'},src:'https://www.diningcode.com/profile.php?rid=Fm5J3bLhY9ov'},
+
+{id:'daelim',grp:'eat',sub:'cafe',name:'대림창고',t:LG('大林仓库 画廊咖啡','Daelim Changgo gallery café','テリム倉庫 ギャラリーカフェ'),brand:'Daelim Changgo',
+ addr:'서울 성동구 성수이로 78',ll:[37.5417036,127.0563952],perm:true,end:'2099-12-31T22:00:00+09:00',h:'10:00–22:00',hx:LG('最后点单 21:30','Last order 21:30','LO 21:30'),entry:'walkin',type:'sweet',
+ g:LG('仓库咖啡','Warehouse café','倉庫カフェ'),note:LG('圣水代表性的旧仓库改造空间','Seongsu’s landmark converted warehouse','聖水を代表する倉庫リノベ空間'),
+ perks:[[LG('维也纳咖啡 7,500 韩元','Einspänner ₩7,500','アインシュペナー 7,500ウォン'),'sig'],[LG('有机草莓牛奶 9,500 韩元（每日限量）','Organic strawberry milk ₩9,500 (limited daily)','有機いちごミルク 9,500ウォン（数量限定）'),'menu']],
+ rate:{s:3.8,n:94,u:'TpMlBoL70Tge'},src:'https://www.diningcode.com/profile.php?rid=TpMlBoL70Tge'},
+
+/* =================== SHOPS =================== */
+{id:'nyunyu',grp:'shop',sub:'acc',name:'뉴뉴 성수점 (뉴뉴랩+ · 뉴뉴걸즈)',t:LG('NYUNYU 圣水店（饰品大店）','NYUNYU Seongsu (flagship)','NYUNYU 聖水店'),brand:'NYUNYU',
+ addr:'서울 성동구 연무장길 89',ll:[37.5415698,127.0592805],perm:true,end:'2099-12-31T23:00:00+09:00',h:'10:00–23:00',entry:'queue',type:'shop',tax:true,
+ g:LG('3万件饰品','30,000+ items','3万点以上'),
+ note:LG('人多时可能要在门口用手机号登记取号，叫号再进店，以现场为准','At peak times you may need to register your phone number at the door and wait to be called','混雑時は入口で電話番号を登録して順番待ちの場合あり'),
+ perks:[[LG('2–3 楼 NYUNYU：3 万多件平价饰品、耳环、发饰','2–3F NYUNYU: 30,000+ affordable accessories, earrings, hair pieces','2〜3F：3万点以上のプチプラアクセ'),'sig'],
+        [LG('B1–1 楼 NYUNYU LAB+：设计款和原创材质；1 楼 nyunyu Girls','B1–1F NYUNYU LAB+ (design-led line); 1F nyunyu Girls','B1〜1F NYUNYU LAB+、1F nyunyu Girls'),'sale'],
+        [LG('退税店（Tax Refund），带护照','Tax-refund shop — bring your passport','タックスリファンド対応、パスポート持参'),'tip'],
+        [LG('周末 14:00–18:00 延武场街步行街，过来更方便','Yeonmujang-gil is car-free on weekends 14:00–18:00','週末14〜18時は延武場キルが歩行者天国'),'tip']],
+ src:'https://www.koreatodo.com/seongsu',src2:'Kakao Map / ktriptips'},
+
+{id:'nyunyuhouse',grp:'shop',sub:'acc',name:'뉴뉴하우스 성수역점 (뉴뉴 기프트샵)',t:LG('NYUNYU House 圣水站店','NYUNYU House (Seongsu Stn.)','NYUNYU House 聖水駅店'),brand:'NYUNYU House',
+ addr:'서울 성동구 성수이로 93',ll:[37.5434227,127.056555],perm:true,end:'2099-12-31T23:00:00+09:00',h:'10:00–23:00',entry:'walkin',type:'shop',tax:true,
+ g:LG('伴手礼','Gift shop','ギフト'),note:LG('圣水站 3 号出口步行约 1 分钟','About 1 min from Seongsu Stn. exit 3','聖水駅3番出口から徒歩1分'),
+ perks:[[LG('B1–2 楼休闲服饰和饰品','B1–2F casual fashion & accessories','B1〜2F カジュアル服とアクセ'),'sig'],[LG('3 楼礼品店：100 多个韩国品牌','3F gift shop: 100+ Korean brands','3F ギフトショップ：韓国100以上のブランド'),'sale']],
+ src:'https://www.koreatodo.com/seongsu',src2:'Kakao Map'},
+
+{id:'nyunyuyeon',grp:'shop',sub:'acc',name:'뉴뉴 연무장점',t:LG('NYUNYU 延武场店','NYUNYU Yeonmujang','NYUNYU 延武場店'),brand:'NYUNYU',
+ addr:'서울 성동구 연무장길 14-2 지하1층',ll:[37.5436694,127.0509121],perm:true,end:'2099-12-31T23:00:00+09:00',h:'10:00–23:00',entry:'walkin',type:'shop',
+ g:LG('小店','Small store','小さめ店舗'),
+ perks:[[LG('B1 小型店，自然风格选品','Small B1 store with a natural, organic look','B1の小さな店、ナチュラル系'),'sig']],
+ src:'https://www.koreatodo.com/seongsu',src2:'Kakao Map'},
+
+{id:'oyn',grp:'shop',sub:'bstore',name:'올리브영 N성수',t:LG('Olive Young N 圣水','Olive Young N Seongsu','オリーブヤング N聖水'),brand:'Olive Young',
+ addr:'서울 성동구 연무장7길 13 팩토리얼 성수 1-5층',ll:[37.5441733,127.0544305],perm:true,end:'2099-12-31T22:00:00+09:00',h:'10:00–22:00',entry:'walkin',type:'shop',
+ g:LG('K-Beauty旗舰','K-beauty flagship','Kビューティー旗艦'),note:LG('皮肤检测名额每天 30–35 个，上午常约满','30–35 skin-analysis slots a day, often full by morning','肌診断は1日30〜35枠、午前中に埋まりがち'),
+ perks:[[LG('1–5 楼体验型旗舰店，AI 肌肤检测、美妆顾问','5-floor experience store: AI skin analysis, beauty consultants','5フロア体験型、AI肌診断・カウンセリング'),'exp'],[LG('开业一年 250 万人次到访','2.5 million visitors in its first year','開業1年で250万人来店'),'tip']],
+ src:'https://cjnews.cj.net/올리브영n-성수-외국인-방문-늘며-성수지역-k뷰티/',src2:'Kakao Map'},
+
+{id:'oymansion',grp:'shop',sub:'bstore',name:'올리브영 뷰티 맨션 성수',t:LG('Olive Young Beauty Mansion','Olive Young Beauty Mansion','オリーブヤング ビューティーマンション'),brand:'OY Mansion',
+ addr:'서울 성동구 성수이로 108 1-4층',ll:[37.5445395,127.0573705],perm:true,end:'2099-12-31T22:00:00+09:00',h:'10:00–22:00',entry:'walkin',type:'shop',
+ g:LG('洋房体验店','Mansion store','体験型店舗'),
+ perks:[[LG('4 层“豪宅”体验店：美容仪工作室、3D 皮肤检测、AI 定制彩妆','4-floor “mansion”: device studio, 3D skin diagnosis, AI makeup','4フロア：美容機器スタジオ、3D肌診断、AIメイク'),'exp'],[LG('1 楼品牌快闪空间（Dr.Althea 快闪进行中）','1F brand pop-up space (Dr.Althea now on)','1Fポップアップ空間（ドクターエルシア開催中）'),'tip']],
+ src:'https://www.ddaily.co.kr/page/view/2026062909212049977',src2:'Kakao Map'},
+
+{id:'olivebetter',grp:'shop',sub:'bstore',name:'올리브베러 성수점',t:LG('Olive Better 圣水（健康美容）','Olivebetter Seongsu (wellness)','オリーブベター 聖水'),brand:'Olivebetter',
+ addr:'서울 성동구 성수일로 33',ll:[37.5436431,127.0491876],perm:true,end:'2099-12-31T22:00:00+09:00',h:'10:00–22:00',entry:'walkin',type:'shop',
+ g:LG('健康饮品吧','Wellness bar','ウェルネスバー'),
+ perks:[[LG('1 楼 Better Bar：蛋白奶昔和茶','1F Better Bar: protein shakes and teas','1F ベターバー：プロテインシェイクとお茶'),'exp'],[LG('低糖零食、刮痧区、桑拿主题身体护理区','Low-sugar snacks, gua sha island, sauna-themed body care','低糖スナック、かっさ、サウナ風ボディケア'),'sale']],
+ src:'https://www.insight.co.kr/news/579765',src2:'Kakao Map'},
+
+{id:'musinsamega',grp:'shop',sub:'fstore',name:'무신사 메가스토어 성수',t:LG('MUSINSA Megastore 圣水','MUSINSA Megastore Seongsu','ムシンサ メガストア聖水'),brand:'MUSINSA',
+ addr:'서울 성동구 성수이로 62 지하1층, 1-4층',ll:[37.5403623,127.0558579],perm:true,end:'2099-12-31T22:00:00+09:00',h:'11:00–22:00',entry:'walkin',type:'shop',
+ g:LG('韩国潮牌','K-fashion','韓国ブランド'),
+ perks:[[LG('B1–4 楼，线上品牌线下大店（含美妆区）','B1–4F megastore of online K-fashion brands, plus beauty corner','B1〜4F、オンラインブランドの大型店（コスメもあり）'),'sig'],[LG('集齐 10 家 MUSINSA 门店打卡可拿奖励（NFC）','Visit 10 MUSINSA stores (NFC check-in) for a reward','ムシンサ10店舗チェックインで特典'),'tip']],
+ src:'https://news.bizwatch.co.kr/article/consumer/2026/11/10/0018',src2:'Kakao Map'},
+
+{id:'musinsastd',grp:'shop',sub:'fstore',name:'무신사 스탠다드 성수점',t:LG('MUSINSA STANDARD 圣水','MUSINSA STANDARD Seongsu','ムシンサスタンダード聖水'),brand:'MUSINSA STANDARD',
+ addr:'서울 성동구 연무장길 83 1-2층',ll:[37.5416809,127.0586357],perm:true,end:'2099-12-31T22:00:00+09:00',h:'11:00–22:00',entry:'walkin',type:'shop',
+ g:LG('基础款','Basics','ベーシック'),
+ perks:[[LG('MUSINSA 自有品牌基础款','MUSINSA’s in-house basics label','ムシンサの自社ベーシックブランド'),'sig']],
+ src:'https://news.bizwatch.co.kr/article/consumer/2026/07/02/0033',src2:'Kakao Map'},
+
+{id:'musinsabeauty',grp:'shop',sub:'bstore',name:'무신사 뷰티 성수',t:LG('MUSINSA BEAUTY 圣水（新店）','MUSINSA BEAUTY Seongsu (new)','ムシンサビューティー聖水'),brand:'MUSINSA BEAUTY',
+ addr:'서울 성동구 연무장길 87',ll:[37.5415826,127.0588494],perm:true,end:'2099-12-31T22:00:00+09:00',h:'10:00–22:00',entry:'walkin',type:'shop',
+ g:LG('700个品牌','700+ brands','700ブランド'),note:LG('11 月 11 日新开','Opened 11 Nov 2026','2026年11月11日オープン'),
+ perks:[[LG('700 多个品牌、约 1 万件商品，八成是小众品牌','700+ brands, ~10,000 products, 80% indie','700以上のブランド、約1万点、8割がインディー'),'sig'],[LG('1 楼“全球护肤区”、香水区 520 多款','1F Global Skincare Zone; 520+ perfumes','1F グローバルスキンケアゾーン、香水520種以上'),'sale']],
+ src:'https://news.bizwatch.co.kr/article/consumer/2026/11/10/0018',src2:'Kakao Map'},
+
+{id:'musinsaempty',grp:'shop',sub:'fstore',name:'무신사 엠프티 성수',t:LG('MUSINSA EMPTY 圣水（设计师买手店）','MUSINSA EMPTY Seongsu','ムシンサ エンプティ聖水'),brand:'MUSINSA EMPTY',
+ addr:'서울 성동구 성수이로 97 1-4층',ll:[37.5436479,127.0565846],perm:true,end:'2099-12-31T22:00:00+09:00',h:'11:00–22:00',entry:'walkin',type:'shop',
+ g:LG('买手店','Select shop','セレクト'),
+ perks:[[LG('1–4 楼设计师品牌买手店','4-floor designer select shop','4フロアのデザイナーズセレクト'),'sig']],
+ src:'https://news.bizwatch.co.kr/article/consumer/2026/11/10/0018',src2:'Kakao Map'},
 ];

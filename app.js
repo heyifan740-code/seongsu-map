@@ -1,0 +1,393 @@
+(function(){
+'use strict';
+/* ================= i18n ================= */
+const LANGS=['zh','en','ja'];
+const LOCALE={zh:'zh-CN',en:'en',ja:'ja'};
+const T={
+zh:{title:'圣水快闪线',tag:'课堂原型 · 信息以官方为准',ph:'搜索快闪、美食、店铺或福利',all:'全部',
+ grp:{pop:'快闪',eat:'美食',shop:'逛店'},
+ near:n=>`附近 50m · <em>${n}</em> 家`,list:(l,n)=>`${l} · <em>${n}</em> 家`,demo:'演示位置 · 点地图可移动',real:'当前定位 · 点地图可移动',
+ empty:'50m 内暂时没有',nearest:(n,d)=>`最近的是 ${n} · ${d} ›`,
+ note:(p,e,s,d)=>`共收录圣水 ${p} 家快闪、${e} 家美食、${s} 家店铺 · 信息查询于 ${d}，以官方为准`,
+ ends:'剩',perm:'常设',details:'详情 ›',nores:q=>`圣水暂时没有找到「${q}」`,moved:'已把你的位置移到这里（演示）',
+ locating:'正在定位…',nogeo:'这个浏览器不支持定位，已使用圣水演示位置',far:'你现在不在圣水附近，先用圣水演示位置',located:'已定位到你的位置',denied:'没有拿到定位权限，已使用圣水演示位置',
+ back:'返回地图',about:d=>`距你约 ${d}`,nav:'Naver 地图导航',book:'查看预约方式',perks:'福利',source:'信息来源',
+ live:'现场',hours:'营业',queue:'现场排队',wait:'排队时长',norep:'暂无上报',here:'我在现场：',lv:['人少','一般','很多'],
+ reported:'刚刚由你上报 · 正式版会汇总所有用户的上报',thanks:'感谢上报（演示）',
+ entryT:'入场方式',method:'方式',endsIn:'距结束',ohours:'营业时间',daily:'每天',period:'快闪期间',dates:'日期',left:'剩余',kind:'类型',permStore:'常设店铺',
+ rating:'评分',rnote:n=>`DiningCode 用户评分 · ${n} 条评价`,
+ secPop:'福利与亮点',secEat:'招牌与价格',secShop:'店铺亮点',info:'基本信息',koaddr:'韩文地址',copy:'复制，给出租车司机看',copied:'韩文地址已复制',copyfail:'请长按地址手动复制',
+ tax:'可退税',guideT:'怎么入场',guideS:'中文指引',
+ lineT:'圣水线路图',lineS:'从首尔林到圣水站 · 点站点切换',stA:'首尔林站',stB:'圣水站',lnA:'水仁·盆唐线',lnB:'2号线',
+ foot:d=>`课堂作业原型。快闪信息与坐标整理自 Popply，餐厅评分与坐标来自 DiningCode，店铺信息参考 Kakao Map（${d}），以官方公告为准。排队上报为演示功能。`,
+ srcFrom:(s,d)=>`以上整理自 ${s}（查询于 ${d}），以官方公告为准`,srcNames:{popply:'Popply 活动页',diningcode:'DiningCode',instagram:'品牌 Instagram',other:'来源页面'},
+ fav:'已收藏',unfav:'已取消收藏',refreshed:'已刷新',refresh:'刷新',star:'收藏',
+ sortD:'按距离',sortR:'按评分',
+ vipWhy:'细分类筛选是会员功能',vipH:'逛圣水，一场都不错过',vipP:'按细分类筛选，新快闪和快结束的快闪第一时间提醒你',
+ plans:[['日包','单日逛圣水'],['周包','短期旅行'],['月包','在韩生活']],price:['¥9.9','¥29','¥59'],
+ tbl:['功能','免费','会员'],rows:['地图 · 搜索 · 50m 内福利','快闪 / 美食 / 逛店 大类','单店详情 · 评分 · 导航 · 中文指引','细分类筛选（美妆、面包、贝果、饰品……）','新快闪 / 即将结束提醒'],
+ buy:(n,p)=>`开通${n} ${p}（演示，不扣费）`,fine:'定价为示意，正式价格待验证后确定',bought:'已开通（演示）：细分类筛选已解锁',close:'关闭',
+ tilewarn:'地图底图加载不出来，请检查网络后刷新',mapLabel:'圣水洞地图',locate:'定位到我',clear:'清除',
+ left:(d,h,m)=>d?`${d}天${h}小时`:h?`${h}小时${m}分`:`${m}分钟`,km:'km',
+ tags:{gift:'赠品',deal:'折扣',exp:'体验',sale:'售卖',sig:'招牌',menu:'菜单',tip:'提示',draw:'抽奖',taste:'试吃'},
+ entry:{walkin:'现场排队',naver:'Naver 预约',ticket:'购票入场',queue:'现场登记排号'},
+ guide:{walkin:['不用预约，直接到门口','人多时店员可能会让你登记手机号排号，留意短信或 KakaoTalk 通知','周末下午最挤，工作日或开门后一小时内去最省时间'],
+  queue:['到门口找店员或平板，用手机号登记排号（没有韩国号码可以问店员）','登记后可以先去附近逛，留意短信 / KakaoTalk 叫号','叫到号后回到门口入场'],
+  naver:['打开“信息来源”页面，找到 <span class="ko">네이버 예약</span> 链接','用 Naver 账号登录，选择日期和时段完成预约','按预约时间到店，出示预约确认页面入场'],
+  ticket:['这是收费展览，需要购票入场','票价和购票方式请看“信息来源”页面里的官方链接','周末人多，建议工作日或开门时段去']},
+ taxStep:'结账时出示护照办理退税',lang:'中文'},
+en:{title:'Seongsu Pop-up Line',tag:'Class prototype · confirm with official sources',ph:'Search pop-ups, food, shops or freebies',all:'All',
+ grp:{pop:'Pop-ups',eat:'Eat',shop:'Shops'},
+ near:n=>`Within 50 m · <em>${n}</em>`,list:(l,n)=>`${l} · <em>${n}</em>`,demo:'Demo location · tap the map to move',real:'Your location · tap the map to move',
+ empty:'Nothing within 50 m right now',nearest:(n,d)=>`Nearest: ${n} · ${d} ›`,
+ note:(p,e,s,d)=>`${p} pop-ups, ${e} food spots and ${s} shops in Seongsu · checked ${d}; always confirm with official sources`,
+ ends:'Ends in',perm:'Permanent',details:'Details ›',nores:q=>`No results for “${q}” in Seongsu`,moved:'Moved your location here (demo)',
+ locating:'Locating…',nogeo:'Location isn’t supported here — using the Seongsu demo spot',far:'You’re not near Seongsu — using the demo spot',located:'Found your location',denied:'No location permission — using the Seongsu demo spot',
+ back:'Back to map',about:d=>`About ${d} from you`,nav:'Directions (Naver Map)',book:'How to book',perks:'Perks',source:'Source',
+ live:'Live',hours:'Hours',queue:'Queue',wait:'Wait',norep:'No reports yet',here:'I’m here:',lv:['Short','Medium','Long'],
+ reported:'Reported by you just now · the full version will combine everyone’s reports',thanks:'Thanks for reporting (demo)',
+ entryT:'Getting in',method:'Method',endsIn:'Ends in',ohours:'Opening hours',daily:'Daily',period:'Dates',dates:'Dates',left:'Left',kind:'Type',permStore:'Permanent store',
+ rating:'Rating',rnote:n=>`DiningCode user rating · ${n} reviews`,
+ secPop:'Perks & highlights',secEat:'Signatures & prices',secShop:'Highlights',info:'Info',koaddr:'Korean address',copy:'Copy to show a taxi driver',copied:'Korean address copied',copyfail:'Long-press the address to copy',
+ tax:'Tax refund',guideT:'How to get in',guideS:'step by step',
+ lineT:'Seongsu line map',lineS:'Seoul Forest → Seongsu Stn. · tap a stop',stA:'Seoul Forest',stB:'Seongsu',lnA:'Suin-Bundang',lnB:'Line 2',
+ foot:d=>`Class-project prototype. Pop-up info and locations from Popply, restaurant ratings and locations from DiningCode, store info from Kakao Map (${d}). Always confirm with official sources. Queue reports are a demo.`,
+ srcFrom:(s,d)=>`Compiled from ${s} (checked ${d}); confirm with official announcements`,srcNames:{popply:'the Popply page',diningcode:'DiningCode',instagram:'the brand’s Instagram',other:'the source page'},
+ fav:'Saved',unfav:'Removed',refreshed:'Refreshed',refresh:'Refresh',star:'Save',
+ sortD:'Nearest',sortR:'Top rated',
+ vipWhy:'Detailed filters are a member feature',vipH:'Never miss a Seongsu pop-up',vipP:'Filter by detailed category and get alerts for new and ending pop-ups',
+ plans:[['Day pass','One day in Seongsu'],['Week pass','Short trip'],['Month pass','Living in Korea']],price:['₩2,000','₩5,900','₩11,900'],
+ tbl:['Feature','Free','Member'],rows:['Map · search · perks within 50 m','Pop-ups / Eat / Shops','Details · ratings · directions · how-to','Detailed filters (beauty, bakery, bagels, accessories…)','New / ending-soon alerts'],
+ buy:(n,p)=>`Get the ${n} ${p} (demo, no charge)`,fine:'Prices are placeholders until tested',bought:'Activated (demo): detailed filters unlocked',close:'Close',
+ tilewarn:'The map tiles didn’t load — check your connection and refresh',mapLabel:'Map of Seongsu-dong',locate:'Show my location',clear:'Clear',
+ left:(d,h,m)=>d?`${d}d ${h}h`:h?`${h}h ${m}m`:`${m} min`,km:'km',
+ tags:{gift:'Gift',deal:'Deal',exp:'Experience',sale:'On sale',sig:'Signature',menu:'Menu',tip:'Tip',draw:'Lucky draw',taste:'Tasting'},
+ entry:{walkin:'Walk in',naver:'Naver booking',ticket:'Ticket',queue:'Waiting list'},
+ guide:{walkin:['No booking needed — just go to the door','When it’s busy, staff may ask for your phone number to join a waiting list; watch for an SMS or KakaoTalk message','Weekend afternoons are busiest; weekdays or the first hour after opening are quickest'],
+  queue:['Register your phone number with staff or the tablet at the door (ask staff if you don’t have a Korean number)','Browse nearby while you wait and watch for the SMS / KakaoTalk call','Come back to the door when your number is called'],
+  naver:['Open the source page and find the <span class="ko">네이버 예약</span> (Naver booking) link','Sign in to Naver and pick a date and time','Show your booking confirmation at the door'],
+  ticket:['This is a paid exhibition — you need a ticket','See the official link on the source page for prices and booking','Weekends are crowded; weekdays or opening time are best']},
+ taxStep:'Show your passport at checkout for the tax refund',lang:'EN'},
+ja:{title:'聖水ポップアップライン',tag:'授業プロトタイプ・公式情報を確認してください',ph:'ポップアップ・グルメ・お店・特典を検索',all:'すべて',
+ grp:{pop:'ポップアップ',eat:'グルメ',shop:'ショップ'},
+ near:n=>`50m以内 · <em>${n}</em>件`,list:(l,n)=>`${l} · <em>${n}</em>件`,demo:'デモ位置・地図をタップで移動',real:'現在地・地図をタップで移動',
+ empty:'50m以内にはまだありません',nearest:(n,d)=>`最寄り：${n}・${d} ›`,
+ note:(p,e,s,d)=>`聖水のポップアップ${p}件・グルメ${e}件・ショップ${s}件を掲載・${d}確認、最新情報は公式で`,
+ ends:'残り',perm:'常設',details:'詳細 ›',nores:q=>`「${q}」は聖水で見つかりません`,moved:'位置をここに移動しました（デモ）',
+ locating:'現在地を取得中…',nogeo:'位置情報非対応のため聖水のデモ位置を使います',far:'聖水付近にいないためデモ位置を使います',located:'現在地を取得しました',denied:'位置情報の許可がないためデモ位置を使います',
+ back:'地図へ戻る',about:d=>`現在地から約${d}`,nav:'Naver地図で行く',book:'予約方法',perks:'特典',source:'出典',
+ live:'現地',hours:'営業',queue:'待ち状況',wait:'待ち時間',norep:'報告なし',here:'現地にいます：',lv:['少ない','普通','多い'],
+ reported:'あなたの報告・正式版では全員の報告を集計します',thanks:'報告ありがとうございます（デモ）',
+ entryT:'入場方法',method:'方法',endsIn:'終了まで',ohours:'営業時間',daily:'毎日',period:'開催期間',dates:'日程',left:'残り',kind:'タイプ',permStore:'常設店',
+ rating:'評価',rnote:n=>`DiningCodeユーザー評価・${n}件`,
+ secPop:'特典・見どころ',secEat:'看板メニューと価格',secShop:'見どころ',info:'基本情報',koaddr:'韓国語住所',copy:'コピーしてタクシーで見せる',copied:'住所をコピーしました',copyfail:'住所を長押ししてコピー',
+ tax:'免税対応',guideT:'入場ガイド',guideS:'日本語',
+ lineT:'聖水路線図',lineS:'ソウルの森→聖水駅・タップで切替',stA:'ソウルの森',stB:'聖水',lnA:'水仁・盆唐線',lnB:'2号線',
+ foot:d=>`授業課題のプロトタイプ。ポップアップ情報と位置はPopply、飲食店の評価と位置はDiningCode、店舗情報はKakao Map（${d}）より。最新情報は公式で確認してください。待ち状況の報告はデモです。`,
+ srcFrom:(s,d)=>`${s}より作成（${d}確認）、公式発表を優先してください`,srcNames:{popply:'Popplyページ',diningcode:'DiningCode',instagram:'ブランド公式Instagram',other:'出典ページ'},
+ fav:'保存しました',unfav:'保存を解除しました',refreshed:'更新しました',refresh:'更新',star:'保存',
+ sortD:'近い順',sortR:'評価順',
+ vipWhy:'細かい絞り込みはメンバー機能です',vipH:'聖水のポップアップを見逃さない',vipP:'細かいカテゴリで絞り込み、新着・終了間近をお知らせ',
+ plans:[['1日パス','聖水を1日'],['1週間パス','短期旅行'],['1か月パス','韓国在住']],price:['₩2,000','₩5,900','₩11,900'],
+ tbl:['機能','無料','メンバー'],rows:['地図・検索・50m以内の特典','ポップアップ／グルメ／ショップ','詳細・評価・ナビ・入場ガイド','細かい絞り込み（コスメ、パン、ベーグル、アクセ…）','新着／終了間近のお知らせ'],
+ buy:(n,p)=>`${n} ${p}を開始（デモ・課金なし）`,fine:'価格は仮のもので検証後に決定します',bought:'開始しました（デモ）：細かい絞り込みが使えます',close:'閉じる',
+ tilewarn:'地図を読み込めませんでした。接続を確認して再読み込みしてください',mapLabel:'聖水洞の地図',locate:'現在地を表示',clear:'クリア',
+ left:(d,h,m)=>d?`${d}日${h}時間`:h?`${h}時間${m}分`:`${m}分`,km:'km',
+ tags:{gift:'プレゼント',deal:'割引',exp:'体験',sale:'販売',sig:'看板',menu:'メニュー',tip:'ヒント',draw:'抽選',taste:'試食'},
+ entry:{walkin:'直接入店',naver:'Naver予約',ticket:'チケット制',queue:'現地で順番待ち'},
+ guide:{walkin:['予約不要、そのまま入口へ','混雑時は電話番号で順番待ち登録を求められることがあります。SMSやカカオトークの通知を確認','週末の午後が最も混雑。平日か開店直後が狙い目'],
+  queue:['入口のスタッフかタブレットで電話番号を登録（韓国の番号がなければスタッフに相談）','待っている間は近くを散策し、SMS／カカオトークの呼び出しを確認','呼ばれたら入口に戻って入場'],
+  naver:['出典ページで <span class="ko">네이버 예약</span>（Naver予約）のリンクを探す','Naverにログインして日時を選ぶ','予約確認画面を入口で見せる'],
+  ticket:['有料展示のためチケットが必要です','料金と購入方法は出典ページの公式リンクで確認','週末は混雑。平日か開場直後がおすすめ']},
+ taxStep:'会計時にパスポートを見せて免税手続き',lang:'日本語'}
+};
+const SUBS={pop:['beauty','fashion','char','kpop','game','life','food'],eat:['korean','western','bakery','bagel','donut','eggtart','dessert','cafe'],shop:['acc','bstore','fstore']};
+const SUBL={beauty:['美妆','Beauty','コスメ'],fashion:['服饰','Fashion','ファッション'],char:['IP联名','Characters','キャラ・コラボ'],kpop:['K-pop','K-pop','K-POP'],game:['展览游戏','Exhibits & games','展示・ゲーム'],life:['生活市集','Lifestyle & local','ライフスタイル'],food:['美食快闪','Food pop-ups','フード'],
+ korean:['韩餐','Korean','韓国料理'],western:['西餐披萨','Western & pizza','洋食・ピザ'],bakery:['面包烘焙','Bakery','ベーカリー'],bagel:['贝果','Bagels','ベーグル'],donut:['甜甜圈','Donuts','ドーナツ'],eggtart:['蛋挞','Egg tarts','エッグタルト'],dessert:['甜品','Desserts','スイーツ'],cafe:['咖啡','Cafés','カフェ'],
+ acc:['饰品杂货','Accessories','アクセサリー'],bstore:['美妆集合店','Beauty stores','コスメストア'],fstore:['服装集合店','Fashion stores','ファッション']};
+
+let lang=(()=>{try{const q=new URLSearchParams(location.search).get('lang');if(LANGS.includes(q))return q;const s=localStorage.getItem('ss_lang');if(LANGS.includes(s))return s;}catch(e){}
+  const n=(navigator.language||'en').toLowerCase();return n.startsWith('zh')?'zh':n.startsWith('ja')?'ja':'en';})();
+let t=T[lang];
+const tx=o=>o==null?'':typeof o==='string'?o:(o[lang]||o.en||o.zh||'');
+const subL=k=>SUBL[k][LANGS.indexOf(lang)];
+
+/* ================= state ================= */
+const M=60e3,H=60*M,D=24*H;
+const FALLBACK=[37.54275,127.05420];
+const ST_B=[37.54457,127.05571], ST_A=[37.54360,127.04460];
+POPS.forEach(p=>{p.endTs=Date.parse(p.end);p.rep=null;});
+const live=POPS.filter(p=>p.endTs>Date.now());
+// spread markers that share an address so none are hidden
+(()=>{const g={};live.forEach(p=>{const k=p.ll[0].toFixed(5)+','+p.ll[1].toFixed(5);(g[k]=g[k]||[]).push(p);});
+  Object.values(g).forEach(a=>a.forEach((p,i)=>{if(a.length<2){p.dl=p.ll;return;}const ang=2*Math.PI*i/a.length,r=0.00009;p.dl=[p.ll[0]+r*Math.cos(ang),p.ll[1]+r*1.26*Math.sin(ang)];}));})();
+const S={view:'home',i:0,mode:'live',grp:'all',sub:null,sort:'dist',member:false,sel:1,sheet:null,fav:{},me:FALLBACK.slice(),q:'',real:false,clock:Date.now()};
+const esc=s=>String(s).replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
+const LINE=live.slice().sort((a,b)=>a.ll[1]-b.ll[1]);
+const P=()=>LINE[S.i];
+function meters(a,b){const R=6371000,r=x=>x*Math.PI/180;const dLa=r(b[0]-a[0]),dLo=r(b[1]-a[1]);const h=Math.sin(dLa/2)**2+Math.cos(r(a[0]))*Math.cos(r(b[0]))*Math.sin(dLo/2)**2;return Math.round(2*R*Math.asin(Math.sqrt(h)));}
+const distM=p=>meters(S.me,p.ll);
+const fmtD=m=>m<1000?m+'m':(m/1000).toFixed(1)+t.km;
+function left(ts){let x=Math.max(0,ts-Date.now());const d=Math.floor(x/D);x-=d*D;const h=Math.floor(x/H);x-=h*H;return t.left(d,h,Math.floor(x/M));}
+const clock=ts=>new Date(ts).toLocaleTimeString(LOCALE[lang],{hour:'numeric',minute:'2-digit'});
+const match=p=>(S.grp==='all'||p.grp===S.grp)&&(!S.sub||p.sub===S.sub);
+const visible=()=>live.filter(match);
+const naverUrl=p=>'https://map.naver.com/p/search/'+encodeURIComponent(p.addr.replace(/\s*\(.*?\)\s*/g,' ').replace(/,.*$/,'').trim());
+const stars=p=>p.rate?`<span class="rt-s">★ ${p.rate.s.toFixed(1)}</span>`:'';
+const period=p=>p.perm?t.perm:`${p.start}–${p.endTxt}`;
+const hoursTxt=p=>(p.h==='24h'?(lang==='zh'?'24 小时':lang==='ja'?'24時間':'24 hours'):t.daily+' '+p.h)+(p.hx?' · '+tx(p.hx):'');
+const ICON={
+ back:'<svg viewBox="0 0 24 24"><path d="M15 6l-6 6 6 6"/></svg>',
+ star:'<svg viewBox="0 0 24 24"><path d="M12 3l2.7 5.6 6.1.9-4.4 4.3 1 6.1L12 17l-5.4 2.9 1-6.1L3.2 9.5l6.1-.9z"/></svg>',
+ pin:'<svg viewBox="0 0 24 24"><path d="M12 21s-7-6.2-7-11a7 7 0 0 1 14 0c0 4.8-7 11-7 11z"/><circle cx="12" cy="10" r="2.5"/></svg>',
+ cal:'<svg viewBox="0 0 24 24"><rect x="4" y="5" width="16" height="15" rx="2"/><path d="M4 10h16M9 3v4M15 3v4"/></svg>',
+ gift:'<svg viewBox="0 0 24 24"><rect x="4" y="9" width="16" height="11" rx="1"/><path d="M4 13h16M12 9v11M12 9c-2-4-6-3-5-1s5 1 5 1zm0 0c2-4 6-3 5-1s-5 1-5 1z"/></svg>',
+ deal:'<svg viewBox="0 0 24 24"><path d="M3 12V4h8l10 10-8 8z"/><circle cx="7.5" cy="8.5" r="1.5"/></svg>',
+ exp:'<svg viewBox="0 0 24 24"><path d="M12 3l2.5 5.5L20 9l-4 4 1 6-5-3-5 3 1-6-4-4 5.5-.5z"/></svg>',
+ info:'<svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="8"/><path d="M12 11v5M12 8v.5"/></svg>',
+ food:'<svg viewBox="0 0 24 24"><path d="M7 3v8M5 3v5a2 2 0 0 0 4 0V3M7 11v10M17 21V3c-2 0-4 2-4 6v4h4"/></svg>',
+ sweet:'<svg viewBox="0 0 24 24"><path d="M4 13h16l-2 7H6zM6 13c0-4 2.7-7 6-7s6 3 6 7M12 6V3"/></svg>',
+ shop:'<svg viewBox="0 0 24 24"><path d="M5 8h14l-1 12H6zM9 8V6a3 3 0 0 1 6 0v2"/></svg>',
+ ref:'<svg viewBox="0 0 24 24"><path d="M20 12a8 8 0 1 1-2.3-5.7M20 4v5h-5"/></svg>',
+ door:'<svg viewBox="0 0 24 24"><path d="M6 21V4h12v17M3 21h18"/><circle cx="14.5" cy="12.5" r="1"/></svg>',
+ clock:'<svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="8"/><path d="M12 8v4l3 2"/></svg>',
+ link:'<svg viewBox="0 0 24 24"><path d="M10 14a4 4 0 0 0 5.7 0l3-3a4 4 0 0 0-5.7-5.7l-1 1M14 10a4 4 0 0 0-5.7 0l-3 3a4 4 0 0 0 5.7 5.7l1-1"/></svg>',
+ copy:'<svg viewBox="0 0 24 24"><rect x="8" y="8" width="12" height="12" rx="2"/><path d="M16 8V5a1 1 0 0 0-1-1H5a1 1 0 0 0-1 1v10a1 1 0 0 0 1 1h3"/></svg>',
+ globe:'<svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M3 12h18M12 3a14 14 0 0 1 0 18M12 3a14 14 0 0 0 0 18"/></svg>'
+};
+let tt; function toast(s){const el=document.getElementById('toast');el.textContent=s;el.hidden=false;clearTimeout(tt);tt=setTimeout(()=>el.hidden=true,2600);}
+const $=id=>document.getElementById(id);
+
+/* ================= map adapters (Naver Maps when a key is set, OpenStreetMap otherwise) ================= */
+const CFG=window.SEONGSU_CONFIG||{};
+const BOUNDS=[[37.530,127.025],[37.556,127.075]];
+function leafletAdapter(el){
+  const map=L.map(el,{zoomControl:false,zoomSnap:.5,minZoom:14,maxZoom:19,maxBounds:BOUNDS,maxBoundsViscosity:.8}).setView(FALLBACK,17);
+  let fail=0;
+  L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png',{maxZoom:19,className:'osm-tiles',attribution:'&copy; <a href="https://www.openstreetmap.org/copyright" target="_blank" rel="noopener">OpenStreetMap</a>'})
+   .on('tileerror',()=>{if(++fail===3)$('tilewarn').hidden=false;}).on('tileload',()=>{$('tilewarn').hidden=true;fail=-99;}).addTo(map);
+  L.control.zoom({position:'bottomright'}).addTo(map);map.attributionControl.setPrefix(false);
+  const layer=L.layerGroup().addTo(map);
+  return {kind:'osm',destroy(){map.remove();},
+   marker(o){const m=L.marker(o.ll,{icon:L.divIcon({className:'gm-wrap',html:o.html,iconSize:[o.w,o.h],iconAnchor:[o.ax,o.ay]}),title:o.title||'',interactive:!!o.onClick,zIndexOffset:o.z||0,riseOnHover:!!o.onClick});
+     if(o.onClick)m.on('click',o.onClick);m.addTo(o.fixed?map:layer);return m;},
+   clear(){layer.clearLayers();},
+   circle(ll,r){const c=L.circle(ll,{radius:r,color:'#2ea84a',weight:2,dashArray:'6 5',fillColor:'#2ea84a',fillOpacity:.08,interactive:false}).addTo(map);return {move:x=>c.setLatLng(x)};},
+   move(m,ll){m.setLatLng(ll);},
+   onClick(cb){map.on('click',e=>cb([e.latlng.lat,e.latlng.lng]));},
+   onZoom(cb){map.on('zoomend',cb);},
+   zoom(){return map.getZoom();},
+   view(ll,z,off){map.setView(map.unproject(map.project(ll,z).add([0,off]),z),z,{animate:true});},
+   resize(){map.invalidateSize();}};
+}
+function naverAdapter(el){
+  const N=naver.maps,LL=a=>new N.LatLng(a[0],a[1]);
+  const map=new N.Map(el,{center:LL(FALLBACK),zoom:17,minZoom:14,maxZoom:19,maxBounds:new N.LatLngBounds(LL(BOUNDS[0]),LL(BOUNDS[1])),
+    zoomControl:matchMedia('(min-width:880px)').matches,zoomControlOptions:{position:N.Position.RIGHT_BOTTOM,style:N.ZoomControlStyle.SMALL},
+    scaleControl:false,mapDataControl:false,logoControlOptions:{position:N.Position.BOTTOM_LEFT}});
+  let ms=[];
+  return {kind:'naver',destroy(){try{map.destroy();}catch(e){}},
+   marker(o){const m=new N.Marker({position:LL(o.ll),map,icon:{content:o.html,size:new N.Size(o.w,o.h),anchor:new N.Point(o.ax,o.ay)},zIndex:100+(o.z||0),clickable:!!o.onClick,title:o.title||''});
+     if(o.onClick)N.Event.addListener(m,'click',o.onClick);if(!o.fixed)ms.push(m);return m;},
+   clear(){ms.forEach(m=>m.setMap(null));ms=[];},
+   circle(ll,r){const c=new N.Circle({map,center:LL(ll),radius:r,strokeColor:'#2ea84a',strokeWeight:2,strokeStyle:'shortdash',fillColor:'#2ea84a',fillOpacity:.08,clickable:false});return {move:x=>c.setCenter(LL(x))};},
+   move(m,ll){m.setPosition(LL(ll));},
+   onClick(cb){N.Event.addListener(map,'click',e=>cb([e.coord.lat(),e.coord.lng()]));},
+   onZoom(cb){N.Event.addListener(map,'zoom_changed',cb);},
+   zoom(){return map.getZoom();},
+   view(ll,z,off){map.setZoom(z,false);const pr=map.getProjection();const pt=pr.fromCoordToOffset(LL(ll));const c=pr.fromOffsetToCoord(new N.Point(pt.x,pt.y+off));map.panTo(c);},
+   resize(){N.Event.trigger(map,'resize');}};
+}
+let MAP,ring,meDot;
+function buildMap(adapter){
+  const el=$('map');if(MAP&&MAP.destroy)MAP.destroy();el.innerHTML='';
+  MAP=adapter(el);
+  ring=MAP.circle(S.me,50);
+  meDot=MAP.marker({ll:S.me,html:'<div class="me-host"><span class="me-pulse"></span><span class="me-dot"></span></div>',w:30,h:30,ax:15,ay:15,z:1000,fixed:true});
+  MAP.marker({ll:ST_B,html:`<span class="stn"><b>2</b>${t.stB}</span>`,w:96,h:24,ax:48,ay:12,fixed:true});
+  MAP.marker({ll:ST_A,html:`<span class="stn y"><b>水</b>${t.stA}</span>`,w:110,h:24,ax:55,ay:12,fixed:true});
+  MAP.onClick(ll=>{setMe(ll,false);toast(t.moved);});
+  let big=null;MAP.onZoom(()=>{const b=MAP.zoom()>=18.5;if(b!==big){big=b;drawMarkers();}});
+  drawMarkers();
+  setTimeout(()=>{MAP.resize();centerMe();},60);
+}
+function startMap(){
+  if(CFG.naverKeyId){
+    let done=false;
+    const fallback=()=>{if(MAP&&MAP.kind==='osm')return;done=true;buildMap(leafletAdapter);};
+    window.navermap_authFailure=fallback;
+    const s=document.createElement('script');
+    s.src='https://oapi.map.naver.com/openapi/v3/maps.js?ncpKeyId='+encodeURIComponent(CFG.naverKeyId)+'&language='+(lang==='zh'?'zh':lang);
+    s.onload=()=>{if(done)return;try{buildMap(naverAdapter);}catch(e){fallback();}};
+    s.onerror=fallback;setTimeout(()=>{if(!MAP)fallback();},7000);
+    document.head.appendChild(s);
+  } else buildMap(leafletAdapter);
+}
+function pinHtml(p,near){
+  const lab=esc(p.brand)+(p.rate?` <b>★${p.rate.s.toFixed(1)}</b>`:'');
+  return `<div class="gm${near?' on':''} t-${p.type}"><div class="bub">${ICON[p.type]||ICON.gift}<span>${esc(tx(p.g))}</span></div><i></i><em>${lab}</em></div>`;}
+// full gift bubbles for places within 50 m, when a category is chosen, or when zoomed in; small dots otherwise (keeps the map readable)
+function drawMarkers(){if(!MAP)return;MAP.clear();const zoomed=MAP.zoom()>=18.5;visible().forEach(p=>{const near=distM(p)<=50;
+  if(near||zoomed||S.grp!=='all')MAP.marker({ll:p.dl||p.ll,html:pinHtml(p,near),w:70,h:86,ax:35,ay:68,z:near?500:100,title:tx(p.t),onClick:()=>openPop(p.id)});
+  else MAP.marker({ll:p.dl||p.ll,html:`<div class="dotm t-${p.type}"></div>`,w:16,h:16,ax:8,ay:8,z:0,title:tx(p.t),onClick:()=>openPop(p.id)});});}
+function setMe(ll,recenter){S.me=ll;if(ring)ring.move(ll);if(meDot)MAP.move(meDot,ll);drawMarkers();renderNear();if(recenter)centerMe();}
+const wide=()=>matchMedia('(min-width:880px)').matches;
+function centerMe(){if(!MAP)return;const z=Math.max(MAP.zoom(),17);let off=0;if(!wide()){const sh=$('near').offsetHeight,tp=document.querySelector('.topov').offsetHeight;off=(sh-tp)/2;}MAP.view(S.me,z,off);}
+
+/* ================= home ================= */
+function card(p,d){
+  return `<button class="nc" data-act="open" data-id="${p.id}">
+    <div class="t"><b>${esc(tx(p.t))}</b>${stars(p)}<span class="c">${subL(p.sub)}</span><span class="dm">${fmtD(d)}</span></div>
+    <div class="gifts">${p.perks.slice(0,3).map(x=>`<span class="gift${/deal|menu|tip|sale/.test(x[1])?' a':''}">${ICON[p.grp==='eat'?p.type:p.grp==='shop'?'shop':'gift']}${esc(tx(x[0]))}</span>`).join('')}</div>
+    <div class="ft"><span>${t.entry[p.entry]}${p.tax?' · '+t.tax:''}${p.perm?' · '+esc(p.h==='24h'?'24h':p.h):` · ${t.ends} <b data-end="${p.endTs}">${left(p.endTs)}</b>`}</span><span class="more">${t.details}</span></div></button>`;}
+function nearList(){
+  const vs=visible().map(p=>({p,d:distM(p)}));
+  const cnt=g=>live.filter(p=>p.grp===g).length;
+  const foot=`<p class="datanote">${t.note(cnt('pop'),cnt('eat'),cnt('shop'),DATA_DATE)}</p>`;
+  if(S.grp==='all'){
+    vs.sort((a,b)=>a.d-b.d);const inR=vs.filter(x=>x.d<=50),nearest=vs[0];
+    const empty=`<div class="emptyn">${t.empty}${nearest?`<button data-act="open" data-id="${nearest.p.id}">${esc(t.nearest(tx(nearest.p.t),fmtD(nearest.d)))}</button>`:''}</div>`;
+    return `<div class="grab"></div><div class="sh pad"><h2>${t.near(inR.length)}</h2><small>${S.real?t.real:t.demo}</small></div>
+     <div class="near pad">${inR.length?inR.map(x=>card(x.p,x.d)).join(''):empty}${foot}</div>`;}
+  const rated=S.grp==='eat'&&S.sort==='rate';
+  vs.sort(rated?(a,b)=>((b.p.rate?b.p.rate.s:0)-(a.p.rate?a.p.rate.s:0))||(b.p.rate?b.p.rate.n:0)-(a.p.rate?a.p.rate.n:0):(a,b)=>a.d-b.d);
+  const label=S.sub?subL(S.sub):t.grp[S.grp];
+  const sortSeg=S.grp==='eat'?`<div class="seg sm"><button class="${S.sort==='dist'?'on':''}" data-act="sort" data-v="dist">${t.sortD}</button><button class="${S.sort==='rate'?'on':''}" data-act="sort" data-v="rate">${t.sortR}</button></div>`:'';
+  return `<div class="grab"></div><div class="sh pad"><h2>${t.list(esc(label),vs.length)}</h2>${sortSeg}</div>
+   <div class="near pad">${vs.map(x=>card(x.p,x.d)).join('')}${foot}</div>`;}
+function renderNear(){$('near').innerHTML=nearList();}
+function hay(p){return [p.name,p.brand,p.addr,...LANGS.map(l=>[p.t[l],p.g[l],SUBL[p.sub].join(' '),T[l].grp[p.grp],...p.perks.map(x=>x[0][l])].join(' '))].join(' ').toLowerCase();}
+POPS.forEach(p=>{p._h=null;});
+function results(){
+  const q=S.q.trim().toLowerCase(); if(!q)return '';
+  const hit=live.filter(p=>(p._h||(p._h=hay(p))).includes(q)).sort((a,b)=>distM(a)-distM(b));
+  const hl=s=>{const i=s.toLowerCase().indexOf(q);return i<0?esc(s):esc(s.slice(0,i))+'<mark>'+esc(s.slice(i,i+q.length))+'</mark>'+esc(s.slice(i+q.length));};
+  return `<div class="results" role="listbox">${hit.length?hit.slice(0,30).map(p=>`<button class="res" data-act="open" data-id="${p.id}"><span class="pi">${ICON[p.grp==='eat'?p.type:p.grp==='shop'?'shop':'pin']}</span><span><b>${hl(tx(p.t))}</b><small>${subL(p.sub)} · ${esc(tx(p.g))}${p.rate?' · ★'+p.rate.s.toFixed(1):''} · ${period(p)}</small></span><span class="d">${fmtD(distM(p))}</span></button>`).join('')
+    :`<div class="res" style="color:var(--muted)">${esc(t.nores(S.q))}</div>`}</div>`;}
+function renderChips(){
+  const g=['all','pop','eat','shop'].map(k=>`<button class="fl${S.grp===k?' on':''}" data-act="grp" data-v="${k}">${k==='all'?t.all:t.grp[k]}</button>`).join('');
+  $('chips').innerHTML=g;
+  const s=$('subchips');
+  if(S.grp==='all'){s.hidden=true;s.innerHTML='';return;}
+  s.hidden=false;
+  s.innerHTML=SUBS[S.grp].map(k=>{const n=live.filter(p=>p.grp===S.grp&&p.sub===k).length;if(!n)return '';
+    return `<button class="fl sub${S.sub===k?' on':''}" data-act="sub" data-v="${k}">${subL(k)}<small>${n}</small>${S.member?'':'<span class="vip">VIP</span>'}</button>`;}).join('');}
+function locate(){
+  if(!navigator.geolocation){toast(t.nogeo);setMe(FALLBACK,true);return;}
+  toast(t.locating);
+  navigator.geolocation.getCurrentPosition(pos=>{const ll=[pos.coords.latitude,pos.coords.longitude];
+    if(meters(ll,ST_B)>2500){S.real=false;toast(t.far);setMe(FALLBACK,true);}else{S.real=true;toast(t.located);setMe(ll,true);}},
+   ()=>{S.real=false;toast(t.denied);setMe(FALLBACK,true);},{enableHighAccuracy:true,timeout:8000});}
+
+/* ================= detail ================= */
+function srcName(u){return u.includes('popply')?t.srcNames.popply:u.includes('diningcode')?t.srcNames.diningcode:u.includes('instagram')?t.srcNames.instagram:t.srcNames.other;}
+function head(p){
+  return `<div class="backrow pad"><button data-act="home">${ICON.back}${t.back}</button></div>
+   <section class="head pad">
+   <div style="display:flex;align-items:flex-start;gap:8px"><div style="flex:1;min-width:0">
+    <div class="title"><h1>${esc(tx(p.t))}</h1><span class="cat">${subL(p.sub)}</span></div>
+    <div class="addr ko-name">${esc(p.name)}</div>
+    <div class="addr">${p.perm?t.permStore:p.start+' – '+p.endTxt} · ${t.about(fmtD(distM(p)))}</div>
+    ${p.rate||p.tax?`<div class="badges">${p.rate?`<a class="rbadge" href="https://www.diningcode.com/profile.php?rid=${p.rate.u}" target="_blank" rel="noopener">★ ${p.rate.s.toFixed(1)} <small>${esc(t.rnote(p.rate.n))}</small></a>`:''}${p.tax?`<span class="tbadge">${t.tax}</span>`:''}</div>`:''}</div>
+    <button class="star${S.fav[p.id]?' on':''}" data-act="fav" aria-label="${t.star}">${ICON.star}</button></div>
+   <div class="chiprow"><a class="chipb p" href="${naverUrl(p)}" target="_blank" rel="noopener">${ICON.pin}${t.nav}</a>
+    ${p.entry==='naver'?`<a class="chipb s" href="${p.src}" target="_blank" rel="noopener">${ICON.cal}${t.book}</a>`:''}
+    <button class="chipb" data-act="perks">${ICON.gift}${t.perks}</button><a class="chipb" href="${p.src}" target="_blank" rel="noopener">${ICON.link}${t.source}</a></div>
+  </section><div class="sep"></div>`;}
+function lineBar(){const prev=LINE[S.i-1],next=LINE[S.i+1],p=P();
+  return `<div class="lineb" role="group">
+   <button class="side" data-act="step" data-v="-1" ${prev?'':'disabled'}>‹ <span>${prev?esc(prev.brand):t.stA}</span></button>
+   <div class="cur"><span class="badge">${S.i+1}</span><b>${esc(p.brand)}</b></div>
+   <button class="side r" data-act="step" data-v="1" ${next?'':'disabled'}><span>${next?esc(next.brand):t.stB}</span> ›</button></div>`;}
+function cards(p){
+  if(S.mode==='live'){
+    const q=p.rep!=null?`<div class="kv"><span>${t.wait}</span><b class="${p.rep===0?'g':p.rep===1?'a':''}">${t.lv[p.rep]}</b></div><div class="src">${t.reported}</div>`
+      :`<div class="kv"><span>${t.wait}</span><b class="k">${t.norep}</b></div><div class="rep2">${t.here}${t.lv.map((x,i)=>`<button data-act="report" data-v="${i}">${x}</button>`).join('')}</div>`;
+    return `<div class="cards"><div class="card"><h3>${t.queue}</h3>${q}</div>
+     <div class="card"><h3>${t.entryT}</h3><div class="kv"><span>${t.method}</span><b class="${p.entry==='walkin'?'g':'a'}">${t.entry[p.entry]}</b></div>${p.perm?'':`<div class="kv"><span>${t.endsIn}</span><b data-end="${p.endTs}">${left(p.endTs)}</b></div>`}${p.note?`<div class="src">${esc(tx(p.note))}</div>`:''}</div></div>`;}
+  return `<div class="cards"><div class="card"><h3>${t.ohours}</h3><div class="kv"><span style="white-space:normal">${esc(hoursTxt(p))}</span></div></div>
+    <div class="card"><h3>${p.perm?t.kind:t.period}</h3>${p.perm?`<div class="kv"><span>${t.permStore}</span></div>`:`<div class="kv"><span>${t.dates}</span><b class="k">${p.start}–${p.endTxt}</b></div><div class="kv"><span>${t.left}</span><b data-end="${p.endTs}">${left(p.endTs)}</b></div>`}</div></div>`;}
+function lineMap(){
+  const st=LINE.map((p,i)=>`<button class="st${i===S.i?' cur':''}" data-act="go" data-v="${i}" aria-label="${esc(tx(p.t))}"><span class="dot"></span><span class="nm">${esc(p.brand)}</span><span class="q">${esc(tx(p.g))}</span></button>`).join('');
+  return `<div class="mapbox"><div class="mapscroll"><div class="track">
+    <div class="st term"><span class="sub subs">${t.lnA}</span><span class="dot"></span><span class="nm">${t.stA}</span></div>${st}
+    <div class="st term"><span class="sub sub2">${t.lnB}</span><span class="dot"></span><span class="nm">${t.stB}</span></div></div></div></div>`;}
+function guide(p){const g=t.guide[p.entry]||t.guide.walkin;return `<ol class="guide">${g.map(x=>`<li>${x}</li>`).join('')}${p.tax?`<li>${t.taxStep}</li>`:''}</ol>`;}
+function info(p){
+  const sec=p.grp==='eat'?t.secEat:p.grp==='shop'?t.secShop:t.secPop;
+  return `<section class="sec pad" id="perks"><h2>${sec}</h2><div>${p.perks.map(x=>`<div class="perk">${esc(tx(x[0]))}<span class="tag ${/gift|sig|taste|draw/.test(x[1])?'t-g':'t-a'}">${t.tags[x[1]]}</span></div>`).join('')}</div>
+    <p class="datanote">${t.srcFrom(`<a href="${p.src}" target="_blank" rel="noopener">${srcName(p.src)}</a>${p.src2?'、'+esc(p.src2):''}`,DATA_DATE)}</p></section><div class="sep"></div>
+   <section class="sec pad"><h2>${t.info}</h2><div class="facts">
+    <div class="fact"><span class="ic">${ICON.door}</span><div>${t.entryT}<small><span class="hl">${t.entry[p.entry]}</span></small></div></div>
+    <div class="fact"><span class="ic">${ICON.clock}</span><div>${t.ohours}<small>${esc(hoursTxt(p))}</small></div></div>
+    <div class="fact"><span class="ic">${ICON.cal}</span><div>${p.perm?t.kind:t.period}<small>${p.perm?t.permStore+' · '+subL(p.sub):p.start+' – '+p.endTxt}</small></div></div>
+    <div class="fact"><span class="ic">${ICON.pin}</span><div>${t.koaddr}<small>${esc(p.addr)}</small><button class="copy" data-act="copy" data-v="${esc(p.addr)}">${ICON.copy}${t.copy}</button></div></div>
+   </div></section><div class="sep"></div>
+   <section class="sec pad"><h2>${t.guideT}<small>${t.guideS}</small></h2>${guide(p)}</section>`;}
+function vDetail(){const p=P();
+  return `<div class="wrap grid"><main>${head(p)}<section class="pad" style="padding-bottom:22px">${lineBar()}
+   <div class="rt"><div class="seg"><button class="${S.mode==='live'?'on':''}" data-act="mode" data-v="live">${t.live}</button><button class="${S.mode==='info'?'on':''}" data-act="mode" data-v="info">${t.hours}</button></div>
+   <span class="clock">${clock(S.clock)}</span><button class="refresh" data-act="refresh" aria-label="${t.refresh}">${ICON.ref}</button></div>${cards(p)}</section>
+   <div class="sep"></div>${info(p)}</main>
+   <aside class="aside"><section class="sec pad"><h2>${t.lineT}<small>${t.lineS}</small></h2>${lineMap()}</section>
+   <p class="foot pad">${t.foot(DATA_DATE)}</p></aside></div>`;}
+function vSheet(){
+  const pl=t.plans[S.sel];
+  return `<div class="mask" data-act="close"><div class="vsheet" role="dialog">
+   <div class="shead pad"><h3>${t.vipH}</h3><p>${t.vipP}</p><span class="why">${t.vipWhy}</span><button class="x" data-act="close" aria-label="${t.close}">×</button></div>
+   <div class="pad"><div class="plans">${t.plans.map((x,i)=>`<button class="plan${S.sel===i?' on':''}" data-act="plan" data-v="${i}"><div>${x[0]}</div><div class="pr">${t.price[i]}</div><div class="ds">${x[1]}</div></button>`).join('')}</div>
+    <table class="tbl"><tr><th>${t.tbl[0]}</th><th>${t.tbl[1]}</th><th>${t.tbl[2]}</th></tr>
+     ${t.rows.map((r,i)=>`<tr><td>${r}</td><td${i<3?' class="y"':''}>${i<3?'✓':'—'}</td><td class="y">✓</td></tr>`).join('')}</table>
+    <button class="buy" data-act="buy">${esc(t.buy(pl[0],t.price[S.sel]))}</button><div class="fine">${t.fine}</div></div></div></div>`;}
+const homeEl=$('home'),detEl=$('detail');
+function renderDetail(){detEl.innerHTML=vDetail();const c=document.querySelector('.st.cur');if(c){const sc=c.closest('.mapscroll');sc.scrollLeft=c.offsetLeft-sc.clientWidth/2+46;}}
+function renderSheet(){$('sheetHost').innerHTML=S.sheet!==null?vSheet():'';}
+function rerender(){if(S.view==='detail'){const y=scrollY;renderDetail();scrollTo(0,y);}renderSheet();}
+function openPop(id){S.i=LINE.findIndex(x=>x.id===id);if(S.i<0)return;S.view='detail';S.mode='live';S.sheet=null;renderSheet();homeEl.hidden=true;detEl.hidden=false;renderDetail();scrollTo(0,0);try{history.replaceState(null,'',location.pathname+location.search+'#'+id);}catch(e){}}
+function goHome(){S.view='home';detEl.hidden=true;detEl.innerHTML='';homeEl.hidden=false;if(MAP)MAP.resize();drawMarkers();renderNear();try{history.replaceState(null,'',location.pathname+location.search);}catch(e){}}
+
+/* ================= language ================= */
+function applyStatic(){
+  document.documentElement.lang=LOCALE[lang];document.title=t.title;
+  $('brand').textContent=t.title;$('tagline').textContent=t.tag;$('q').placeholder=t.ph;
+  $('tilewarn').textContent=t.tilewarn;$('map').setAttribute('aria-label',t.mapLabel);
+  document.querySelector('.locate').setAttribute('aria-label',t.locate);$('clr').setAttribute('aria-label',t.clear);
+  $('langs').innerHTML=LANGS.map(l=>`<button class="${l===lang?'on':''}" data-act="lang" data-v="${l}" lang="${LOCALE[l]}">${T[l].lang}</button>`).join('');}
+function setLang(l){
+  if(l===lang)return;lang=l;t=T[l];try{localStorage.setItem('ss_lang',l);}catch(e){}
+  try{const u=new URL(location.href);u.searchParams.set('lang',l);history.replaceState(null,'',u.pathname+u.search+u.hash);}catch(e){}
+  applyStatic();renderChips();$('res').innerHTML=results();
+  if(MAP){const keep=MAP.kind;buildMap(keep==='naver'?naverAdapter:leafletAdapter);}
+  renderNear();rerender();}
+
+/* ================= events ================= */
+const qEl=$('q');
+qEl.addEventListener('input',()=>{S.q=qEl.value;$('res').innerHTML=results();$('clr').hidden=!S.q;});
+document.addEventListener('click',e=>{
+  const el=e.target.closest('[data-act]'); if(!el)return;
+  const a=el.dataset.act, v=el.dataset.v, p=P();
+  if(a==='open')openPop(el.dataset.id);
+  else if(a==='home')goHome();
+  else if(a==='locate')locate();
+  else if(a==='lang')setLang(v);
+  else if(a==='clear'){S.q='';qEl.value='';$('res').innerHTML='';el.hidden=true;}
+  else if(a==='step'){const n=LINE[S.i+(+v)];if(n)openPop(n.id);}
+  else if(a==='go')openPop(LINE[+v].id);
+  else if(a==='mode'){S.mode=v;rerender();}
+  else if(a==='refresh'){S.clock=Date.now();rerender();toast(t.refreshed);}
+  else if(a==='report'){p.rep=+v;rerender();toast(t.thanks);}
+  else if(a==='perks'){const x=$('perks');if(x)x.scrollIntoView({behavior:'smooth'});}
+  else if(a==='copy'){(navigator.clipboard?navigator.clipboard.writeText(v):Promise.reject()).then(()=>toast(t.copied),()=>toast(t.copyfail));}
+  else if(a==='fav'){S.fav[p.id]=!S.fav[p.id];rerender();toast(S.fav[p.id]?t.fav:t.unfav);}
+  else if(a==='grp'){S.grp=v;S.sub=null;if(v!=='eat')S.sort='dist';renderChips();drawMarkers();renderNear();}
+  else if(a==='sub'){if(!S.member){S.sheet='filter';renderSheet();}else{S.sub=S.sub===v?null:v;renderChips();drawMarkers();renderNear();}}
+  else if(a==='sort'){S.sort=v;renderNear();}
+  else if(a==='close'){if(e.target===el||el.classList.contains('x')){S.sheet=null;renderSheet();}}
+  else if(a==='plan'){S.sel=+v;renderSheet();}
+  else if(a==='buy'){S.member=true;S.sheet=null;renderSheet();renderChips();toast(t.bought);}
+});
+window.addEventListener('hashchange',()=>{const id=location.hash.slice(1);if(LINE.some(x=>x.id===id))openPop(id);});
+setInterval(()=>{document.querySelectorAll('[data-end]').forEach(el=>{el.textContent=left(+el.dataset.end);});},30000);
+applyStatic();renderChips();renderNear();startMap();
+const h0=location.hash.slice(1); if(LINE.some(x=>x.id===h0))openPop(h0);
+})();
