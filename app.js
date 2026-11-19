@@ -441,7 +441,7 @@ function setLang(l){
 
 /* ================= events ================= */
 const qEl=$('q');
-qEl.addEventListener('input',()=>{S.q=qEl.value;$('res').innerHTML=results();$('clr').hidden=!S.q;});
+qEl.addEventListener('input',()=>{S.q=qEl.value;if(S.q&&!wide())setMin(true);$('res').innerHTML=results();$('clr').hidden=!S.q;});
 document.addEventListener('click',e=>{
   const el=e.target.closest('[data-act]'); if(!el)return;
   const a=el.dataset.act, v=el.dataset.v, p=P();
