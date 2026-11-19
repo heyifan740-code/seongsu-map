@@ -4,7 +4,7 @@
 const LANGS=['zh','en','ko'];
 const LOCALE={zh:'zh-CN',en:'en',ko:'ko'};
 const T={
-zh:{filt:'筛选',fTitle:'按条件筛选',fSec:['福利','时间','入场','其他'],fOpt:{gift:'送礼',deal:'打折',taste:'试吃',draw:'抽奖',exp:'体验',new:'本周新开',ending:'3天内结束',perm:'常设店',walkin:'直接进',queue:'现场取号',book:'要预约/购票',tax:'可退税',r45:'评分 4.5+',r40:'评分 4.0+'},fClear:'清除',fShow:n=>`查看 ${n} 个结果`,fres:'筛选结果',title:'圣水快闪线',tag:'课堂原型 · 信息以官方为准',ph:'搜索快闪、美食、店铺或福利',all:'全部',
+zh:{tbd:'结束日期未公布',from:s=>`${s} 起`,imgBy:'图片',filt:'筛选',fTitle:'按条件筛选',fSec:['福利','时间','入场','其他'],fOpt:{popup:'只看快闪',gift:'送礼',deal:'打折',taste:'试吃',draw:'抽奖',exp:'体验',new:'本周新开',ending:'3天内结束',perm:'常设店',walkin:'直接进',queue:'现场取号',book:'要预约/购票',tax:'可退税',r45:'评分 4.5+',r40:'评分 4.0+'},fClear:'清除',fShow:n=>`查看 ${n} 个结果`,fres:'筛选结果',title:'圣水快闪线',tag:'课堂原型 · 信息以官方为准',ph:'搜索快闪、美食、店铺或福利',all:'全部',
  grp:{pop:'快闪',eat:'美食',shop:'逛店'},
  near:n=>`附近 50m · <em>${n}</em> 家`,list:(l,n)=>`${l} · <em>${n}</em> 家`,demo:'演示位置 · 长按地图可移动',real:'当前定位 · 长按地图可移动',
  empty:'50m 内暂时没有',nearest:(n,d)=>`最近的是 ${n} · ${d} ›`,
@@ -36,7 +36,7 @@ zh:{filt:'筛选',fTitle:'按条件筛选',fSec:['福利','时间','入场','其
   naver:['打开“信息来源”页面，找到 <span class="ko">네이버 예약</span> 链接','用 Naver 账号登录，选择日期和时段完成预约','按预约时间到店，出示预约确认页面入场'],
   ticket:['这是收费展览，需要购票入场','票价和购票方式请看“信息来源”页面里的官方链接','周末人多，建议工作日或开门时段去']},
  taxStep:'结账时出示护照办理退税',lang:'中文'},
-en:{filt:'Filters',fTitle:'Filter by',fSec:['Perks','When','Entry','Other'],fOpt:{gift:'Free gift',deal:'Discount',taste:'Tasting',draw:'Lucky draw',exp:'Experience',new:'New this week',ending:'Ends in 3 days',perm:'Permanent',walkin:'Walk in',queue:'Waiting list',book:'Booking / ticket',tax:'Tax refund',r45:'Rating 4.5+',r40:'Rating 4.0+'},fClear:'Clear',fShow:n=>`Show ${n} results`,fres:'Filtered',title:'Seongsu Pop-up Line',tag:'Class prototype · confirm with official sources',ph:'Search pop-ups, food, shops or freebies',all:'All',
+en:{tbd:'End date TBA',from:s=>`From ${s}`,imgBy:'Photo',filt:'Filters',fTitle:'Filter by',fSec:['Perks','When','Entry','Other'],fOpt:{popup:'Pop-ups only',gift:'Free gift',deal:'Discount',taste:'Tasting',draw:'Lucky draw',exp:'Experience',new:'New this week',ending:'Ends in 3 days',perm:'Permanent',walkin:'Walk in',queue:'Waiting list',book:'Booking / ticket',tax:'Tax refund',r45:'Rating 4.5+',r40:'Rating 4.0+'},fClear:'Clear',fShow:n=>`Show ${n} results`,fres:'Filtered',title:'Seongsu Pop-up Line',tag:'Class prototype · confirm with official sources',ph:'Search pop-ups, food, shops or freebies',all:'All',
  grp:{pop:'Pop-ups',eat:'Eat',shop:'Shops'},
  near:n=>`Within 50 m · <em>${n}</em>`,list:(l,n)=>`${l} · <em>${n}</em>`,demo:'Demo location · long-press the map to move',real:'Your location · long-press the map to move',
  empty:'Nothing within 50 m right now',nearest:(n,d)=>`Nearest: ${n} · ${d} ›`,
@@ -68,7 +68,7 @@ en:{filt:'Filters',fTitle:'Filter by',fSec:['Perks','When','Entry','Other'],fOpt
   naver:['Open the source page and find the <span class="ko">네이버 예약</span> (Naver booking) link','Sign in to Naver and pick a date and time','Show your booking confirmation at the door'],
   ticket:['This is a paid exhibition — you need a ticket','See the official link on the source page for prices and booking','Weekends are crowded; weekdays or opening time are best']},
  taxStep:'Show your passport at checkout for the tax refund',lang:'EN'},
-ko:{filt:'필터',fTitle:'조건으로 찾기',fSec:['혜택','기간','입장','기타'],fOpt:{gift:'증정',deal:'할인',taste:'시식',draw:'추첨',exp:'체험',new:'이번 주 오픈',ending:'3일 내 종료',perm:'상시 매장',walkin:'바로 입장',queue:'현장 웨이팅',book:'예약/티켓',tax:'택스리펀',r45:'평점 4.5+',r40:'평점 4.0+'},fClear:'초기화',fShow:n=>`결과 ${n}곳 보기`,fres:'필터 결과',title:'성수 팝업라인',tag:'수업 프로토타입 · 정보는 공식 안내를 확인하세요',ph:'팝업, 맛집, 매장, 혜택 검색',all:'전체',
+ko:{tbd:'종료일 미정',from:s=>`${s}부터`,imgBy:'사진',filt:'필터',fTitle:'조건으로 찾기',fSec:['혜택','기간','입장','기타'],fOpt:{popup:'팝업만',gift:'증정',deal:'할인',taste:'시식',draw:'추첨',exp:'체험',new:'이번 주 오픈',ending:'3일 내 종료',perm:'상시 매장',walkin:'바로 입장',queue:'현장 웨이팅',book:'예약/티켓',tax:'택스리펀',r45:'평점 4.5+',r40:'평점 4.0+'},fClear:'초기화',fShow:n=>`결과 ${n}곳 보기`,fres:'필터 결과',title:'성수 팝업라인',tag:'수업 프로토타입 · 정보는 공식 안내를 확인하세요',ph:'팝업, 맛집, 매장, 혜택 검색',all:'전체',
  grp:{pop:'팝업',eat:'맛집',shop:'매장'},
  near:n=>`주변 50m · <em>${n}</em>곳`,list:(l,n)=>`${l} · <em>${n}</em>곳`,demo:'데모 위치 · 지도를 길게 눌러 이동',real:'현재 위치 · 지도를 길게 눌러 이동',
  empty:'50m 안에 아직 없어요',nearest:(n,d)=>`가장 가까운 곳: ${n} · ${d} ›`,
@@ -101,27 +101,59 @@ ko:{filt:'필터',fTitle:'조건으로 찾기',fSec:['혜택','기간','입장',
   ticket:['유료 전시라 티켓이 필요해요','가격과 예매 방법은 출처 페이지의 공식 링크에서 확인','주말은 붐벼요. 평일이나 오픈 시간대를 추천해요']},
  taxStep:'계산할 때 여권을 보여주고 택스리펀 받기',lang:'한국어'}
 };
-const SUBS={pop:['beauty','scent','fashion','char','kpop','game','life','food'],eat:['korean','western','saltbread','bakery','bagel','donut','eggtart','dessert','cafe'],shop:['acc','bstore','fstore']};
-const SUBL={beauty:['美妆护肤','Beauty','뷰티'],scent:['香水香氛','Fragrance','향수'],saltbread:['盐面包','Salt bread','소금빵'],fashion:['服饰','Fashion','패션'],char:['IP联名','Characters','캐릭터·콜라보'],kpop:['K-pop','K-pop','K-pop'],game:['展览游戏','Exhibits & games','전시·게임'],life:['生活市集','Lifestyle & local','라이프스타일·로컬'],food:['美食快闪','Food pop-ups','푸드 팝업'],
+const SUBS={pop:['beauty','scent','fashion','eyewearpop','char','kpop','game','life','food'],eat:['korean','western','saltbread','bakery','bagel','donut','eggtart','dessert','cafe'],shop:['acc','eyewear','bstore','fstore']};
+const SUBL={eyewear:['眼镜门店','Eyewear stores','아이웨어 매장'],eyewearpop:['眼镜快闪','Eyewear pop-ups','아이웨어 팝업'],beauty:['美妆护肤','Beauty','뷰티'],scent:['香水香氛','Fragrance','향수'],saltbread:['盐面包','Salt bread','소금빵'],fashion:['服饰','Fashion','패션'],char:['IP联名','Characters','캐릭터·콜라보'],kpop:['K-pop','K-pop','K-pop'],game:['展览游戏','Exhibits & games','전시·게임'],life:['生活市集','Lifestyle & local','라이프스타일·로컬'],food:['美食快闪','Food pop-ups','푸드 팝업'],
  korean:['韩餐','Korean','한식'],western:['西餐披萨','Western & pizza','양식·피자'],bakery:['面包烘焙','Bakery','베이커리'],bagel:['贝果','Bagels','베이글'],donut:['甜甜圈','Donuts','도넛'],eggtart:['蛋挞','Egg tarts','에그타르트'],dessert:['甜品','Desserts','디저트'],cafe:['咖啡','Cafés','카페'],
  acc:['饰品杂货','Accessories','액세서리'],bstore:['美妆集合店','Beauty stores','뷰티 매장'],fstore:['服装集合店','Fashion stores','패션 매장']};
 
+const CATS=[
+ ['beauty',['pop/beauty','shop/bstore'],['美妆','Beauty','뷰티']],
+ ['scent',['pop/scent'],['香水','Fragrance','향수']],
+ ['fashion',['pop/fashion','shop/fstore'],['服饰','Fashion','패션']],
+ ['eyewear',['pop/eyewearpop','shop/eyewear'],['眼镜','Eyewear','안경']],
+ ['acc',['shop/acc'],['饰品','Accessories','액세서리']],
+ ['char',['pop/char'],['IP联名','Characters','캐릭터']],
+ ['kpop',['pop/kpop'],['K-pop','K-pop','K-pop']],
+ ['exhibit',['pop/game'],['展览体验','Exhibits','전시·체험']],
+ ['life',['pop/life'],['地方好物','Local goods','로컬·라이프']],
+ ['meal',['eat/korean','eat/western','pop/food'],['餐厅','Restaurants','식당']],
+ ['bread',['eat/saltbread','eat/bakery','eat/bagel'],['面包','Bakery','빵']],
+ ['sweet',['eat/donut','eat/eggtart','eat/dessert','pop/food'],['甜品','Desserts','디저트']],
+ ['cafe',['eat/cafe'],['咖啡','Café','카페']]];
+const catOf=p=>{const k=p.grp+'/'+p.sub;if(k==='pop/food')return p.type==='sweet'?'sweet':'meal';const c=CATS.find(c=>c[1].includes(k));return c?c[0]:'life';};
+const CICON={
+ beauty:'<path d="M9 21h6V11H9zM10 11V6l4-3v8"/>',
+ scent:'<path d="M7 10h10v10a1 1 0 0 1-1 1H8a1 1 0 0 1-1-1zM10 10V7h4v3M10 4h4v3h-4z"/>',
+ fashion:'<path d="M8 3L3 6l2 4 3-1v12h8V9l3 1 2-4-5-3c-1 2-2 3-4 3S9 5 8 3z"/>',
+ eyewear:'<circle cx="6.5" cy="14" r="3.5"/><circle cx="17.5" cy="14" r="3.5"/><path d="M10 14h4M3 13l2-6M21 13l-2-6"/>',
+ acc:'<circle cx="12" cy="15" r="5"/><path d="M10 6l2-3 2 3-2 3z"/>',
+ char:'<path d="M12 3l2.7 5.6 6.1.9-4.4 4.3 1 6.1L12 17l-5.4 2.9 1-6.1L3.2 9.5l6.1-.9z"/>',
+ kpop:'<path d="M9 18V5l11-2v13"/><circle cx="6" cy="18" r="3"/><circle cx="17" cy="16" r="3"/>',
+ exhibit:'<path d="M3 7h18v3a2 2 0 0 0 0 4v3H3v-3a2 2 0 0 0 0-4z"/><path d="M14 7v10"/>',
+ life:'<path d="M4 10h16l-2 10H6zM8 10l4-6 4 6"/>',
+ meal:'<path d="M3 11h18a9 9 0 0 1-18 0zM8 7c0-2 2-2 2-4M13 7c0-2 2-2 2-4"/>',
+ bread:'<path d="M4 13a8 5 0 0 1 16 0v6H4z"/><path d="M9 10v3M12 9v4M15 10v3"/>',
+ sweet:'<path d="M4 13h16l-2 7H6zM6 13c0-4 2.7-7 6-7s6 3 6 7M12 6V3"/>',
+ cafe:'<path d="M4 9h13v5a5 5 0 0 1-5 5H9a5 5 0 0 1-5-5zM17 11h2a2 2 0 0 1 0 4h-2M8 3v3M12 3v3"/>'};
+const cIcon=k=>`<svg viewBox="0 0 24 24">${CICON[k]||CICON.life}</svg>`;
 let lang=(()=>{try{const q=new URLSearchParams(location.search).get('lang');if(LANGS.includes(q))return q;const s=localStorage.getItem('ss_lang');if(LANGS.includes(s))return s;}catch(e){}
   const n=(navigator.language||'en').toLowerCase();return n.startsWith('zh')?'zh':n.startsWith('ko')?'ko':'en';})();
 let t=T[lang];
 const tx=o=>o==null?'':typeof o==='string'?o:(o[lang]||o.en||o.zh||'');
 const subL=k=>SUBL[k][LANGS.indexOf(lang)];
+const catL=k=>CATS.find(c=>c[0]===k)[2][LANGS.indexOf(lang)];
+const subKL=k=>subL(k.split('/')[1]);
 
 /* ================= state ================= */
 const M=60e3,H=60*M,D=24*H;
 const FALLBACK=[37.54275,127.05420];
 const ST_B=[37.54457,127.05571], ST_A=[37.54360,127.04460];
-POPS.forEach(p=>{p.endTs=Date.parse(p.end);p.rep=null;});
+POPS.forEach(p=>{p.endTs=Date.parse(p.end);p.rep=null;p.cat=catOf(p);});
 const live=POPS.filter(p=>p.endTs>Date.now());
 // spread markers that share an address so none are hidden
 (()=>{const g={};live.forEach(p=>{const k=p.ll[0].toFixed(5)+','+p.ll[1].toFixed(5);(g[k]=g[k]||[]).push(p);});
   Object.values(g).forEach(a=>a.forEach((p,i)=>{if(a.length<2){p.dl=p.ll;return;}const ang=2*Math.PI*i/a.length,r=0.00009;p.dl=[p.ll[0]+r*Math.cos(ang),p.ll[1]+r*1.26*Math.sin(ang)];}));})();
-const S={f:{perk:[],time:'',entry:'',tax:false,rate:0},view:'home',i:0,mode:'live',grp:'all',sub:null,sort:'dist',member:false,sel:1,sheet:null,fav:{},me:FALLBACK.slice(),q:'',real:false,clock:Date.now()};
+const S={f:{perk:[],time:'',entry:'',tax:false,rate:0},view:'home',cat:null,i:0,mode:'live',grp:'all',sub:null,sort:'dist',member:false,sel:1,sheet:null,fav:{},me:FALLBACK.slice(),q:'',real:false,clock:Date.now()};
 const esc=s=>String(s).replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
 const LINE=live.slice().sort((a,b)=>a.ll[1]-b.ll[1]);
 const P=()=>LINE[S.i];
@@ -136,19 +168,24 @@ const fCount=()=>S.f.perk.length+(S.f.time?1:0)+(S.f.entry?1:0)+(S.f.tax?1:0)+(S
 function fMatch(p){const f=S.f;
   if(f.perk.length&&!f.perk.some(k=>hasPerk(p,k)))return false;
   if(f.time==='new'){const s0=startTs(p);if(!s0||Date.now()-s0>7*D||Date.now()<s0-D)return false;}
-  if(f.time==='ending'&&(p.perm||p.endTs-Date.now()>3*D))return false;
+  if(f.time==='ending'&&(p.perm||p.endUnk||p.endTs-Date.now()>3*D))return false;
   if(f.time==='perm'&&!p.perm)return false;
+  if(f.time==='popup'&&p.perm)return false;
   if(f.entry==='walkin'&&p.entry!=='walkin')return false;
   if(f.entry==='queue'&&p.entry!=='queue')return false;
   if(f.entry==='book'&&!/naver|ticket/.test(p.entry))return false;
   if(f.tax&&!p.tax)return false;
   if(f.rate&&!(p.rate&&p.rate.s>=f.rate))return false;
   return true;}
-const match=p=>(S.grp==='all'||p.grp===S.grp)&&(!S.sub||p.sub===S.sub)&&fMatch(p);
+const match=p=>(!S.cat||p.cat===S.cat)&&(!S.sub||p.grp+'/'+p.sub===S.sub)&&fMatch(p);
 const visible=()=>live.filter(match);
 const naverUrl=p=>'https://map.naver.com/p/search/'+encodeURIComponent(p.addr.replace(/\s*\(.*?\)\s*/g,' ').replace(/,.*$/,'').trim());
 const stars=p=>p.rate?`<span class="rt-s">★ ${p.rate.s.toFixed(1)}</span>`:'';
-const period=p=>p.perm?t.perm:`${p.start}–${p.endTxt}`;
+const rangeTxt=p=>p.endUnk?t.from(p.start):`${p.start} – ${p.endTxt}`;
+const leftHtml=p=>p.endUnk?`<b class="k">${t.tbd}</b>`:`<b data-end="${p.endTs}">${left(p.endTs)}</b>`;
+const period=p=>p.perm?t.perm:rangeTxt(p);
+const credit=u=>u.includes('d8nffddmkwqeq')?'Popply':u.includes('d12zq4w4guyljn')?'DiningCode':'';
+const thumb=(p,cls)=>`<span class="thumb ${cls||''} c-${p.cat}">${cIcon(p.cat)}${p.img?`<img src="${esc(p.img)}" alt="" loading="lazy" referrerpolicy="no-referrer" onerror="this.remove()">`:''}</span>`;
 const hoursTxt=p=>(p.h==='24h'?(lang==='zh'?'24 小时':lang==='ko'?'24시간':'24 hours'):t.daily+' '+p.h)+(p.hx?' · '+tx(p.hx):'');
 const ICON={
  back:'<svg viewBox="0 0 24 24"><path d="M15 6l-6 6 6 6"/></svg>',
@@ -246,7 +283,7 @@ function pinHtml(p,near){
   return `<div class="gm${near?' on':''} t-${p.type}"><div class="bub">${ICON[p.type]||ICON.gift}<span>${esc(tx(p.g))}</span></div><i></i><em>${lab}</em></div>`;}
 // full gift bubbles for places within 50 m, when a category is chosen, or when zoomed in; small dots otherwise (keeps the map readable)
 function drawMarkers(){if(!MAP)return;MAP.clear();const zoomed=MAP.zoom()>=18.5;visible().forEach(p=>{const near=distM(p)<=50;
-  if(near||zoomed||S.grp!=='all')MAP.marker({ll:p.dl||p.ll,html:pinHtml(p,near),w:70,h:86,ax:35,ay:68,z:near?500:100,title:tx(p.t),onClick:()=>openPop(p.id)});
+  if(near||zoomed||S.cat||S.sub||fCount())MAP.marker({ll:p.dl||p.ll,html:pinHtml(p,near),w:70,h:86,ax:35,ay:68,z:near?500:100,title:tx(p.t),onClick:()=>openPop(p.id)});
   else MAP.marker({ll:p.dl||p.ll,html:`<div class="dotm t-${p.type}"></div>`,w:16,h:16,ax:8,ay:8,z:0,title:tx(p.t),onClick:()=>openPop(p.id)});});}
 function setMe(ll,recenter){S.me=ll;if(ring)ring.move(ll);if(meDot)MAP.move(meDot,ll);drawMarkers();renderNear();if(recenter)centerMe();}
 const wide=()=>matchMedia('(min-width:880px)').matches;
@@ -255,42 +292,44 @@ function centerMe(){if(!MAP)return;const z=Math.max(MAP.zoom(),17);let off=0;if(
 
 /* ================= home ================= */
 function card(p,d){
-  return `<button class="nc" data-act="open" data-id="${p.id}">
-    <div class="t"><b>${esc(tx(p.t))}</b>${stars(p)}<span class="c">${subL(p.sub)}</span><span class="dm">${fmtD(d)}</span></div>
+  return `<button class="nc has-th" data-act="open" data-id="${p.id}">${thumb(p)}<span class="ncb">
+    <div class="t"><b>${esc(tx(p.t))}</b>${stars(p)}<span class="c">${catL(p.cat)}</span><span class="dm">${fmtD(d)}</span></div>
     <div class="gifts">${p.perks.slice(0,3).map(x=>`<span class="gift${/deal|menu|tip|sale/.test(x[1])?' a':''}">${ICON[p.grp==='eat'?p.type:p.grp==='shop'?'shop':'gift']}${esc(tx(x[0]))}</span>`).join('')}</div>
-    <div class="ft"><span>${t.entry[p.entry]}${p.tax?' · '+t.tax:''}${p.perm?' · '+esc(p.h==='24h'?'24h':p.h):` · ${t.ends} <b data-end="${p.endTs}">${left(p.endTs)}</b>`}</span><span class="more">${t.details}</span></div></button>`;}
+    <div class="ft"><span>${t.entry[p.entry]}${p.tax?' · '+t.tax:''}${p.perm?' · '+esc(p.h==='24h'?'24h':p.h):` · ${p.endUnk?t.tbd:`${t.ends} <b data-end="${p.endTs}">${left(p.endTs)}</b>`}`}</span><span class="more">${t.details}</span></div></span></button>`;}
 function nearList(){
   const vs=visible().map(p=>({p,d:distM(p)}));
   const cnt=g=>live.filter(p=>p.grp===g).length;
   const foot=`<p class="datanote">${t.note(cnt('pop'),cnt('eat'),cnt('shop'),DATA_DATE)}</p>`;
-  if(S.grp==='all'&&!S.sub&&!fCount()){
+  if(!S.cat&&!S.sub&&!fCount()){
     vs.sort((a,b)=>a.d-b.d);const inR=vs.filter(x=>x.d<=50),nearest=vs[0];
     const empty=`<div class="emptyn">${t.empty}${nearest?`<button data-act="open" data-id="${nearest.p.id}">${esc(t.nearest(tx(nearest.p.t),fmtD(nearest.d)))}</button>`:''}</div>`;
     return `<button class="grabbtn" data-act="sheet" aria-label="${t.details}"><span class="grab"></span></button><div class="sh pad" data-act="sheet"><h2>${t.near(inR.length)}</h2><small>${S.real?t.real:t.demo}</small></div>
      <div class="near pad">${inR.length?inR.map(x=>card(x.p,x.d)).join(''):empty}${foot}</div>`;}
-  const rated=(S.grp==='eat'||S.f.rate>0)&&S.sort==='rate';
+  const foodCat=['meal','bread','sweet','cafe'].includes(S.cat)||S.f.rate>0;
+  const rated=foodCat&&S.sort==='rate';
   vs.sort(rated?(a,b)=>((b.p.rate?b.p.rate.s:0)-(a.p.rate?a.p.rate.s:0))||(b.p.rate?b.p.rate.n:0)-(a.p.rate?a.p.rate.n:0):(a,b)=>a.d-b.d);
-  const label=S.sub?subL(S.sub):S.grp==='all'?t.fres:t.grp[S.grp];
-  const sortSeg=(S.grp==='eat'||S.f.rate>0)?`<div class="seg sm"><button class="${S.sort==='dist'?'on':''}" data-act="sort" data-v="dist">${t.sortD}</button><button class="${S.sort==='rate'?'on':''}" data-act="sort" data-v="rate">${t.sortR}</button></div>`:'';
+  const label=S.sub?subKL(S.sub):S.cat?catL(S.cat):t.fres;
+  const sortSeg=foodCat?`<div class="seg sm"><button class="${S.sort==='dist'?'on':''}" data-act="sort" data-v="dist">${t.sortD}</button><button class="${S.sort==='rate'?'on':''}" data-act="sort" data-v="rate">${t.sortR}</button></div>`:'';
   return `<button class="grabbtn" data-act="sheet" aria-label="${t.details}"><span class="grab"></span></button><div class="sh pad" data-act="sheet"><h2>${t.list(esc(label),vs.length)}</h2>${sortSeg}</div>
    <div class="near pad">${vs.map(x=>card(x.p,x.d)).join('')}${foot}</div>`;}
 function renderNear(){$('near').innerHTML=nearList();}
-function hay(p){return [p.name,p.brand,p.addr,...LANGS.map(l=>[p.t[l],p.g[l],SUBL[p.sub].join(' '),T[l].grp[p.grp],...p.perks.map(x=>x[0][l])].join(' '))].join(' ').toLowerCase();}
+function hay(p){return [p.name,p.brand,p.addr,CATS.find(c=>c[0]===p.cat)[2].join(' '),...LANGS.map(l=>[p.t[l],p.g[l],SUBL[p.sub].join(' '),T[l].grp[p.grp],...p.perks.map(x=>x[0][l])].join(' '))].join(' ').toLowerCase();}
 POPS.forEach(p=>{p._h=null;});
 function results(){
   const q=S.q.trim().toLowerCase(); if(!q)return '';
   const hit=live.filter(p=>(p._h||(p._h=hay(p))).includes(q)).sort((a,b)=>distM(a)-distM(b));
   const hl=s=>{const i=s.toLowerCase().indexOf(q);return i<0?esc(s):esc(s.slice(0,i))+'<mark>'+esc(s.slice(i,i+q.length))+'</mark>'+esc(s.slice(i+q.length));};
-  return `<div class="results" role="listbox">${hit.length?hit.slice(0,30).map(p=>`<button class="res" data-act="open" data-id="${p.id}"><span class="pi">${ICON[p.grp==='eat'?p.type:p.grp==='shop'?'shop':'pin']}</span><span><b>${hl(tx(p.t))}</b><small>${subL(p.sub)} · ${esc(tx(p.g))}${p.rate?' · ★'+p.rate.s.toFixed(1):''} · ${period(p)}</small></span><span class="d">${fmtD(distM(p))}</span></button>`).join('')
+  return `<div class="results" role="listbox">${hit.length?hit.slice(0,30).map(p=>`<button class="res" data-act="open" data-id="${p.id}">${thumb(p,'sm')}<span><b>${hl(tx(p.t))}</b><small>${catL(p.cat)} · ${esc(tx(p.g))}${p.rate?' · ★'+p.rate.s.toFixed(1):''} · ${period(p)}</small></span><span class="d">${fmtD(distM(p))}</span></button>`).join('')
     :`<div class="res" style="color:var(--muted)">${esc(t.nores(S.q))}</div>`}</div>`;}
 function renderChips(){
   const n=fCount();
-  $('chips').innerHTML=['all','pop','eat','shop'].map(k=>`<button class="fl${S.grp===k&&!(k==='all'&&S.sub)?' on':''}" data-act="grp" data-v="${k}">${k==='all'?t.all:t.grp[k]}</button>`).join('')
-   +`<button class="fl ff${n?' on':''}" data-act="facets"><svg viewBox="0 0 24 24"><path d="M4 6h16M7 12h10M10 18h4"/></svg>${t.filt}${n?`<small>${n}</small>`:''}</button>`;
-  const s=$('subchips');s.hidden=false;
-  const groups=S.grp==='all'?['pop','eat','shop']:[S.grp];
-  s.innerHTML=groups.map(g=>(S.grp==='all'?`<span class="glab">${t.grp[g]}</span>`:'')+SUBS[g].map(k=>{const c=live.filter(p=>p.grp===g&&p.sub===k).length;if(!c)return '';
-    return `<button class="fl sub${S.sub===k?' on':''}" data-act="sub" data-v="${k}" data-g="${g}">${subL(k)}<small>${c}</small>${S.member?'':'<span class="vip">VIP</span>'}</button>`;}).join('')).join('');}
+  $('chips').innerHTML=`<button class="fl${!S.cat&&!S.sub?' on':''}" data-act="cat" data-v="">${t.all}</button>`
+   +CATS.map(([k])=>{const c=live.filter(p=>p.cat===k).length;if(!c)return '';return `<button class="fl cat${S.cat===k?' on':''}" data-act="cat" data-v="${k}">${cIcon(k)}${catL(k)}<small>${c}</small></button>`;}).join('');
+  const s=$('subchips');
+  const subs=S.cat?[...new Set(live.filter(p=>p.cat===S.cat).map(p=>p.grp+'/'+p.sub))]:[];
+  s.hidden=false;
+  s.innerHTML=`<button class="fl ff${n?' on':''}" data-act="facets"><svg viewBox="0 0 24 24"><path d="M4 6h16M7 12h10M10 18h4"/></svg>${t.filt}${n?`<small>${n}</small>`:''}</button>`
+   +(subs.length>1?subs.map(k=>`<button class="fl sub${S.sub===k?' on':''}" data-act="sub" data-v="${k}">${subKL(k)}<small>${live.filter(p=>p.grp+'/'+p.sub===k&&p.cat===S.cat).length}</small></button>`).join(''):'');}
 function locate(){
   if(!navigator.geolocation){toast(t.nogeo);setMe(FALLBACK,true);return;}
   toast(t.locating);
@@ -302,11 +341,12 @@ function locate(){
 function srcName(u){return u.includes('popply')?t.srcNames.popply:u.includes('diningcode')?t.srcNames.diningcode:u.includes('instagram')?t.srcNames.instagram:t.srcNames.other;}
 function head(p){
   return `<div class="backrow pad"><button data-act="home">${ICON.back}${t.back}</button></div>
+   <div class="hero c-${p.cat}${p.img?'':' ill'}">${cIcon(p.cat)}${p.img?`<img src="${esc(p.img)}" alt="${esc(tx(p.t))}" referrerpolicy="no-referrer" onerror="this.remove()"><span class="credit">${t.imgBy}: ${credit(p.img)}</span>`:''}</div>
    <section class="head pad">
    <div style="display:flex;align-items:flex-start;gap:8px"><div style="flex:1;min-width:0">
     <div class="title"><h1>${esc(tx(p.t))}</h1><span class="cat">${subL(p.sub)}</span></div>
     <div class="addr ko-name">${esc(p.name)}</div>
-    <div class="addr">${p.perm?t.permStore:p.start+' – '+p.endTxt} · ${t.about(fmtD(distM(p)))}</div>
+    <div class="addr">${p.perm?t.permStore:rangeTxt(p)} · ${t.about(fmtD(distM(p)))}</div>
     ${p.rate||p.tax?`<div class="badges">${p.rate?`<a class="rbadge" href="https://www.diningcode.com/profile.php?rid=${p.rate.u}" target="_blank" rel="noopener">★ ${p.rate.s.toFixed(1)} <small>${esc(t.rnote(p.rate.n))}</small></a>`:''}${p.tax?`<span class="tbadge">${t.tax}</span>`:''}</div>`:''}</div>
     <button class="star${S.fav[p.id]?' on':''}" data-act="fav" aria-label="${t.star}">${ICON.star}</button></div>
    <div class="chiprow"><a class="chipb p" href="${naverUrl(p)}" target="_blank" rel="noopener">${ICON.pin}${t.nav}</a>
@@ -323,9 +363,9 @@ function cards(p){
     const q=p.rep!=null?`<div class="kv"><span>${t.wait}</span><b class="${p.rep===0?'g':p.rep===1?'a':''}">${t.lv[p.rep]}</b></div><div class="src">${t.reported}</div>`
       :`<div class="kv"><span>${t.wait}</span><b class="k">${t.norep}</b></div><div class="rep2">${t.here}${t.lv.map((x,i)=>`<button data-act="report" data-v="${i}">${x}</button>`).join('')}</div>`;
     return `<div class="cards"><div class="card"><h3>${t.queue}</h3>${q}</div>
-     <div class="card"><h3>${t.entryT}</h3><div class="kv"><span>${t.method}</span><b class="${p.entry==='walkin'?'g':'a'}">${t.entry[p.entry]}</b></div>${p.perm?'':`<div class="kv"><span>${t.endsIn}</span><b data-end="${p.endTs}">${left(p.endTs)}</b></div>`}${p.note?`<div class="src">${esc(tx(p.note))}</div>`:''}</div></div>`;}
+     <div class="card"><h3>${t.entryT}</h3><div class="kv"><span>${t.method}</span><b class="${p.entry==='walkin'?'g':'a'}">${t.entry[p.entry]}</b></div>${p.perm?'':`<div class="kv"><span>${t.endsIn}</span>${leftHtml(p)}</div>`}${p.note?`<div class="src">${esc(tx(p.note))}</div>`:''}</div></div>`;}
   return `<div class="cards"><div class="card"><h3>${t.ohours}</h3><div class="kv"><span style="white-space:normal">${esc(hoursTxt(p))}</span></div></div>
-    <div class="card"><h3>${p.perm?t.kind:t.period}</h3>${p.perm?`<div class="kv"><span>${t.permStore}</span></div>`:`<div class="kv"><span>${t.dates}</span><b class="k">${p.start}–${p.endTxt}</b></div><div class="kv"><span>${t.left}</span><b data-end="${p.endTs}">${left(p.endTs)}</b></div>`}</div></div>`;}
+    <div class="card"><h3>${p.perm?t.kind:t.period}</h3>${p.perm?`<div class="kv"><span>${t.permStore}</span></div>`:`<div class="kv"><span>${t.dates}</span><b class="k">${rangeTxt(p)}</b></div><div class="kv"><span>${t.left}</span>${leftHtml(p)}</div>`}</div></div>`;}
 function lineMap(){
   const st=LINE.map((p,i)=>`<button class="st${i===S.i?' cur':''}" data-act="go" data-v="${i}" aria-label="${esc(tx(p.t))}"><span class="dot"></span><span class="nm">${esc(p.brand)}</span><span class="q">${esc(tx(p.g))}</span></button>`).join('');
   return `<div class="mapbox"><div class="mapscroll"><div class="track">
@@ -339,7 +379,7 @@ function info(p){
    <section class="sec pad"><h2>${t.info}</h2><div class="facts">
     <div class="fact"><span class="ic">${ICON.door}</span><div>${t.entryT}<small><span class="hl">${t.entry[p.entry]}</span></small></div></div>
     <div class="fact"><span class="ic">${ICON.clock}</span><div>${t.ohours}<small>${esc(hoursTxt(p))}</small></div></div>
-    <div class="fact"><span class="ic">${ICON.cal}</span><div>${p.perm?t.kind:t.period}<small>${p.perm?t.permStore+' · '+subL(p.sub):p.start+' – '+p.endTxt}</small></div></div>
+    <div class="fact"><span class="ic">${ICON.cal}</span><div>${p.perm?t.kind:t.period}<small>${p.perm?t.permStore+' · '+subL(p.sub):rangeTxt(p)}</small></div></div>
     <div class="fact"><span class="ic">${ICON.pin}</span><div>${t.koaddr}<small>${esc(p.addr)}</small><button class="copy" data-act="copy" data-v="${esc(p.addr)}">${ICON.copy}${t.copy}</button></div></div>
    </div></section><div class="sep"></div>
    <section class="sec pad"><h2>${t.guideT}<small>${t.guideS}</small></h2>${guide(p)}</section>`;}
@@ -362,13 +402,13 @@ const homeEl=$('home'),detEl=$('detail');
 function renderDetail(){detEl.innerHTML=vDetail();const c=document.querySelector('.st.cur');if(c){const sc=c.closest('.mapscroll');sc.scrollLeft=c.offsetLeft-sc.clientWidth/2+46;}}
 function vFacets(){
   const f=S.f,on=(sec,k)=>sec==='perk'?f.perk.includes(k):sec==='tax'?f.tax:sec==='rate'?f.rate===(k==='r45'?4.5:4.0):f[sec]===k;
-  const row=(sec,keys)=>`<div class="fopts">${keys.map(([s2,k])=>`<button class="fl${on(s2,k)?' on':''}" data-act="facet" data-s="${s2}" data-v="${k}">${t.fOpt[k]}${S.member?'':'<span class="vip">VIP</span>'}</button>`).join('')}</div>`;
+  const row=(sec,keys)=>`<div class="fopts">${keys.map(([s2,k])=>`<button class="fl${on(s2,k)?' on':''}" data-act="facet" data-s="${s2}" data-v="${k}">${t.fOpt[k]}</button>`).join('')}</div>`;
   const cnt=live.filter(match).length;
   return `<div class="mask" data-act="close"><div class="vsheet fsheet" role="dialog">
    <div class="fhead pad"><h3>${t.fTitle}</h3><button class="x" data-act="close" aria-label="${t.close}">×</button></div>
    <div class="pad">
     <h4>${t.fSec[0]}</h4>${row('perk',[['perk','gift'],['perk','deal'],['perk','taste'],['perk','draw'],['perk','exp']])}
-    <h4>${t.fSec[1]}</h4>${row('time',[['time','new'],['time','ending'],['time','perm']])}
+    <h4>${t.fSec[1]}</h4>${row('time',[['time','popup'],['time','new'],['time','ending'],['time','perm']])}
     <h4>${t.fSec[2]}</h4>${row('entry',[['entry','walkin'],['entry','queue'],['entry','book']])}
     <h4>${t.fSec[3]}</h4>${row('other',[['tax','tax'],['rate','r45'],['rate','r40']])}
     <div class="fbtns"><button class="fclear" data-act="fclear">${t.fClear}</button><button class="buy" data-act="close" data-x="1">${t.fShow(cnt)}</button></div>
@@ -412,10 +452,10 @@ document.addEventListener('click',e=>{
   else if(a==='perks'){const x=$('perks');if(x)x.scrollIntoView({behavior:'smooth'});}
   else if(a==='copy'){(navigator.clipboard?navigator.clipboard.writeText(v):Promise.reject()).then(()=>toast(t.copied),()=>toast(t.copyfail));}
   else if(a==='fav'){S.fav[p.id]=!S.fav[p.id];rerender();toast(S.fav[p.id]?t.fav:t.unfav);}
-  else if(a==='grp'){setMin(false);S.grp=v;S.sub=null;if(v!=='eat')S.sort='dist';renderChips();drawMarkers();renderNear();}
-  else if(a==='sub'){if(!S.member){S.sheet='filter';renderSheet();}else{setMin(false);if(S.sub===v){S.sub=null;}else{S.sub=v;S.grp=el.dataset.g;}refresh();}}
+  else if(a==='cat'){setMin(false);S.cat=(!v||S.cat===v)?null:v;S.sub=null;if(!['meal','bread','sweet','cafe'].includes(S.cat))S.sort='dist';refresh();}
+  else if(a==='sub'){setMin(false);S.sub=S.sub===v?null:v;refresh();}
   else if(a==='facets'){S.sheet='facets';renderSheet();}
-  else if(a==='facet'){if(!S.member){S.sheet='filter';renderSheet();return;}const s2=el.dataset.s,f=S.f;
+  else if(a==='facet'){const s2=el.dataset.s,f=S.f;
     if(s2==='perk'){f.perk=f.perk.includes(v)?f.perk.filter(x=>x!==v):[...f.perk,v];}
     else if(s2==='tax')f.tax=!f.tax;
     else if(s2==='rate'){const r=v==='r45'?4.5:4.0;f.rate=f.rate===r?0:r;}
