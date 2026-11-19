@@ -1,8 +1,8 @@
 (function(){
 'use strict';
 /* ================= i18n ================= */
-const LANGS=['zh','en','ja'];
-const LOCALE={zh:'zh-CN',en:'en',ja:'ja'};
+const LANGS=['zh','en','ko'];
+const LOCALE={zh:'zh-CN',en:'en',ko:'ko'};
 const T={
 zh:{title:'圣水快闪线',tag:'课堂原型 · 信息以官方为准',ph:'搜索快闪、美食、店铺或福利',all:'全部',
  grp:{pop:'快闪',eat:'美食',shop:'逛店'},
@@ -68,46 +68,46 @@ en:{title:'Seongsu Pop-up Line',tag:'Class prototype · confirm with official so
   naver:['Open the source page and find the <span class="ko">네이버 예약</span> (Naver booking) link','Sign in to Naver and pick a date and time','Show your booking confirmation at the door'],
   ticket:['This is a paid exhibition — you need a ticket','See the official link on the source page for prices and booking','Weekends are crowded; weekdays or opening time are best']},
  taxStep:'Show your passport at checkout for the tax refund',lang:'EN'},
-ja:{title:'聖水ポップアップライン',tag:'授業プロトタイプ・公式情報を確認してください',ph:'ポップアップ・グルメ・お店・特典を検索',all:'すべて',
- grp:{pop:'ポップアップ',eat:'グルメ',shop:'ショップ'},
- near:n=>`50m以内 · <em>${n}</em>件`,list:(l,n)=>`${l} · <em>${n}</em>件`,demo:'デモ位置・地図をタップで移動',real:'現在地・地図をタップで移動',
- empty:'50m以内にはまだありません',nearest:(n,d)=>`最寄り：${n}・${d} ›`,
- note:(p,e,s,d)=>`聖水のポップアップ${p}件・グルメ${e}件・ショップ${s}件を掲載・${d}確認、最新情報は公式で`,
- ends:'残り',perm:'常設',details:'詳細 ›',nores:q=>`「${q}」は聖水で見つかりません`,moved:'位置をここに移動しました（デモ）',
- locating:'現在地を取得中…',nogeo:'位置情報非対応のため聖水のデモ位置を使います',far:'聖水付近にいないためデモ位置を使います',located:'現在地を取得しました',denied:'位置情報の許可がないためデモ位置を使います',
- back:'地図へ戻る',about:d=>`現在地から約${d}`,nav:'Naver地図で行く',book:'予約方法',perks:'特典',source:'出典',
- live:'現地',hours:'営業',queue:'待ち状況',wait:'待ち時間',norep:'報告なし',here:'現地にいます：',lv:['少ない','普通','多い'],
- reported:'あなたの報告・正式版では全員の報告を集計します',thanks:'報告ありがとうございます（デモ）',
- entryT:'入場方法',method:'方法',endsIn:'終了まで',ohours:'営業時間',daily:'毎日',period:'開催期間',dates:'日程',left:'残り',kind:'タイプ',permStore:'常設店',
- rating:'評価',rnote:n=>`DiningCodeユーザー評価・${n}件`,
- secPop:'特典・見どころ',secEat:'看板メニューと価格',secShop:'見どころ',info:'基本情報',koaddr:'韓国語住所',copy:'コピーしてタクシーで見せる',copied:'住所をコピーしました',copyfail:'住所を長押ししてコピー',
- tax:'免税対応',guideT:'入場ガイド',guideS:'日本語',
- lineT:'聖水路線図',lineS:'ソウルの森→聖水駅・タップで切替',stA:'ソウルの森',stB:'聖水',lnA:'水仁・盆唐線',lnB:'2号線',
- foot:d=>`授業課題のプロトタイプ。ポップアップ情報と位置はPopply、飲食店の評価と位置はDiningCode、店舗情報はKakao Map（${d}）より。最新情報は公式で確認してください。待ち状況の報告はデモです。`,
- srcFrom:(s,d)=>`${s}より作成（${d}確認）、公式発表を優先してください`,srcNames:{popply:'Popplyページ',diningcode:'DiningCode',instagram:'ブランド公式Instagram',other:'出典ページ'},
- fav:'保存しました',unfav:'保存を解除しました',refreshed:'更新しました',refresh:'更新',star:'保存',
- sortD:'近い順',sortR:'評価順',
- vipWhy:'細かい絞り込みはメンバー機能です',vipH:'聖水のポップアップを見逃さない',vipP:'細かいカテゴリで絞り込み、新着・終了間近をお知らせ',
- plans:[['1日パス','聖水を1日'],['1週間パス','短期旅行'],['1か月パス','韓国在住']],price:['₩2,000','₩5,900','₩11,900'],
- tbl:['機能','無料','メンバー'],rows:['地図・検索・50m以内の特典','ポップアップ／グルメ／ショップ','詳細・評価・ナビ・入場ガイド','細かい絞り込み（コスメ、パン、ベーグル、アクセ…）','新着／終了間近のお知らせ'],
- buy:(n,p)=>`${n} ${p}を開始（デモ・課金なし）`,fine:'価格は仮のもので検証後に決定します',bought:'開始しました（デモ）：細かい絞り込みが使えます',close:'閉じる',
- tilewarn:'地図を読み込めませんでした。接続を確認して再読み込みしてください',mapLabel:'聖水洞の地図',locate:'現在地を表示',clear:'クリア',
- left:(d,h,m)=>d?`${d}日${h}時間`:h?`${h}時間${m}分`:`${m}分`,km:'km',
- tags:{gift:'プレゼント',deal:'割引',exp:'体験',sale:'販売',sig:'看板',menu:'メニュー',tip:'ヒント',draw:'抽選',taste:'試食'},
- entry:{walkin:'直接入店',naver:'Naver予約',ticket:'チケット制',queue:'現地で順番待ち'},
- guide:{walkin:['予約不要、そのまま入口へ','混雑時は電話番号で順番待ち登録を求められることがあります。SMSやカカオトークの通知を確認','週末の午後が最も混雑。平日か開店直後が狙い目'],
-  queue:['入口のスタッフかタブレットで電話番号を登録（韓国の番号がなければスタッフに相談）','待っている間は近くを散策し、SMS／カカオトークの呼び出しを確認','呼ばれたら入口に戻って入場'],
-  naver:['出典ページで <span class="ko">네이버 예약</span>（Naver予約）のリンクを探す','Naverにログインして日時を選ぶ','予約確認画面を入口で見せる'],
-  ticket:['有料展示のためチケットが必要です','料金と購入方法は出典ページの公式リンクで確認','週末は混雑。平日か開場直後がおすすめ']},
- taxStep:'会計時にパスポートを見せて免税手続き',lang:'日本語'}
+ko:{title:'성수 팝업라인',tag:'수업 프로토타입 · 정보는 공식 안내를 확인하세요',ph:'팝업, 맛집, 매장, 혜택 검색',all:'전체',
+ grp:{pop:'팝업',eat:'맛집',shop:'매장'},
+ near:n=>`주변 50m · <em>${n}</em>곳`,list:(l,n)=>`${l} · <em>${n}</em>곳`,demo:'데모 위치 · 지도를 눌러 이동',real:'현재 위치 · 지도를 눌러 이동',
+ empty:'50m 안에 아직 없어요',nearest:(n,d)=>`가장 가까운 곳: ${n} · ${d} ›`,
+ note:(p,e,s,d)=>`성수 팝업 ${p}곳 · 맛집 ${e}곳 · 매장 ${s}곳 수록 · ${d} 확인, 공식 안내를 우선하세요`,
+ ends:'종료까지',perm:'상시',details:'자세히 ›',nores:q=>`성수에서 「${q}」을(를) 찾지 못했어요`,moved:'내 위치를 여기로 옮겼어요 (데모)',
+ locating:'위치 확인 중…',nogeo:'위치 기능을 쓸 수 없어 성수 데모 위치를 사용해요',far:'성수 근처가 아니라서 데모 위치를 사용해요',located:'현재 위치를 찾았어요',denied:'위치 권한이 없어 성수 데모 위치를 사용해요',
+ back:'지도로 돌아가기',about:d=>`내 위치에서 약 ${d}`,nav:'네이버 지도 길찾기',book:'예약 방법',perks:'혜택',source:'출처',
+ live:'현장',hours:'영업',queue:'현장 웨이팅',wait:'대기 시간',norep:'제보 없음',here:'지금 현장이에요:',lv:['여유','보통','많음'],
+ reported:'방금 내가 제보함 · 정식 버전은 모든 사용자의 제보를 모아 보여줘요',thanks:'제보 감사합니다 (데모)',
+ entryT:'입장 방법',method:'방법',endsIn:'종료까지',ohours:'영업시간',daily:'매일',period:'운영 기간',dates:'기간',left:'남은 시간',kind:'유형',permStore:'상시 매장',
+ rating:'평점',rnote:n=>`다이닝코드 사용자 평점 · 리뷰 ${n}개`,
+ secPop:'혜택과 볼거리',secEat:'대표 메뉴와 가격',secShop:'매장 포인트',info:'기본 정보',koaddr:'주소',copy:'주소 복사',copied:'주소를 복사했어요',copyfail:'주소를 길게 눌러 복사하세요',
+ tax:'택스리펀',guideT:'입장 방법',guideS:'단계별 안내',
+ lineT:'성수 노선도',lineS:'서울숲역 → 성수역 · 눌러서 이동',stA:'서울숲역',stB:'성수역',lnA:'수인분당선',lnB:'2호선',
+ foot:d=>`수업 과제 프로토타입입니다. 팝업 정보와 위치는 Popply, 맛집 평점과 위치는 다이닝코드, 매장 정보는 카카오맵(${d}) 기준이며 공식 안내를 우선하세요. 웨이팅 제보는 데모 기능입니다.`,
+ srcFrom:(s,d)=>`${s} 기준 정리 (${d} 확인), 공식 공지를 우선하세요`,srcNames:{popply:'Popply 페이지',diningcode:'다이닝코드',instagram:'브랜드 인스타그램',other:'출처 페이지'},
+ fav:'저장했어요',unfav:'저장을 취소했어요',refreshed:'새로고침했어요',refresh:'새로고침',star:'저장',
+ sortD:'가까운 순',sortR:'평점 순',
+ vipWhy:'세부 카테고리 필터는 멤버십 기능이에요',vipH:'성수 팝업, 하나도 놓치지 마세요',vipP:'세부 카테고리로 골라 보고, 새 팝업과 곧 끝나는 팝업을 알려드려요',
+ plans:[['1일권','하루 성수 투어'],['1주권','짧은 여행'],['1개월권','한국 거주']],price:['₩2,000','₩5,900','₩11,900'],
+ tbl:['기능','무료','멤버십'],rows:['지도 · 검색 · 50m 내 혜택','팝업 / 맛집 / 매장 큰 분류','상세 정보 · 평점 · 길찾기 · 입장 안내','세부 카테고리 필터 (뷰티, 베이커리, 베이글, 액세서리…)','새 팝업 / 종료 임박 알림'],
+ buy:(n,p)=>`${n} ${p} 시작하기 (데모, 결제 없음)`,fine:'가격은 예시이며 검증 후 정합니다',bought:'시작했어요 (데모): 세부 카테고리 필터가 열렸어요',close:'닫기',
+ tilewarn:'지도를 불러오지 못했어요. 연결을 확인하고 새로고침하세요',mapLabel:'성수동 지도',locate:'내 위치 보기',clear:'지우기',
+ left:(d,h,m)=>d?`${d}일 ${h}시간`:h?`${h}시간 ${m}분`:`${m}분`,km:'km',
+ tags:{gift:'증정',deal:'할인',exp:'체험',sale:'판매',sig:'대표',menu:'메뉴',tip:'팁',draw:'추첨',taste:'시식'},
+ entry:{walkin:'현장 입장',naver:'네이버 예약',ticket:'티켓 구매',queue:'현장 웨이팅 등록'},
+ guide:{walkin:['예약 없이 바로 입구로 가면 돼요','붐빌 때는 전화번호로 웨이팅 등록을 요청할 수 있어요. 문자나 카카오톡 알림을 확인하세요','주말 오후가 가장 붐벼요. 평일이나 오픈 직후 1시간이 가장 빨라요'],
+  queue:['입구 직원이나 태블릿에서 전화번호로 웨이팅 등록','기다리는 동안 근처를 둘러보고 문자 / 카카오톡 호출 확인','호출되면 입구로 돌아와 입장'],
+  naver:['출처 페이지에서 <span class="ko">네이버 예약</span> 링크 찾기','네이버에 로그인해 날짜와 시간 선택','예약 확인 화면을 입구에서 보여주기'],
+  ticket:['유료 전시라 티켓이 필요해요','가격과 예매 방법은 출처 페이지의 공식 링크에서 확인','주말은 붐벼요. 평일이나 오픈 시간대를 추천해요']},
+ taxStep:'계산할 때 여권을 보여주고 택스리펀 받기',lang:'한국어'}
 };
 const SUBS={pop:['beauty','fashion','char','kpop','game','life','food'],eat:['korean','western','bakery','bagel','donut','eggtart','dessert','cafe'],shop:['acc','bstore','fstore']};
-const SUBL={beauty:['美妆','Beauty','コスメ'],fashion:['服饰','Fashion','ファッション'],char:['IP联名','Characters','キャラ・コラボ'],kpop:['K-pop','K-pop','K-POP'],game:['展览游戏','Exhibits & games','展示・ゲーム'],life:['生活市集','Lifestyle & local','ライフスタイル'],food:['美食快闪','Food pop-ups','フード'],
- korean:['韩餐','Korean','韓国料理'],western:['西餐披萨','Western & pizza','洋食・ピザ'],bakery:['面包烘焙','Bakery','ベーカリー'],bagel:['贝果','Bagels','ベーグル'],donut:['甜甜圈','Donuts','ドーナツ'],eggtart:['蛋挞','Egg tarts','エッグタルト'],dessert:['甜品','Desserts','スイーツ'],cafe:['咖啡','Cafés','カフェ'],
- acc:['饰品杂货','Accessories','アクセサリー'],bstore:['美妆集合店','Beauty stores','コスメストア'],fstore:['服装集合店','Fashion stores','ファッション']};
+const SUBL={beauty:['美妆','Beauty','뷰티'],fashion:['服饰','Fashion','패션'],char:['IP联名','Characters','캐릭터·콜라보'],kpop:['K-pop','K-pop','K-pop'],game:['展览游戏','Exhibits & games','전시·게임'],life:['生活市集','Lifestyle & local','라이프스타일·로컬'],food:['美食快闪','Food pop-ups','푸드 팝업'],
+ korean:['韩餐','Korean','한식'],western:['西餐披萨','Western & pizza','양식·피자'],bakery:['面包烘焙','Bakery','베이커리'],bagel:['贝果','Bagels','베이글'],donut:['甜甜圈','Donuts','도넛'],eggtart:['蛋挞','Egg tarts','에그타르트'],dessert:['甜品','Desserts','디저트'],cafe:['咖啡','Cafés','카페'],
+ acc:['饰品杂货','Accessories','액세서리'],bstore:['美妆集合店','Beauty stores','뷰티 매장'],fstore:['服装集合店','Fashion stores','패션 매장']};
 
 let lang=(()=>{try{const q=new URLSearchParams(location.search).get('lang');if(LANGS.includes(q))return q;const s=localStorage.getItem('ss_lang');if(LANGS.includes(s))return s;}catch(e){}
-  const n=(navigator.language||'en').toLowerCase();return n.startsWith('zh')?'zh':n.startsWith('ja')?'ja':'en';})();
+  const n=(navigator.language||'en').toLowerCase();return n.startsWith('zh')?'zh':n.startsWith('ko')?'ko':'en';})();
 let t=T[lang];
 const tx=o=>o==null?'':typeof o==='string'?o:(o[lang]||o.en||o.zh||'');
 const subL=k=>SUBL[k][LANGS.indexOf(lang)];
@@ -135,7 +135,7 @@ const visible=()=>live.filter(match);
 const naverUrl=p=>'https://map.naver.com/p/search/'+encodeURIComponent(p.addr.replace(/\s*\(.*?\)\s*/g,' ').replace(/,.*$/,'').trim());
 const stars=p=>p.rate?`<span class="rt-s">★ ${p.rate.s.toFixed(1)}</span>`:'';
 const period=p=>p.perm?t.perm:`${p.start}–${p.endTxt}`;
-const hoursTxt=p=>(p.h==='24h'?(lang==='zh'?'24 小时':lang==='ja'?'24時間':'24 hours'):t.daily+' '+p.h)+(p.hx?' · '+tx(p.hx):'');
+const hoursTxt=p=>(p.h==='24h'?(lang==='zh'?'24 小时':lang==='ko'?'24시간':'24 hours'):t.daily+' '+p.h)+(p.hx?' · '+tx(p.hx):'');
 const ICON={
  back:'<svg viewBox="0 0 24 24"><path d="M15 6l-6 6 6 6"/></svg>',
  star:'<svg viewBox="0 0 24 24"><path d="M12 3l2.7 5.6 6.1.9-4.4 4.3 1 6.1L12 17l-5.4 2.9 1-6.1L3.2 9.5l6.1-.9z"/></svg>',
@@ -217,7 +217,7 @@ function startMap(){
     const fallback=()=>{if(MAP&&MAP.kind==='osm')return;done=true;buildMap(leafletAdapter);};
     window.navermap_authFailure=fallback;
     const s=document.createElement('script');
-    s.src='https://oapi.map.naver.com/openapi/v3/maps.js?ncpKeyId='+encodeURIComponent(CFG.naverKeyId)+'&language='+(lang==='zh'?'zh':lang);
+    s.src='https://oapi.map.naver.com/openapi/v3/maps.js?ncpKeyId='+encodeURIComponent(CFG.naverKeyId)+'&language='+lang;
     s.onload=()=>{if(done)return;try{buildMap(naverAdapter);}catch(e){fallback();}};
     s.onerror=fallback;setTimeout(()=>{if(!MAP)fallback();},7000);
     document.head.appendChild(s);
