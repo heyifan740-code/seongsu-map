@@ -9,12 +9,53 @@
    endUnk: true when the end date is not announced
    rate: DiningCode user rating {s: score/5, n: reviews, u: DiningCode id}
 */
-const DATA_DATE = '2026-11-19';
+const DATA_DATE = '2026-11-23';
 const LG = (zh, en, ko) => ({ zh, en, ko });  // (not "L": Leaflet uses window.L)
 const PP = 'https://popply.co.kr/popup/';
 const POPS = [
 
 /* =================== POP-UPS =================== */
+{id:'lmrflnyong',gk:'draw',grp:'pop',sub:'fashion',name:'LMR X 플뇽이 팝업 @ 서울숲',t:LG('LMR × 플뇽이 首尔林快闪','LMR × Flnyong pop-up @ Seoul Forest','LMR X 플뇽이 팝업 @ 서울숲'),brand:'LMR',
+ addr:'서울 성동구 서울숲4길 16-30 (LMR 서울숲 하우스)',ll:[37.5476,127.0428],est:true,start:'11.17',endTxt:'12.13',end:'2026-12-13T20:00:00+09:00',h:'11:00–20:00',entry:'walkin',type:'gift',
+ g:LG('100%中奖','100% win','100% 당첨'),
+ note:LG('入场方式页面未写明，以官方为准','Entry method not stated — check official channels','입장 방식 미기재, 공식 안내 확인'),
+ perks:[[LG('关注 LMR Instagram 即可参加 100% 中奖幸运转盘：外套、羽绒服、钥匙扣、5 折券等','Follow LMR on Instagram for a no-blank lucky roulette: jackets, padding, keyrings, 50%-off coupons and more','LMR 인스타그램 팔로우 시 꽝 없는 럭키 룰렛: 자켓·패딩·키링·50% 할인권 등'),'draw'],
+        [LG('플뇽이 系列全场 7 折','30% off the whole 플뇽이 line','플뇽이 라인 전 상품 30% 할인'),'deal'],
+        [LG('周末限定：关注并分享快拍送棉花糖','Weekends: cotton candy for a follow + story share','주말 한정: 팔로우 + 스토리 공유 시 플뇽이 솜사탕'),'gift']],
+ img:'https://d8nffddmkwqeq.cloudfront.net/store/427b6a0a%2C6523%2C4820%2C9b62%2C5863013a1a64',src:PP+'6740'},
+
+{id:'illigo',grp:'pop',sub:'fashion',name:'일리고 팝업 (ILLIGO X MUSINSA SEONGSU @ 대림창고)',t:LG('ILLIGO × 无印新沙 大林仓库快闪','ILLIGO × MUSINSA Seongsu @ Daelim Changgo','일리고 팝업 @ 무신사 대림창고'),brand:'ILLIGO',
+ addr:'서울 성동구 성수이로 74 (무신사 스토어 성수 대림창고 1층)',ll:[37.5417,127.0556],est:true,start:'11.20',endTxt:'12.03',end:'2026-12-03T22:00:00+09:00',h:'11:00–22:00',entry:'walkin',type:'deal',
+ g:LG('最高72折+9折','Up to 28% + 10%','최대 28%+10%'),
+ note:LG('赠品颜色随机，送完即止','Gift colours are random; while stocks last','사은품 색상 랜덤, 소진 시 종료'),
+ perks:[[LG('26FW 新品及常青款最高 72 折，门店再享 9 折','26FW & carry-over items up to 28% off, plus an extra 10% off in store','26FW·캐리오버 최대 28% 할인 + 오프라인 단독 추가 10% 할인'),'deal'],
+        [LG('购买送钥匙扣；满 12 万韩元送围巾，满 20 万韩元送手套','Keyring with purchase; ₩120,000+ muffler, ₩200,000+ hand warmer','구매 시 키링, 12만 원 이상 머플러, 20만 원 이상 러플 핸드캠'),'gift']],
+ img:'https://d8nffddmkwqeq.cloudfront.net/store/50807444%2C5f01%2C4fb2%2C8dac%2Cbc2f04799d03',src:PP+'6736'},
+
+{id:'chanelholiday',grp:'pop',sub:'beauty',name:'샤넬 홀리데이 팝업',t:LG('CHANEL 圣诞假日快闪','CHANEL Holiday pop-up','샤넬 홀리데이 팝업'),brand:'CHANEL',
+ addr:'서울 성동구 성수이로7가길 9',ll:[37.5411,127.0553],est:true,start:'11.21',endTxt:'12.31',end:'2026-12-31T20:00:00+09:00',h:'11:00–20:00',entry:'walkin',type:'exp',
+ g:LG('雪景拍照','Snow room','스노우 룸'),
+ note:LG('官方称“邀请函”，是否需要预约以官方为准','Official page calls it an invitation — whether booking is needed, check CHANEL’s page','공식 안내는 ‘초대장’ 형식 — 예약 필요 여부는 공식 확인'),
+ perks:[[LG('雪景房、滑雪拍照亭等互动和拍照','Snow room, ski photo booth and other activities','스노우 룸, 스키 포토부스 등 액티비티와 포토콜'),'exp'],
+        [LG('展示 CHANEL 假日系列','CHANEL holiday collection on show','샤넬 홀리데이 컬렉션'),'sig']],
+ img:'https://d8nffddmkwqeq.cloudfront.net/store/8afb2af0%2C24bd%2C4aab%2C91a2%2Cd4f973fc65e4',src:PP+'6676'},
+
+{id:'seedvault',grp:'pop',sub:'game',name:'2026 기억 저장소 : SEED VAULT 26 팝업 (T 팩토리)',t:LG('SK电讯 记忆储藏室 SEED VAULT 26','SEED VAULT 26 memory archive (T Factory)','2026 기억 저장소 : SEED VAULT 26'),brand:'SK telecom T Factory',
+ addr:'서울 성동구 연무장1길 7-1 (T 팩토리 성수 1층·지하 1층)',ll:[37.5444,127.0506],est:true,start:'11.21',endTxt:'2027.01.24',end:'2027-01-24T20:00:00+09:00',h:'11:00–20:00',
+ hx:LG('19:30 最后入场，排队多时可能提前截止','Last entry 19:30; may close entry early if the queue is long','입장 마감 19:30, 웨이팅 상황에 따라 조기 마감'),entry:'walkin',type:'exp',
+ g:LG('做记忆钥匙扣','Make a keyring','키링 만들기'),
+ note:LG('是否收费页面信息不一致，以官方为准','Admission fee info on the page is unclear — check official channels','입장료 여부 안내 불명확, 공식 확인'),
+ perks:[[LG('回答问题制作“记忆卡”钥匙扣','Answer questions to make a memory-card keyring','질문에 답하고 메모리 카드 키링 제작'),'exp'],
+        [LG('把自己的回忆存进 T Factory 记忆储藏室','Store your memory in the T Factory vault','나의 기억을 T 팩토리 기억저장소에 저장'),'exp']],
+ img:'https://d8nffddmkwqeq.cloudfront.net/store/6f992cec%2Ce748%2C4980%2C9308%2C4a5570587227',src:PP+'6708'},
+
+{id:'muulm',grp:'pop',sub:'scent',name:'묾 팝업 : 공기 (MUULM 첫 번째 POP-UP)',t:LG('MUULM「空气」香氛快闪','MUULM “Air” fragrance pop-up','묾 팝업 : 공기'),brand:'MUULM',
+ addr:'서울 성동구 연무장길 17 (스토리칸 성수 1층)',ll:[37.5438,127.0515],est:true,start:'11.17',endTxt:'11.23',end:'2026-11-23T21:00:00+09:00',h:'11:00–21:00',entry:'walkin',type:'exp',
+ g:LG('25款香','25 scents','25가지 향'),
+ note:LG('今天最后一天；网上有“送小样/周边”的说法，官方未写明，以官方为准','Last day today; gift claims online are not in the official text — check on site','오늘 마지막 날, 굿즈·샘플 증정은 공식 안내에 없음 — 현장 확인'),
+ perks:[[LG('体验 25 种香气','Try 25 scents','25가지 향 체험'),'exp']],
+ img:'https://d8nffddmkwqeq.cloudfront.net/store/f9b6abb9%2C3955%2C40b0%2C8d32%2C085a82b66119',src:PP+'6735'},
+
 {id:'ongredients',gk:'lotion',grp:'pop',sub:'beauty',name:'온그리디언츠 팝업 : ddalgi HOUSE',t:LG('ongredients 草莓屋快闪','ongredients ddalgi HOUSE','온그리디언츠 딸기 HOUSE'),brand:'ongredients',
  addr:'서울 성동구 연무장길 65',ll:[37.5422281,127.0568117],start:'11.13',endTxt:'2027.02.10',end:'2027-02-10T21:00:00+09:00',h:'12:00–21:00',entry:'walkin',type:'gift',
  g:LG('到店送礼','Free gift','방문 선물'),
@@ -119,15 +160,9 @@ const POPS = [
  addr:'서울 성동구 아차산로5길 24-18',ll:[37.5473017,127.0533301],start:'11.05',endTxt:'12.04',end:'2026-12-04T20:00:00+09:00',h:'11:00–20:00',entry:'walkin',type:'deal',
  g:LG('最低1.5折','Up to 85% off','최대 85% 할인'),
  perks:[[LG('特价区最低 1.5 折，其余全场 7 折','Special zone up to 85% off, everything else 30% off','특가존 최대 85% 할인, 그 외 전 품목 30% 할인'),'deal'],
-        [LG('购买即送红色帆布袋；满 7 万韩元送钥匙扣（每天前 30 名）','Red tarp bag with any purchase; ₩70,000+ keyring (first 30 a day)','구매 시 레드 타포린백, 7만 원 이상 키링 (일별 선착순 30명)'),'gift']],
+        [LG('购买即送红色帆布袋；满 7 万韩元送钥匙扣（每天前 30 名）','Red tarp bag with any purchase; ₩70,000+ keyring (first 30 a day)','구매 시 레드 타포린백, 7만 원 이상 키링 (일별 선착순 30명)'),'gift'],
+        [LG('满 10 万韩元送地垫（每天前 20 名），满 15 万韩元送棒球帽（每天前 10 名）；关注 Instagram 送贴纸包','₩100,000+ floor mat (first 20 a day), ₩150,000+ R ball cap (first 10 a day); sticker pack for an Instagram follow','10만 원 이상 플로어 매트 (일별 선착순 20명), 15만 원 이상 R 볼캡 (일별 선착순 10명), 인스타그램 팔로우 시 스티커팩'),'gift']],
  img:'https://d8nffddmkwqeq.cloudfront.net/store/c730dd62%2Cb6ef%2C4380%2C8cf3%2C4cbfe1f8ae91',src:PP+'6715'},
-
-{id:'sansan',grp:'pop',sub:'fashion',name:'산산기어 아카이브 세일 : SHELTER',t:LG('SAN SAN GEAR 往季特卖','SAN SAN GEAR archive sale','산산기어 아카이브 세일'),brand:'SAN SAN GEAR',
- addr:'서울 성동구 연무장길 35',ll:[37.543115,127.0534919],start:'11.14',endTxt:'11.22',end:'2026-11-22T20:00:00+09:00',h:'11:00–20:00',entry:'queue',type:'deal',
- g:LG('5–7折','30–50% off','30–50% 할인'),
- note:LG('现场登记排队；每人限逛 40 分钟，同款每人限买 1 件','On-site waiting list; 40 min per person, 1 piece per style','현장 웨이팅 등록, 1인 40분, 동일 제품 1개씩'),
- perks:[[LG('2022–2025 年往季款 5–7 折','2022–2025 archive pieces 30–50% off','2022–2025 아카이브 30–50% 할인'),'deal']],
- img:'https://d8nffddmkwqeq.cloudfront.net/store/2226d5d1%2C9b0e%2C42f9%2Ca4ed%2C61dc270942b5',src:PP+'6636'},
 
 {id:'shinchan',grp:'pop',sub:'char',name:'짱구는 못말려 전시 : 시공간 대모험',t:LG('蜡笔小新展 · 时空大冒险','Crayon Shin-chan: Space-Time Adventure','짱구는 못말려 전시: 시공간 대모험'),brand:'蜡笔小新',
  addr:'서울 성동구 연무장5길 9-29',ll:[37.5444463,127.0520483],start:'10.17',endTxt:'2027.01.24',end:'2027-01-24T20:00:00+09:00',h:'11:00–20:00',
@@ -154,32 +189,11 @@ const POPS = [
  perks:[[LG('用视觉、触感、光线、香气等五种感官找自己的喜好','Find your taste through sight, touch, light, scent and more','시각·촉감·빛·향기로 내 취향 찾기'),'exp']],
  img:'https://d8nffddmkwqeq.cloudfront.net/store/1cef96e4%2Cca65%2C45b5%2C87a9%2Ced36777150bb',src:PP+'6684'},
 
-{id:'gyeongbuk',gk:'draw',grp:'pop',sub:'life',name:'경북 투 더 넥스트 성수 팝업',t:LG('庆尚北道好物快闪','Gyeongbuk To The Next pop-up','경북 투 더 넥스트 팝업'),brand:'Gyeongbuk',
- addr:'서울 성동구 연무장길 5-9 메종 앨리 2층',ll:[37.5442564,127.0503748],start:'11.18',endTxt:'11.22',end:'2026-11-22T19:00:00+09:00',h:'12:00–19:00',
- hx:LG('周三–周日，15:00–16:00 休息','Wed–Sun, break 15:00–16:00','수–일, 15:00–16:00 브레이크'),entry:'walkin',type:'gift',
- g:LG('100%抽奖','100% win draw','100% 당첨'),
- perks:[[LG('庆尚北道 9 个小品牌的地方好物','Goods from 9 small Gyeongbuk brands','경북 소상공인 9개 브랜드'),'sale'],[LG('100% 中奖抽奖 + 免费 AI 小票照片','100%-win lucky draw + free AI receipt photo','100% 당첨 럭키드로우 + AI 영수증 사진 무료'),'draw']],
- img:'https://d8nffddmkwqeq.cloudfront.net/store/607410c1%2C7c70%2C479a%2C9c84%2Cba3f41d70afc',src:PP+'6726'},
-
-{id:'sodam',grp:'pop',sub:'life',name:'소담상회 로컬 팝업 Vol.2 : 식탁으로 떠나는 제주여행',t:LG('小潭商会 · 餐桌上的济州旅行','Sodam Local pop-up: Jeju on your table','소담상회 로컬 팝업: 식탁으로 떠나는 제주여행'),brand:'Sodam',
- addr:'서울 성동구 왕십리로 63 (언더스탠드에비뉴)',ll:[37.5435618,127.0435817],start:'10.27',endTxt:'11.22',end:'2026-11-22T20:00:00+09:00',h:'11:00–20:00',
- hx:LG('周一休息','Closed Mon','월요일 휴무'),entry:'walkin',type:'info',
- g:LG('济州好物','Jeju goods','제주 먹거리'),
- perks:[[LG('济州食品品牌 민들레마음 × 제주마미 联合展卖','Jeju food brands 민들레마음 × 제주마미','제주 식품 브랜드 민들레마음 × 제주마미'),'sale']],
- img:'https://d8nffddmkwqeq.cloudfront.net/store/857f5498%2C1f4f%2C45a0%2C896f%2C1072684dd480',src:PP+'6691'},
-
 {id:'shinramyun',grp:'pop',sub:'food',name:'신라면분식 더 팩토리 팝업',t:LG('辛拉面分食 The Factory','Shin Ramyun Bunsik: The Factory','신라면분식 더 팩토리'),brand:'Shin Ramyun',
  addr:'서울 성동구 성수일로4길 52',ll:[37.5424984,127.0543264],start:'06.16',endTxt:'12.16',end:'2026-12-16T18:00:00+09:00',h:'09:00–18:00',entry:'walkin',type:'exp',
  g:LG('DIY拉面','DIY ramyun','DIY 라면'),
  perks:[[LG('自选面、汤料、配料的 DIY 拉面','Build-your-own ramyun','면·스프·토핑을 고르는 DIY 라면'),'exp'],[LG('海外版拉面试吃','Tasting of overseas editions','해외 라면 시식'),'taste']],
  img:'https://d8nffddmkwqeq.cloudfront.net/store/2c923895%2Ca8ac%2C4228%2Cb846%2Cea19aad9f929',src:PP+'5243'},
-
-{id:'fixpizza',gk:'taste',grp:'pop',sub:'food',name:'픽스피자 성수 팝업스토어',t:LG('FIX PIZZA 披萨快闪','FIX PIZZA pop-up','픽스피자 팝업'),brand:'FIX PIZZA',
- addr:'서울 성동구 연무장길 5-9 1층, 2층',ll:[37.5442564,127.0503748],start:'10.22',endTxt:'11.22',end:'2026-11-22T19:00:00+09:00',h:'12:00–19:00',
- hx:LG('15:00–16:00 休息，周一休息','Break 15:00–16:00, closed Mon','15:00–16:00 브레이크, 월요일 휴무'),entry:'walkin',type:'gift',
- g:LG('免费试吃','Free tasting','무료 시식'),
- perks:[[LG('关注官方账号并发快拍，免费试吃 4 款披萨 + 汽水','Follow + post a story → taste 4 pizzas + a soda free','팔로우 + 스토리 업로드 시 피자 4종 + 음료 무료 시식'),'taste'],[LG('披萨 1,800 韩元起；每消费 1 万韩元抽奖 1 次','Pizza from ₩1,800; one draw per ₩10,000 spent','피자 1,800원부터, 1만 원당 추첨 1회'),'draw']],
- src:PP+'6276',src2:'小红书 @在韩向日葵'},
 
 {id:'badabites',gk:'taste',grp:'pop',sub:'food',name:'BADA BITES K-씨푸드 팝업',t:LG('BADA BITES 韩国海鲜快闪','BADA BITES K-seafood pop-up','BADA BITES K-씨푸드 팝업'),brand:'BADA BITES',
  addr:'서울 성동구 연무장9길 4 (노스 성수점 1층)',ll:[37.5427012,127.0559718],start:'11.19',endTxt:'11.28',end:'2026-11-28T19:00:00+09:00',h:'11:30–19:00',entry:'walkin',type:'gift',
