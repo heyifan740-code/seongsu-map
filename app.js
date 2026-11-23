@@ -523,7 +523,7 @@ async function sendCmt(){const p=P(),b=$('cBody'),nk=$('cNick');if(!b)return;
   if(Date.now()-SO.me.lastPost()<10e3){toast(t.cerr.fast);return;}
   const btn=document.querySelector('.csend');btn.disabled=true;
   try{const c=await SO.add(p.id,nick,r.body);SO.me.posted();b.value='';addCmt(c,true);toast(t.posted);}
-  catch(e){toast(t.cerr.fail);}finally{btn.disabled=false;}}
+  catch(e){console.error('comment failed',e);toast(t.cerr.fail+(e&&(e.code||e.message)?' ('+String(e.code||e.message).slice(0,60)+')':''));}finally{btn.disabled=false;}}
 function addCmt(c,mine){if(!c)return;const cm=S.cm;
   if(cm&&cm.place===c.place){if(cm.list.some(x=>x.id===c.id))return;cm.list.unshift(c);cm.fresh=c.id;if(mine)cm.sort='new';S.cc[c.place]=cm.list.length;renderCmt();const el=$('cmtList');if(el&&mine)el.scrollTop=0;}
   else S.cc[c.place]=(S.cc[c.place]||0)+1;

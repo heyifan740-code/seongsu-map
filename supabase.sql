@@ -72,6 +72,11 @@ create or replace view public.comment_counts with (security_invoker = true) as
   select place, count(*)::int as n from public.comments where reports < 3 group by place;
 grant select on public.comment_counts to anon;
 
+-- table privileges for the public (anon) key — needed on projects that don't expose new tables automatically
+grant usage on schema public to anon;
+grant select, insert on public.comments, public.queue_reports to anon;
+grant usage, select on all sequences in schema public to anon;
+
 -- live updates
 do $$ begin
   alter publication supabase_realtime add table public.comments;
