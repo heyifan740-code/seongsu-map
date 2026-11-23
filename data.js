@@ -7,6 +7,7 @@
    img: photo URL (Popply poster / DiningCode photo); leave out to show a category illustration
    gk: what the free gift is (lotion cleanser lip bag keyring coffee sample showerball draw taste gift) — shows a gift pin on the map
    endUnk: true when the end date is not announced
+   spot: LG(...) where to queue / which door, only when the source says so (e.g. 'Seongsu Stn. Exit 4, left door')
    rate: DiningCode user rating {s: score/5, n: reviews, u: DiningCode id}
 */
 const DATA_DATE = '2026-11-23';

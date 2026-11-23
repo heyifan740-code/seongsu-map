@@ -35,7 +35,15 @@ zh:{photos:'图片',pk:{o:'外景',i:'店内',f:'产品',food:'美食',p:'活动
   queue:['到门口找店员或平板，用手机号登记排号（没有韩国号码可以问店员）','登记后可以先去附近逛，留意短信 / KakaoTalk 叫号','叫到号后回到门口入场'],
   naver:['打开“信息来源”页面，找到 <span class="ko">네이버 예약</span> 链接','用 Naver 账号登录，选择日期和时段完成预约','按预约时间到店，出示预约确认页面入场'],
   ticket:['这是收费展览，需要购票入场','票价和购票方式请看“信息来源”页面里的官方链接','周末人多，建议工作日或开门时段去']},
- taxStep:'结账时出示护照办理退税',lang:'中文'},
+ taxStep:'结账时出示护照办理退税',lang:'中文',
+ cmt:'评论',cmtN:n=>`${n} 条评论`,say:'说点什么…',hot:'最热',newest:'最新',send:'发送',nickL:'昵称',nickDef:'圣水路人',justNow:'刚刚',
+ ago:(m,h,d)=>d?`${d} 天前`:h?`${h} 小时前`:`${m} 分钟前`,noCmt:'还没有评论，来说第一句吧',cmtDemo:'演示模式：评论只保存在这台设备上，接入后台后所有人可见',
+ report:'举报',reportedC:'已举报，这条评论对你隐藏了',posted:'已发出',cmtRule:'友善发言 · 不发广告和联系方式 · 被 3 人举报会自动隐藏',
+ cerr:{empty:'先写点内容',long:'最多 200 字',link:'不能发链接或联系方式',spam:'内容像是刷屏',fast:'发得太快了，稍等几秒',fail:'没发出去，请稍后再试'},
+ qAgg:(n,lv)=>`最近 2 小时 ${n} 人上报，多数说「${lv}」`,qLast:a=>`最新一条 ${a}`,qDemo:'演示模式：上报只保存在这台设备上',qNote:'由现场用户上报，仅供参考',qWait:'30 分钟内只能上报一次',qThanks:'感谢上报',
+ phT:'给店员看',phS:'点一下放大韩文',spotT:'在哪排队',naverHint:'Naver 预约一般要登录 Naver 账号，付费项目要用 Naver Pay；约不上可以到现场问有没有现场名额',
+ share:'分享',shared:'已复制，可以粘贴到小红书或微信',
+ phr:[['请问需要预约吗？','예약해야 하나요?'],['现在大概要等多久？','지금 얼마나 기다려야 하나요?'],['我没有韩国手机号，可以登记排队吗？','한국 전화번호가 없는데 웨이팅 등록할 수 있나요?'],['赠品还有吗？','증정품 아직 남아 있나요?'],['可以拍照吗？','사진 찍어도 되나요?'],['可以退税吗？我带了护照。','택스리펀 되나요? 여권 있어요.'],['可以用外国信用卡或支付宝吗？','해외 카드나 알리페이로 결제할 수 있나요?']]},
 en:{photos:'Photos',pk:{o:'Outside',i:'Inside',f:'Products',food:'Food',p:'Pop-up'},giftOnly:'Free gifts',tbd:'End date TBA',from:s=>`From ${s}`,imgBy:'Photo',filt:'Filters',fTitle:'Filter by',fSec:['Perks','When','Entry','Other'],fOpt:{popup:'Pop-ups only',gift:'Free gift',deal:'Discount',taste:'Tasting',draw:'Lucky draw',exp:'Experience',new:'New this week',ending:'Ends in 3 days',perm:'Permanent',walkin:'Walk in',queue:'Waiting list',book:'Booking / ticket',tax:'Tax refund',r45:'Rating 4.5+',r40:'Rating 4.0+'},fClear:'Clear',fShow:n=>`Show ${n} results`,fres:'Filtered',title:'Seongsu Pop-up Line',tag:'Class prototype · confirm with official sources',ph:'Search pop-ups, food, shops or freebies',all:'All',
  grp:{pop:'Pop-ups',eat:'Eat',shop:'Shops'},
  near:n=>`Within 50 m · <em>${n}</em>`,list:(l,n)=>`${l} · <em>${n}</em>`,demo:'Demo location · long-press the map to move',real:'Your location · long-press the map to move',
@@ -67,7 +75,15 @@ en:{photos:'Photos',pk:{o:'Outside',i:'Inside',f:'Products',food:'Food',p:'Pop-u
   queue:['Register your phone number with staff or the tablet at the door (ask staff if you don’t have a Korean number)','Browse nearby while you wait and watch for the SMS / KakaoTalk call','Come back to the door when your number is called'],
   naver:['Open the source page and find the <span class="ko">네이버 예약</span> (Naver booking) link','Sign in to Naver and pick a date and time','Show your booking confirmation at the door'],
   ticket:['This is a paid exhibition — you need a ticket','See the official link on the source page for prices and booking','Weekends are crowded; weekdays or opening time are best']},
- taxStep:'Show your passport at checkout for the tax refund',lang:'EN'},
+ taxStep:'Show your passport at checkout for the tax refund',lang:'EN',
+ cmt:'Comments',cmtN:n=>`${n} comment${n===1?'':'s'}`,say:'Add a comment…',hot:'Top',newest:'Newest',send:'Send',nickL:'Name',nickDef:'Visitor',justNow:'just now',
+ ago:(m,h,d)=>d?`${d}d ago`:h?`${h}h ago`:`${m} min ago`,noCmt:'No comments yet — be the first',cmtDemo:'Demo mode: comments are saved on this device only until the backend is connected',
+ report:'Report',reportedC:'Reported — hidden for you',posted:'Posted',cmtRule:'Be kind · no ads or contact details · hidden after 3 reports',
+ cerr:{empty:'Write something first',long:'200 characters max',link:'No links or contact details',spam:'That looks like spam',fast:'Too fast — wait a few seconds',fail:'Couldn’t post, try again later'},
+ qAgg:(n,lv)=>`${n} report${n===1?'':'s'} in the last 2 h, mostly “${lv}”`,qLast:a=>`latest ${a}`,qDemo:'Demo mode: reports are saved on this device only',qNote:'Reported by visitors on site; a rough guide only',qWait:'One report per 30 minutes',qThanks:'Thanks for reporting',
+ phT:'Show the staff',phS:'tap to show the Korean in large type',spotT:'Where to queue',naverHint:'Naver booking usually needs a Naver account, and paid slots use Naver Pay; if you can’t book, ask on site about walk-in places',
+ share:'Share',shared:'Copied — paste it anywhere',
+ phr:[['Do I need a reservation?','예약해야 하나요?'],['How long is the wait now?','지금 얼마나 기다려야 하나요?'],['I don’t have a Korean phone number. Can I still join the waiting list?','한국 전화번호가 없는데 웨이팅 등록할 수 있나요?'],['Are there any free gifts left?','증정품 아직 남아 있나요?'],['May I take photos?','사진 찍어도 되나요?'],['Can I get a tax refund? I have my passport.','택스리펀 되나요? 여권 있어요.'],['Can I pay with a foreign card or Alipay?','해외 카드나 알리페이로 결제할 수 있나요?']]},
 ko:{photos:'사진',pk:{o:'외관',i:'내부',f:'상품',food:'메뉴',p:'팝업 이미지'},giftOnly:'증정 있음',tbd:'종료일 미정',from:s=>`${s}부터`,imgBy:'사진',filt:'필터',fTitle:'조건으로 찾기',fSec:['혜택','기간','입장','기타'],fOpt:{popup:'팝업만',gift:'증정',deal:'할인',taste:'시식',draw:'추첨',exp:'체험',new:'이번 주 오픈',ending:'3일 내 종료',perm:'상시 매장',walkin:'바로 입장',queue:'현장 웨이팅',book:'예약/티켓',tax:'택스리펀',r45:'평점 4.5+',r40:'평점 4.0+'},fClear:'초기화',fShow:n=>`결과 ${n}곳 보기`,fres:'필터 결과',title:'성수 팝업라인',tag:'수업 프로토타입 · 정보는 공식 안내를 확인하세요',ph:'팝업, 맛집, 매장, 혜택 검색',all:'전체',
  grp:{pop:'팝업',eat:'맛집',shop:'매장'},
  near:n=>`주변 50m · <em>${n}</em>곳`,list:(l,n)=>`${l} · <em>${n}</em>곳`,demo:'데모 위치 · 지도를 길게 눌러 이동',real:'현재 위치 · 지도를 길게 눌러 이동',
@@ -99,7 +115,15 @@ ko:{photos:'사진',pk:{o:'외관',i:'내부',f:'상품',food:'메뉴',p:'팝업
   queue:['입구 직원이나 태블릿에서 전화번호로 웨이팅 등록','기다리는 동안 근처를 둘러보고 문자 / 카카오톡 호출 확인','호출되면 입구로 돌아와 입장'],
   naver:['출처 페이지에서 <span class="ko">네이버 예약</span> 링크 찾기','네이버에 로그인해 날짜와 시간 선택','예약 확인 화면을 입구에서 보여주기'],
   ticket:['유료 전시라 티켓이 필요해요','가격과 예매 방법은 출처 페이지의 공식 링크에서 확인','주말은 붐벼요. 평일이나 오픈 시간대를 추천해요']},
- taxStep:'계산할 때 여권을 보여주고 택스리펀 받기',lang:'한국어'}
+ taxStep:'계산할 때 여권을 보여주고 택스리펀 받기',lang:'한국어',
+ cmt:'댓글',cmtN:n=>`댓글 ${n}개`,say:'댓글을 남겨 보세요…',hot:'인기순',newest:'최신순',send:'등록',nickL:'닉네임',nickDef:'성수방문자',justNow:'방금',
+ ago:(m,h,d)=>d?`${d}일 전`:h?`${h}시간 전`:`${m}분 전`,noCmt:'아직 댓글이 없어요. 첫 댓글을 남겨 보세요',cmtDemo:'데모 모드: 백엔드 연결 전까지 댓글은 이 기기에만 저장돼요',
+ report:'신고',reportedC:'신고했어요. 이 댓글은 숨겨져요',posted:'등록했어요',cmtRule:'서로 배려해 주세요 · 광고·연락처 금지 · 신고 3회 시 자동 숨김',
+ cerr:{empty:'내용을 입력하세요',long:'최대 200자',link:'링크나 연락처는 쓸 수 없어요',spam:'도배로 보여요',fast:'너무 빨라요. 잠시 후 다시 시도하세요',fail:'등록하지 못했어요. 잠시 후 다시 시도하세요'},
+ qAgg:(n,lv)=>`최근 2시간 제보 ${n}건 · 대부분 「${lv}」`,qLast:a=>`최근 제보 ${a}`,qDemo:'데모 모드: 제보는 이 기기에만 저장돼요',qNote:'현장 방문자 제보 · 참고용',qWait:'30분에 한 번만 제보할 수 있어요',qThanks:'제보 감사합니다',
+ phT:'직원에게 보여주기',phS:'눌러서 크게 보기',spotT:'줄 서는 곳',naverHint:'네이버 예약은 보통 네이버 로그인이 필요하고, 유료 예약은 네이버페이로 결제해요',
+ share:'공유',shared:'복사했어요',
+ phr:[]}
 };
 const SUBS={pop:['beauty','scent','fashion','eyewearpop','char','kpop','game','life','food'],eat:['korean','western','saltbread','bakery','bagel','donut','eggtart','dessert','cafe'],shop:['acc','eyewear','bstore','fstore']};
 const SUBL={eyewear:['眼镜门店','Eyewear stores','아이웨어 매장'],eyewearpop:['眼镜快闪','Eyewear pop-ups','아이웨어 팝업'],beauty:['美妆护肤','Beauty','뷰티'],scent:['香水香氛','Fragrance','향수'],saltbread:['盐面包','Salt bread','소금빵'],fashion:['服饰','Fashion','패션'],char:['IP联名','Characters','캐릭터·콜라보'],kpop:['K-pop','K-pop','K-pop'],game:['展览游戏','Exhibits & games','전시·게임'],life:['生活市集','Lifestyle & local','라이프스타일·로컬'],food:['美食快闪','Food pop-ups','푸드 팝업'],
@@ -172,7 +196,8 @@ const live=POPS.filter(p=>p.endTs>Date.now());
 // spread markers that share an address so none are hidden
 (()=>{const g={};live.forEach(p=>{const k=p.ll[0].toFixed(5)+','+p.ll[1].toFixed(5);(g[k]=g[k]||[]).push(p);});
   Object.values(g).forEach(a=>a.forEach((p,i)=>{if(a.length<2){p.dl=p.ll;return;}const ang=2*Math.PI*i/a.length,r=0.00009;p.dl=[p.ll[0]+r*Math.cos(ang),p.ll[1]+r*1.26*Math.sin(ang)];}));})();
-const S={f:{perk:[],time:'',entry:'',tax:false,rate:0},view:'home',cat:null,i:0,mode:'live',grp:'all',sub:null,sort:'dist',member:false,sel:1,sheet:null,fav:{},me:FALLBACK.slice(),q:'',real:false,clock:Date.now()};
+const S={f:{perk:[],time:'',entry:'',tax:false,rate:0},view:'home',cat:null,i:0,mode:'live',grp:'all',sub:null,sort:'dist',member:false,sel:1,sheet:null,fav:{},me:FALLBACK.slice(),q:'',real:false,clock:Date.now(),cc:{},qr:{},cm:null};
+const SO=window.SOCIAL;
 const esc=s=>String(s).replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
 const LINE=live.slice().sort((a,b)=>a.ll[1]-b.ll[1]);
 const P=()=>LINE[S.i];
@@ -223,7 +248,11 @@ const ICON={
  clock:'<svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="8"/><path d="M12 8v4l3 2"/></svg>',
  link:'<svg viewBox="0 0 24 24"><path d="M10 14a4 4 0 0 0 5.7 0l3-3a4 4 0 0 0-5.7-5.7l-1 1M14 10a4 4 0 0 0-5.7 0l-3 3a4 4 0 0 0 5.7 5.7l1-1"/></svg>',
  copy:'<svg viewBox="0 0 24 24"><rect x="8" y="8" width="12" height="12" rx="2"/><path d="M16 8V5a1 1 0 0 0-1-1H5a1 1 0 0 0-1 1v10a1 1 0 0 0 1 1h3"/></svg>',
- globe:'<svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M3 12h18M12 3a14 14 0 0 1 0 18M12 3a14 14 0 0 0 0 18"/></svg>'
+ globe:'<svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M3 12h18M12 3a14 14 0 0 1 0 18M12 3a14 14 0 0 0 0 18"/></svg>',
+ chat:'<svg viewBox="0 0 24 24"><path d="M4 5h16v11H9l-5 4z"/></svg>',
+ heart:'<svg viewBox="0 0 24 24"><path d="M12 20s-7-4.4-7-10a4 4 0 0 1 7-2.6A4 4 0 0 1 19 10c0 5.6-7 10-7 10z"/></svg>',
+ share:'<svg viewBox="0 0 24 24"><path d="M12 15V4M8 8l4-4 4 4M5 12v7h14v-7"/></svg>',
+ talk:'<svg viewBox="0 0 24 24"><path d="M5 5h14v10h-6l-4 4v-4H5z"/><path d="M9 10h.01M12 10h.01M15 10h.01"/></svg>'
 };
 let tt; function toast(s){const el=document.getElementById('toast');el.textContent=s;el.hidden=false;clearTimeout(tt);tt=setTimeout(()=>el.hidden=true,2600);}
 const $=id=>document.getElementById(id);
@@ -328,7 +357,7 @@ function card(p,d){
   return `<button class="nc has-th" data-act="open" data-id="${p.id}">${thumb(p)}<span class="ncb">
     <div class="t"><b>${esc(tx(p.t))}</b>${stars(p)}<span class="c">${catL(p.cat)}</span><span class="dm">${fmtD(d)}</span></div>
     <div class="gifts">${p.perks.slice(0,3).map(x=>`<span class="gift${/deal|menu|tip|sale/.test(x[1])?' a':''}">${ICON[p.grp==='eat'?p.type:p.grp==='shop'?'shop':'gift']}${esc(tx(x[0]))}</span>`).join('')}</div>
-    <div class="ft"><span>${t.entry[p.entry]}${p.tax?' · '+t.tax:''}${p.perm?' · '+esc(p.h==='24h'?'24h':p.h):` · ${p.endUnk?t.tbd:`${t.ends} <b data-end="${p.endTs}">${left(p.endTs)}</b>`}`}</span><span class="more">${t.details}</span></div>${strip(p)}</span></button>`;}
+    <div class="ft"><span><i class="eb e-${p.entry}">${t.entry[p.entry]}</i>${p.tax?' · '+t.tax:''}${p.perm?' · '+esc(p.h==='24h'?'24h':p.h):` · ${p.endUnk?t.tbd:`${t.ends} <b data-end="${p.endTs}">${left(p.endTs)}</b>`}`}</span><span class="more">${S.cc[p.id]?`<i class="cc">${ICON.chat}${S.cc[p.id]}</i>`:''}${t.details}</span></div>${strip(p)}</span></button>`;}
 function strip(p){const g=gallery(p);if(g.length<2)return '';const pick=[];['o','i','f','p'].forEach(k=>{const x=g.find(y=>y.k===k);if(x)pick.push(x);});g.forEach(x=>{if(pick.length<4&&!pick.includes(x))pick.push(x);});
   return `<span class="strip">${pick.slice(0,3).map(x=>`<span class="sp"><img src="${esc(small(x.u))}" alt="" loading="lazy" referrerpolicy="no-referrer" onerror="this.parentNode.remove()"><i>${kindL(p,x.k)}</i></span>`).join('')}</span>`;}
 function nearList(){
@@ -387,7 +416,7 @@ function head(p){
     <button class="star${S.fav[p.id]?' on':''}" data-act="fav" aria-label="${t.star}">${ICON.star}</button></div>
    <div class="chiprow"><a class="chipb p" href="${naverUrl(p)}" target="_blank" rel="noopener">${ICON.pin}${t.nav}</a>
     ${p.entry==='naver'?`<a class="chipb s" href="${p.src}" target="_blank" rel="noopener">${ICON.cal}${t.book}</a>`:''}
-    <button class="chipb" data-act="perks">${ICON.gift}${t.perks}</button><a class="chipb" href="${p.src}" target="_blank" rel="noopener">${ICON.link}${t.source}</a></div>
+    <button class="chipb" data-act="perks">${ICON.gift}${t.perks}</button><button class="chipb" data-act="cmt">${ICON.chat}${t.cmt}<small class="num" data-cc="${p.id}">${S.cc[p.id]||''}</small></button><button class="chipb" data-act="share">${ICON.share}${t.share}</button><a class="chipb" href="${p.src}" target="_blank" rel="noopener">${ICON.link}${t.source}</a></div>
   </section>${galHtml(p)}<div class="sep"></div>`;}
 function galHtml(p){const g=gallery(p);if(!g.length)return '';
   return `<section class="gal pad"><h2>${t.photos}<small>${g.length}</small></h2>${['o','i','f','p'].map(k=>{const xs=g.map((x,i)=>({...x,i})).filter(x=>x.k===k);if(!xs.length)return '';
@@ -401,12 +430,17 @@ function lineBar(){const prev=LINE[S.i-1],next=LINE[S.i+1],p=P();
    <button class="side" data-act="step" data-v="-1" ${prev?'':'disabled'}>‹ <span>${prev?esc(prev.brand):t.stA}</span></button>
    <div class="cur"><span class="badge">${S.i+1}</span><b>${esc(p.brand)}</b></div>
    <button class="side r" data-act="step" data-v="1" ${next?'':'disabled'}><span>${next?esc(next.brand):t.stB}</span> ›</button></div>`;}
+function ago(ts){const x=Math.max(0,Date.now()-ts);if(x<60e3)return t.justNow;const m=Math.floor(x/M),h=Math.floor(x/H),d=Math.floor(x/D);return t.ago(m,h,d);}
+function queueHtml(p){const rs=S.qr[p.id]||[];const can=Date.now()-SO.me.lastRep(p.id)>30*M;
+  const btns=`<div class="rep2">${t.here}${t.lv.map((x,i)=>`<button data-act="report" data-v="${i}" ${can?'':'disabled'}>${x}</button>`).join('')}</div>`;
+  if(!rs.length)return `<div class="kv"><span>${t.wait}</span><b class="k">${t.norep}</b></div>${btns}<div class="src">${SO.live?t.qNote:t.qDemo}</div>`;
+  const c=[0,0,0];rs.forEach(r=>c[r.level]++);const lv=c[2]>=c[1]&&c[2]>=c[0]?2:c[1]>=c[0]?1:0;const last=Math.max(...rs.map(r=>Date.parse(r.created_at)));
+  return `<div class="kv"><span>${t.wait}</span><b class="${lv===0?'g':lv===1?'a':''}">${t.lv[lv]}</b></div><div class="qbar">${c.map((n,i)=>n?`<span class="q${i}" style="flex:${n}">${n}</span>`:'').join('')}</div>
+   <div class="src">${esc(t.qAgg(rs.length,t.lv[lv]))} · ${esc(t.qLast(ago(last)))}</div>${btns}<div class="src">${SO.live?t.qNote:t.qDemo}</div>`;}
 function cards(p){
   if(S.mode==='live'){
-    const q=p.rep!=null?`<div class="kv"><span>${t.wait}</span><b class="${p.rep===0?'g':p.rep===1?'a':''}">${t.lv[p.rep]}</b></div><div class="src">${t.reported}</div>`
-      :`<div class="kv"><span>${t.wait}</span><b class="k">${t.norep}</b></div><div class="rep2">${t.here}${t.lv.map((x,i)=>`<button data-act="report" data-v="${i}">${x}</button>`).join('')}</div>`;
-    return `<div class="cards"><div class="card"><h3>${t.queue}</h3>${q}</div>
-     <div class="card"><h3>${t.entryT}</h3><div class="kv"><span>${t.method}</span><b class="${p.entry==='walkin'?'g':'a'}">${t.entry[p.entry]}</b></div>${p.perm?'':`<div class="kv"><span>${t.endsIn}</span>${leftHtml(p)}</div>`}${p.note?`<div class="src">${esc(tx(p.note))}</div>`:''}</div></div>`;}
+    return `<div class="cards"><div class="card"><h3>${t.queue}${SO.live?'<span class="livedot"></span>':''}</h3>${queueHtml(p)}</div>
+     <div class="card"><h3>${t.entryT}</h3><div class="kv"><span>${t.method}</span><b class="${p.entry==='walkin'?'g':'a'}">${t.entry[p.entry]}</b></div>${p.spot?`<div class="kv"><span>${t.spotT}</span><b class="k sp">${esc(tx(p.spot))}</b></div>`:''}${p.perm?'':`<div class="kv"><span>${t.endsIn}</span>${leftHtml(p)}</div>`}${p.entry==='naver'?`<div class="src">${t.naverHint}</div>`:''}${p.note?`<div class="src">${esc(tx(p.note))}</div>`:''}</div></div>`;}
   return `<div class="cards"><div class="card"><h3>${t.ohours}</h3><div class="kv"><span style="white-space:normal">${esc(hoursTxt(p))}</span></div></div>
     <div class="card"><h3>${p.perm?t.kind:t.period}</h3>${p.perm?`<div class="kv"><span>${t.permStore}</span></div>`:`<div class="kv"><span>${t.dates}</span><b class="k">${rangeTxt(p)}</b></div><div class="kv"><span>${t.left}</span>${leftHtml(p)}</div>`}</div></div>`;}
 function lineMap(){
@@ -425,14 +459,15 @@ function info(p){
     <div class="fact"><span class="ic">${ICON.cal}</span><div>${p.perm?t.kind:t.period}<small>${p.perm?t.permStore+' · '+subL(p.sub):rangeTxt(p)}</small></div></div>
     <div class="fact"><span class="ic">${ICON.pin}</span><div>${t.koaddr}<small>${esc(p.addr)}</small><button class="copy" data-act="copy" data-v="${esc(p.addr)}">${ICON.copy}${t.copy}</button></div></div>
    </div></section><div class="sep"></div>
-   <section class="sec pad"><h2>${t.guideT}<small>${t.guideS}</small></h2>${guide(p)}</section>`;}
+   <section class="sec pad"><h2>${t.guideT}<small>${t.guideS}</small></h2>${guide(p)}</section>${t.phr.length?`<div class="sep"></div><section class="sec pad"><h2>${t.phT}<small>${t.phS}</small></h2><div class="phr">${t.phr.map((x,i)=>`<button class="ph1" data-act="phrase" data-v="${i}"><span>${esc(x[0])}</span><b lang="ko">${esc(x[1])}</b></button>`).join('')}</div></section>`:''}`;}
 function vDetail(){const p=P();
   return `<div class="wrap grid"><main>${head(p)}<section class="pad" style="padding-bottom:22px">${lineBar()}
    <div class="rt"><div class="seg"><button class="${S.mode==='live'?'on':''}" data-act="mode" data-v="live">${t.live}</button><button class="${S.mode==='info'?'on':''}" data-act="mode" data-v="info">${t.hours}</button></div>
    <span class="clock">${clock(S.clock)}</span><button class="refresh" data-act="refresh" aria-label="${t.refresh}">${ICON.ref}</button></div>${cards(p)}</section>
    <div class="sep"></div>${info(p)}</main>
    <aside class="aside"><section class="sec pad"><h2>${t.lineT}<small>${t.lineS}</small></h2>${lineMap()}</section>
-   <p class="foot pad">${t.foot(DATA_DATE)}</p></aside></div>`;}
+   <p class="foot pad">${t.foot(DATA_DATE)}</p></aside></div>
+   <div class="cbar"><button class="cin" data-act="cmt" data-v="write">${ICON.talk}<span>${t.say}</span></button><button class="cnum" data-act="cmt">${ICON.chat}<b class="num" data-cc="${p.id}">${S.cc[p.id]||0}</b></button></div>`;}
 function vSheet(){
   const pl=t.plans[S.sel];
   return `<div class="mask" data-act="close"><div class="vsheet" role="dialog">
@@ -456,13 +491,55 @@ function vFacets(){
     <h4>${t.fSec[3]}</h4>${row('other',[['tax','tax'],['rate','r45'],['rate','r40']])}
     <div class="fbtns"><button class="fclear" data-act="fclear">${t.fClear}</button><button class="buy" data-act="close" data-x="1">${t.fShow(cnt)}</button></div>
    </div></div></div>`;}
-function renderSheet(){$('sheetHost').innerHTML=S.sheet==='facets'?vFacets():S.sheet!==null?vSheet():'';}
+function renderSheet(){if(S.sheet==='cmt'){if(!$('cmtList'))$('sheetHost').innerHTML=vCmt();renderCmt();return;}$('sheetHost').innerHTML=S.sheet==='facets'?vFacets():S.sheet!==null?vSheet():'';}
+/* ================= comments (Douyin-style sheet) ================= */
+const hue=s=>{let h=0;for(const c of String(s))h=(h*31+c.codePointAt(0))%360;return h;};
+const myNick=()=>SO.me.nick()||(()=>{const n=t.nickDef+String(Math.floor(1000+Math.random()*9000));SO.me.setNick(n);return n;})();
+function vCmt(){const p=P();
+  return `<div class="mask" data-act="close"><div class="vsheet csheet" role="dialog" aria-label="${t.cmt}">
+   <div class="chead"><b id="cmtTitle">${t.cmtN(0)}</b><div class="seg sm"><button data-act="csort" data-v="hot">${t.hot}</button><button data-act="csort" data-v="new">${t.newest}</button></div><button class="x" data-act="close" aria-label="${t.close}">×</button></div>
+   ${SO.live?'':`<div class="cdemo">${t.cmtDemo}</div>`}
+   <div class="clist" id="cmtList"></div>
+   <div class="cfoot"><div class="crule">${t.cmtRule}</div>
+    <div class="cform"><input id="cNick" class="cnick" maxlength="12" value="${esc(myNick())}" aria-label="${t.nickL}"><textarea id="cBody" rows="1" maxlength="200" placeholder="${esc(t.say)}" aria-label="${t.say}"></textarea><button class="csend" data-act="csend">${t.send}</button></div></div>
+  </div></div>`;}
+function renderCmt(){const cm=S.cm,el=$('cmtList');if(!cm||!el)return;
+  const xs=cm.list.filter(c=>!SO.me.hidden(c.id));
+  const sorted=xs.slice().sort(cm.sort==='new'?(a,b)=>Date.parse(b.created_at)-Date.parse(a.created_at):(a,b)=>(b.likes-a.likes)||(Date.parse(b.created_at)-Date.parse(a.created_at)));
+  $('cmtTitle').textContent=t.cmtN(xs.length);
+  document.querySelectorAll('[data-act="csort"]').forEach(b=>b.classList.toggle('on',b.dataset.v===cm.sort));
+  el.innerHTML=cm.loading?'<div class="cempty">…</div>':sorted.length?sorted.map(c=>{const lk=SO.me.liked(c.id);
+    return `<div class="cm${cm.fresh===c.id?' fresh':''}"><span class="av" style="background:hsl(${hue(c.nick)} 55% 52%)">${esc([...c.nick][0]||'?')}</span>
+     <div class="cmb"><div class="cn">${esc(c.nick)}</div><div class="ct">${esc(c.body)}</div><div class="cmeta">${ago(Date.parse(c.created_at))}<button data-act="crep" data-v="${c.id}">${t.report}</button></div></div>
+     <button class="clk${lk?' on':''}" data-act="clike" data-v="${c.id}" aria-label="like">${ICON.heart}<span class="num">${c.likes||''}</span></button></div>`;}).join(''):`<div class="cempty">${t.noCmt}</div>`;}
+async function openComments(focus){const p=P();S.sheet='cmt';S.cm={place:p.id,list:[],sort:'hot',loading:true};$('sheetHost').innerHTML=vCmt();renderCmt();
+  if(focus)setTimeout(()=>{const b=$('cBody');if(b)b.focus();},60);
+  try{await SO.ready;const l=await SO.list(p.id);if(S.cm&&S.cm.place===p.id){S.cm.list=l;S.cm.loading=false;S.cc[p.id]=l.length;renderCmt();setCount(p.id);}}
+  catch(e){if(S.cm){S.cm.loading=false;renderCmt();}}}
+function setCount(id){document.querySelectorAll(`[data-cc="${id}"]`).forEach(el=>el.textContent=S.cc[id]||(el.tagName==='B'?0:''));}
+async function sendCmt(){const p=P(),b=$('cBody'),nk=$('cNick');if(!b)return;
+  const nick=(nk.value||'').trim().slice(0,12)||myNick();SO.me.setNick(nick);
+  const r=SO.clean(b.value);if(r.err){toast(t.cerr[r.err]);return;}
+  if(Date.now()-SO.me.lastPost()<10e3){toast(t.cerr.fast);return;}
+  const btn=document.querySelector('.csend');btn.disabled=true;
+  try{const c=await SO.add(p.id,nick,r.body);SO.me.posted();b.value='';addCmt(c,true);toast(t.posted);}
+  catch(e){toast(t.cerr.fail);}finally{btn.disabled=false;}}
+function addCmt(c,mine){if(!c)return;const cm=S.cm;
+  if(cm&&cm.place===c.place){if(cm.list.some(x=>x.id===c.id))return;cm.list.unshift(c);cm.fresh=c.id;if(mine)cm.sort='new';S.cc[c.place]=cm.list.length;renderCmt();const el=$('cmtList');if(el&&mine)el.scrollTop=0;}
+  else S.cc[c.place]=(S.cc[c.place]||0)+1;
+  setCount(c.place);if(S.view==='home')renderNear();}
+SO.onComment(c=>addCmt(c,false));
+SO.onQueue(r=>{const a=S.qr[r.place];if(!a)return;if(a.some(x=>x.created_at===r.created_at&&x.level===r.level))return;a.unshift(r);if(S.view==='detail'&&P().id===r.place&&S.mode==='live')rerender();});
+async function loadQueue(id){try{await SO.ready;S.qr[id]=await SO.queue(id);if(S.view==='detail'&&P().id===id)rerender();}catch(e){}}
+SO.ready.then(()=>SO.counts()).then(m=>{S.cc=m||{};if(S.view==='home')renderNear();else rerender();}).catch(()=>{});
+function shareText(p){const pk=p.perks.slice(0,2).map(x=>'· '+tx(x[0])).join('\n');
+  return `${tx(p.t)}\n${p.perm?t.permStore:rangeTxt(p)} · ${hoursTxt(p)}\n${pk}\n${p.addr}\n${location.origin+location.pathname}?lang=${lang}#${p.id}`;}
 function fitResults(){if(!MAP||!MAP.fit||!(S.cat||S.sub||fCount()))return;const v=visible();if(!v.length)return;
   let top=20,bottom=20;if(!wide()){top=document.querySelector('.topov').offsetHeight+70;bottom=$('near').offsetHeight+20;}
   MAP.fit(v.map(p=>p.dl||p.ll),[top,40,bottom,40]);}
 function refresh(){renderChips();drawMarkers();renderNear();setTimeout(fitResults,30);}
-function rerender(){if(S.view==='detail'){const y=scrollY;renderDetail();scrollTo(0,y);}renderSheet();}
-function openPop(id){S.i=LINE.findIndex(x=>x.id===id);if(S.i<0)return;S.view='detail';S.mode='live';S.sheet=null;renderSheet();homeEl.hidden=true;detEl.hidden=false;renderDetail();scrollTo(0,0);try{history.replaceState(null,'',location.pathname+location.search+'#'+id);}catch(e){}}
+function rerender(){if(S.view==='detail'){const y=scrollY;renderDetail();scrollTo(0,y);}if(S.sheet!=='cmt')renderSheet();}
+function openPop(id){S.i=LINE.findIndex(x=>x.id===id);if(S.i<0)return;S.view='detail';S.mode='live';S.sheet=null;S.cm=null;$('sheetHost').innerHTML='';loadQueue(id);homeEl.hidden=true;detEl.hidden=false;renderDetail();scrollTo(0,0);try{history.replaceState(null,'',location.pathname+location.search+'#'+id);}catch(e){}}
 function goHome(){S.lb=null;lightbox();S.view='home';detEl.hidden=true;detEl.innerHTML='';homeEl.hidden=false;if(MAP)MAP.resize();drawMarkers();renderNear();try{history.replaceState(null,'',location.pathname+location.search);}catch(e){}}
 
 /* ================= language ================= */
@@ -489,7 +566,7 @@ document.addEventListener('click',e=>{
   else if(a==='home')goHome();
   else if(a==='lb'){S.lb=+v;lightbox();}
   else if(a==='lbstep'){S.lb+=+v;lightbox();}
-  else if(a==='lbclose'){if(e.target===el||el.classList.contains('lbx')){S.lb=null;lightbox();}}
+  else if(a==='lbclose'){if(e.target===el||el.classList.contains('lbx')||el.classList.contains('phbig')){S.lb=null;lightbox();}}
   else if(a==='locate')locate();
   else if(a==='lang')setLang(v);
   else if(a==='clear'){S.q='';qEl.value='';$('res').innerHTML='';el.hidden=true;}
@@ -497,7 +574,15 @@ document.addEventListener('click',e=>{
   else if(a==='go')openPop(LINE[+v].id);
   else if(a==='mode'){S.mode=v;rerender();}
   else if(a==='refresh'){S.clock=Date.now();rerender();toast(t.refreshed);}
-  else if(a==='report'){p.rep=+v;rerender();toast(t.thanks);}
+  else if(a==='report'){if(Date.now()-SO.me.lastRep(p.id)<30*M){toast(t.qWait);return;}SO.me.reported(p.id);
+    SO.addQueue(p.id,+v).then(()=>{toast(t.qThanks);if(!SO.live)return;setTimeout(()=>loadQueue(p.id),1500);},()=>toast(t.cerr.fail));rerender();}
+  else if(a==='cmt')openComments(v==='write');
+  else if(a==='csort'){S.cm.sort=v;S.cm.fresh=null;renderCmt();}
+  else if(a==='csend')sendCmt();
+  else if(a==='clike'){const id=+v,c=S.cm&&S.cm.list.find(x=>x.id===id);if(!c)return;const on=!SO.me.liked(id);SO.me.setLiked(id,on);c.likes=Math.max(0,(c.likes||0)+(on?1:-1));renderCmt();SO.like(id,on).catch(()=>{});}
+  else if(a==='crep'){const id=+v;SO.me.hide(id);SO.report(id).catch(()=>{});renderCmt();toast(t.reportedC);}
+  else if(a==='phrase'){const x=t.phr[+v];$('lbHost').innerHTML=`<div class="lb phbig" data-act="lbclose"><b lang="ko">${esc(x[1])}</b><span>${esc(x[0])}</span><button class="lbx" data-act="lbclose" aria-label="${t.close}">×</button></div>`;}
+  else if(a==='share'){const txt=shareText(p);if(navigator.share){navigator.share({title:tx(p.t),text:txt}).catch(()=>{});}else (navigator.clipboard?navigator.clipboard.writeText(txt):Promise.reject()).then(()=>toast(t.shared),()=>toast(t.copyfail));}
   else if(a==='perks'){const x=$('perks');if(x)x.scrollIntoView({behavior:'smooth'});}
   else if(a==='copy'){(navigator.clipboard?navigator.clipboard.writeText(v):Promise.reject()).then(()=>toast(t.copied),()=>toast(t.copyfail));}
   else if(a==='fav'){S.fav[p.id]=!S.fav[p.id];rerender();toast(S.fav[p.id]?t.fav:t.unfav);}
@@ -513,13 +598,13 @@ document.addEventListener('click',e=>{
   else if(a==='fclear'){S.f={perk:[],time:'',entry:'',tax:false,rate:0};refresh();renderSheet();}
   else if(a==='sort'){S.sort=v;renderNear();}
   else if(a==='sheet'){if(!wide())setMin(!S.min);}
-  else if(a==='close'){if(e.target===el||el.classList.contains('x')||el.dataset.x){S.sheet=null;renderSheet();}}
+  else if(a==='close'){if(e.target===el||el.classList.contains('x')||el.dataset.x){S.sheet=null;S.cm=null;renderSheet();}}
   else if(a==='plan'){S.sel=+v;renderSheet();}
   else if(a==='buy'){S.member=true;S.sheet=null;renderSheet();renderChips();toast(t.bought);}
 });
-document.addEventListener('keydown',e=>{if(S.lb==null)return;const n=gallery(P()).length;if(e.key==='Escape'){S.lb=null;lightbox();}else if(e.key==='ArrowRight'&&S.lb<n-1){S.lb++;lightbox();}else if(e.key==='ArrowLeft'&&S.lb>0){S.lb--;lightbox();}});
+document.addEventListener('keydown',e=>{if(e.target&&e.target.id==='cBody'&&e.key==='Enter'&&!e.shiftKey&&!e.isComposing){e.preventDefault();sendCmt();return;}if(S.lb==null)return;const n=gallery(P()).length;if(e.key==='Escape'){S.lb=null;lightbox();}else if(e.key==='ArrowRight'&&S.lb<n-1){S.lb++;lightbox();}else if(e.key==='ArrowLeft'&&S.lb>0){S.lb--;lightbox();}});
 window.addEventListener('hashchange',()=>{const id=location.hash.slice(1);if(LINE.some(x=>x.id===id))openPop(id);});
-setInterval(()=>{document.querySelectorAll('[data-end]').forEach(el=>{el.textContent=left(+el.dataset.end);});},30000);
+setInterval(()=>{if(S.sheet==='cmt')renderCmt();document.querySelectorAll('[data-end]').forEach(el=>{el.textContent=left(+el.dataset.end);});},30000);
 applyStatic();renderChips();renderNear();startMap();
 const h0=location.hash.slice(1); if(LINE.some(x=>x.id===h0))openPop(h0);
 })();

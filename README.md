@@ -17,3 +17,10 @@
 3. 把 Client ID 填进 `config.js` 的 `naverKeyId`，提交即可。没填或认证失败时自动用 OpenStreetMap。
 
 数据来源：快闪信息和坐标来自 Popply，餐厅评分和坐标来自 DiningCode，店铺坐标与营业时间参考 Kakao Map，信息以官方公告为准。地图 © OpenStreetMap 贡献者。
+
+## Comments and live queue reports
+Each pop-up has a comment sheet (Douyin-style: newest/top sort, likes, report) and a "how long is the queue" report.
+- Without a backend (default) they run in demo mode: saved only in each visitor's own browser.
+- To share them live with everyone: create a free Supabase project (region Seoul), run `supabase.sql` in its SQL Editor,
+  then paste the Project URL and the `anon public` key into `config.js`.
+- Comments with 3 reports are hidden automatically; delete any comment in Supabase → Table Editor → comments.
