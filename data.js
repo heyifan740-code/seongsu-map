@@ -7,6 +7,7 @@
    img: photo URL (Popply poster / DiningCode photo); leave out to show a category illustration
    gk: what the free gift is (lotion cleanser lip bag keyring coffee sample showerball draw taste gift) — shows a gift pin on the map
    endUnk: true when the end date is not announced
+   book: [{via:'catchtable'|'tabling', ref (CatchTable shopRef) or u (full URL), t:'waiting'|'reserve'}] — only verified shop pages
    spot: LG(...) where to queue / which door, only when the source says so (e.g. 'Seongsu Stn. Exit 4, left door')
    rate: DiningCode user rating {s: score/5, n: reviews, u: DiningCode id}
 */
@@ -216,7 +217,7 @@ const POPS = [
  src:PP+'6674'},
 
 /* =================== FOOD =================== */
-{id:'minari',grp:'eat',sub:'korean',name:'능동미나리 성수점',t:LG('能洞水芹 圣水店','Neungdong Minari','능동미나리 성수점'),brand:'Neungdong Minari',
+{id:'minari',book:[{via:'tabling',u:'https://www.tabling.co.kr/restaurant/10713',t:'waiting'}],grp:'eat',sub:'korean',name:'능동미나리 성수점',t:LG('能洞水芹 圣水店','Neungdong Minari','능동미나리 성수점'),brand:'Neungdong Minari',
  addr:'서울 성동구 연무장길 42',ll:[37.5427551,127.0539622],perm:true,end:'2099-12-31T23:00:00+09:00',h:'11:00–23:00',entry:'walkin',type:'food',
  g:LG('水芹汤','Minari gomtang','미나리곰탕'),note:LG('TikTok 爆红后排队较长','Long lines since going viral on TikTok','틱톡에서 화제가 된 뒤 웨이팅 김'),
  perks:[[LG('水芹牛骨汤 15,000 韩元','Minari beef-bone soup ₩15,000','미나리곰탕 15,000원'),'sig'],[LG('水芹生拌 9,000 韩元','Minari yukhoe-style salad ₩9,000','미나리 육회 9,000원'),'menu']],
@@ -290,7 +291,7 @@ const POPS = [
  perks:[[LG('天然酵种法棍 3,500 韩元','Sourdough-levain baguette ₩3,500','천연발효종 프랑스 바게트 3,500원'),'sig'],[LG('杏仁可颂 4,300 韩元、红豆黄油 4,700 韩元','Almond croissant ₩4,300, anbutter ₩4,700','아몬드 크루아상 4,300원, 앙버터 4,700원'),'menu']],
  rate:{s:4.3,n:32,u:'IUpAMOCNzZhd'},img:'https://d12zq4w4guyljn.cloudfront.net/300_300_20260807122602_photo1_36858cb0e82b.webp',src:'https://www.diningcode.com/profile.php?rid=IUpAMOCNzZhd'},
 
-{id:'standardbread',grp:'eat',sub:'bakery',name:'스탠다드브레드 성수',t:LG('Standard Bread 吐司','Standard Bread','스탠다드브레드 성수'),brand:'Standard Bread',
+{id:'standardbread',book:[{via:'catchtable',ref:'standardbreadss',t:'waiting'}],grp:'eat',sub:'bakery',name:'스탠다드브레드 성수',t:LG('Standard Bread 吐司','Standard Bread','스탠다드브레드 성수'),brand:'Standard Bread',
  addr:'서울 성동구 성수이로18길 37 1층',ll:[37.5416005,127.0612036],perm:true,end:'2099-12-31T21:00:00+09:00',h:'09:00–21:00',hx:LG('最后点单 20:30','Last order 20:30','라스트오더 20:30'),entry:'walkin',type:'sweet',
  g:LG('生吐司','Fresh loaf','생식빵'),
  perks:[[LG('千层手撕吐司 7,900 韩元','Tissue (pastry) loaf ₩7,900','티슈식빵 7,900원'),'sig'],[LG('焦糖布蕾法式吐司 14,900 韩元','Crème brûlée French toast ₩14,900','크림브륄레 프렌치토스트 14,900원'),'menu']],
@@ -332,7 +333,7 @@ const POPS = [
  perks:[[LG('焦糖布蕾贝果 7,900 韩元','Crème brûlée bagel ₩7,900','크렘브륄레 베이글 7,900원'),'sig'],[LG('迪拜贝果（开心果）11,500 韩元','Dubai (pistachio) bagel ₩11,500','두바이 베이글 11,500원'),'menu']],
  rate:{s:3.8,n:10,u:'SI0hXPnFackw'},img:'https://d12zq4w4guyljn.cloudfront.net/300_300_20260726035836_photo4_c4af74f90374.webp',src:'https://www.diningcode.com/profile.php?rid=SI0hXPnFackw'},
 
-{id:'imdonut',grp:'eat',sub:'donut',name:'아임도넛 성수점',t:LG('I’m donut ? 圣水店','I’m donut ?','아임도넛 성수점'),brand:'I’m donut ?',
+{id:'imdonut',book:[{via:'tabling',u:'https://www.tabling.co.kr/restaurant/12786',t:'waiting'}],grp:'eat',sub:'donut',name:'아임도넛 성수점',t:LG('I’m donut ? 圣水店','I’m donut ?','아임도넛 성수점'),brand:'I’m donut ?',
  addr:'서울 성동구 연무장길 37-30 1층',ll:[37.543672,127.0539378],perm:true,end:'2099-12-31T20:00:00+09:00',h:'10:00–20:00',entry:'walkin',type:'sweet',
  g:LG('生甜甜圈','Fresh donuts','생도넛'),
  perks:[[LG('糖霜甜甜圈 2,800 韩元','Glazed ₩2,800','글레이즈드 2,800원'),'sig'],[LG('开心果奶油 4,800 韩元','Pistachio cream ₩4,800','피스타치오 크림 4,800원'),'menu']],

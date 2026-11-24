@@ -30,7 +30,9 @@ function demoBackend(){
   return {live:false,
     async list(place){return all().filter(c=>c.place===place&&c.reports<3);},
     async counts(){const m={};all().forEach(c=>{if(c.reports<3)m[c.place]=(m[c.place]||0)+1;});return m;},
-    async add(place,nick,body){const c={id:Date.now(),place,nick,body,likes:0,reports:0,created_at:new Date().toISOString()};
+    photos:true,
+    async upload(blob){return await new Promise(r=>{const f=new FileReader();f.onload=()=>r(f.result);f.readAsDataURL(blob);});},
+    async add(place,nick,body,img){const c={id:Date.now(),place,nick,body,img:img||null,likes:0,reports:0,created_at:new Date().toISOString()};
       const a=all();a.push(c);store.set('ss_demo_c',a);subs.c.forEach(f=>f(c));return c;},
     async like(id,v){const a=all(),c=a.find(x=>x.id===id);if(c){c.likes=Math.max(0,c.likes+(v?1:-1));store.set('ss_demo_c',a);}},
     async report(id){const a=all(),c=a.find(x=>x.id===id);if(c){c.reports++;store.set('ss_demo_c',a);}},
@@ -47,15 +49,21 @@ function supaBackend(sb){
     .on('postgres_changes',{event:'INSERT',schema:'public',table:'queue_reports'},m=>subs.q.forEach(f=>f(m.new)))
     .subscribe();
   const ok=r=>{if(r.error)throw r.error;return r.data;};
-  return {live:true,
-    async list(place){return ok(await sb.from('comments').select('id,place,nick,body,likes,created_at').eq('place',place).order('created_at',{ascending:false}).limit(200));},
+  let cols='id,place,nick,body,img,likes,created_at';
+  const B={live:true,photos:true,
+    async list(place){const q=()=>sb.from('comments').select(cols).eq('place',place).order('created_at',{ascending:false}).limit(200);
+      let r=await q();if(r.error&&cols.includes(',img')){cols=cols.replace(',img','');B.photos=false;r=await q();}return ok(r);},
+    async upload(blob){const path=`c/${Date.now()}-${Math.random().toString(36).slice(2,8)}.jpg`;
+      ok(await sb.storage.from('photos').upload(path,blob,{contentType:'image/jpeg',upsert:false}));
+      return sb.storage.from('photos').getPublicUrl(path).data.publicUrl;},
     async counts(){const m={};ok(await sb.from('comment_counts').select('place,n')).forEach(r=>m[r.place]=r.n);return m;},
-    async add(place,nick,body){return ok(await sb.from('comments').insert({place,nick,body}).select('id,place,nick,body,likes,created_at').single());},
+    async add(place,nick,body,img){const row={place,nick,body};if(img)row.img=img;return ok(await sb.from('comments').insert(row).select(cols).single());},
     async like(id,v){ok(await sb.rpc(v?'like_comment':'unlike_comment',{cid:id}));},
     async report(id){ok(await sb.rpc('report_comment',{cid:id}));},
     async queue(place){return ok(await sb.from('queue_reports').select('place,level,created_at').eq('place',place).gte('created_at',new Date(Date.now()-QWIN).toISOString()).order('created_at',{ascending:false}).limit(100));},
     async addQueue(place,level){ok(await sb.from('queue_reports').insert({place,level}));},
     onComment(f){subs.c.push(f);},onQueue(f){subs.q.push(f);}};
+  return B;
 }
 
 let backend=demoBackend();
@@ -79,9 +87,15 @@ function clean(body){
   return {body};
 }
 
+function shrink(file,max){return new Promise((res,rej)=>{const u=URL.createObjectURL(file);const im=new Image();
+  im.onload=()=>{const k=Math.min(1,max/Math.max(im.width,im.height));const c=document.createElement('canvas');c.width=Math.round(im.width*k);c.height=Math.round(im.height*k);
+    c.getContext('2d').drawImage(im,0,0,c.width,c.height);URL.revokeObjectURL(u);c.toBlob(b=>b?res(b):rej(new Error('encode')),'image/jpeg',.82);};
+  im.onerror=()=>{URL.revokeObjectURL(u);rej(new Error('image'));};im.src=u;});}
 window.SOCIAL={me,ready,clean,QWIN,
+  get photos(){return backend.photos;},
+  upload:async file=>backend.upload(await shrink(file,backend.live?1280:480)),
   get live(){return backend.live;},
-  list:p=>backend.list(p),counts:()=>backend.counts(),add:(p,n,b)=>backend.add(p,n,b),
+  list:p=>backend.list(p),counts:()=>backend.counts(),add:(p,n,b,i)=>backend.add(p,n,b,i),
   like:(id,v)=>backend.like(id,v),report:id=>backend.report(id),
   queue:p=>backend.queue(p),addQueue:(p,l)=>backend.addQueue(p,l),
   onComment:f=>ready.then(()=>backend.onComment(f)),onQueue:f=>ready.then(()=>backend.onQueue(f))};

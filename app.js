@@ -4,7 +4,7 @@
 const LANGS=['zh','en','ko'];
 const LOCALE={zh:'zh-CN',en:'en',ko:'ko'};
 const T={
-zh:{photos:'图片',pk:{o:'外景',i:'店内',f:'产品',food:'美食',p:'活动图'},giftOnly:'有赠品',tbd:'结束日期未公布',from:s=>`${s} 起`,imgBy:'图片',filt:'筛选',fTitle:'按条件筛选',fSec:['福利','时间','入场','其他'],fOpt:{popup:'只看快闪',gift:'送礼',deal:'打折',taste:'试吃',draw:'抽奖',exp:'体验',new:'本周新开',ending:'3天内结束',perm:'常设店',walkin:'直接进',queue:'现场取号',book:'要预约/购票',tax:'可退税',r45:'评分 4.5+',r40:'评分 4.0+'},fClear:'清除',fShow:n=>`查看 ${n} 个结果`,fres:'筛选结果',title:'圣水快闪线',tag:'课堂原型 · 信息以官方为准',ph:'搜索快闪、美食、店铺或福利',all:'全部',
+zh:{photos:'图片',pk:{o:'外景',i:'店内',f:'产品',food:'美食',p:'活动图',u:'网友实拍'},giftOnly:'有赠品',tbd:'结束日期未公布',from:s=>`${s} 起`,imgBy:'图片',filt:'筛选',fTitle:'按条件筛选',fSec:['福利','时间','入场','其他'],fOpt:{popup:'只看快闪',gift:'送礼',deal:'打折',taste:'试吃',draw:'抽奖',exp:'体验',new:'本周新开',ending:'3天内结束',perm:'常设店',walkin:'直接进',queue:'现场取号',book:'要预约/购票',tax:'可退税',r45:'评分 4.5+',r40:'评分 4.0+'},fClear:'清除',fShow:n=>`查看 ${n} 个结果`,fres:'筛选结果',title:'圣水快闪线',tag:'课堂原型 · 信息以官方为准',ph:'搜索快闪、美食、店铺或福利',all:'全部',
  grp:{pop:'快闪',eat:'美食',shop:'逛店'},
  near:n=>`附近 50m · <em>${n}</em> 家`,list:(l,n)=>`${l} · <em>${n}</em> 家`,demo:'演示位置 · 长按地图可移动',real:'当前定位 · 长按地图可移动',
  empty:'50m 内暂时没有',nearest:(n,d)=>`最近的是 ${n} · ${d} ›`,
@@ -41,10 +41,10 @@ zh:{photos:'图片',pk:{o:'外景',i:'店内',f:'产品',food:'美食',p:'活动
  report:'举报',reportedC:'已举报，这条评论对你隐藏了',posted:'已发出',cmtRule:'友善发言 · 不发广告和联系方式 · 被 3 人举报会自动隐藏',
  cerr:{empty:'先写点内容',long:'最多 200 字',link:'不能发链接或联系方式',spam:'内容像是刷屏',fast:'发得太快了，稍等几秒',fail:'没发出去，请稍后再试'},
  qAgg:(n,lv)=>`最近 2 小时 ${n} 人上报，多数说「${lv}」`,qLast:a=>`最新一条 ${a}`,qDemo:'演示模式：上报只保存在这台设备上',qNote:'由现场用户上报，仅供参考',qWait:'30 分钟内只能上报一次',qThanks:'感谢上报',
- phT:'给店员看',phS:'点一下放大韩文',spotT:'在哪排队',naverHint:'Naver 预约一般要登录 Naver 账号，付费项目要用 Naver Pay；约不上可以到现场问有没有现场名额',
+ addPhoto:'加图片',photoBig:'图片太大或格式不支持',uploading:'正在上传图片…',ugcBy:'网友',ugcHint:'去过现场？在评论里发张照片，帮后来的人看看真实样子',bookT:'排队 / 预约',bkS:{catchtable:'CatchTable',tabling:'Tabling'},bkW:{waiting:'远程排队',reserve:'预约',search:'搜索这家店'},bookHint:'CatchTable 有面向外国游客的国际版；Tabling 远程排队一般要韩国手机号收短信，没有的话到店问店员',phT:'给店员看',phS:'点一下放大韩文',spotT:'在哪排队',naverHint:'Naver 预约一般要登录 Naver 账号，付费项目要用 Naver Pay；约不上可以到现场问有没有现场名额',
  share:'分享',shared:'已复制，可以粘贴到小红书或微信',
- phr:[['请问需要预约吗？','예약해야 하나요?'],['现在大概要等多久？','지금 얼마나 기다려야 하나요?'],['我没有韩国手机号，可以登记排队吗？','한국 전화번호가 없는데 웨이팅 등록할 수 있나요?'],['赠品还有吗？','증정품 아직 남아 있나요?'],['可以拍照吗？','사진 찍어도 되나요?'],['可以退税吗？我带了护照。','택스리펀 되나요? 여권 있어요.'],['可以用外国信用卡或支付宝吗？','해외 카드나 알리페이로 결제할 수 있나요?']]},
-en:{photos:'Photos',pk:{o:'Outside',i:'Inside',f:'Products',food:'Food',p:'Pop-up'},giftOnly:'Free gifts',tbd:'End date TBA',from:s=>`From ${s}`,imgBy:'Photo',filt:'Filters',fTitle:'Filter by',fSec:['Perks','When','Entry','Other'],fOpt:{popup:'Pop-ups only',gift:'Free gift',deal:'Discount',taste:'Tasting',draw:'Lucky draw',exp:'Experience',new:'New this week',ending:'Ends in 3 days',perm:'Permanent',walkin:'Walk in',queue:'Waiting list',book:'Booking / ticket',tax:'Tax refund',r45:'Rating 4.5+',r40:'Rating 4.0+'},fClear:'Clear',fShow:n=>`Show ${n} results`,fres:'Filtered',title:'Seongsu Pop-up Line',tag:'Class prototype · confirm with official sources',ph:'Search pop-ups, food, shops or freebies',all:'All',
+ phr:[['不预约也能进吗？','예약 안 해도 들어갈 수 있어요?'],['在哪里登记排队？','웨이팅 등록은 어디서 해요?'],['现在排队大概要等多久？','지금 기다리면 얼마나 걸려요?'],['我没有韩国手机号，可以登记排队吗？','한국 전화번호가 없는데 웨이팅 등록할 수 있어요?'],['赠品还有吗？','사은품 아직 남아 있어요?'],['赠品要怎么领？','사은품은 어떻게 받아요?'],['可以拍照吗？','사진 찍어도 돼요?'],['可以退税吗？我带了护照。','택스리펀 돼요? 여권 있어요.'],['可以刷外国信用卡吗？','해외 카드로 결제돼요?'],['有会说英语或中文的店员吗？','영어나 중국어 하시는 직원분 계세요?']]},
+en:{photos:'Photos',pk:{o:'Outside',i:'Inside',f:'Products',food:'Food',p:'Pop-up',u:'Visitor photos'},giftOnly:'Free gifts',tbd:'End date TBA',from:s=>`From ${s}`,imgBy:'Photo',filt:'Filters',fTitle:'Filter by',fSec:['Perks','When','Entry','Other'],fOpt:{popup:'Pop-ups only',gift:'Free gift',deal:'Discount',taste:'Tasting',draw:'Lucky draw',exp:'Experience',new:'New this week',ending:'Ends in 3 days',perm:'Permanent',walkin:'Walk in',queue:'Waiting list',book:'Booking / ticket',tax:'Tax refund',r45:'Rating 4.5+',r40:'Rating 4.0+'},fClear:'Clear',fShow:n=>`Show ${n} results`,fres:'Filtered',title:'Seongsu Pop-up Line',tag:'Class prototype · confirm with official sources',ph:'Search pop-ups, food, shops or freebies',all:'All',
  grp:{pop:'Pop-ups',eat:'Eat',shop:'Shops'},
  near:n=>`Within 50 m · <em>${n}</em>`,list:(l,n)=>`${l} · <em>${n}</em>`,demo:'Demo location · long-press the map to move',real:'Your location · long-press the map to move',
  empty:'Nothing within 50 m right now',nearest:(n,d)=>`Nearest: ${n} · ${d} ›`,
@@ -81,10 +81,10 @@ en:{photos:'Photos',pk:{o:'Outside',i:'Inside',f:'Products',food:'Food',p:'Pop-u
  report:'Report',reportedC:'Reported — hidden for you',posted:'Posted',cmtRule:'Be kind · no ads or contact details · hidden after 3 reports',
  cerr:{empty:'Write something first',long:'200 characters max',link:'No links or contact details',spam:'That looks like spam',fast:'Too fast — wait a few seconds',fail:'Couldn’t post, try again later'},
  qAgg:(n,lv)=>`${n} report${n===1?'':'s'} in the last 2 h, mostly “${lv}”`,qLast:a=>`latest ${a}`,qDemo:'Demo mode: reports are saved on this device only',qNote:'Reported by visitors on site; a rough guide only',qWait:'One report per 30 minutes',qThanks:'Thanks for reporting',
- phT:'Show the staff',phS:'tap to show the Korean in large type',spotT:'Where to queue',naverHint:'Naver booking usually needs a Naver account, and paid slots use Naver Pay; if you can’t book, ask on site about walk-in places',
+ addPhoto:'Add photo',photoBig:'That image is too large or not supported',uploading:'Uploading photo…',ugcBy:'Visitors',ugcHint:'Been there? Add a photo with your comment so others can see what it’s really like',bookT:'Waitlist / booking',bkS:{catchtable:'CatchTable',tabling:'Tabling'},bkW:{waiting:'Join the waitlist',reserve:'Book',search:'Search this place'},bookHint:'CatchTable has a global version for visitors; Tabling’s remote waitlist usually needs a Korean number for the SMS — if you don’t have one, ask staff at the door',phT:'Show the staff',phS:'tap to show the Korean in large type',spotT:'Where to queue',naverHint:'Naver booking usually needs a Naver account, and paid slots use Naver Pay; if you can’t book, ask on site about walk-in places',
  share:'Share',shared:'Copied — paste it anywhere',
- phr:[['Do I need a reservation?','예약해야 하나요?'],['How long is the wait now?','지금 얼마나 기다려야 하나요?'],['I don’t have a Korean phone number. Can I still join the waiting list?','한국 전화번호가 없는데 웨이팅 등록할 수 있나요?'],['Are there any free gifts left?','증정품 아직 남아 있나요?'],['May I take photos?','사진 찍어도 되나요?'],['Can I get a tax refund? I have my passport.','택스리펀 되나요? 여권 있어요.'],['Can I pay with a foreign card or Alipay?','해외 카드나 알리페이로 결제할 수 있나요?']]},
-ko:{photos:'사진',pk:{o:'외관',i:'내부',f:'상품',food:'메뉴',p:'팝업 이미지'},giftOnly:'증정 있음',tbd:'종료일 미정',from:s=>`${s}부터`,imgBy:'사진',filt:'필터',fTitle:'조건으로 찾기',fSec:['혜택','기간','입장','기타'],fOpt:{popup:'팝업만',gift:'증정',deal:'할인',taste:'시식',draw:'추첨',exp:'체험',new:'이번 주 오픈',ending:'3일 내 종료',perm:'상시 매장',walkin:'바로 입장',queue:'현장 웨이팅',book:'예약/티켓',tax:'택스리펀',r45:'평점 4.5+',r40:'평점 4.0+'},fClear:'초기화',fShow:n=>`결과 ${n}곳 보기`,fres:'필터 결과',title:'성수 팝업라인',tag:'수업 프로토타입 · 정보는 공식 안내를 확인하세요',ph:'팝업, 맛집, 매장, 혜택 검색',all:'전체',
+ phr:[['Can I go in without a reservation?','예약 안 해도 들어갈 수 있어요?'],['Where do I sign up for the waiting list?','웨이팅 등록은 어디서 해요?'],['How long is the wait right now?','지금 기다리면 얼마나 걸려요?'],['I don’t have a Korean phone number. Can I still join the waiting list?','한국 전화번호가 없는데 웨이팅 등록할 수 있어요?'],['Are there any free gifts left?','사은품 아직 남아 있어요?'],['How do I get the free gift?','사은품은 어떻게 받아요?'],['May I take photos?','사진 찍어도 돼요?'],['Can I get a tax refund? I have my passport.','택스리펀 돼요? 여권 있어요.'],['Can I pay with a foreign card?','해외 카드로 결제돼요?'],['Is there anyone who speaks English or Chinese?','영어나 중국어 하시는 직원분 계세요?']]},
+ko:{photos:'사진',pk:{o:'외관',i:'내부',f:'상품',food:'메뉴',p:'팝업 이미지',u:'방문자 사진'},giftOnly:'증정 있음',tbd:'종료일 미정',from:s=>`${s}부터`,imgBy:'사진',filt:'필터',fTitle:'조건으로 찾기',fSec:['혜택','기간','입장','기타'],fOpt:{popup:'팝업만',gift:'증정',deal:'할인',taste:'시식',draw:'추첨',exp:'체험',new:'이번 주 오픈',ending:'3일 내 종료',perm:'상시 매장',walkin:'바로 입장',queue:'현장 웨이팅',book:'예약/티켓',tax:'택스리펀',r45:'평점 4.5+',r40:'평점 4.0+'},fClear:'초기화',fShow:n=>`결과 ${n}곳 보기`,fres:'필터 결과',title:'성수 팝업라인',tag:'수업 프로토타입 · 정보는 공식 안내를 확인하세요',ph:'팝업, 맛집, 매장, 혜택 검색',all:'전체',
  grp:{pop:'팝업',eat:'맛집',shop:'매장'},
  near:n=>`주변 50m · <em>${n}</em>곳`,list:(l,n)=>`${l} · <em>${n}</em>곳`,demo:'데모 위치 · 지도를 길게 눌러 이동',real:'현재 위치 · 지도를 길게 눌러 이동',
  empty:'50m 안에 아직 없어요',nearest:(n,d)=>`가장 가까운 곳: ${n} · ${d} ›`,
@@ -121,7 +121,7 @@ ko:{photos:'사진',pk:{o:'외관',i:'내부',f:'상품',food:'메뉴',p:'팝업
  report:'신고',reportedC:'신고했어요. 이 댓글은 숨겨져요',posted:'등록했어요',cmtRule:'서로 배려해 주세요 · 광고·연락처 금지 · 신고 3회 시 자동 숨김',
  cerr:{empty:'내용을 입력하세요',long:'최대 200자',link:'링크나 연락처는 쓸 수 없어요',spam:'도배로 보여요',fast:'너무 빨라요. 잠시 후 다시 시도하세요',fail:'등록하지 못했어요. 잠시 후 다시 시도하세요'},
  qAgg:(n,lv)=>`최근 2시간 제보 ${n}건 · 대부분 「${lv}」`,qLast:a=>`최근 제보 ${a}`,qDemo:'데모 모드: 제보는 이 기기에만 저장돼요',qNote:'현장 방문자 제보 · 참고용',qWait:'30분에 한 번만 제보할 수 있어요',qThanks:'제보 감사합니다',
- phT:'직원에게 보여주기',phS:'눌러서 크게 보기',spotT:'줄 서는 곳',naverHint:'네이버 예약은 보통 네이버 로그인이 필요하고, 유료 예약은 네이버페이로 결제해요',
+ addPhoto:'사진 추가',photoBig:'사진이 너무 크거나 지원하지 않는 형식이에요',uploading:'사진 올리는 중…',ugcBy:'방문자',ugcHint:'다녀오셨나요? 댓글에 사진을 남겨 실제 모습을 공유해 주세요',bookT:'웨이팅 / 예약',bkS:{catchtable:'캐치테이블',tabling:'테이블링'},bkW:{waiting:'원격 웨이팅',reserve:'예약',search:'매장 검색'},bookHint:'',phT:'직원에게 보여주기',phS:'눌러서 크게 보기',spotT:'줄 서는 곳',naverHint:'네이버 예약은 보통 네이버 로그인이 필요하고, 유료 예약은 네이버페이로 결제해요',
  share:'공유',shared:'복사했어요',
  phr:[]}
 };
@@ -190,7 +190,7 @@ POPS.forEach(p=>{p.endTs=Date.parse(p.end);p.rep=null;p.cat=catOf(p);
   p.pics=(typeof PICS!=='undefined'&&PICS[p.id])||{};
   if(!p.img){const g=[...(p.pics.o||[]),...(p.pics.f||[]),...(p.pics.i||[]),...(p.pics.p||[])];if(g.length)p.img=g[0];}});
 const small=u=>u.replace('/750_750_','/300_300_').replace('/C544x408.q60/','/C280x280.q50/');
-const gallery=p=>{const g=[];['o','i','f','p'].forEach(k=>(p.pics[k]||[]).forEach(u=>g.push({k,u})));if(!g.length&&p.img)g.push({k:'p',u:p.img});return g;};
+const gallery=p=>{const g=[];['o','i','f','p'].forEach(k=>(p.pics[k]||[]).forEach(u=>g.push({k,u})));((window.__UGC||{})[p.id]||[]).forEach(u=>g.push({k:'u',u}));if(!g.length&&p.img)g.push({k:'p',u:p.img});return g;};
 const kindL=(p,k)=>k==='f'?(p.grp==='eat'?t.pk.food:t.pk.f):t.pk[k];
 const live=POPS.filter(p=>p.endTs>Date.now());
 // spread markers that share an address so none are hidden
@@ -228,7 +228,7 @@ const stars=p=>p.rate?`<span class="rt-s">★ ${p.rate.s.toFixed(1)}</span>`:'';
 const rangeTxt=p=>p.endUnk?t.from(p.start):`${p.start} – ${p.endTxt}`;
 const leftHtml=p=>p.endUnk?`<b class="k">${t.tbd}</b>`:`<b data-end="${p.endTs}">${left(p.endTs)}</b>`;
 const period=p=>p.perm?t.perm:rangeTxt(p);
-const credit=u=>u.includes('d8nffddmkwqeq')?'Popply':u.includes('d12zq4w4guyljn')?'DiningCode':u.includes('kakaocdn')?'Kakao Map':'';
+const credit=u=>/supabase\.co|^data:/.test(u)?t.ugcBy:u.includes('d8nffddmkwqeq')?'Popply':u.includes('d12zq4w4guyljn')?'DiningCode':u.includes('kakaocdn')?'Kakao Map':'';
 const thumb=(p,cls)=>`<span class="thumb ${cls||''} c-${p.cat}">${cIcon(p.cat)}${p.gk?`<span class="tg">${gIcon(p.gk)}</span>`:''}${p.img?`<img src="${esc(small(p.img))}" alt="" loading="lazy" referrerpolicy="no-referrer" onerror="this.remove()">`:''}</span>`;
 const hoursTxt=p=>(p.h==='24h'?(lang==='zh'?'24 小时':lang==='ko'?'24시간':'24 hours'):t.daily+' '+p.h)+(p.hx?' · '+tx(p.hx):'');
 const ICON={
@@ -249,6 +249,7 @@ const ICON={
  link:'<svg viewBox="0 0 24 24"><path d="M10 14a4 4 0 0 0 5.7 0l3-3a4 4 0 0 0-5.7-5.7l-1 1M14 10a4 4 0 0 0-5.7 0l-3 3a4 4 0 0 0 5.7 5.7l1-1"/></svg>',
  copy:'<svg viewBox="0 0 24 24"><rect x="8" y="8" width="12" height="12" rx="2"/><path d="M16 8V5a1 1 0 0 0-1-1H5a1 1 0 0 0-1 1v10a1 1 0 0 0 1 1h3"/></svg>',
  globe:'<svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M3 12h18M12 3a14 14 0 0 1 0 18M12 3a14 14 0 0 0 0 18"/></svg>',
+ cam:'<svg viewBox="0 0 24 24"><path d="M4 8h3l2-3h6l2 3h3v11H4z"/><circle cx="12" cy="13" r="3.5"/></svg>',
  chat:'<svg viewBox="0 0 24 24"><path d="M4 5h16v11H9l-5 4z"/></svg>',
  heart:'<svg viewBox="0 0 24 24"><path d="M12 20s-7-4.4-7-10a4 4 0 0 1 7-2.6A4 4 0 0 1 19 10c0 5.6-7 10-7 10z"/></svg>',
  share:'<svg viewBox="0 0 24 24"><path d="M12 15V4M8 8l4-4 4 4M5 12v7h14v-7"/></svg>',
@@ -404,9 +405,9 @@ function locate(){
 
 /* ================= detail ================= */
 function srcName(u){return u.includes('popply')?t.srcNames.popply:u.includes('diningcode')?t.srcNames.diningcode:u.includes('instagram')?t.srcNames.instagram:t.srcNames.other;}
-function head(p){
+function head(p){const hi=p.img||(gallery(p)[0]||{}).u;
   return `<div class="backrow pad"><button data-act="home">${ICON.back}${t.back}</button></div>
-   <div class="hero c-${p.cat}${p.img?'':' ill'}">${cIcon(p.cat)}${p.img?`<img src="${esc(p.img)}" alt="${esc(tx(p.t))}" referrerpolicy="no-referrer" onerror="this.remove()"><span class="credit">${t.imgBy}: ${credit(p.img)}</span>`:''}</div>
+   <div class="hero c-${p.cat}${hi?'':' ill'}">${cIcon(p.cat)}${hi?`<img src="${esc(hi)}" alt="${esc(tx(p.t))}" referrerpolicy="no-referrer" onerror="this.remove()"><span class="credit">${t.imgBy}: ${credit(hi)}</span>`:''}</div>
    <section class="head pad">
    <div style="display:flex;align-items:flex-start;gap:8px"><div style="flex:1;min-width:0">
     <div class="title"><h1>${esc(tx(p.t))}</h1><span class="cat">${subL(p.sub)}</span></div>
@@ -415,13 +416,13 @@ function head(p){
     ${p.rate||p.tax?`<div class="badges">${p.rate?`<a class="rbadge" href="https://www.diningcode.com/profile.php?rid=${p.rate.u}" target="_blank" rel="noopener">★ ${p.rate.s.toFixed(1)} <small>${esc(t.rnote(p.rate.n))}</small></a>`:''}${p.tax?`<span class="tbadge">${t.tax}</span>`:''}</div>`:''}</div>
     <button class="star${S.fav[p.id]?' on':''}" data-act="fav" aria-label="${t.star}">${ICON.star}</button></div>
    <div class="chiprow"><a class="chipb p" href="${naverUrl(p)}" target="_blank" rel="noopener">${ICON.pin}${t.nav}</a>
-    ${p.entry==='naver'?`<a class="chipb s" href="${p.src}" target="_blank" rel="noopener">${ICON.cal}${t.book}</a>`:''}
+    ${p.entry==='naver'?`<a class="chipb s" href="${p.src}" target="_blank" rel="noopener">${ICON.cal}${t.book}</a>`:''}${(p.book||[]).slice(0,1).map(b=>`<a class="chipb s" href="${esc(bookUrl(b))}" target="_blank" rel="noopener">${ICON.cal}${t.bkS[b.via]} ${t.bkW[b.t||'waiting']}</a>`).join('')}
     <button class="chipb" data-act="perks">${ICON.gift}${t.perks}</button><button class="chipb" data-act="cmt">${ICON.chat}${t.cmt}<small class="num" data-cc="${p.id}">${S.cc[p.id]||''}</small></button><button class="chipb" data-act="share">${ICON.share}${t.share}</button><a class="chipb" href="${p.src}" target="_blank" rel="noopener">${ICON.link}${t.source}</a></div>
   </section>${galHtml(p)}<div class="sep"></div>`;}
-function galHtml(p){const g=gallery(p);if(!g.length)return '';
-  return `<section class="gal pad"><h2>${t.photos}<small>${g.length}</small></h2>${['o','i','f','p'].map(k=>{const xs=g.map((x,i)=>({...x,i})).filter(x=>x.k===k);if(!xs.length)return '';
-    return `<div class="grow"><span class="gk">${kindL(p,k)}</span><div class="gscroll">${xs.map(x=>`<button class="gi" data-act="lb" data-v="${x.i}"><img src="${esc(small(x.u))}" alt="${esc(kindL(p,k))}" loading="lazy" referrerpolicy="no-referrer" onerror="this.parentNode.remove()"></button>`).join('')}</div></div>`;}).join('')}
-   <p class="gcredit">${t.imgBy}: ${[...new Set(g.map(x=>credit(x.u)).filter(Boolean))].join(' · ')}</p></section>`;}
+function galHtml(p){const g=gallery(p);if(!g.length)return `<p class="ugchint pad" data-act="cmt" data-v="write">${ICON.cam}${t.ugcHint}</p>`;
+  return `<section class="gal pad"><h2>${t.photos}<small>${g.length}</small></h2>${['u','o','i','f','p'].map(k=>{const xs=g.map((x,i)=>({...x,i})).filter(x=>x.k===k);if(!xs.length)return '';
+    return `<div class="grow"><span class="gk${k==='u'?' ku':''}">${kindL(p,k)}</span><div class="gscroll">${xs.map(x=>`<button class="gi" data-act="lb" data-v="${x.i}"><img src="${esc(small(x.u))}" alt="${esc(kindL(p,k))}" loading="lazy" referrerpolicy="no-referrer" onerror="this.parentNode.remove()"></button>`).join('')}</div></div>`;}).join('')}
+   <p class="gcredit">${t.imgBy}: ${[...new Set(g.map(x=>credit(x.u)).filter(Boolean))].join(' · ')}</p><p class="ugchint" data-act="cmt" data-v="write">${ICON.cam}${t.ugcHint}</p></section>`;}
 function lightbox(){const host=$('lbHost');if(S.lb==null){host.innerHTML='';return;}const p=P(),g=gallery(p),x=g[S.lb];if(!x){S.lb=null;host.innerHTML='';return;}
   host.innerHTML=`<div class="lb" data-act="lbclose"><img src="${esc(x.u)}" alt="" referrerpolicy="no-referrer"><div class="lbcap">${kindL(p,x.k)} · ${S.lb+1}/${g.length} · ${t.imgBy}: ${credit(x.u)}</div>
    <button class="lbx" data-act="lbclose" aria-label="${t.close}">×</button>${S.lb>0?`<button class="lbn l" data-act="lbstep" data-v="-1">‹</button>`:''}${S.lb<g.length-1?`<button class="lbn r" data-act="lbstep" data-v="1">›</button>`:''}</div>`;}
@@ -448,6 +449,12 @@ function lineMap(){
   return `<div class="mapbox"><div class="mapscroll"><div class="track">
     <div class="st term"><span class="sub subs">${t.lnA}</span><span class="dot"></span><span class="nm">${t.stA}</span></div>${st}
     <div class="st term"><span class="sub sub2">${t.lnB}</span><span class="dot"></span><span class="nm">${t.stB}</span></div></div></div></div>`;}
+const bookUrl=b=>b.via==='catchtable'&&b.ref?(lang==='ko'?'https://app.catchtable.co.kr/ct/shop/':'https://www.catchtable.net/shop/')+b.ref:b.u;
+const ctSearch=p=>{const k=encodeURIComponent(p.name.replace(/\s*\(.*?\)\s*/g,' ').trim());return `https://app.catchtable.co.kr/ct/map/COMMON?showTabs=true&serviceType=INTEGRATION&keyword=${k}&keywordSearch=${k}&bottomSheetHeightType=HALF`;};
+function bookHtml(p){const bs=p.book||[];if(!bs.length&&p.grp!=='eat')return '';
+  const links=bs.map(b=>`<a class="bk bk-${b.via}" href="${esc(bookUrl(b))}" target="_blank" rel="noopener"><b>${t.bkS[b.via]}</b><span>${t.bkW[b.t||'waiting']}</span></a>`);
+  if(!bs.some(b=>b.via==='catchtable')&&p.grp==='eat')links.push(`<a class="bk bk-catchtable s" href="${esc(ctSearch(p))}" target="_blank" rel="noopener"><b>${t.bkS.catchtable}</b><span>${t.bkW.search}</span></a>`);
+  return `<div class="sep"></div><section class="sec pad"><h2>${t.bookT}</h2><div class="bks">${links.join('')}</div>${t.bookHint?`<p class="datanote">${t.bookHint}</p>`:''}</section>`;}
 function guide(p){const g=t.guide[p.entry]||t.guide.walkin;return `<ol class="guide">${g.map(x=>`<li>${x}</li>`).join('')}${p.tax?`<li>${t.taxStep}</li>`:''}</ol>`;}
 function info(p){
   const sec=p.grp==='eat'?t.secEat:p.grp==='shop'?t.secShop:t.secPop;
@@ -459,7 +466,7 @@ function info(p){
     <div class="fact"><span class="ic">${ICON.cal}</span><div>${p.perm?t.kind:t.period}<small>${p.perm?t.permStore+' · '+subL(p.sub):rangeTxt(p)}</small></div></div>
     <div class="fact"><span class="ic">${ICON.pin}</span><div>${t.koaddr}<small>${esc(p.addr)}</small><button class="copy" data-act="copy" data-v="${esc(p.addr)}">${ICON.copy}${t.copy}</button></div></div>
    </div></section><div class="sep"></div>
-   <section class="sec pad"><h2>${t.guideT}<small>${t.guideS}</small></h2>${guide(p)}</section>${t.phr.length?`<div class="sep"></div><section class="sec pad"><h2>${t.phT}<small>${t.phS}</small></h2><div class="phr">${t.phr.map((x,i)=>`<button class="ph1" data-act="phrase" data-v="${i}"><span>${esc(x[0])}</span><b lang="ko">${esc(x[1])}</b></button>`).join('')}</div></section>`:''}`;}
+   <section class="sec pad"><h2>${t.guideT}<small>${t.guideS}</small></h2>${guide(p)}</section>${bookHtml(p)}${t.phr.length?`<div class="sep"></div><section class="sec pad"><h2>${t.phT}<small>${t.phS}</small></h2><div class="phr">${t.phr.map((x,i)=>`<button class="ph1" data-act="phrase" data-v="${i}"><span>${esc(x[0])}</span><b lang="ko">${esc(x[1])}</b></button>`).join('')}</div></section>`:''}`;}
 function vDetail(){const p=P();
   return `<div class="wrap grid"><main>${head(p)}<section class="pad" style="padding-bottom:22px">${lineBar()}
    <div class="rt"><div class="seg"><button class="${S.mode==='live'?'on':''}" data-act="mode" data-v="live">${t.live}</button><button class="${S.mode==='info'?'on':''}" data-act="mode" data-v="info">${t.hours}</button></div>
@@ -501,7 +508,7 @@ function vCmt(){const p=P();
    ${SO.live?'':`<div class="cdemo">${t.cmtDemo}</div>`}
    <div class="clist" id="cmtList"></div>
    <div class="cfoot"><div class="crule">${t.cmtRule}</div>
-    <div class="cform"><input id="cNick" class="cnick" maxlength="12" value="${esc(myNick())}" aria-label="${t.nickL}"><textarea id="cBody" rows="1" maxlength="200" placeholder="${esc(t.say)}" aria-label="${t.say}"></textarea><button class="csend" data-act="csend">${t.send}</button></div></div>
+    <div class="cprev" id="cPrev" hidden></div><div class="cform">${SO.photos?`<label class="ccam" aria-label="${t.addPhoto}">${ICON.cam}<input id="cFile" type="file" accept="image/*" hidden></label>`:''}<input id="cNick" class="cnick" maxlength="12" value="${esc(myNick())}" aria-label="${t.nickL}"><textarea id="cBody" rows="1" maxlength="200" placeholder="${esc(t.say)}" aria-label="${t.say}"></textarea><button class="csend" data-act="csend">${t.send}</button></div></div>
   </div></div>`;}
 function renderCmt(){const cm=S.cm,el=$('cmtList');if(!cm||!el)return;
   const xs=cm.list.filter(c=>!SO.me.hidden(c.id));
@@ -510,7 +517,7 @@ function renderCmt(){const cm=S.cm,el=$('cmtList');if(!cm||!el)return;
   document.querySelectorAll('[data-act="csort"]').forEach(b=>b.classList.toggle('on',b.dataset.v===cm.sort));
   el.innerHTML=cm.loading?'<div class="cempty">…</div>':sorted.length?sorted.map(c=>{const lk=SO.me.liked(c.id);
     return `<div class="cm${cm.fresh===c.id?' fresh':''}"><span class="av" style="background:hsl(${hue(c.nick)} 55% 52%)">${esc([...c.nick][0]||'?')}</span>
-     <div class="cmb"><div class="cn">${esc(c.nick)}</div><div class="ct">${esc(c.body)}</div><div class="cmeta">${ago(Date.parse(c.created_at))}<button data-act="crep" data-v="${c.id}">${t.report}</button></div></div>
+     <div class="cmb"><div class="cn">${esc(c.nick)}</div><div class="ct">${esc(c.body)}</div>${c.img?`<button class="cimg" data-act="cimg" data-v="${esc(c.img)}"><img src="${esc(c.img)}" alt="" loading="lazy"></button>`:''}<div class="cmeta">${ago(Date.parse(c.created_at))}<button data-act="crep" data-v="${c.id}">${t.report}</button></div></div>
      <button class="clk${lk?' on':''}" data-act="clike" data-v="${c.id}" aria-label="like">${ICON.heart}<span class="num">${c.likes||''}</span></button></div>`;}).join(''):`<div class="cempty">${t.noCmt}</div>`;}
 async function openComments(focus){const p=P();S.sheet='cmt';S.cm={place:p.id,list:[],sort:'hot',loading:true};$('sheetHost').innerHTML=vCmt();renderCmt();
   if(focus)setTimeout(()=>{const b=$('cBody');if(b)b.focus();},60);
@@ -522,14 +529,18 @@ async function sendCmt(){const p=P(),b=$('cBody'),nk=$('cNick');if(!b)return;
   const r=SO.clean(b.value);if(r.err){toast(t.cerr[r.err]);return;}
   if(Date.now()-SO.me.lastPost()<10e3){toast(t.cerr.fast);return;}
   const btn=document.querySelector('.csend');btn.disabled=true;
-  try{const c=await SO.add(p.id,nick,r.body);SO.me.posted();b.value='';addCmt(c,true);toast(t.posted);}
+  try{let img=null;if(S.cfile){toast(t.uploading);img=await SO.upload(S.cfile);}const c=await SO.add(p.id,nick,r.body,img);SO.me.posted();b.value='';setFile(null);addCmt(c,true);toast(t.posted);}
   catch(e){console.error('comment failed',e);toast(t.cerr.fail+(e&&(e.code||e.message)?' ('+String(e.code||e.message).slice(0,60)+')':''));}finally{btn.disabled=false;}}
-function addCmt(c,mine){if(!c)return;const cm=S.cm;
+function setFile(f){S.cfile=f;const pv=$('cPrev');if(!pv)return;if(!f){pv.hidden=true;pv.innerHTML='';const i=$('cFile');if(i)i.value='';return;}
+  const u=URL.createObjectURL(f);pv.hidden=false;pv.innerHTML=`<img src="${u}" alt=""><button data-act="cfx" aria-label="${t.close}">×</button>`;}
+function ugcAdd(c){if(!c||!c.img)return;const U=window.__UGC=window.__UGC||{};const a=U[c.place]=U[c.place]||[];if(!a.includes(c.img))a.unshift(c.img);}
+function addCmt(c,mine){if(!c)return;const cm=S.cm;ugcAdd(c);if(c.img&&S.view==='detail'&&P().id===c.place&&!mine)rerender();
   if(cm&&cm.place===c.place){if(cm.list.some(x=>x.id===c.id))return;cm.list.unshift(c);cm.fresh=c.id;if(mine)cm.sort='new';S.cc[c.place]=cm.list.length;renderCmt();const el=$('cmtList');if(el&&mine)el.scrollTop=0;}
   else S.cc[c.place]=(S.cc[c.place]||0)+1;
   setCount(c.place);if(S.view==='home')renderNear();}
 SO.onComment(c=>addCmt(c,false));
 SO.onQueue(r=>{const a=S.qr[r.place];if(!a)return;if(a.some(x=>x.created_at===r.created_at&&x.level===r.level))return;a.unshift(r);if(S.view==='detail'&&P().id===r.place&&S.mode==='live')rerender();});
+async function loadUgc(id){try{await SO.ready;const l=await SO.list(id);(window.__UGC=window.__UGC||{})[id]=l.filter(c=>c.img).map(c=>c.img);S.cc[id]=l.length;if(S.view==='detail'&&P().id===id)rerender();}catch(e){}}
 async function loadQueue(id){try{await SO.ready;S.qr[id]=await SO.queue(id);if(S.view==='detail'&&P().id===id)rerender();}catch(e){}}
 SO.ready.then(()=>SO.counts()).then(m=>{S.cc=m||{};if(S.view==='home')renderNear();else rerender();}).catch(()=>{});
 function shareText(p){const pk=p.perks.slice(0,2).map(x=>'· '+tx(x[0])).join('\n');
@@ -539,7 +550,7 @@ function fitResults(){if(!MAP||!MAP.fit||!(S.cat||S.sub||fCount()))return;const 
   MAP.fit(v.map(p=>p.dl||p.ll),[top,40,bottom,40]);}
 function refresh(){renderChips();drawMarkers();renderNear();setTimeout(fitResults,30);}
 function rerender(){if(S.view==='detail'){const y=scrollY;renderDetail();scrollTo(0,y);}if(S.sheet!=='cmt')renderSheet();}
-function openPop(id){S.i=LINE.findIndex(x=>x.id===id);if(S.i<0)return;S.view='detail';S.mode='live';S.sheet=null;S.cm=null;$('sheetHost').innerHTML='';loadQueue(id);homeEl.hidden=true;detEl.hidden=false;renderDetail();scrollTo(0,0);try{history.replaceState(null,'',location.pathname+location.search+'#'+id);}catch(e){}}
+function openPop(id){S.i=LINE.findIndex(x=>x.id===id);if(S.i<0)return;S.view='detail';S.mode='live';S.sheet=null;S.cm=null;S.cfile=null;$('sheetHost').innerHTML='';loadQueue(id);loadUgc(id);homeEl.hidden=true;detEl.hidden=false;renderDetail();scrollTo(0,0);try{history.replaceState(null,'',location.pathname+location.search+'#'+id);}catch(e){}}
 function goHome(){S.lb=null;lightbox();S.view='home';detEl.hidden=true;detEl.innerHTML='';homeEl.hidden=false;if(MAP)MAP.resize();drawMarkers();renderNear();try{history.replaceState(null,'',location.pathname+location.search);}catch(e){}}
 
 /* ================= language ================= */
@@ -579,6 +590,8 @@ document.addEventListener('click',e=>{
   else if(a==='cmt')openComments(v==='write');
   else if(a==='csort'){S.cm.sort=v;S.cm.fresh=null;renderCmt();}
   else if(a==='csend')sendCmt();
+  else if(a==='cfx')setFile(null);
+  else if(a==='cimg'){$('lbHost').innerHTML=`<div class="lb" data-act="lbclose"><img src="${esc(v)}" alt=""><div class="lbcap">${t.pk.u}</div><button class="lbx" data-act="lbclose" aria-label="${t.close}">×</button></div>`;}
   else if(a==='clike'){const id=+v,c=S.cm&&S.cm.list.find(x=>x.id===id);if(!c)return;const on=!SO.me.liked(id);SO.me.setLiked(id,on);c.likes=Math.max(0,(c.likes||0)+(on?1:-1));renderCmt();SO.like(id,on).catch(()=>{});}
   else if(a==='crep'){const id=+v;SO.me.hide(id);SO.report(id).catch(()=>{});renderCmt();toast(t.reportedC);}
   else if(a==='phrase'){const x=t.phr[+v];$('lbHost').innerHTML=`<div class="lb phbig" data-act="lbclose"><b lang="ko">${esc(x[1])}</b><span>${esc(x[0])}</span><button class="lbx" data-act="lbclose" aria-label="${t.close}">×</button></div>`;}
@@ -602,6 +615,7 @@ document.addEventListener('click',e=>{
   else if(a==='plan'){S.sel=+v;renderSheet();}
   else if(a==='buy'){S.member=true;S.sheet=null;renderSheet();renderChips();toast(t.bought);}
 });
+document.addEventListener('change',e=>{if(e.target&&e.target.id==='cFile'){const f=e.target.files&&e.target.files[0];if(!f)return;if(!/^image\//.test(f.type)||f.size>25e6){toast(t.photoBig);e.target.value='';return;}setFile(f);}});
 document.addEventListener('keydown',e=>{if(e.target&&e.target.id==='cBody'&&e.key==='Enter'&&!e.shiftKey&&!e.isComposing){e.preventDefault();sendCmt();return;}if(S.lb==null)return;const n=gallery(P()).length;if(e.key==='Escape'){S.lb=null;lightbox();}else if(e.key==='ArrowRight'&&S.lb<n-1){S.lb++;lightbox();}else if(e.key==='ArrowLeft'&&S.lb>0){S.lb--;lightbox();}});
 window.addEventListener('hashchange',()=>{const id=location.hash.slice(1);if(LINE.some(x=>x.id===id))openPop(id);});
 setInterval(()=>{if(S.sheet==='cmt')renderCmt();document.querySelectorAll('[data-end]').forEach(el=>{el.textContent=left(+el.dataset.end);});},30000);

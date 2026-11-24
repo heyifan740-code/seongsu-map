@@ -86,3 +86,14 @@ do $$ begin
 exception when duplicate_object then null; end $$;
 
 -- To delete a comment: Table Editor → comments → delete the row (or set reports = 3 to hide it).
+
+-- ===== visitor photos in comments (run this part too) =====
+alter table public.comments add column if not exists img text
+  check (img is null or img like 'https://%.supabase.co/storage/v1/object/public/photos/%');
+insert into storage.buckets (id, name, public, file_size_limit, allowed_mime_types)
+  values ('photos', 'photos', true, 3145728, array['image/jpeg'])
+  on conflict (id) do nothing;
+drop policy if exists "upload photos" on storage.objects;
+create policy "upload photos" on storage.objects for insert to anon with check (bucket_id = 'photos' and (storage.foldername(name))[1] = 'c');
+drop policy if exists "read photos" on storage.objects;
+create policy "read photos" on storage.objects for select to anon using (bucket_id = 'photos');
