@@ -6,6 +6,7 @@
 window.SEONGSU_CONFIG = {
   naverKeyId: '',
   kakaoJsKey: '58a58089a37f22e7d75377dacae73e90',   // Kakao Developers → JavaScript key (domain-locked to heyifan740-code.github.io); turns on "All shops"
+  kakaoRestKey: '',  // Kakao REST API key — turns on "Web photos" (Kakao image search) on Kakao place pages
   supabaseUrl: 'https://qgnuvrogvvnjczxsromy.supabase.co',
   supabaseKey: 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InFnbnV2cm9ndnZuamN6eHNyb215Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3OTUzNzk0NzcsImV4cCI6MjExMDk1NTQ3N30.iF0ncYXZlOpsuCTwKgtnbGHAK9cWakc1P1GNjCziKww'  // anon public key (safe to publish)
 };

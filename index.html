@@ -1138,6 +1138,12 @@ p.ugchint.pad{margin:12px 0 4px}
 .kpaddr{font-size:14px;margin-top:6px}
 .kpbtns{display:flex;flex-wrap:wrap;gap:8px;margin-top:14px}
 .kpbtns .chipb{height:40px;padding:0 14px;font-size:14px}
+.rvslot{border-radius:14px;overflow:hidden;background:var(--panel)}
+.rvbox{width:100%;height:240px}
+@media (min-width:880px){.rvbox{height:320px}}
+.rvnone{height:100%;display:grid;place-items:center;color:var(--muted);font-size:13px}
+a.gi{position:relative;display:block}
+a.gi i{position:absolute;left:0;right:0;bottom:0;font-style:normal;font-size:10px;color:#fff;background:linear-gradient(transparent,rgba(0,0,0,.6));padding:8px 6px 3px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
 </style></head><body>
 <header class="bar"><div class="in pad">
  <button class="logo" data-act="home"><span class="badge">S</span><span id="brand">Seongsu Pop-up Line</span></button>
@@ -1161,10 +1167,10 @@ p.ugchint.pad{margin:12px 0 4px}
 <div id="sheetHost"></div>
 <div id="lbHost"></div>
 <div class="toast" id="toast" hidden></div>
-<script src="config.js?v=20261126b"></script>
+<script src="config.js?v=20261126c"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.min.js"></script>
 <script src="pics.js?v=20261126"></script>
 <script src="data.js?v=20261126"></script>
 <script src="social.js?v=20261124"></script>
-<script src="app.js?v=20261126b"></script>
+<script src="app.js?v=20261126c"></script>
 </body></html>
