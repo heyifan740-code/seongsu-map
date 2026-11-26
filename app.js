@@ -41,7 +41,7 @@ zh:{photos:'图片',pk:{o:'外景',i:'店内',f:'产品',food:'美食',p:'活动
  report:'举报',reportedC:'已举报，这条评论对你隐藏了',posted:'已发出',cmtRule:'友善发言 · 不发广告和联系方式 · 被 3 人举报会自动隐藏',
  cerr:{empty:'先写点内容',long:'最多 200 字',link:'不能发链接或联系方式',spam:'内容像是刷屏',fast:'发得太快了，稍等几秒',fail:'没发出去，请稍后再试'},
  qAgg:(n,lv)=>`最近 2 小时 ${n} 人上报，多数说「${lv}」`,qLast:a=>`最新一条 ${a}`,qDemo:'演示模式：上报只保存在这台设备上',qNote:'由现场用户上报，仅供参考',qWait:'30 分钟内只能上报一次',qThanks:'感谢上报',
- aiT:'路线小助手',aiHi:'你好！告诉我你想逛什么，我帮你挑店、排出最省时间、不走回头路的路线。比如「3 家有赠品的美妆快闪」「2 小时吃面包和咖啡」「用我的收藏排路线」。',
+ aiT:'路线小助手',aiFab:'收藏路线',aiHi:'你好！告诉我你想逛什么，我帮你挑店、排出最省时间、不走回头路的路线。比如「3 家有赠品的美妆快闪」「2 小时吃面包和咖啡」「用我的收藏排路线」。',
  aiPh:'想逛什么？例如：2小时 美妆 送赠品',aiSend:'发送',aiChips:['用我的收藏排路线','有赠品的快闪','美妆和香水','面包甜品咖啡','2 小时逛圣水','从圣水站出发 4 家'],
  aiPick:(n,ks)=>`给你挑了 ${n} 家${ks?'（'+ks+'）':''}，按这个顺序走最省路：`,aiTot:(km,walk,all)=>`全程步行约 ${km}，走路 ${walk} 分钟；算上每家逛 20 分钟，一共约 ${all} 分钟。`,
  aiNone:'没找到符合的店。可以换个说法，比如「美妆」「有赠品」「面包」，或者先在店铺页点 ☆ 收藏。',aiFew:'收藏还不到 2 家，我先按你的收藏加上附近热门的店帮你排。',
@@ -87,7 +87,7 @@ en:{photos:'Photos',pk:{o:'Outside',i:'Inside',f:'Products',food:'Food',p:'Pop-u
  report:'Report',reportedC:'Reported — hidden for you',posted:'Posted',cmtRule:'Be kind · no ads or contact details · hidden after 3 reports',
  cerr:{empty:'Write something first',long:'200 characters max',link:'No links or contact details',spam:'That looks like spam',fast:'Too fast — wait a few seconds',fail:'Couldn’t post, try again later'},
  qAgg:(n,lv)=>`${n} report${n===1?'':'s'} in the last 2 h, mostly “${lv}”`,qLast:a=>`latest ${a}`,qDemo:'Demo mode: reports are saved on this device only',qNote:'Reported by visitors on site; a rough guide only',qWait:'One report per 30 minutes',qThanks:'Thanks for reporting',
- aiT:'Route helper',aiHi:'Hi! Tell me what you’d like to see and I’ll pick places and order them so you walk the least without doubling back. Try “3 beauty pop-ups with gifts”, “2 hours of bakeries and coffee” or “route my saved places”.',
+ aiT:'Route helper',aiFab:'Route',aiHi:'Hi! Tell me what you’d like to see and I’ll pick places and order them so you walk the least without doubling back. Try “3 beauty pop-ups with gifts”, “2 hours of bakeries and coffee” or “route my saved places”.',
  aiPh:'What do you want? e.g. 2 hours beauty gifts',aiSend:'Send',aiChips:['Route my saved places','Pop-ups with gifts','Beauty & fragrance','Bakery, dessert, coffee','2 hours in Seongsu','4 places from Seongsu Stn.'],
  aiPick:(n,ks)=>`Here are ${n} places${ks?' ('+ks+')':''} in the order with the least walking:`,aiTot:(km,walk,all)=>`About ${km} on foot (${walk} min walking); with 20 min at each place, about ${all} min in total.`,
  aiNone:'I couldn’t find a match. Try words like “beauty”, “gifts” or “bakery”, or save places with ☆ first.',aiFew:'You have fewer than 2 saved places, so I added popular places nearby.',
@@ -133,7 +133,7 @@ ko:{photos:'사진',pk:{o:'외관',i:'내부',f:'상품',food:'메뉴',p:'팝업
  report:'신고',reportedC:'신고했어요. 이 댓글은 숨겨져요',posted:'등록했어요',cmtRule:'서로 배려해 주세요 · 광고·연락처 금지 · 신고 3회 시 자동 숨김',
  cerr:{empty:'내용을 입력하세요',long:'최대 200자',link:'링크나 연락처는 쓸 수 없어요',spam:'도배로 보여요',fast:'너무 빨라요. 잠시 후 다시 시도하세요',fail:'등록하지 못했어요. 잠시 후 다시 시도하세요'},
  qAgg:(n,lv)=>`최근 2시간 제보 ${n}건 · 대부분 「${lv}」`,qLast:a=>`최근 제보 ${a}`,qDemo:'데모 모드: 제보는 이 기기에만 저장돼요',qNote:'현장 방문자 제보 · 참고용',qWait:'30분에 한 번만 제보할 수 있어요',qThanks:'제보 감사합니다',
- aiT:'경로 도우미',aiHi:'안녕하세요! 가고 싶은 곳을 말해 주시면 장소를 골라 되돌아가지 않는 최단 경로로 정리해 드려요. 예: 「증정 있는 뷰티 팝업 3곳」 「빵이랑 커피 2시간」 「저장한 곳으로 경로 만들기」',
+ aiT:'경로 도우미',aiFab:'경로',aiHi:'안녕하세요! 가고 싶은 곳을 말해 주시면 장소를 골라 되돌아가지 않는 최단 경로로 정리해 드려요. 예: 「증정 있는 뷰티 팝업 3곳」 「빵이랑 커피 2시간」 「저장한 곳으로 경로 만들기」',
  aiPh:'예: 2시간 뷰티 증정',aiSend:'보내기',aiChips:['저장한 곳으로 경로 만들기','증정 있는 팝업','뷰티·향수','빵·디저트·카페','성수 2시간 코스','성수역 출발 4곳'],
  aiPick:(n,ks)=>`${n}곳을 골랐어요${ks?' ('+ks+')':''}. 이 순서가 가장 덜 걸어요:`,aiTot:(km,walk,all)=>`도보 약 ${km}, 걷는 시간 ${walk}분. 한 곳에 20분씩 머물면 총 약 ${all}분이에요.`,
  aiNone:'조건에 맞는 곳을 못 찾았어요. 「뷰티」 「증정」 「빵」처럼 말해 보거나, 먼저 ☆로 저장해 보세요.',aiFew:'저장한 곳이 2곳 미만이라 근처 인기 장소를 함께 넣었어요.',
@@ -524,7 +524,7 @@ function aiAsk(q,ex){const r=aiParse(q);if(r.fr==='gps'&&S.ai.fr!=='gps')locate(
    <p class="aitot">${esc(t.aiTot(fmtD(tot),walk,walk+list.length*20))}</p>
    <div class="aibtn"><button class="buy" data-act="aishow" data-v="${i}">${t.aiShow}</button><button class="fl" data-act="aisave" data-v="${i}">${ICON.star}${t.aiSave}</button>${r.fav?'':`<button class="fl" data-act="aimore" data-v="${i}">${t.aiMore}</button>`}</div>`});
   renderAi();}
-function openAi(){S.ai=S.ai||{msgs:[{txt:t.aiHi}],plans:[],fr:S.rtFrom||'free'};S.sheet='ai';$('sheetHost').innerHTML=vAiFrame();renderAi();}
+function openAi(){S.ai=S.ai||{msgs:[{txt:t.aiHi}],plans:[],fr:S.rtFrom||'free'};if(FAV.all().length>=2&&!S.ai.favDone){S.ai.favDone=1;S.sheet='ai';$('sheetHost').innerHTML=vAiFrame();aiAsk(t.aiChips[0]);return;}S.sheet='ai';$('sheetHost').innerHTML=vAiFrame();renderAi();}
 function vAiFrame(){return `<div class="mask" data-act="close"><div class="vsheet csheet aisheet" role="dialog" aria-label="${t.aiT}">
   <div class="chead"><span class="aiav">${ICON.spark}</span><b>${t.aiT}</b><button class="x" data-act="close" aria-label="${t.close}" style="margin-left:auto">×</button></div>
   <div class="clist" id="aiLog"></div>
@@ -762,6 +762,7 @@ function applyStatic(){
   $('brand').textContent=t.title;$('tagline').textContent=t.tag;$('q').placeholder=t.ph;
   $('tilewarn').textContent=t.tilewarn;$('map').setAttribute('aria-label',t.mapLabel);
   document.querySelector('.locate').setAttribute('aria-label',t.locate);$('clr').setAttribute('aria-label',t.clear);
+  const fb=$('aifab');if(fb){fb.dataset.l=t.aiFab;fb.setAttribute('aria-label',t.aiT);}
   $('langs').innerHTML=LANGS.map(l=>`<button class="${l===lang?'on':''}" data-act="lang" data-v="${l}" lang="${LOCALE[l]}">${T[l].lang}</button>`).join('');}
 function setLang(l){S.ai=null;if(S.sheet==='ai'){S.sheet=null;}
   if(l===lang)return;lang=l;t=T[l];try{localStorage.setItem('ss_lang',l);}catch(e){}

@@ -1169,7 +1169,8 @@ a.gi i{position:absolute;left:0;right:0;bottom:0;font-style:normal;font-size:10p
 .aifab svg{width:26px;height:26px;fill:#fff;stroke:none}
 @keyframes aipulse{0%,100%{box-shadow:0 4px 14px rgba(29,125,53,.45),0 0 0 0 rgba(46,168,74,.35)}50%{box-shadow:0 4px 14px rgba(29,125,53,.45),0 0 0 10px rgba(46,168,74,0)}}
 .home.min .aifab{bottom:152px}
-@media (min-width:880px){.aifab{bottom:90px}}
+@media (min-width:880px){.aifab{bottom:200px}}
+.aifab::after{content:attr(data-l);position:absolute;top:100%;margin-top:3px;left:50%;transform:translateX(-50%);white-space:nowrap;font-size:11px;font-weight:800;color:#1d7d35;background:var(--surface);border-radius:8px;padding:0 6px;box-shadow:0 1px 3px rgba(0,0,0,.2)}
 .aiav{width:30px;height:30px;border-radius:50%;background:linear-gradient(135deg,#2ea84a,#1d7d35);display:grid;place-items:center;flex:none}
 .aiav svg{width:17px;height:17px;fill:#fff;stroke:none}.aiav.sm{width:26px;height:26px}.aiav.sm svg{width:14px;height:14px}
 .msg{margin:10px 0;font-size:14.5px;line-height:1.55}.msg p{margin:0 0 6px}
@@ -1194,7 +1195,7 @@ a.gi i{position:absolute;left:0;right:0;bottom:0;font-style:normal;font-size:10p
 <div class="home" id="home">
  <div class="mapwrap"><div id="map"></div>
   <div class="tilewarn" id="tilewarn" hidden></div>
-  <button class="aifab" data-act="ai" aria-label="AI"><svg viewBox="0 0 24 24"><path d="M12 3l1.8 5.2L19 10l-5.2 1.8L12 17l-1.8-5.2L5 10l5.2-1.8z"/><path d="M19 15l.8 2.2L22 18l-2.2.8L19 21l-.8-2.2L16 18l2.2-.8z"/></svg></button>
+  <button class="aifab" id="aifab" data-act="ai" aria-label="AI"><svg viewBox="0 0 24 24"><path d="M12 3l1.8 5.2L19 10l-5.2 1.8L12 17l-1.8-5.2L5 10l5.2-1.8z"/><path d="M19 15l.8 2.2L22 18l-2.2.8L19 21l-.8-2.2L16 18l2.2-.8z"/></svg></button>
   <button class="locate" data-act="locate"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="4"/><path d="M12 2v4M12 18v4M2 12h4M18 12h4"/></svg></button></div>
  <div class="topov pad">
   <label class="search"><svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="6.5"/><path d="M16 16l4.5 4.5"/></svg><input id="q" type="search" autocomplete="off"><button class="clr" id="clr" data-act="clear" hidden>×</button></label>
@@ -1215,5 +1216,5 @@ a.gi i{position:absolute;left:0;right:0;bottom:0;font-style:normal;font-size:10p
 <script src="data.js?v=20261126"></script>
 <script src="i18n-kr.js?v=20261126b"></script>
 <script src="social.js?v=20261124"></script>
-<script src="app.js?v=20261126k"></script>
+<script src="app.js?v=20261126l"></script>
 </body></html>
