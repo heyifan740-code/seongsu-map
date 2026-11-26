@@ -1146,6 +1146,25 @@ a.gi{position:relative;display:block}
 a.gi i{position:absolute;left:0;right:0;bottom:0;font-style:normal;font-size:10px;color:#fff;background:linear-gradient(transparent,rgba(0,0,0,.6));padding:8px 6px 3px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
 .mtt{display:inline-block;margin-left:6px;font-size:11px;font-weight:600;color:var(--muted);vertical-align:middle}
 .ctr{font-size:12px;color:var(--green-deep);margin-top:3px;padding:0}
+.fl.favb svg{width:15px;height:15px;stroke:currentColor;fill:none;stroke-width:2}
+.fl.favb.has{border-color:#e8b500;color:#9a7300}.fl.favb.has svg{fill:#f5c518;stroke:#c99a00}
+.favl{display:flex;flex-direction:column;gap:6px;margin-top:6px}
+.favi{display:flex;align-items:center;gap:8px;border:1px solid var(--line);border-radius:12px;padding:8px 12px}
+.favi>button:first-child{flex:1;text-align:left;display:flex;flex-direction:column}.favi small{color:var(--muted);font-size:12px}
+.favx{font-size:12.5px;color:var(--muted);border:1px solid var(--line);border-radius:12px;padding:3px 10px}
+.buy:disabled{opacity:.5}
+.rnum{width:26px;height:26px;border-radius:50%;background:#1d7d35;color:#fff;font-weight:800;font-size:13px;display:grid;place-items:center;border:2px solid #fff;box-shadow:0 1px 4px rgba(0,0,0,.4);cursor:pointer;font-family:var(--f-num)}
+.rnum.s{background:#3478f6;font-size:10px}
+.rtx{margin-left:auto;font-size:13px;border:1px solid var(--line);border-radius:14px;padding:3px 12px;color:var(--muted)}
+.rtsum{margin:0 0 10px;font-weight:700}
+.rtl{list-style:none;margin:0;padding:0;counter-reset:r;display:flex;flex-direction:column}
+.rtl li{display:flex;align-items:center;gap:10px;padding:10px 0 10px 36px;position:relative;border-left:3px dotted var(--green);margin-left:12px}
+.rtl li::before{content:attr(data-n);position:absolute;left:-14px;width:26px;height:26px;border-radius:50%;background:#1d7d35;color:#fff;font-weight:800;font-size:13px;display:grid;place-items:center}
+.rtl li.st0::before{content:'●';background:#3478f6;font-size:10px}.rtl li.st0{counter-increment:none;flex-direction:column;align-items:flex-start;gap:0}
+.rtl li small,.rtn small{display:block;color:var(--muted);font-size:12.5px}
+.rtn{flex:1;text-align:left}
+.rtnav{flex:none;display:inline-flex;align-items:center;gap:4px;font-size:13px;font-weight:700;color:var(--green-deep);border:1px solid var(--line);border-radius:14px;padding:4px 10px}
+.rtnav svg{width:14px;height:14px;stroke:currentColor;fill:none;stroke-width:2}
 </style></head><body>
 <header class="bar"><div class="in pad">
  <button class="logo" data-act="home"><span class="badge">S</span><span id="brand">seopup</span></button>
@@ -1175,5 +1194,5 @@ a.gi i{position:absolute;left:0;right:0;bottom:0;font-style:normal;font-size:10p
 <script src="data.js?v=20261126"></script>
 <script src="i18n-kr.js?v=20261126b"></script>
 <script src="social.js?v=20261124"></script>
-<script src="app.js?v=20261126g"></script>
+<script src="app.js?v=20261126h"></script>
 </body></html>
