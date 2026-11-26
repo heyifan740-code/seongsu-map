@@ -363,7 +363,7 @@ function centerMe(){if(!MAP)return;const z=Math.max(MAP.zoom(),17);let off=0;if(
 
 /* ================= all shops (Kakao Local, loaded in the visitor's browser) ================= */
 const KIND={food:{c:'FD6',col:'#d4552f'},cafe:{c:'CE7',col:'#7a5a3d'},shop:{kw:['옷가게','편집숍','소품샵','액세서리'],col:'#4366c9'},beauty:{kw:['화장품','뷰티'],col:'#d24d7e'}};
-const ALL=(()=>{let svc=null,ready=null,ms=[],timer=0;const cache={},places={};
+const ALL=(()=>{let svc=null,ready=null,ms=new Map(),timer=0;const cache={},places={};
   const key=CFG.kakaoJsKey;
   function load(){if(ready)return ready;if(!key)return ready=Promise.reject(new Error('nokey'));
     ready=new Promise((res,rej)=>{const sc=document.createElement('script');sc.src='https://dapi.kakao.com/v2/maps/sdk.js?autoload=false&libraries=services&appkey='+encodeURIComponent(key);
@@ -379,9 +379,13 @@ const ALL=(()=>{let svc=null,ready=null,ms=[],timer=0;const cache={},places={};
       r.forEach(d=>{if(!places[d.id])places[d.id]={...d,kind,ll:[+d.y,+d.x]};});return r.length;})();return cache[ck];}
   const curated=d=>live.some(p=>meters(p.ll,[+d.y,+d.x])<35&&(p.name.replace(/\s/g,'').includes(d.place_name.replace(/\s/g,'').slice(0,4))||d.place_name.replace(/\s/g,'').includes(p.name.replace(/\s/g,'').slice(0,4))));
   function inView(){if(!MAP||!MAP.bounds)return [];const b=MAP.bounds();return Object.values(places).filter(d=>S.allK.includes(d.kind)&&d.ll[0]>=b[0][0]&&d.ll[0]<=b[1][0]&&d.ll[1]>=b[0][1]&&d.ll[1]<=b[1][1]);}
-  function draw(){ms.forEach(m=>MAP.remove(m));ms=[];if(!S.all||!MAP||MAP.zoom()<17)return;
-    inView().slice(0,700).forEach(d=>{if(d.cur==null)d.cur=curated(d);if(d.cur)return;
-      ms.push(MAP.marker({ll:d.ll,html:`<div class="kd" style="--kc:${KIND[d.kind].col}"></div>`,w:14,h:14,ax:7,ay:7,z:-50,title:d.place_name,fixed:true,onClick:()=>openKp(d.id)}));});
+  // incremental: keep markers that are still wanted, add only new ones (redrawing hundreds of markers while panning made the map stick)
+  let dq=0;
+  function draw(){if(dq)return;dq=requestAnimationFrame(()=>{dq=0;drawNow();});}
+  function drawNow(){if(!MAP)return;const want=new Map();
+    if(S.all&&MAP.zoom()>=17)inView().slice(0,700).forEach(d=>{if(d.cur==null)d.cur=curated(d);if(!d.cur)want.set(d.id,d);});
+    for(const [id,m] of ms)if(!want.has(id)){MAP.remove(m);ms.delete(id);}
+    for(const [id,d] of want)if(!ms.has(id))ms.set(id,MAP.marker({ll:d.ll,html:`<div class="kd" style="--kc:${KIND[d.kind].col}"></div>`,w:14,h:14,ax:7,ay:7,z:-50,title:d.place_name,fixed:true,onClick:()=>openKp(d.id)}));
     status();}
   function status(){const el=$('allst');if(!el)return;if(!S.all){el.hidden=true;return;}el.hidden=false;
     el.textContent=!key?t.allNoKey:MAP.zoom()<17?t.allZoom:S.allBusy?t.allLoading:t.allN(inView().filter(d=>!d.cur).length);}
@@ -392,7 +396,7 @@ const ALL=(()=>{let svc=null,ready=null,ms=[],timer=0;const cache={},places={};
       for(const tl of ts){for(const k of S.allK)await fetchTile(tl,k);draw();}S.allBusy=false;draw();},250);}
   async function search(q){try{await load();}catch(e){return [];}return new Promise(res=>svc.keywordSearch(q,(d,st)=>res(st===kakao.maps.services.Status.OK?d:[]),{rect:'127.035,37.536,127.068,37.552',size:15}));}
   function add(d,kind){if(!places[d.id])places[d.id]={...d,kind:kind||'shop',ll:[+d.y,+d.x]};return places[d.id];}
-  return {idle,draw,status,search,add,sdk:load,get:id=>places[id],reset(){ms=[];},has:()=>!!key};})();
+  return {idle,draw,status,search,add,sdk:load,get:id=>places[id],reset(){ms=new Map();},has:()=>!!key};})();
 const KCAT={food:['meal','korean','food'],cafe:['cafe','cafe','sweet'],shop:['fashion','fstore','shop'],beauty:['beauty','bstore','shop']};
 function kPlace(d){const k=KCAT[d.kind]||KCAT.shop,cat=(d.category_name||'').split('>').map(x=>x.trim());const nm=d.place_name;
   const grp=d.kind==='food'||d.kind==='cafe'?'eat':'shop';const lab=cat.slice(-1)[0]||'';
