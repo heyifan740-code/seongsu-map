@@ -351,6 +351,16 @@ const POPS = [
  perks:[[LG('经典蛋挞 3,300 韩元，4 个装 11,000 韩元','Classic egg tart ₩3,300, box of 4 ₩11,000','클래식 에그타르트 3,300원, 4개 세트 11,000원'),'sig'],[LG('早餐套餐（蛋挞 + 美式）5,000 韩元，9–11 点','Morning set (tart + americano) ₩5,000, 9–11 am','모닝 세트 (타르트 + 아메리카노) 5,000원, 오전 9–11시'),'tip']],
  rate:{s:4.1,n:36,u:'TAomc4ctI2qz'},img:'https://d12zq4w4guyljn.cloudfront.net/300_300_20261107065503_photo3_dd600a39bd97.webp',src:'https://www.diningcode.com/profile.php?rid=TAomc4ctI2qz'},
 
+{id:'hanjeongseon',book:[{via:'tabling',u:'https://www.tabling.co.kr/restaurant/avsmouhvh4akrfbtrv2dsp',t:'waiting'}],grp:'eat',sub:'dessert',name:'한정선 성수',t:LG('韩贞仙 水果糯米糕','Han Jeong-seon fruit mochi','한정선 성수'),brand:'Han Jeong-seon',
+ addr:'서울 성동구 연무장길 43-1 1층',ll:[37.5428806,127.0542012],perm:true,end:'2099-12-31T22:30:00+09:00',h:'09:00–22:00',
+ hx:LG('周五至周日营业到 22:30','Fri–Sun until 22:30','금–일 22:30까지'),entry:'queue',type:'sweet',
+ g:LG('水果糯米糕','Fruit mochi','과일 찹쌀떡'),
+ note:LG('只能外带；评论称排队常要 1.5 小时以上，节假日有等 3 小时的；现场登记后用 KakaoTalk 通知叫号，有博客写用 CatchTable 登记，叫号后 30 分钟不到会自动取消，以现场为准','Takeaway only. Reviews mention waits of 1.5 h+ (3 h on a holiday); register on site and get a KakaoTalk call — one blog says it used CatchTable; you lose your place if you don’t come within 30 min of the call. Check on site.','포장만 가능. 리뷰 기준 대기 1시간 30분 이상(공휴일 3시간), 현장 등록 후 카카오톡 알림 — 캐치테이블로 등록했다는 블로그도 있음. 호출 후 30분 내 미입장 시 자동 취소, 현장 확인'),
+ perks:[[LG('[限量] 生草莓酸奶糯米糕 6,000 韩元','[Limited] Fresh strawberry yogurt mochi ₩6,000','[한정수량] 생딸기 요거트 찹쌀떡 6,000원'),'sig'],
+        [LG('[限量] 迪拜风巧克力开心果糯米糕 6,500 韩元','[Limited] Dubai-style chocolate pistachio mochi ₩6,500','[한정수량] 두바이st 찹쌀떡 6,500원'),'sig'],
+        [LG('黄金猕猴桃 4,500 · 整颗橘子 4,000 · 6 个礼盒 34,000 韩元','Gold kiwi ₩4,500 · whole tangerine ₩4,000 · box of 6 ₩34,000','골드키위 4,500원 · 통귤 4,000원 · 6구 선물세트 34,000원'),'menu']],
+ rate:{s:4.2,n:75,u:'sF3RPtaiGrlQ'},img:'https://d12zq4w4guyljn.cloudfront.net/300_300_20261117030035_photo2_9d9664df6dac.webp',src:'https://www.diningcode.com/profile.php?rid=sF3RPtaiGrlQ',src2:'Tabling'},
+
 {id:'meitawang',grp:'eat',sub:'eggtart',name:'메이타왕에그타르트스토어 성수본점',t:LG('梅塔王 盐蛋挞','Mei Ta Wang Egg Tart','메이타왕 에그타르트'),brand:'Mei Ta Wang',
  addr:'서울 성동구 연무장길 43-1 1층',ll:[37.5428806,127.0542012],perm:true,end:'2099-12-31T22:00:00+09:00',h:'10:00–22:00',entry:'walkin',type:'sweet',
  g:LG('盐蛋挞','Salt egg tart','소금 에그타르트'),
