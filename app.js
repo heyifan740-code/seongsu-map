@@ -46,7 +46,7 @@ zh:{photos:'图片',pk:{o:'外景',i:'店内',f:'产品',food:'美食',p:'活动
  aiPick:(n,ks)=>`给你挑了 ${n} 家${ks?'（'+ks+'）':''}，按这个顺序走最省路：`,aiTot:(km,walk,all)=>`全程步行约 ${km}，走路 ${walk} 分钟；算上每家逛 20 分钟，一共约 ${all} 分钟。`,
  aiNone:'没找到符合的店。可以换个说法，比如「美妆」「有赠品」「面包」，或者先在店铺页点 ☆ 收藏。',aiFew:'收藏还不到 2 家，我先按你的收藏加上附近热门的店帮你排。',
  aiShow:'在地图上看路线',aiSave:'全部加入收藏',aiMore:'换一批',aiSaved:'已加入收藏',aiFrom:{stn:'从圣水站出发',sf:'从首尔林站出发',gps:'从你的位置出发',pick:'从你选的起点出发',free:''},aiNote:'我是按关键词帮你挑店的小助手，不是真人；营业时间和福利以店铺页为准。',
- favT:'我的收藏',favEmpty:'还没有收藏。在店铺页点右上角的 ☆ 就能收藏',favN:n=>`收藏 ${n}`,rtGo:'规划最佳路线',rtFrom:'从哪出发',rtMe:'我的位置（定位）',rtPick:'在地图上选起点',rtPickSet:'自选起点 ⚑',rtPickHint:'点一下地图，选你的出发点',rtPickDone:'已设为起点',rtFree:'不限，自动选',rtFirst:'从这里开始',rtStn:'圣水站',rtSF:'首尔林站',rtNeed:'至少收藏 2 家店才能规划路线',rtT:'最佳路线',rtSum:(n,km,min)=>`${n} 站 · 步行约 ${km} · ${min} 分钟`,rtLeg:(m,min)=>`步行约 ${m} · ${min} 分钟`,rtNav:'导航',rtExit:'退出路线',rtNote:'按直线距离估算的最短顺序，不走回头路；实际步行时间以导航为准',rtStart:'起点',rtClosed:'当前可能未营业',rtRemove:'移除',
+ favT:'我的收藏',favEmpty:'还没有收藏。在店铺页点右上角的 ☆ 就能收藏',favN:n=>`收藏 ${n}`,rtGo:'规划最佳路线',rtFrom:'从哪出发',rtMe:'我的位置（定位）',rtPick:'在地图上选起点',rtHow:'怎么走',rtBusy:'正在计算实际步行路线…',rtReal:'按实际街道算的步行路线和时间（OpenStreetMap）；点「导航」用 Kakao 地图实时步行导航',rtPickSet:'自选起点 ⚑',rtPickHint:'点一下地图，选你的出发点',rtPickDone:'已设为起点',rtFree:'不限，自动选',rtFirst:'从这里开始',rtStn:'圣水站',rtSF:'首尔林站',rtNeed:'至少收藏 2 家店才能规划路线',rtT:'最佳路线',rtSum:(n,km,min)=>`${n} 站 · 步行约 ${km} · ${min} 分钟`,rtLeg:(m,min)=>`步行约 ${m} · ${min} 分钟`,rtNav:'导航',rtExit:'退出路线',rtNote:'暂时连不上步行路线服务，先按直线距离估算；点「导航」用 Kakao 地图步行导航',rtStart:'起点',rtClosed:'当前可能未营业',rtRemove:'移除',
  mtTag:'机器翻译',trBtn:'翻译',trOrig:'看原文',allT:'全部店铺',rvT:'街景',rvS:'Kakao 街景 · 可拖动看四周',rvNone:'这里没有街景',webT:'网络图片',webS:'来自网络搜索，点开看原文 · 可能有不相关的图',allKinds:{food:'餐厅',cafe:'咖啡甜品',shop:'服饰杂货',beauty:'美妆'},allZoom:'放大地图就能看到这一带所有店铺',allN:n=>`这一带 ${n} 家店 · 数据来自 Kakao 地图`,allLoading:'正在加载附近店铺…',allNoKey:'全部店铺功能还没接上 Kakao 地图',kakaoOpen:'Kakao 地图看照片和评价',callShop:'打电话',moreShops:'Kakao 地图上的更多店铺',kpNote:'店名、分类、地址来自 Kakao 地图，营业时间和排队情况请点进 Kakao 地图查看',addPhoto:'加图片',photoBig:'图片太大或格式不支持',uploading:'正在上传图片…',ugcBy:'网友',ugcHint:'去过现场？在评论里发张照片，帮后来的人看看真实样子',bookT:'排队 / 预约',bkS:{catchtable:'CatchTable',tabling:'Tabling'},bkW:{waiting:'远程排队',reserve:'预约',search:'搜索这家店'},bookHint:'CatchTable 有面向外国游客的国际版；Tabling 远程排队一般要韩国手机号收短信，没有的话到店问店员',phT:'给店员看',phS:'点一下放大韩文',spotT:'在哪排队',naverHint:'Naver 预约一般要登录 Naver 账号，付费项目要用 Naver Pay；约不上可以到现场问有没有现场名额',
  share:'分享',shared:'已复制，可以粘贴到小红书或微信',
  phr:[['不预约也能进吗？','예약 안 해도 들어갈 수 있어요?'],['在哪里登记排队？','웨이팅 등록은 어디서 해요?'],['现在排队大概要等多久？','지금 기다리면 얼마나 걸려요?'],['我没有韩国手机号，可以登记排队吗？','한국 전화번호가 없는데 웨이팅 등록할 수 있어요?'],['赠品还有吗？','사은품 아직 남아 있어요?'],['赠品要怎么领？','사은품은 어떻게 받아요?'],['可以拍照吗？','사진 찍어도 돼요?'],['可以退税吗？我带了护照。','택스리펀 돼요? 여권 있어요.'],['可以刷外国信用卡吗？','해외 카드로 결제돼요?'],['有会说英语或中文的店员吗？','영어나 중국어 하시는 직원분 계세요?']]},
@@ -92,7 +92,7 @@ en:{photos:'Photos',pk:{o:'Outside',i:'Inside',f:'Products',food:'Food',p:'Pop-u
  aiPick:(n,ks)=>`Here are ${n} places${ks?' ('+ks+')':''} in the order with the least walking:`,aiTot:(km,walk,all)=>`About ${km} on foot (${walk} min walking); with 20 min at each place, about ${all} min in total.`,
  aiNone:'I couldn’t find a match. Try words like “beauty”, “gifts” or “bakery”, or save places with ☆ first.',aiFew:'You have fewer than 2 saved places, so I added popular places nearby.',
  aiShow:'Show route on the map',aiSave:'Save all',aiMore:'Show others',aiSaved:'Saved',aiFrom:{stn:'Starting at Seongsu Stn.',sf:'Starting at Seoul Forest Stn.',gps:'Starting where you are',pick:'Starting at your chosen point',free:''},aiNote:'I pick places by keywords — I’m not a person; check each place page for hours and perks.',
- favT:'Saved places',favEmpty:'Nothing saved yet. Tap ☆ on a place page to save it',favN:n=>`Saved ${n}`,rtGo:'Plan the best route',rtFrom:'Start from',rtMe:'My location (GPS)',rtPick:'Pick on the map',rtPickSet:'Picked start ⚑',rtPickHint:'Tap the map to choose where you start',rtPickDone:'Start point set',rtFree:'Anywhere (auto)',rtFirst:'Start here',rtStn:'Seongsu Stn.',rtSF:'Seoul Forest Stn.',rtNeed:'Save at least 2 places to plan a route',rtT:'Best route',rtSum:(n,km,min)=>`${n} stops · about ${km} on foot · ${min} min`,rtLeg:(m,min)=>`about ${m} · ${min} min walk`,rtNav:'Directions',rtExit:'Exit route',rtNote:'Shortest order by straight-line distance, no doubling back; follow the navigation app for real walking times',rtStart:'Start',rtClosed:'may be closed now',rtRemove:'Remove',
+ favT:'Saved places',favEmpty:'Nothing saved yet. Tap ☆ on a place page to save it',favN:n=>`Saved ${n}`,rtGo:'Plan the best route',rtFrom:'Start from',rtMe:'My location (GPS)',rtPick:'Pick on the map',rtHow:'Directions',rtBusy:'Working out the walking route…',rtReal:'Walking route and times along real streets (OpenStreetMap); tap Directions for live walking navigation in Kakao Map',rtPickSet:'Picked start ⚑',rtPickHint:'Tap the map to choose where you start',rtPickDone:'Start point set',rtFree:'Anywhere (auto)',rtFirst:'Start here',rtStn:'Seongsu Stn.',rtSF:'Seoul Forest Stn.',rtNeed:'Save at least 2 places to plan a route',rtT:'Best route',rtSum:(n,km,min)=>`${n} stops · about ${km} on foot · ${min} min`,rtLeg:(m,min)=>`about ${m} · ${min} min walk`,rtNav:'Directions',rtExit:'Exit route',rtNote:'Walking-route service unavailable, so this is a straight-line estimate; tap Directions for Kakao Map walking navigation',rtStart:'Start',rtClosed:'may be closed now',rtRemove:'Remove',
  mtTag:'Machine translated',trBtn:'Translate',trOrig:'Original',allT:'All shops',rvT:'Street view',rvS:'Kakao Roadview · drag to look around',rvNone:'No street view here',webT:'Web photos',webS:'From web search — tap to see the source; some may be unrelated',allKinds:{food:'Restaurants',cafe:'Cafés & desserts',shop:'Fashion & goods',beauty:'Beauty'},allZoom:'Zoom in to see every shop around here',allN:n=>`${n} places here · data from Kakao Map`,allLoading:'Loading nearby places…',allNoKey:'All-shops mode isn’t connected to Kakao Map yet',kakaoOpen:'Photos & reviews on Kakao Map',callShop:'Call',moreShops:'More places on Kakao Map',kpNote:'Name, category and address from Kakao Map; open Kakao Map for hours and waiting',addPhoto:'Add photo',photoBig:'That image is too large or not supported',uploading:'Uploading photo…',ugcBy:'Visitors',ugcHint:'Been there? Add a photo with your comment so others can see what it’s really like',bookT:'Waitlist / booking',bkS:{catchtable:'CatchTable',tabling:'Tabling'},bkW:{waiting:'Join the waitlist',reserve:'Book',search:'Search this place'},bookHint:'CatchTable has a global version for visitors; Tabling’s remote waitlist usually needs a Korean number for the SMS — if you don’t have one, ask staff at the door',phT:'Show the staff',phS:'tap to show the Korean in large type',spotT:'Where to queue',naverHint:'Naver booking usually needs a Naver account, and paid slots use Naver Pay; if you can’t book, ask on site about walk-in places',
  share:'Share',shared:'Copied — paste it anywhere',
  phr:[['Can I go in without a reservation?','예약 안 해도 들어갈 수 있어요?'],['Where do I sign up for the waiting list?','웨이팅 등록은 어디서 해요?'],['How long is the wait right now?','지금 기다리면 얼마나 걸려요?'],['I don’t have a Korean phone number. Can I still join the waiting list?','한국 전화번호가 없는데 웨이팅 등록할 수 있어요?'],['Are there any free gifts left?','사은품 아직 남아 있어요?'],['How do I get the free gift?','사은품은 어떻게 받아요?'],['May I take photos?','사진 찍어도 돼요?'],['Can I get a tax refund? I have my passport.','택스리펀 돼요? 여권 있어요.'],['Can I pay with a foreign card?','해외 카드로 결제돼요?'],['Is there anyone who speaks English or Chinese?','영어나 중국어 하시는 직원분 계세요?']]},
@@ -138,7 +138,7 @@ ko:{photos:'사진',pk:{o:'외관',i:'내부',f:'상품',food:'메뉴',p:'팝업
  aiPick:(n,ks)=>`${n}곳을 골랐어요${ks?' ('+ks+')':''}. 이 순서가 가장 덜 걸어요:`,aiTot:(km,walk,all)=>`도보 약 ${km}, 걷는 시간 ${walk}분. 한 곳에 20분씩 머물면 총 약 ${all}분이에요.`,
  aiNone:'조건에 맞는 곳을 못 찾았어요. 「뷰티」 「증정」 「빵」처럼 말해 보거나, 먼저 ☆로 저장해 보세요.',aiFew:'저장한 곳이 2곳 미만이라 근처 인기 장소를 함께 넣었어요.',
  aiShow:'지도에서 경로 보기',aiSave:'모두 저장',aiMore:'다른 곳 보기',aiSaved:'저장했어요',aiFrom:{stn:'성수역 출발',sf:'서울숲역 출발',gps:'내 위치에서 출발',pick:'선택한 출발점에서 출발',free:''},aiNote:'키워드로 장소를 골라 주는 도우미예요. 영업시간과 혜택은 장소 페이지를 확인하세요.',
- favT:'저장한 장소',favEmpty:'아직 저장한 곳이 없어요. 장소 페이지에서 ☆를 눌러 저장하세요',favN:n=>`저장 ${n}`,rtGo:'최적 경로 만들기',rtFrom:'출발 위치',rtMe:'내 위치 (GPS)',rtPick:'지도에서 선택',rtPickSet:'선택한 출발점 ⚑',rtPickHint:'지도를 눌러 출발점을 고르세요',rtPickDone:'출발점으로 설정했어요',rtFree:'자동으로 선택',rtFirst:'여기서 시작',rtStn:'성수역',rtSF:'서울숲역',rtNeed:'경로를 만들려면 2곳 이상 저장하세요',rtT:'최적 경로',rtSum:(n,km,min)=>`${n}곳 · 도보 약 ${km} · ${min}분`,rtLeg:(m,min)=>`도보 약 ${m} · ${min}분`,rtNav:'길찾기',rtExit:'경로 닫기',rtNote:'직선거리 기준 최단 순서, 되돌아가지 않아요. 실제 도보 시간은 지도 앱을 확인하세요',rtStart:'출발',rtClosed:'지금 영업하지 않을 수 있어요',rtRemove:'삭제',
+ favT:'저장한 장소',favEmpty:'아직 저장한 곳이 없어요. 장소 페이지에서 ☆를 눌러 저장하세요',favN:n=>`저장 ${n}`,rtGo:'최적 경로 만들기',rtFrom:'출발 위치',rtMe:'내 위치 (GPS)',rtPick:'지도에서 선택',rtHow:'가는 길',rtBusy:'도보 경로 계산 중…',rtReal:'실제 길 기준 도보 경로와 시간(OpenStreetMap). 「길찾기」를 누르면 카카오맵 도보 내비로 안내해요',rtPickSet:'선택한 출발점 ⚑',rtPickHint:'지도를 눌러 출발점을 고르세요',rtPickDone:'출발점으로 설정했어요',rtFree:'자동으로 선택',rtFirst:'여기서 시작',rtStn:'성수역',rtSF:'서울숲역',rtNeed:'경로를 만들려면 2곳 이상 저장하세요',rtT:'최적 경로',rtSum:(n,km,min)=>`${n}곳 · 도보 약 ${km} · ${min}분`,rtLeg:(m,min)=>`도보 약 ${m} · ${min}분`,rtNav:'길찾기',rtExit:'경로 닫기',rtNote:'도보 경로 서비스에 연결하지 못해 직선거리로 계산했어요. 「길찾기」로 카카오맵 도보 안내를 이용하세요',rtStart:'출발',rtClosed:'지금 영업하지 않을 수 있어요',rtRemove:'삭제',
  mtTag:'기계 번역',trBtn:'번역',trOrig:'원문',allT:'모든 매장',rvT:'로드뷰',rvS:'카카오 로드뷰 · 드래그해서 둘러보기',rvNone:'이 위치는 로드뷰가 없어요',webT:'웹 이미지',webS:'웹 검색 결과 · 눌러서 원문 보기 · 관련 없는 이미지가 있을 수 있어요',allKinds:{food:'음식점',cafe:'카페·디저트',shop:'패션·소품',beauty:'뷰티'},allZoom:'지도를 확대하면 이 근처 모든 매장이 보여요',allN:n=>`이 근처 ${n}곳 · 카카오맵 데이터`,allLoading:'주변 매장 불러오는 중…',allNoKey:'모든 매장 기능이 아직 카카오맵과 연결되지 않았어요',kakaoOpen:'카카오맵에서 사진·리뷰 보기',callShop:'전화',moreShops:'카카오맵 검색 결과',kpNote:'매장명·분류·주소는 카카오맵 기준이에요. 영업시간과 웨이팅은 카카오맵에서 확인하세요',addPhoto:'사진 추가',photoBig:'사진이 너무 크거나 지원하지 않는 형식이에요',uploading:'사진 올리는 중…',ugcBy:'방문자',ugcHint:'다녀오셨나요? 댓글에 사진을 남겨 실제 모습을 공유해 주세요',bookT:'웨이팅 / 예약',bkS:{catchtable:'캐치테이블',tabling:'테이블링'},bkW:{waiting:'원격 웨이팅',reserve:'예약',search:'매장 검색'},bookHint:'',phT:'직원에게 보여주기',phS:'눌러서 크게 보기',spotT:'줄 서는 곳',naverHint:'네이버 예약은 보통 네이버 로그인이 필요하고, 유료 예약은 네이버페이로 결제해요',
  share:'공유',shared:'복사했어요',
  phr:[]}
@@ -312,7 +312,7 @@ function leafletAdapter(el){
    onIdle(cb){map.on('moveend',cb);},
    bounds(){const b=map.getBounds();return [[b.getSouth(),b.getWest()],[b.getNorth(),b.getEast()]];},
    remove(m){m.remove();},
-   line(lls){return L.polyline(lls,{color:'#2ea84a',weight:5,opacity:.85,dashArray:'1 9',lineCap:'round'}).addTo(map);},
+   line(lls,real){return L.polyline(lls,real?{color:'#1d7d35',weight:6,opacity:.9,lineJoin:'round'}:{color:'#2ea84a',weight:5,opacity:.85,dashArray:'1 9',lineCap:'round'}).addTo(map);},
    zoom(){return map.getZoom();},
    view(ll,z,off){map.setView(map.unproject(map.project(ll,z).add([0,off]),z),z,{animate:true});},
    resize(){map.invalidateSize();}};
@@ -336,7 +336,7 @@ function naverAdapter(el){
    onIdle(cb){N.Event.addListener(map,'idle',cb);},
    bounds(){const b=map.getBounds();return [[b.getMin().y,b.getMin().x],[b.getMax().y,b.getMax().x]];},
    remove(m){m.setMap(null);},
-   line(lls){return new N.Polyline({map,path:lls.map(LL),strokeColor:'#2ea84a',strokeWeight:5,strokeOpacity:.85,strokeStyle:'shortdot'});},
+   line(lls,real){return new N.Polyline({map,path:lls.map(LL),strokeColor:real?'#1d7d35':'#2ea84a',strokeWeight:real?6:5,strokeOpacity:.9,strokeStyle:real?'solid':'shortdot'});},
    zoom(){return map.getZoom();},
    view(ll,z,off){map.setZoom(z,false);const pr=map.getProjection();const pt=pr.fromCoordToOffset(LL(ll));const c=pr.fromOffsetToCoord(new N.Point(pt.x,pt.y+off));map.panTo(c);},
    resize(){N.Event.trigger(map,'resize');}};
@@ -462,25 +462,44 @@ const favPlace=f=>live.find(p=>p.id===f.id)||f;
 function planRoute(list,frIn){const fs=(list||FAV.all().map(favPlace)).filter(p=>p.ll);if(fs.length<2){toast(t.rtNeed);return;}
   const fr=frIn||S.rtFrom||'free';S.rtFrom=fr;const start=startOf(fr);const ord=bestOrder(start,fs.map(p=>p.ll)).map(i=>fs[i]);
   let prev=start||ord[0].ll;const legs=ord.map(p=>{const m=Math.round(meters(prev,p.ll)*WALK);prev=p.ll;return m;});
-  S.route={start,stops:ord,legs};S.sheet=null;renderSheet();drawRoute();renderNear();setMin(false);return S.route;}
+  S.route={start,stops:ord,legs};S.sheet=null;renderSheet();drawRoute();renderNear();setMin(false);walkRoute(S.route);return S.route;}
 function startOf(fr){return fr==='stn'?ST_B:fr==='sf'?ST_A:fr==='gps'?S.me:fr==='pick'?(S.rtPick||null):null;}
 function orderOf(list,fr){const start=startOf(fr);const ord=bestOrder(start,list.map(p=>p.ll)).map(i=>list[i]);
   let prev=start||ord[0].ll;const legs=ord.map(p=>{const m=Math.round(meters(prev,p.ll)*WALK);prev=p.ll;return m;});return {start,stops:ord,legs};}
 let RT={line:null,ms:[]},PK=null;
 function drawPick(){if(!MAP)return;if(PK){MAP.remove(PK);PK=null;}if(S.rtPick)PK=MAP.marker({ll:S.rtPick,html:'<div class="rnum pk">⚑</div>',w:26,h:26,ax:13,ay:13,z:1900,fixed:true});}
 function drawRoute(){if(!MAP)return;if(RT.line)MAP.remove(RT.line);RT.ms.forEach(m=>MAP.remove(m));RT={line:null,ms:[]};if(!S.route)return;
-  const lls=[...(S.route.start?[S.route.start]:[]),...S.route.stops.map(p=>p.ll)];RT.line=MAP.line(lls);
+  const lls=[...(S.route.start?[S.route.start]:[]),...S.route.stops.map(p=>p.ll)];RT.line=MAP.line(S.route.path||lls,!!S.route.path);
   if(S.route.start)RT.ms.push(MAP.marker({ll:S.route.start,html:'<div class="rnum s">●</div>',w:26,h:26,ax:13,ay:13,z:2000,fixed:true}));
   S.route.stops.forEach((p,i)=>RT.ms.push(MAP.marker({ll:p.ll,html:`<div class="rnum">${i+1}</div>`,w:26,h:26,ax:13,ay:13,z:2000,fixed:true,title:tx(p.t),onClick:()=>openFav(p.id)})));
   let top=20,bottom=20;if(!wide()){top=document.querySelector('.topov').offsetHeight+40;bottom=$('near').offsetHeight+20;}if(MAP.fit)MAP.fit(lls,[top,40,bottom,40]);}
+async function walkRoute(r){const pts=[...(r.start?[r.start]:[]),...r.stops.map(p=>p.ll)];r.busy=1;renderNear();
+  try{const u='https://routing.openstreetmap.de/routed-foot/route/v1/foot/'+pts.map(p=>p[1].toFixed(6)+','+p[0].toFixed(6)).join(';')+'?overview=full&geometries=geojson&steps=true';
+    const j=await (await fetch(u)).json();if(S.route!==r)return;if(j.code!=='Ok'||!j.routes||!j.routes[0])throw 0;const R=j.routes[0];
+    r.path=R.geometry.coordinates.map(c=>[c[1],c[0]]);const off=r.start?0:1;
+    r.legs=r.stops.map((_,i)=>i<off?0:Math.round(R.legs[i-off].distance));r.mins=r.stops.map((_,i)=>i<off?0:Math.max(1,Math.round(R.legs[i-off].duration/60)));
+    r.steps=r.stops.map((_,i)=>i<off?[]:R.legs[i-off].steps);r.real=1;}
+  catch(e){r.real=0;}
+  r.busy=0;if(S.route===r){drawRoute();renderNear();}}
+const TURN={zh:{left:'左转',right:'右转','slight left':'稍向左','slight right':'稍向右','sharp left':'向左急转','sharp right':'向右急转',straight:'直行',uturn:'掉头'},
+  en:{left:'Turn left','right':'Turn right','slight left':'Bear left','slight right':'Bear right','sharp left':'Sharp left','sharp right':'Sharp right',straight:'Go straight',uturn:'Make a U-turn'},
+  ko:{left:'좌회전',right:'우회전','slight left':'왼쪽 방향','slight right':'오른쪽 방향','sharp left':'급좌회전','sharp right':'급우회전',straight:'직진',uturn:'유턴'}};
+function stepTxt(st){const m=st.maneuver||{},T=TURN[lang],nm=st.name||'',d=fmtD(Math.round(st.distance));
+  if(m.type==='arrive')return lang==='zh'?'到达':lang==='ko'?'도착':'Arrive';
+  const dir=m.type==='depart'?(lang==='zh'?'出发':lang==='ko'?'출발':'Head off'):(T[m.modifier]||(lang==='zh'?'继续走':lang==='ko'?'계속 직진':'Continue'));
+  if(lang==='zh')return `${dir}${nm?`，沿 ${nm}`:''}走 ${d}`;if(lang==='ko')return `${dir}${nm?` 후 ${nm} 따라`:''} ${d} 이동`;return `${dir}${nm?` onto ${nm}`:''}, walk ${d}`;}
+const kakaoWalk=(a,an,b,bn)=>`https://map.kakao.com/link/by/walk/${encodeURIComponent((an||'').replace(/[,/]/g,' '))},${a[0]},${a[1]}/${encodeURIComponent((bn||'').replace(/[,/]/g,' '))},${b[0]},${b[1]}`;
 function openFav(id){if(live.some(p=>p.id===id)){openPop(id);return;}const f=FAV.all().find(x=>x.id===id);if(f&&f.raw){const d=ALL.add({...f.raw},f.raw.kind);openKp(d.id);}}
 const kakaoTo=p=>`https://map.kakao.com/link/to/${encodeURIComponent((p.name||'').replace(/,/g,' '))},${p.ll[0]},${p.ll[1]}`;
-function routeList(){const r=S.route,tot=r.legs.reduce((a,b)=>a+b,0);
+function routeList(){const r=S.route,tot=r.legs.reduce((a,b)=>a+b,0),totMin=r.mins?r.mins.reduce((a,b)=>a+b,0):Math.round(tot/SPEED);
   return `<button class="grabbtn" data-act="sheet" aria-label="${t.details}"><span class="grab"></span></button><div class="sh pad"><h2>${t.rtT}</h2><button class="rtx" data-act="rtexit">${t.rtExit}</button></div>
-   <div class="near pad"><p class="rtsum">${esc(t.rtSum(r.stops.length,fmtD(tot),Math.round(tot/SPEED)))}</p>
+   <div class="near pad"><p class="rtsum">${esc(t.rtSum(r.stops.length,fmtD(tot),totMin))}</p>
    <ol class="rtl">${r.start?`<li class="st0"><b>${t.rtStart}</b><small>${S.rtFrom==='stn'?t.rtStn:S.rtFrom==='sf'?t.rtSF:S.rtFrom==='pick'?t.rtPickSet:t.rtMe}</small></li>`:''}
-   ${r.stops.map((p,i)=>`<li data-n="${i+1}"><button class="rtn" data-act="favopen" data-id="${esc(p.id)}"><b>${esc(tx(p.t)||p.name)}</b><small>${i===0&&!r.start?t.rtFirst:esc(t.rtLeg(fmtD(r.legs[i]),Math.max(1,Math.round(r.legs[i]/SPEED))))}${!p.kk&&p.endTs&&p.endTs<Date.now()?' · '+t.rtClosed:''}</small></button><a class="rtnav" href="${kakaoTo(p)}" target="_blank" rel="noopener">${ICON.pin}${t.rtNav}</a></li>`).join('')}</ol>
-   <p class="datanote">${t.rtNote}</p></div>`;}
+   ${r.stops.map((p,i)=>{const prev=i?r.stops[i-1]:null,from=prev?prev.ll:r.start,fromN=prev?(prev.name||tx(prev.t)):t.rtStart,mins=r.mins?r.mins[i]:Math.max(1,Math.round(r.legs[i]/SPEED));
+     const steps=r.steps&&r.steps[i]&&r.steps[i].length?`<details class="rtsteps"><summary>${t.rtHow}</summary><ol>${r.steps[i].filter(st=>st.maneuver&&(st.distance>3||st.maneuver.type==='arrive')).map(st=>`<li>${esc(stepTxt(st))}</li>`).join('')}</ol></details>`:'';
+     return `<li data-n="${i+1}"><div class="rtb"><button class="rtn" data-act="favopen" data-id="${esc(p.id)}"><b>${esc(tx(p.t)||p.name)}</b><small>${i===0&&!r.start?t.rtFirst:esc(t.rtLeg(fmtD(r.legs[i]),mins))}${!p.kk&&p.endTs&&p.endTs<Date.now()?' · '+t.rtClosed:''}</small></button>${steps}</div>
+      <a class="rtnav" href="${from?kakaoWalk(from,fromN,p.ll,p.name):kakaoTo(p)}" target="_blank" rel="noopener">${ICON.pin}${t.rtNav}</a></li>`;}).join('')}</ol>
+   <p class="datanote">${r.busy?t.rtBusy:r.real?t.rtReal:t.rtNote}</p></div>`;}
 function vFav(){const fs=FAV.all().map(favPlace);const fr=S.rtFrom||'free';
   return `<div class="mask" data-act="close"><div class="vsheet fsheet" role="dialog"><div class="fhead pad"><h3>${t.favT}</h3><button class="x" data-act="close" aria-label="${t.close}">×</button></div>
    <div class="pad">${fs.length?`<div class="favl">${fs.map(p=>`<div class="favi"><button data-act="favopen" data-id="${esc(p.id)}"><b>${esc(tx(p.t)||p.name)}</b><small>${p.ll?fmtD(meters(S.me,p.ll)):''}</small></button><button class="favx" data-act="favdrop" data-id="${esc(p.id)}">${t.rtRemove}</button></div>`).join('')}</div>
