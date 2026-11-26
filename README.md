@@ -1,4 +1,4 @@
-# 圣水快闪线 · Seongsu Pop-up Line · 성수 팝업라인
+# seopup · 首尔快闪地图 · Seoul pop-up map
 
 圣水洞快闪、餐厅烘焙和店铺的多语言地图（课堂作业原型）。网站：https://heyifan740-code.github.io/seongsu-map/
 
