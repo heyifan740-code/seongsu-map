@@ -41,7 +41,7 @@ zh:{photos:'图片',pk:{o:'外景',i:'店内',f:'产品',food:'美食',p:'活动
  report:'举报',reportedC:'已举报，这条评论对你隐藏了',posted:'已发出',cmtRule:'友善发言 · 不发广告和联系方式 · 被 3 人举报会自动隐藏',
  cerr:{empty:'先写点内容',long:'最多 200 字',link:'不能发链接或联系方式',spam:'内容像是刷屏',fast:'发得太快了，稍等几秒',fail:'没发出去，请稍后再试'},
  qAgg:(n,lv)=>`最近 2 小时 ${n} 人上报，多数说「${lv}」`,qLast:a=>`最新一条 ${a}`,qDemo:'演示模式：上报只保存在这台设备上',qNote:'由现场用户上报，仅供参考',qWait:'30 分钟内只能上报一次',qThanks:'感谢上报',
- addPhoto:'加图片',photoBig:'图片太大或格式不支持',uploading:'正在上传图片…',ugcBy:'网友',ugcHint:'去过现场？在评论里发张照片，帮后来的人看看真实样子',bookT:'排队 / 预约',bkS:{catchtable:'CatchTable',tabling:'Tabling'},bkW:{waiting:'远程排队',reserve:'预约',search:'搜索这家店'},bookHint:'CatchTable 有面向外国游客的国际版；Tabling 远程排队一般要韩国手机号收短信，没有的话到店问店员',phT:'给店员看',phS:'点一下放大韩文',spotT:'在哪排队',naverHint:'Naver 预约一般要登录 Naver 账号，付费项目要用 Naver Pay；约不上可以到现场问有没有现场名额',
+ allT:'全部店铺',allKinds:{food:'餐厅',cafe:'咖啡甜品',shop:'服饰杂货',beauty:'美妆'},allZoom:'放大地图就能看到这一带所有店铺',allN:n=>`这一带 ${n} 家店 · 数据来自 Kakao 地图`,allLoading:'正在加载附近店铺…',allNoKey:'全部店铺功能还没接上 Kakao 地图',kakaoOpen:'Kakao 地图看照片和评价',callShop:'打电话',moreShops:'Kakao 地图上的更多店铺',kpNote:'店名、分类、地址来自 Kakao 地图，营业时间和排队情况请点进 Kakao 地图查看',addPhoto:'加图片',photoBig:'图片太大或格式不支持',uploading:'正在上传图片…',ugcBy:'网友',ugcHint:'去过现场？在评论里发张照片，帮后来的人看看真实样子',bookT:'排队 / 预约',bkS:{catchtable:'CatchTable',tabling:'Tabling'},bkW:{waiting:'远程排队',reserve:'预约',search:'搜索这家店'},bookHint:'CatchTable 有面向外国游客的国际版；Tabling 远程排队一般要韩国手机号收短信，没有的话到店问店员',phT:'给店员看',phS:'点一下放大韩文',spotT:'在哪排队',naverHint:'Naver 预约一般要登录 Naver 账号，付费项目要用 Naver Pay；约不上可以到现场问有没有现场名额',
  share:'分享',shared:'已复制，可以粘贴到小红书或微信',
  phr:[['不预约也能进吗？','예약 안 해도 들어갈 수 있어요?'],['在哪里登记排队？','웨이팅 등록은 어디서 해요?'],['现在排队大概要等多久？','지금 기다리면 얼마나 걸려요?'],['我没有韩国手机号，可以登记排队吗？','한국 전화번호가 없는데 웨이팅 등록할 수 있어요?'],['赠品还有吗？','사은품 아직 남아 있어요?'],['赠品要怎么领？','사은품은 어떻게 받아요?'],['可以拍照吗？','사진 찍어도 돼요?'],['可以退税吗？我带了护照。','택스리펀 돼요? 여권 있어요.'],['可以刷外国信用卡吗？','해외 카드로 결제돼요?'],['有会说英语或中文的店员吗？','영어나 중국어 하시는 직원분 계세요?']]},
 en:{photos:'Photos',pk:{o:'Outside',i:'Inside',f:'Products',food:'Food',p:'Pop-up',u:'Visitor photos'},giftOnly:'Free gifts',tbd:'End date TBA',from:s=>`From ${s}`,imgBy:'Photo',filt:'Filters',fTitle:'Filter by',fSec:['Perks','When','Entry','Other'],fOpt:{popup:'Pop-ups only',gift:'Free gift',deal:'Discount',taste:'Tasting',draw:'Lucky draw',exp:'Experience',new:'New this week',ending:'Ends in 3 days',perm:'Permanent',walkin:'Walk in',queue:'Waiting list',book:'Booking / ticket',tax:'Tax refund',r45:'Rating 4.5+',r40:'Rating 4.0+'},fClear:'Clear',fShow:n=>`Show ${n} results`,fres:'Filtered',title:'Seongsu Pop-up Line',tag:'Class prototype · confirm with official sources',ph:'Search pop-ups, food, shops or freebies',all:'All',
@@ -81,7 +81,7 @@ en:{photos:'Photos',pk:{o:'Outside',i:'Inside',f:'Products',food:'Food',p:'Pop-u
  report:'Report',reportedC:'Reported — hidden for you',posted:'Posted',cmtRule:'Be kind · no ads or contact details · hidden after 3 reports',
  cerr:{empty:'Write something first',long:'200 characters max',link:'No links or contact details',spam:'That looks like spam',fast:'Too fast — wait a few seconds',fail:'Couldn’t post, try again later'},
  qAgg:(n,lv)=>`${n} report${n===1?'':'s'} in the last 2 h, mostly “${lv}”`,qLast:a=>`latest ${a}`,qDemo:'Demo mode: reports are saved on this device only',qNote:'Reported by visitors on site; a rough guide only',qWait:'One report per 30 minutes',qThanks:'Thanks for reporting',
- addPhoto:'Add photo',photoBig:'That image is too large or not supported',uploading:'Uploading photo…',ugcBy:'Visitors',ugcHint:'Been there? Add a photo with your comment so others can see what it’s really like',bookT:'Waitlist / booking',bkS:{catchtable:'CatchTable',tabling:'Tabling'},bkW:{waiting:'Join the waitlist',reserve:'Book',search:'Search this place'},bookHint:'CatchTable has a global version for visitors; Tabling’s remote waitlist usually needs a Korean number for the SMS — if you don’t have one, ask staff at the door',phT:'Show the staff',phS:'tap to show the Korean in large type',spotT:'Where to queue',naverHint:'Naver booking usually needs a Naver account, and paid slots use Naver Pay; if you can’t book, ask on site about walk-in places',
+ allT:'All shops',allKinds:{food:'Restaurants',cafe:'Cafés & desserts',shop:'Fashion & goods',beauty:'Beauty'},allZoom:'Zoom in to see every shop around here',allN:n=>`${n} places here · data from Kakao Map`,allLoading:'Loading nearby places…',allNoKey:'All-shops mode isn’t connected to Kakao Map yet',kakaoOpen:'Photos & reviews on Kakao Map',callShop:'Call',moreShops:'More places on Kakao Map',kpNote:'Name, category and address from Kakao Map; open Kakao Map for hours and waiting',addPhoto:'Add photo',photoBig:'That image is too large or not supported',uploading:'Uploading photo…',ugcBy:'Visitors',ugcHint:'Been there? Add a photo with your comment so others can see what it’s really like',bookT:'Waitlist / booking',bkS:{catchtable:'CatchTable',tabling:'Tabling'},bkW:{waiting:'Join the waitlist',reserve:'Book',search:'Search this place'},bookHint:'CatchTable has a global version for visitors; Tabling’s remote waitlist usually needs a Korean number for the SMS — if you don’t have one, ask staff at the door',phT:'Show the staff',phS:'tap to show the Korean in large type',spotT:'Where to queue',naverHint:'Naver booking usually needs a Naver account, and paid slots use Naver Pay; if you can’t book, ask on site about walk-in places',
  share:'Share',shared:'Copied — paste it anywhere',
  phr:[['Can I go in without a reservation?','예약 안 해도 들어갈 수 있어요?'],['Where do I sign up for the waiting list?','웨이팅 등록은 어디서 해요?'],['How long is the wait right now?','지금 기다리면 얼마나 걸려요?'],['I don’t have a Korean phone number. Can I still join the waiting list?','한국 전화번호가 없는데 웨이팅 등록할 수 있어요?'],['Are there any free gifts left?','사은품 아직 남아 있어요?'],['How do I get the free gift?','사은품은 어떻게 받아요?'],['May I take photos?','사진 찍어도 돼요?'],['Can I get a tax refund? I have my passport.','택스리펀 돼요? 여권 있어요.'],['Can I pay with a foreign card?','해외 카드로 결제돼요?'],['Is there anyone who speaks English or Chinese?','영어나 중국어 하시는 직원분 계세요?']]},
 ko:{photos:'사진',pk:{o:'외관',i:'내부',f:'상품',food:'메뉴',p:'팝업 이미지',u:'방문자 사진'},giftOnly:'증정 있음',tbd:'종료일 미정',from:s=>`${s}부터`,imgBy:'사진',filt:'필터',fTitle:'조건으로 찾기',fSec:['혜택','기간','입장','기타'],fOpt:{popup:'팝업만',gift:'증정',deal:'할인',taste:'시식',draw:'추첨',exp:'체험',new:'이번 주 오픈',ending:'3일 내 종료',perm:'상시 매장',walkin:'바로 입장',queue:'현장 웨이팅',book:'예약/티켓',tax:'택스리펀',r45:'평점 4.5+',r40:'평점 4.0+'},fClear:'초기화',fShow:n=>`결과 ${n}곳 보기`,fres:'필터 결과',title:'성수 팝업라인',tag:'수업 프로토타입 · 정보는 공식 안내를 확인하세요',ph:'팝업, 맛집, 매장, 혜택 검색',all:'전체',
@@ -121,7 +121,7 @@ ko:{photos:'사진',pk:{o:'외관',i:'내부',f:'상품',food:'메뉴',p:'팝업
  report:'신고',reportedC:'신고했어요. 이 댓글은 숨겨져요',posted:'등록했어요',cmtRule:'서로 배려해 주세요 · 광고·연락처 금지 · 신고 3회 시 자동 숨김',
  cerr:{empty:'내용을 입력하세요',long:'최대 200자',link:'링크나 연락처는 쓸 수 없어요',spam:'도배로 보여요',fast:'너무 빨라요. 잠시 후 다시 시도하세요',fail:'등록하지 못했어요. 잠시 후 다시 시도하세요'},
  qAgg:(n,lv)=>`최근 2시간 제보 ${n}건 · 대부분 「${lv}」`,qLast:a=>`최근 제보 ${a}`,qDemo:'데모 모드: 제보는 이 기기에만 저장돼요',qNote:'현장 방문자 제보 · 참고용',qWait:'30분에 한 번만 제보할 수 있어요',qThanks:'제보 감사합니다',
- addPhoto:'사진 추가',photoBig:'사진이 너무 크거나 지원하지 않는 형식이에요',uploading:'사진 올리는 중…',ugcBy:'방문자',ugcHint:'다녀오셨나요? 댓글에 사진을 남겨 실제 모습을 공유해 주세요',bookT:'웨이팅 / 예약',bkS:{catchtable:'캐치테이블',tabling:'테이블링'},bkW:{waiting:'원격 웨이팅',reserve:'예약',search:'매장 검색'},bookHint:'',phT:'직원에게 보여주기',phS:'눌러서 크게 보기',spotT:'줄 서는 곳',naverHint:'네이버 예약은 보통 네이버 로그인이 필요하고, 유료 예약은 네이버페이로 결제해요',
+ allT:'모든 매장',allKinds:{food:'음식점',cafe:'카페·디저트',shop:'패션·소품',beauty:'뷰티'},allZoom:'지도를 확대하면 이 근처 모든 매장이 보여요',allN:n=>`이 근처 ${n}곳 · 카카오맵 데이터`,allLoading:'주변 매장 불러오는 중…',allNoKey:'모든 매장 기능이 아직 카카오맵과 연결되지 않았어요',kakaoOpen:'카카오맵에서 사진·리뷰 보기',callShop:'전화',moreShops:'카카오맵 검색 결과',kpNote:'매장명·분류·주소는 카카오맵 기준이에요. 영업시간과 웨이팅은 카카오맵에서 확인하세요',addPhoto:'사진 추가',photoBig:'사진이 너무 크거나 지원하지 않는 형식이에요',uploading:'사진 올리는 중…',ugcBy:'방문자',ugcHint:'다녀오셨나요? 댓글에 사진을 남겨 실제 모습을 공유해 주세요',bookT:'웨이팅 / 예약',bkS:{catchtable:'캐치테이블',tabling:'테이블링'},bkW:{waiting:'원격 웨이팅',reserve:'예약',search:'매장 검색'},bookHint:'',phT:'직원에게 보여주기',phS:'눌러서 크게 보기',spotT:'줄 서는 곳',naverHint:'네이버 예약은 보통 네이버 로그인이 필요하고, 유료 예약은 네이버페이로 결제해요',
  share:'공유',shared:'복사했어요',
  phr:[]}
 };
@@ -196,7 +196,7 @@ const live=POPS.filter(p=>p.endTs>Date.now());
 // spread markers that share an address so none are hidden
 (()=>{const g={};live.forEach(p=>{const k=p.ll[0].toFixed(5)+','+p.ll[1].toFixed(5);(g[k]=g[k]||[]).push(p);});
   Object.values(g).forEach(a=>a.forEach((p,i)=>{if(a.length<2){p.dl=p.ll;return;}const ang=2*Math.PI*i/a.length,r=0.00009;p.dl=[p.ll[0]+r*Math.cos(ang),p.ll[1]+r*1.26*Math.sin(ang)];}));})();
-const S={f:{perk:[],time:'',entry:'',tax:false,rate:0},view:'home',cat:null,i:0,mode:'live',grp:'all',sub:null,sort:'dist',member:false,sel:1,sheet:null,fav:{},me:FALLBACK.slice(),q:'',real:false,clock:Date.now(),cc:{},qr:{},cm:null};
+const S={f:{perk:[],time:'',entry:'',tax:false,rate:0},view:'home',cat:null,i:0,mode:'live',grp:'all',sub:null,sort:'dist',member:false,sel:1,sheet:null,fav:{},me:FALLBACK.slice(),q:'',real:false,clock:Date.now(),cc:{},qr:{},cm:null,all:false,allK:['food','cafe','shop','beauty'],kp:null};
 const SO=window.SOCIAL;
 const esc=s=>String(s).replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
 const LINE=live.slice().sort((a,b)=>a.ll[1]-b.ll[1]);
@@ -285,6 +285,9 @@ function leafletAdapter(el){
      const c=[med(lls.map(x=>x[0])),med(lls.map(x=>x[1]))],off=(pad[2]-pad[0])/2;
      map.setView(map.unproject(map.project(c,16.5).add([0,off]),16.5),16.5,{animate:true});},
    onZoom(cb){map.on('zoomend',cb);},
+   onIdle(cb){map.on('moveend',cb);},
+   bounds(){const b=map.getBounds();return [[b.getSouth(),b.getWest()],[b.getNorth(),b.getEast()]];},
+   remove(m){m.remove();},
    zoom(){return map.getZoom();},
    view(ll,z,off){map.setView(map.unproject(map.project(ll,z).add([0,off]),z),z,{animate:true});},
    resize(){map.invalidateSize();}};
@@ -305,6 +308,9 @@ function naverAdapter(el){
    onDrag(cb){N.Event.addListener(map,'dragstart',cb);},
    fit(lls,pad){const b=new N.LatLngBounds(LL(lls[0]),LL(lls[0]));lls.forEach(x=>b.extend(LL(x)));map.fitBounds(b,{top:pad[0],right:pad[1],bottom:pad[2],left:pad[3]});},
    onZoom(cb){N.Event.addListener(map,'zoom_changed',cb);},
+   onIdle(cb){N.Event.addListener(map,'idle',cb);},
+   bounds(){const b=map.getBounds();return [[b.getMin().y,b.getMin().x],[b.getMax().y,b.getMax().x]];},
+   remove(m){m.setMap(null);},
    zoom(){return map.getZoom();},
    view(ll,z,off){map.setZoom(z,false);const pr=map.getProjection();const pt=pr.fromCoordToOffset(LL(ll));const c=pr.fromOffsetToCoord(new N.Point(pt.x,pt.y+off));map.panTo(c);},
    resize(){N.Event.trigger(map,'resize');}};
@@ -320,6 +326,8 @@ function buildMap(adapter){
   MAP.onClick(ll=>{setMe(ll,false);toast(t.moved);});
   MAP.onDrag(()=>{if(!wide()&&!S.min)setMin(true);});
   MAP.onZoom(()=>drawMarkers());
+  if(MAP.onIdle)MAP.onIdle(()=>ALL.idle());
+  ALL.reset();
   drawMarkers();
   setTimeout(()=>{MAP.resize();centerMe();},60);
 }
@@ -352,6 +360,50 @@ function setMe(ll,recenter){S.me=ll;if(ring)ring.move(ll);if(meDot)MAP.move(meDo
 const wide=()=>matchMedia('(min-width:880px)').matches;
 function setMin(v){S.min=v;homeEl.classList.toggle('min',v);}
 function centerMe(){if(!MAP)return;const z=Math.max(MAP.zoom(),17);let off=0;if(!wide()){const sh=$('near').offsetHeight,tp=document.querySelector('.topov').offsetHeight;off=(sh-tp)/2;}MAP.view(S.me,z,off);}
+
+/* ================= all shops (Kakao Local, loaded in the visitor's browser) ================= */
+const KIND={food:{c:'FD6',col:'#d4552f'},cafe:{c:'CE7',col:'#7a5a3d'},shop:{kw:['옷가게','편집숍','소품샵','액세서리'],col:'#4366c9'},beauty:{kw:['화장품','뷰티'],col:'#d24d7e'}};
+const ALL=(()=>{let svc=null,ready=null,ms=[],timer=0;const cache={},places={};
+  const key=CFG.kakaoJsKey;
+  function load(){if(ready)return ready;if(!key)return ready=Promise.reject(new Error('nokey'));
+    ready=new Promise((res,rej)=>{const sc=document.createElement('script');sc.src='https://dapi.kakao.com/v2/maps/sdk.js?autoload=false&libraries=services&appkey='+encodeURIComponent(key);
+      sc.onload=()=>{try{kakao.maps.load(()=>{svc=new kakao.maps.services.Places();res();});}catch(e){rej(e);}};sc.onerror=()=>rej(new Error('sdk'));document.head.appendChild(sc);});
+    return ready;}
+  const SZ=0.0022;   // ~240 m tiles
+  function tiles(b){const out=[];for(let la=Math.floor(b[0][0]/SZ);la<=Math.floor(b[1][0]/SZ);la++)for(let lo=Math.floor(b[0][1]/SZ);lo<=Math.floor(b[1][1]/SZ);lo++)out.push([la,lo]);return out;}
+  function one(kind,q,rect){return new Promise(res=>{const got=[];const done=(d,st,pg)=>{if(st===kakao.maps.services.Status.OK)got.push(...d);if(st===kakao.maps.services.Status.OK&&pg&&pg.hasNextPage&&pg.current<3)pg.nextPage();else res(got);};
+    const o={rect,size:15};if(q.c)svc.categorySearch(q.c,done,o);else svc.keywordSearch(q.k,done,o);});}
+  async function fetchTile(tl,kind){const ck=tl.join(',')+'|'+kind;if(cache[ck])return cache[ck];
+    const rect=[tl[1]*SZ,tl[0]*SZ,(tl[1]+1)*SZ,(tl[0]+1)*SZ].join(',');const K=KIND[kind];
+    cache[ck]=(async()=>{const qs=K.c?[{c:K.c}]:K.kw.map(k=>({k}));const r=[];for(const q of qs)r.push(...await one(kind,q,rect));
+      r.forEach(d=>{if(!places[d.id])places[d.id]={...d,kind,ll:[+d.y,+d.x]};});return r.length;})();return cache[ck];}
+  const curated=d=>live.some(p=>meters(p.ll,[+d.y,+d.x])<35&&(p.name.replace(/\s/g,'').includes(d.place_name.replace(/\s/g,'').slice(0,4))||d.place_name.replace(/\s/g,'').includes(p.name.replace(/\s/g,'').slice(0,4))));
+  function inView(){if(!MAP||!MAP.bounds)return [];const b=MAP.bounds();return Object.values(places).filter(d=>S.allK.includes(d.kind)&&d.ll[0]>=b[0][0]&&d.ll[0]<=b[1][0]&&d.ll[1]>=b[0][1]&&d.ll[1]<=b[1][1]);}
+  function draw(){ms.forEach(m=>MAP.remove(m));ms=[];if(!S.all||!MAP||MAP.zoom()<17)return;
+    inView().slice(0,700).forEach(d=>{if(d.cur==null)d.cur=curated(d);if(d.cur)return;
+      ms.push(MAP.marker({ll:d.ll,html:`<div class="kd" style="--kc:${KIND[d.kind].col}"></div>`,w:14,h:14,ax:7,ay:7,z:-50,title:d.place_name,fixed:true,onClick:()=>openKp(d.id)}));});
+    status();}
+  function status(){const el=$('allst');if(!el)return;if(!S.all){el.hidden=true;return;}el.hidden=false;
+    el.textContent=!key?t.allNoKey:MAP.zoom()<17?t.allZoom:S.allBusy?t.allLoading:t.allN(inView().filter(d=>!d.cur).length);}
+  async function idle(){if(!S.all)return;status();if(!MAP||MAP.zoom()<17){draw();return;}
+    clearTimeout(timer);timer=setTimeout(async()=>{try{await load();}catch(e){status();return;}
+      const ts=tiles(MAP.bounds()).slice(0,24);S.allBusy=true;status();
+      const b=MAP.bounds(),cy=(b[0][0]+b[1][0])/2/SZ,cx=(b[0][1]+b[1][1])/2/SZ;ts.sort((p,q)=>Math.hypot(p[0]+.5-cy,p[1]+.5-cx)-Math.hypot(q[0]+.5-cy,q[1]+.5-cx));
+      for(const tl of ts){for(const k of S.allK)await fetchTile(tl,k);draw();}S.allBusy=false;draw();},250);}
+  async function search(q){try{await load();}catch(e){return [];}return new Promise(res=>svc.keywordSearch(q,(d,st)=>res(st===kakao.maps.services.Status.OK?d:[]),{rect:'127.035,37.536,127.068,37.552',size:15}));}
+  function add(d,kind){if(!places[d.id])places[d.id]={...d,kind:kind||'shop',ll:[+d.y,+d.x]};return places[d.id];}
+  return {idle,draw,status,search,add,get:id=>places[id],reset(){ms=[];},has:()=>!!key};})();
+function openKp(id){S.kp=id;S.sheet='kp';renderSheet();}
+function vKp(){const d=ALL.get(S.kp);if(!d)return '';const cat=(d.category_name||'').split('>').map(x=>x.trim()).slice(-2).join(' · ');const dm=meters(S.me,d.ll);
+  const isFood=/FD6|CE7/.test(d.category_group_code||'');
+  return `<div class="mask" data-act="close"><div class="vsheet kpsheet" role="dialog">
+   <div class="fhead pad"><div><h3>${esc(d.place_name)}</h3><small>${esc(cat)} · ${fmtD(dm)}</small></div><button class="x" data-act="close" aria-label="${t.close}">×</button></div>
+   <div class="pad"><div class="kpaddr">${esc(d.road_address_name||d.address_name)}<button class="copy" data-act="copy" data-v="${esc(d.road_address_name||d.address_name)}">${ICON.copy}${t.copy}</button></div>
+    <div class="kpbtns"><a class="chipb p" href="${esc(d.place_url)}" target="_blank" rel="noopener">${ICON.link}${t.kakaoOpen}</a>
+     <a class="chipb" href="https://map.naver.com/p/search/${encodeURIComponent(d.place_name+' '+(d.road_address_name||''))}" target="_blank" rel="noopener">${ICON.pin}${t.nav}</a>
+     ${d.phone?`<a class="chipb" href="tel:${esc(d.phone)}">${t.callShop}</a>`:''}
+     ${isFood?`<a class="chipb" href="https://app.catchtable.co.kr/ct/map/COMMON?showTabs=true&serviceType=INTEGRATION&keyword=${encodeURIComponent(d.place_name)}&keywordSearch=${encodeURIComponent(d.place_name)}&bottomSheetHeightType=HALF" target="_blank" rel="noopener">CatchTable</a>`:''}</div>
+    <p class="datanote">${t.kpNote}</p></div></div></div>`;}
 
 /* ================= home ================= */
 function card(p,d){
@@ -389,12 +441,14 @@ function results(){
 function renderChips(){
   const n=fCount();
   $('chips').innerHTML=`<button class="fl${!S.cat&&!S.sub?' on':''}" data-act="cat" data-v="">${t.all}</button>`
+   +`<button class="fl allb${S.all?' on':''}" data-act="allshops">${ICON.shop}${t.allT}</button>`
    +CATS.map(([k])=>{const c=live.filter(p=>p.cat===k).length;if(!c)return '';return `<button class="fl cat${S.cat===k?' on':''}" data-act="cat" data-v="${k}">${cIcon(k)}${catL(k)}<small>${c}</small></button>`;}).join('');
   const s=$('subchips');
   const subs=S.cat?[...new Set(live.filter(p=>p.cat===S.cat).map(p=>p.grp+'/'+p.sub))]:[];
   s.hidden=false;
   const gOn=S.f.perk.includes('gift');
   s.innerHTML=`<button class="fl gq${gOn?' on':''}" data-act="facet" data-s="perk" data-v="gift">${gIcon('gift')}${t.giftOnly}<small>${live.filter(p=>p.gk).length}</small></button><button class="fl ff${n?' on':''}" data-act="facets"><svg viewBox="0 0 24 24"><path d="M4 6h16M7 12h10M10 18h4"/></svg>${t.filt}${n?`<small>${n}</small>`:''}</button>`
+   +(S.all?Object.keys(KIND).map(k=>`<button class="fl sub kk${S.allK.includes(k)?' on':''}" data-act="allkind" data-v="${k}" style="--kc:${KIND[k].col}"><i></i>${t.allKinds[k]}</button>`).join(''):'')
    +(subs.length>1?subs.map(k=>`<button class="fl sub${S.sub===k?' on':''}" data-act="sub" data-v="${k}">${subKL(k)}<small>${live.filter(p=>p.grp+'/'+p.sub===k&&p.cat===S.cat).length}</small></button>`).join(''):'');}
 function locate(){
   if(!navigator.geolocation){toast(t.nogeo);setMe(FALLBACK,true);return;}
@@ -498,7 +552,7 @@ function vFacets(){
     <h4>${t.fSec[3]}</h4>${row('other',[['tax','tax'],['rate','r45'],['rate','r40']])}
     <div class="fbtns"><button class="fclear" data-act="fclear">${t.fClear}</button><button class="buy" data-act="close" data-x="1">${t.fShow(cnt)}</button></div>
    </div></div></div>`;}
-function renderSheet(){if(S.sheet==='cmt'){if(!$('cmtList'))$('sheetHost').innerHTML=vCmt();renderCmt();return;}$('sheetHost').innerHTML=S.sheet==='facets'?vFacets():S.sheet!==null?vSheet():'';}
+function renderSheet(){if(S.sheet==='cmt'){if(!$('cmtList'))$('sheetHost').innerHTML=vCmt();renderCmt();return;}$('sheetHost').innerHTML=S.sheet==='facets'?vFacets():S.sheet==='kp'?vKp():S.sheet!==null?vSheet():'';}
 /* ================= comments (Douyin-style sheet) ================= */
 const hue=s=>{let h=0;for(const c of String(s))h=(h*31+c.codePointAt(0))%360;return h;};
 const myNick=()=>SO.me.nick()||(()=>{const n=t.nickDef+String(Math.floor(1000+Math.random()*9000));SO.me.setNick(n);return n;})();
@@ -569,7 +623,12 @@ function setLang(l){
 
 /* ================= events ================= */
 const qEl=$('q');
-qEl.addEventListener('input',()=>{S.q=qEl.value;if(S.q&&!wide())setMin(true);$('res').innerHTML=results();$('clr').hidden=!S.q;});
+let kq=0;
+qEl.addEventListener('input',()=>{S.q=qEl.value;if(S.q&&!wide())setMin(true);$('res').innerHTML=results();$('clr').hidden=!S.q;
+  const q=S.q.trim(),my=++kq;if(q.length<2||!ALL.has())return;
+  setTimeout(async()=>{if(my!==kq)return;const ds=(await ALL.search(q)).map(d=>ALL.add(d,d.category_group_code==='FD6'?'food':d.category_group_code==='CE7'?'cafe':'shop'));if(my!==kq||!ds.length)return;
+    const box=document.querySelector('.results');if(!box)return;
+    box.insertAdjacentHTML('beforeend',`<div class="kres-h">${t.moreShops}</div>`+ds.map(d=>`<button class="res" data-act="kopen" data-id="${esc(d.id)}"><span class="kd big" style="--kc:${KIND[d.kind].col}"></span><span><b>${esc(d.place_name)}</b><small>${esc((d.category_name||'').split('>').pop().trim())} · ${esc(d.road_address_name||d.address_name)}</small></span><span class="d">${fmtD(meters(S.me,d.ll))}</span></button>`).join(''));},350);});
 document.addEventListener('click',e=>{
   const el=e.target.closest('[data-act]'); if(!el)return;
   const a=el.dataset.act, v=el.dataset.v, p=P();
@@ -590,6 +649,9 @@ document.addEventListener('click',e=>{
   else if(a==='cmt')openComments(v==='write');
   else if(a==='csort'){S.cm.sort=v;S.cm.fresh=null;renderCmt();}
   else if(a==='csend')sendCmt();
+  else if(a==='allshops'){S.all=!S.all;renderChips();if(S.all&&MAP&&MAP.zoom()<17.5)MAP.view(S.me,17.5,0);ALL.idle();ALL.draw();ALL.status();}
+  else if(a==='allkind'){S.allK=S.allK.includes(v)?S.allK.filter(x=>x!==v):[...S.allK,v];renderChips();ALL.idle();ALL.draw();}
+  else if(a==='kopen'){const d=ALL.get(el.dataset.id);if(d){S.q='';qEl.value='';$('res').innerHTML='';openKp(d.id);}}
   else if(a==='cfx')setFile(null);
   else if(a==='cimg'){$('lbHost').innerHTML=`<div class="lb" data-act="lbclose"><img src="${esc(v)}" alt=""><div class="lbcap">${t.pk.u}</div><button class="lbx" data-act="lbclose" aria-label="${t.close}">×</button></div>`;}
   else if(a==='clike'){const id=+v,c=S.cm&&S.cm.list.find(x=>x.id===id);if(!c)return;const on=!SO.me.liked(id);SO.me.setLiked(id,on);c.likes=Math.max(0,(c.likes||0)+(on?1:-1));renderCmt();SO.like(id,on).catch(()=>{});}
