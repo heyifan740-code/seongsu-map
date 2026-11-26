@@ -30,8 +30,8 @@ zh:{photos:'图片',pk:{o:'外景',i:'店内',f:'产品',food:'美食',p:'活动
  tilewarn:'地图底图加载不出来，请检查网络后刷新',mapLabel:'圣水洞地图',locate:'定位到我',clear:'清除',
  left:(d,h,m)=>d?`${d}天${h}小时`:h?`${h}小时${m}分`:`${m}分钟`,km:'km',
  tags:{gift:'赠品',deal:'折扣',exp:'体验',sale:'售卖',sig:'招牌',menu:'菜单',tip:'提示',draw:'抽奖',taste:'试吃'},
- entry:{walkin:'现场排队',naver:'Naver 预约',ticket:'购票入场',queue:'现场登记排号'},
- guide:{walkin:['不用预约，直接到门口','人多时店员可能会让你登记手机号排号，留意短信或 KakaoTalk 通知','周末下午最挤，工作日或开门后一小时内去最省时间'],
+ entry:{walkin:'现场排队',naver:'Naver 预约',ticket:'购票入场',queue:'现场登记排号',unk:'未确认'},kHours:'营业时间未收录，点“Kakao 地图”查看',kSrc:'Kakao 地图',
+ guide:{unk:['出发前点上面的“Kakao 地图”，看营业时间和是否要预约','到店后可以用下面的韩语卡问店员要不要登记排队','去过的话在评论区说说排队情况、发张照片，帮后来的人'],walkin:['不用预约，直接到门口','人多时店员可能会让你登记手机号排号，留意短信或 KakaoTalk 通知','周末下午最挤，工作日或开门后一小时内去最省时间'],
   queue:['到门口找店员或平板，用手机号登记排号（没有韩国号码可以问店员）','登记后可以先去附近逛，留意短信 / KakaoTalk 叫号','叫到号后回到门口入场'],
   naver:['打开“信息来源”页面，找到 <span class="ko">네이버 예약</span> 链接','用 Naver 账号登录，选择日期和时段完成预约','按预约时间到店，出示预约确认页面入场'],
   ticket:['这是收费展览，需要购票入场','票价和购票方式请看“信息来源”页面里的官方链接','周末人多，建议工作日或开门时段去']},
@@ -70,8 +70,8 @@ en:{photos:'Photos',pk:{o:'Outside',i:'Inside',f:'Products',food:'Food',p:'Pop-u
  tilewarn:'The map tiles didn’t load — check your connection and refresh',mapLabel:'Map of Seongsu-dong',locate:'Show my location',clear:'Clear',
  left:(d,h,m)=>d?`${d}d ${h}h`:h?`${h}h ${m}m`:`${m} min`,km:'km',
  tags:{gift:'Gift',deal:'Deal',exp:'Experience',sale:'On sale',sig:'Signature',menu:'Menu',tip:'Tip',draw:'Lucky draw',taste:'Tasting'},
- entry:{walkin:'Walk in',naver:'Naver booking',ticket:'Ticket',queue:'Waiting list'},
- guide:{walkin:['No booking needed — just go to the door','When it’s busy, staff may ask for your phone number to join a waiting list; watch for an SMS or KakaoTalk message','Weekend afternoons are busiest; weekdays or the first hour after opening are quickest'],
+ entry:{walkin:'Walk in',naver:'Naver booking',ticket:'Ticket',queue:'Waiting list',unk:'Not confirmed'},kHours:'Hours not listed — check Kakao Map',kSrc:'Kakao Map',
+ guide:{unk:['Before you go, open Kakao Map above for hours and whether booking is needed','At the door, use the phrase cards below to ask about the waiting list','Been there? Leave a comment or photo about the queue to help others'],walkin:['No booking needed — just go to the door','When it’s busy, staff may ask for your phone number to join a waiting list; watch for an SMS or KakaoTalk message','Weekend afternoons are busiest; weekdays or the first hour after opening are quickest'],
   queue:['Register your phone number with staff or the tablet at the door (ask staff if you don’t have a Korean number)','Browse nearby while you wait and watch for the SMS / KakaoTalk call','Come back to the door when your number is called'],
   naver:['Open the source page and find the <span class="ko">네이버 예약</span> (Naver booking) link','Sign in to Naver and pick a date and time','Show your booking confirmation at the door'],
   ticket:['This is a paid exhibition — you need a ticket','See the official link on the source page for prices and booking','Weekends are crowded; weekdays or opening time are best']},
@@ -110,8 +110,8 @@ ko:{photos:'사진',pk:{o:'외관',i:'내부',f:'상품',food:'메뉴',p:'팝업
  tilewarn:'지도를 불러오지 못했어요. 연결을 확인하고 새로고침하세요',mapLabel:'성수동 지도',locate:'내 위치 보기',clear:'지우기',
  left:(d,h,m)=>d?`${d}일 ${h}시간`:h?`${h}시간 ${m}분`:`${m}분`,km:'km',
  tags:{gift:'증정',deal:'할인',exp:'체험',sale:'판매',sig:'대표',menu:'메뉴',tip:'팁',draw:'추첨',taste:'시식'},
- entry:{walkin:'현장 입장',naver:'네이버 예약',ticket:'티켓 구매',queue:'현장 웨이팅 등록'},
- guide:{walkin:['예약 없이 바로 입구로 가면 돼요','붐빌 때는 전화번호로 웨이팅 등록을 요청할 수 있어요. 문자나 카카오톡 알림을 확인하세요','주말 오후가 가장 붐벼요. 평일이나 오픈 직후 1시간이 가장 빨라요'],
+ entry:{walkin:'현장 입장',naver:'네이버 예약',ticket:'티켓 구매',queue:'현장 웨이팅 등록',unk:'확인 안 됨'},kHours:'영업시간 정보 없음 — 카카오맵에서 확인하세요',kSrc:'카카오맵',
+ guide:{unk:['출발 전에 위의 카카오맵에서 영업시간과 예약 여부를 확인하세요','다녀오셨다면 댓글로 웨이팅 상황이나 사진을 남겨 주세요'],walkin:['예약 없이 바로 입구로 가면 돼요','붐빌 때는 전화번호로 웨이팅 등록을 요청할 수 있어요. 문자나 카카오톡 알림을 확인하세요','주말 오후가 가장 붐벼요. 평일이나 오픈 직후 1시간이 가장 빨라요'],
   queue:['입구 직원이나 태블릿에서 전화번호로 웨이팅 등록','기다리는 동안 근처를 둘러보고 문자 / 카카오톡 호출 확인','호출되면 입구로 돌아와 입장'],
   naver:['출처 페이지에서 <span class="ko">네이버 예약</span> 링크 찾기','네이버에 로그인해 날짜와 시간 선택','예약 확인 화면을 입구에서 보여주기'],
   ticket:['유료 전시라 티켓이 필요해요','가격과 예매 방법은 출처 페이지의 공식 링크에서 확인','주말은 붐벼요. 평일이나 오픈 시간대를 추천해요']},
@@ -200,7 +200,7 @@ const S={f:{perk:[],time:'',entry:'',tax:false,rate:0},view:'home',cat:null,i:0,
 const SO=window.SOCIAL;
 const esc=s=>String(s).replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
 const LINE=live.slice().sort((a,b)=>a.ll[1]-b.ll[1]);
-const P=()=>LINE[S.i];
+const P=()=>S.xp||LINE[S.i];
 function meters(a,b){const R=6371000,r=x=>x*Math.PI/180;const dLa=r(b[0]-a[0]),dLo=r(b[1]-a[1]);const h=Math.sin(dLa/2)**2+Math.cos(r(a[0]))*Math.cos(r(b[0]))*Math.sin(dLo/2)**2;return Math.round(2*R*Math.asin(Math.sqrt(h)));}
 const distM=p=>meters(S.me,p.ll);
 const fmtD=m=>m<1000?m+'m':(m/1000).toFixed(1)+t.km;
@@ -230,7 +230,7 @@ const leftHtml=p=>p.endUnk?`<b class="k">${t.tbd}</b>`:`<b data-end="${p.endTs}"
 const period=p=>p.perm?t.perm:rangeTxt(p);
 const credit=u=>/supabase\.co|^data:/.test(u)?t.ugcBy:u.includes('d8nffddmkwqeq')?'Popply':u.includes('d12zq4w4guyljn')?'DiningCode':u.includes('kakaocdn')?'Kakao Map':'';
 const thumb=(p,cls)=>`<span class="thumb ${cls||''} c-${p.cat}">${cIcon(p.cat)}${p.gk?`<span class="tg">${gIcon(p.gk)}</span>`:''}${p.img?`<img src="${esc(small(p.img))}" alt="" loading="lazy" referrerpolicy="no-referrer" onerror="this.remove()">`:''}</span>`;
-const hoursTxt=p=>(p.h==='24h'?(lang==='zh'?'24 小时':lang==='ko'?'24시간':'24 hours'):t.daily+' '+p.h)+(p.hx?' · '+tx(p.hx):'');
+const hoursTxt=p=>p.kk?t.kHours:(p.h==='24h'?(lang==='zh'?'24 小时':lang==='ko'?'24시간':'24 hours'):t.daily+' '+p.h)+(p.hx?' · '+tx(p.hx):'');
 const ICON={
  back:'<svg viewBox="0 0 24 24"><path d="M15 6l-6 6 6 6"/></svg>',
  star:'<svg viewBox="0 0 24 24"><path d="M12 3l2.7 5.6 6.1.9-4.4 4.3 1 6.1L12 17l-5.4 2.9 1-6.1L3.2 9.5l6.1-.9z"/></svg>',
@@ -393,7 +393,13 @@ const ALL=(()=>{let svc=null,ready=null,ms=[],timer=0;const cache={},places={};
   async function search(q){try{await load();}catch(e){return [];}return new Promise(res=>svc.keywordSearch(q,(d,st)=>res(st===kakao.maps.services.Status.OK?d:[]),{rect:'127.035,37.536,127.068,37.552',size:15}));}
   function add(d,kind){if(!places[d.id])places[d.id]={...d,kind:kind||'shop',ll:[+d.y,+d.x]};return places[d.id];}
   return {idle,draw,status,search,add,get:id=>places[id],reset(){ms=[];},has:()=>!!key};})();
-function openKp(id){S.kp=id;S.sheet='kp';renderSheet();}
+const KCAT={food:['meal','korean','food'],cafe:['cafe','cafe','sweet'],shop:['fashion','fstore','shop'],beauty:['beauty','bstore','shop']};
+function kPlace(d){const k=KCAT[d.kind]||KCAT.shop,cat=(d.category_name||'').split('>').map(x=>x.trim());const nm=d.place_name;
+  const grp=d.kind==='food'||d.kind==='cafe'?'eat':'shop';const lab=cat.slice(-1)[0]||'';
+  return {id:'k'+d.id,kk:true,grp,sub:k[1],cat:k[0],name:nm,t:{zh:nm,en:nm,ko:nm},brand:nm,addr:d.road_address_name||d.address_name,ll:d.ll,dl:d.ll,perm:true,endTs:Infinity,h:'',entry:'unk',type:k[2],
+    g:{zh:lab,en:lab,ko:lab},perks:cat.length>1?[[{zh:cat.slice(1).join(' · '),en:cat.slice(1).join(' · '),ko:cat.slice(1).join(' · ')},'tip']]:[],src:d.place_url,src2:d.phone?'☎ '+d.phone:'',phone:d.phone,pics:{}};}
+function openKp(id){const d=ALL.get(id);if(!d)return;S.xp=kPlace(d);S.view='detail';S.mode='live';S.sheet=null;S.cm=null;S.cfile=null;$('sheetHost').innerHTML='';
+  homeEl.hidden=true;detEl.hidden=false;renderDetail();scrollTo(0,0);loadQueue(S.xp.id);loadUgc(S.xp.id);}
 function vKp(){const d=ALL.get(S.kp);if(!d)return '';const cat=(d.category_name||'').split('>').map(x=>x.trim()).slice(-2).join(' · ');const dm=meters(S.me,d.ll);
   const isFood=/FD6|CE7/.test(d.category_group_code||'');
   return `<div class="mask" data-act="close"><div class="vsheet kpsheet" role="dialog">
@@ -458,7 +464,7 @@ function locate(){
    ()=>{S.real=false;toast(t.denied);setMe(FALLBACK,true);},{enableHighAccuracy:true,timeout:8000});}
 
 /* ================= detail ================= */
-function srcName(u){return u.includes('popply')?t.srcNames.popply:u.includes('diningcode')?t.srcNames.diningcode:u.includes('instagram')?t.srcNames.instagram:t.srcNames.other;}
+function srcName(u){if(u.includes('kakao.com'))return t.kSrc;return u.includes('popply')?t.srcNames.popply:u.includes('diningcode')?t.srcNames.diningcode:u.includes('instagram')?t.srcNames.instagram:t.srcNames.other;}
 function head(p){const hi=p.img||(gallery(p)[0]||{}).u;
   return `<div class="backrow pad"><button data-act="home">${ICON.back}${t.back}</button></div>
    <div class="hero c-${p.cat}${hi?'':' ill'}">${cIcon(p.cat)}${hi?`<img src="${esc(hi)}" alt="${esc(tx(p.t))}" referrerpolicy="no-referrer" onerror="this.remove()"><span class="credit">${t.imgBy}: ${credit(hi)}</span>`:''}</div>
@@ -469,9 +475,9 @@ function head(p){const hi=p.img||(gallery(p)[0]||{}).u;
     <div class="addr">${p.perm?t.permStore:rangeTxt(p)} · ${t.about(fmtD(distM(p)))}</div>
     ${p.rate||p.tax?`<div class="badges">${p.rate?`<a class="rbadge" href="https://www.diningcode.com/profile.php?rid=${p.rate.u}" target="_blank" rel="noopener">★ ${p.rate.s.toFixed(1)} <small>${esc(t.rnote(p.rate.n))}</small></a>`:''}${p.tax?`<span class="tbadge">${t.tax}</span>`:''}</div>`:''}</div>
     <button class="star${S.fav[p.id]?' on':''}" data-act="fav" aria-label="${t.star}">${ICON.star}</button></div>
-   <div class="chiprow"><a class="chipb p" href="${naverUrl(p)}" target="_blank" rel="noopener">${ICON.pin}${t.nav}</a>
+   <div class="chiprow"><a class="chipb p" href="${naverUrl(p)}" target="_blank" rel="noopener">${ICON.pin}${t.nav}</a>${p.kk?`<a class="chipb s" href="${esc(p.src)}" target="_blank" rel="noopener">${ICON.link}${t.kakaoOpen}</a>`:''}
     ${p.entry==='naver'?`<a class="chipb s" href="${p.src}" target="_blank" rel="noopener">${ICON.cal}${t.book}</a>`:''}${(p.book||[]).slice(0,1).map(b=>`<a class="chipb s" href="${esc(bookUrl(b))}" target="_blank" rel="noopener">${ICON.cal}${t.bkS[b.via]} ${t.bkW[b.t||'waiting']}</a>`).join('')}
-    <button class="chipb" data-act="perks">${ICON.gift}${t.perks}</button><button class="chipb" data-act="cmt">${ICON.chat}${t.cmt}<small class="num" data-cc="${p.id}">${S.cc[p.id]||''}</small></button><button class="chipb" data-act="share">${ICON.share}${t.share}</button><a class="chipb" href="${p.src}" target="_blank" rel="noopener">${ICON.link}${t.source}</a></div>
+    <button class="chipb" data-act="perks">${ICON.gift}${t.perks}</button><button class="chipb" data-act="cmt">${ICON.chat}${t.cmt}<small class="num" data-cc="${p.id}">${S.cc[p.id]||''}</small></button><button class="chipb" data-act="share">${ICON.share}${t.share}</button>${p.kk&&p.phone?`<a class="chipb" href="tel:${esc(p.phone)}">${t.callShop}</a>`:''}${p.kk?'':`<a class="chipb" href="${p.src}" target="_blank" rel="noopener">${ICON.link}${t.source}</a>`}</div>
   </section>${galHtml(p)}<div class="sep"></div>`;}
 function galHtml(p){const g=gallery(p);if(!g.length)return `<p class="ugchint pad" data-act="cmt" data-v="write">${ICON.cam}${t.ugcHint}</p>`;
   return `<section class="gal pad"><h2>${t.photos}<small>${g.length}</small></h2>${['u','o','i','f','p'].map(k=>{const xs=g.map((x,i)=>({...x,i})).filter(x=>x.k===k);if(!xs.length)return '';
@@ -480,7 +486,7 @@ function galHtml(p){const g=gallery(p);if(!g.length)return `<p class="ugchint pa
 function lightbox(){const host=$('lbHost');if(S.lb==null){host.innerHTML='';return;}const p=P(),g=gallery(p),x=g[S.lb];if(!x){S.lb=null;host.innerHTML='';return;}
   host.innerHTML=`<div class="lb" data-act="lbclose"><img src="${esc(x.u)}" alt="" referrerpolicy="no-referrer"><div class="lbcap">${kindL(p,x.k)} · ${S.lb+1}/${g.length} · ${t.imgBy}: ${credit(x.u)}</div>
    <button class="lbx" data-act="lbclose" aria-label="${t.close}">×</button>${S.lb>0?`<button class="lbn l" data-act="lbstep" data-v="-1">‹</button>`:''}${S.lb<g.length-1?`<button class="lbn r" data-act="lbstep" data-v="1">›</button>`:''}</div>`;}
-function lineBar(){const prev=LINE[S.i-1],next=LINE[S.i+1],p=P();
+function lineBar(){if(S.xp)return '';const prev=LINE[S.i-1],next=LINE[S.i+1],p=P();
   return `<div class="lineb" role="group">
    <button class="side" data-act="step" data-v="-1" ${prev?'':'disabled'}>‹ <span>${prev?esc(prev.brand):t.stA}</span></button>
    <div class="cur"><span class="badge">${S.i+1}</span><b>${esc(p.brand)}</b></div>
@@ -604,8 +610,8 @@ function fitResults(){if(!MAP||!MAP.fit||!(S.cat||S.sub||fCount()))return;const 
   MAP.fit(v.map(p=>p.dl||p.ll),[top,40,bottom,40]);}
 function refresh(){renderChips();drawMarkers();renderNear();setTimeout(fitResults,30);}
 function rerender(){if(S.view==='detail'){const y=scrollY;renderDetail();scrollTo(0,y);}if(S.sheet!=='cmt')renderSheet();}
-function openPop(id){S.i=LINE.findIndex(x=>x.id===id);if(S.i<0)return;S.view='detail';S.mode='live';S.sheet=null;S.cm=null;S.cfile=null;$('sheetHost').innerHTML='';loadQueue(id);loadUgc(id);homeEl.hidden=true;detEl.hidden=false;renderDetail();scrollTo(0,0);try{history.replaceState(null,'',location.pathname+location.search+'#'+id);}catch(e){}}
-function goHome(){S.lb=null;lightbox();S.view='home';detEl.hidden=true;detEl.innerHTML='';homeEl.hidden=false;if(MAP)MAP.resize();drawMarkers();renderNear();try{history.replaceState(null,'',location.pathname+location.search);}catch(e){}}
+function openPop(id){S.i=LINE.findIndex(x=>x.id===id);if(S.i<0)return;S.xp=null;S.view='detail';S.mode='live';S.sheet=null;S.cm=null;S.cfile=null;$('sheetHost').innerHTML='';loadQueue(id);loadUgc(id);homeEl.hidden=true;detEl.hidden=false;renderDetail();scrollTo(0,0);try{history.replaceState(null,'',location.pathname+location.search+'#'+id);}catch(e){}}
+function goHome(){S.xp=null;S.lb=null;lightbox();S.view='home';detEl.hidden=true;detEl.innerHTML='';homeEl.hidden=false;if(MAP)MAP.resize();drawMarkers();renderNear();try{history.replaceState(null,'',location.pathname+location.search);}catch(e){}}
 
 /* ================= language ================= */
 function applyStatic(){
