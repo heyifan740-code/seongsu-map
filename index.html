@@ -1165,6 +1165,26 @@ a.gi i{position:absolute;left:0;right:0;bottom:0;font-style:normal;font-size:10p
 .rtn{flex:1;text-align:left}
 .rtnav{flex:none;display:inline-flex;align-items:center;gap:4px;font-size:13px;font-weight:700;color:var(--green-deep);border:1px solid var(--line);border-radius:14px;padding:4px 10px}
 .rtnav svg{width:14px;height:14px;stroke:currentColor;fill:none;stroke-width:2}
+.aifab{position:absolute;right:max(14px,env(safe-area-inset-right,0px));bottom:calc(44% + 72px);z-index:500;width:52px;height:52px;border-radius:50%;background:linear-gradient(135deg,#2ea84a,#1d7d35);box-shadow:0 4px 14px rgba(29,125,53,.45);display:grid;place-items:center;animation:aipulse 2.6s ease-in-out infinite}
+.aifab svg{width:26px;height:26px;fill:#fff;stroke:none}
+@keyframes aipulse{0%,100%{box-shadow:0 4px 14px rgba(29,125,53,.45),0 0 0 0 rgba(46,168,74,.35)}50%{box-shadow:0 4px 14px rgba(29,125,53,.45),0 0 0 10px rgba(46,168,74,0)}}
+.home.min .aifab{bottom:152px}
+@media (min-width:880px){.aifab{bottom:90px}}
+.aiav{width:30px;height:30px;border-radius:50%;background:linear-gradient(135deg,#2ea84a,#1d7d35);display:grid;place-items:center;flex:none}
+.aiav svg{width:17px;height:17px;fill:#fff;stroke:none}.aiav.sm{width:26px;height:26px}.aiav.sm svg{width:14px;height:14px}
+.msg{margin:10px 0;font-size:14.5px;line-height:1.55}.msg p{margin:0 0 6px}
+.msg.me{margin-left:auto;max-width:80%;width:fit-content;background:var(--green);color:var(--green-ink);border-radius:16px 16px 4px 16px;padding:8px 12px}
+.msg.bot{display:flex;gap:8px;align-items:flex-start}.msg.bot>div{background:var(--panel);border-radius:4px 16px 16px 16px;padding:10px 12px;max-width:88%}
+.ail{margin:4px 0 6px;padding-left:20px}.ail li{margin:4px 0}.ail button{text-align:left;display:flex;flex-direction:column}.ail small{color:var(--muted);font-size:12px}
+.aitot{font-size:13px;color:var(--muted)}
+.aibtn{display:flex;flex-wrap:wrap;gap:6px;margin-top:6px}.aibtn .buy{margin:0;height:38px;font-size:14px;padding:0 14px;width:auto}
+.aibtn .fl{height:38px}.aibtn .fl svg{width:14px;height:14px;stroke:currentColor;fill:none;stroke-width:2}
+.aichips{display:flex;gap:6px;overflow-x:auto;padding:0 0 8px;scrollbar-width:none}.aichips::-webkit-scrollbar{display:none}
+.aisheet .cform textarea{min-height:40px}
+.rnum.pk{background:#e2412e;font-size:12px}
+.aistart{display:flex;gap:6px;align-items:center;overflow-x:auto;scrollbar-width:none;padding:0 0 8px;font-size:12px;color:var(--muted)}.aistart::-webkit-scrollbar{display:none}
+.aistart span{flex:none}.aistart button{flex:none;font-size:12.5px;border:1px solid var(--line);border-radius:12px;padding:3px 10px;color:var(--ink);background:var(--surface)}
+.aistart button.on{background:var(--green);border-color:var(--green);color:var(--green-ink)}
 </style></head><body>
 <header class="bar"><div class="in pad">
  <button class="logo" data-act="home"><span class="badge">S</span><span id="brand">seopup</span></button>
@@ -1174,6 +1194,7 @@ a.gi i{position:absolute;left:0;right:0;bottom:0;font-style:normal;font-size:10p
 <div class="home" id="home">
  <div class="mapwrap"><div id="map"></div>
   <div class="tilewarn" id="tilewarn" hidden></div>
+  <button class="aifab" data-act="ai" aria-label="AI"><svg viewBox="0 0 24 24"><path d="M12 3l1.8 5.2L19 10l-5.2 1.8L12 17l-1.8-5.2L5 10l5.2-1.8z"/><path d="M19 15l.8 2.2L22 18l-2.2.8L19 21l-.8-2.2L16 18l2.2-.8z"/></svg></button>
   <button class="locate" data-act="locate"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="4"/><path d="M12 2v4M12 18v4M2 12h4M18 12h4"/></svg></button></div>
  <div class="topov pad">
   <label class="search"><svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="6.5"/><path d="M16 16l4.5 4.5"/></svg><input id="q" type="search" autocomplete="off"><button class="clr" id="clr" data-act="clear" hidden>×</button></label>
@@ -1194,5 +1215,5 @@ a.gi i{position:absolute;left:0;right:0;bottom:0;font-style:normal;font-size:10p
 <script src="data.js?v=20261126"></script>
 <script src="i18n-kr.js?v=20261126b"></script>
 <script src="social.js?v=20261124"></script>
-<script src="app.js?v=20261126i"></script>
+<script src="app.js?v=20261126k"></script>
 </body></html>

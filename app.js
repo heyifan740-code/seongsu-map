@@ -41,7 +41,12 @@ zh:{photos:'图片',pk:{o:'外景',i:'店内',f:'产品',food:'美食',p:'活动
  report:'举报',reportedC:'已举报，这条评论对你隐藏了',posted:'已发出',cmtRule:'友善发言 · 不发广告和联系方式 · 被 3 人举报会自动隐藏',
  cerr:{empty:'先写点内容',long:'最多 200 字',link:'不能发链接或联系方式',spam:'内容像是刷屏',fast:'发得太快了，稍等几秒',fail:'没发出去，请稍后再试'},
  qAgg:(n,lv)=>`最近 2 小时 ${n} 人上报，多数说「${lv}」`,qLast:a=>`最新一条 ${a}`,qDemo:'演示模式：上报只保存在这台设备上',qNote:'由现场用户上报，仅供参考',qWait:'30 分钟内只能上报一次',qThanks:'感谢上报',
- favT:'我的收藏',favEmpty:'还没有收藏。在店铺页点右上角的 ☆ 就能收藏',favN:n=>`收藏 ${n}`,rtGo:'规划最佳路线',rtFrom:'从哪出发',rtMe:'地图上的蓝点',rtFree:'不限，自动选',rtFirst:'从这里开始',rtStn:'圣水站',rtSF:'首尔林站',rtNeed:'至少收藏 2 家店才能规划路线',rtT:'最佳路线',rtSum:(n,km,min)=>`${n} 站 · 步行约 ${km} · ${min} 分钟`,rtLeg:(m,min)=>`步行约 ${m} · ${min} 分钟`,rtNav:'导航',rtExit:'退出路线',rtNote:'按直线距离估算的最短顺序，不走回头路；实际步行时间以导航为准',rtStart:'起点',rtClosed:'当前可能未营业',rtRemove:'移除',
+ aiT:'路线小助手',aiHi:'你好！告诉我你想逛什么，我帮你挑店、排出最省时间、不走回头路的路线。比如「3 家有赠品的美妆快闪」「2 小时吃面包和咖啡」「用我的收藏排路线」。',
+ aiPh:'想逛什么？例如：2小时 美妆 送赠品',aiSend:'发送',aiChips:['用我的收藏排路线','有赠品的快闪','美妆和香水','面包甜品咖啡','2 小时逛圣水','从圣水站出发 4 家'],
+ aiPick:(n,ks)=>`给你挑了 ${n} 家${ks?'（'+ks+'）':''}，按这个顺序走最省路：`,aiTot:(km,walk,all)=>`全程步行约 ${km}，走路 ${walk} 分钟；算上每家逛 20 分钟，一共约 ${all} 分钟。`,
+ aiNone:'没找到符合的店。可以换个说法，比如「美妆」「有赠品」「面包」，或者先在店铺页点 ☆ 收藏。',aiFew:'收藏还不到 2 家，我先按你的收藏加上附近热门的店帮你排。',
+ aiShow:'在地图上看路线',aiSave:'全部加入收藏',aiMore:'换一批',aiSaved:'已加入收藏',aiFrom:{stn:'从圣水站出发',sf:'从首尔林站出发',gps:'从你的位置出发',pick:'从你选的起点出发',free:''},aiNote:'我是按关键词帮你挑店的小助手，不是真人；营业时间和福利以店铺页为准。',
+ favT:'我的收藏',favEmpty:'还没有收藏。在店铺页点右上角的 ☆ 就能收藏',favN:n=>`收藏 ${n}`,rtGo:'规划最佳路线',rtFrom:'从哪出发',rtMe:'我的位置（定位）',rtPick:'在地图上选起点',rtPickSet:'自选起点 ⚑',rtPickHint:'点一下地图，选你的出发点',rtPickDone:'已设为起点',rtFree:'不限，自动选',rtFirst:'从这里开始',rtStn:'圣水站',rtSF:'首尔林站',rtNeed:'至少收藏 2 家店才能规划路线',rtT:'最佳路线',rtSum:(n,km,min)=>`${n} 站 · 步行约 ${km} · ${min} 分钟`,rtLeg:(m,min)=>`步行约 ${m} · ${min} 分钟`,rtNav:'导航',rtExit:'退出路线',rtNote:'按直线距离估算的最短顺序，不走回头路；实际步行时间以导航为准',rtStart:'起点',rtClosed:'当前可能未营业',rtRemove:'移除',
  mtTag:'机器翻译',trBtn:'翻译',trOrig:'看原文',allT:'全部店铺',rvT:'街景',rvS:'Kakao 街景 · 可拖动看四周',rvNone:'这里没有街景',webT:'网络图片',webS:'来自网络搜索，点开看原文 · 可能有不相关的图',allKinds:{food:'餐厅',cafe:'咖啡甜品',shop:'服饰杂货',beauty:'美妆'},allZoom:'放大地图就能看到这一带所有店铺',allN:n=>`这一带 ${n} 家店 · 数据来自 Kakao 地图`,allLoading:'正在加载附近店铺…',allNoKey:'全部店铺功能还没接上 Kakao 地图',kakaoOpen:'Kakao 地图看照片和评价',callShop:'打电话',moreShops:'Kakao 地图上的更多店铺',kpNote:'店名、分类、地址来自 Kakao 地图，营业时间和排队情况请点进 Kakao 地图查看',addPhoto:'加图片',photoBig:'图片太大或格式不支持',uploading:'正在上传图片…',ugcBy:'网友',ugcHint:'去过现场？在评论里发张照片，帮后来的人看看真实样子',bookT:'排队 / 预约',bkS:{catchtable:'CatchTable',tabling:'Tabling'},bkW:{waiting:'远程排队',reserve:'预约',search:'搜索这家店'},bookHint:'CatchTable 有面向外国游客的国际版；Tabling 远程排队一般要韩国手机号收短信，没有的话到店问店员',phT:'给店员看',phS:'点一下放大韩文',spotT:'在哪排队',naverHint:'Naver 预约一般要登录 Naver 账号，付费项目要用 Naver Pay；约不上可以到现场问有没有现场名额',
  share:'分享',shared:'已复制，可以粘贴到小红书或微信',
  phr:[['不预约也能进吗？','예약 안 해도 들어갈 수 있어요?'],['在哪里登记排队？','웨이팅 등록은 어디서 해요?'],['现在排队大概要等多久？','지금 기다리면 얼마나 걸려요?'],['我没有韩国手机号，可以登记排队吗？','한국 전화번호가 없는데 웨이팅 등록할 수 있어요?'],['赠品还有吗？','사은품 아직 남아 있어요?'],['赠品要怎么领？','사은품은 어떻게 받아요?'],['可以拍照吗？','사진 찍어도 돼요?'],['可以退税吗？我带了护照。','택스리펀 돼요? 여권 있어요.'],['可以刷外国信用卡吗？','해외 카드로 결제돼요?'],['有会说英语或中文的店员吗？','영어나 중국어 하시는 직원분 계세요?']]},
@@ -82,7 +87,12 @@ en:{photos:'Photos',pk:{o:'Outside',i:'Inside',f:'Products',food:'Food',p:'Pop-u
  report:'Report',reportedC:'Reported — hidden for you',posted:'Posted',cmtRule:'Be kind · no ads or contact details · hidden after 3 reports',
  cerr:{empty:'Write something first',long:'200 characters max',link:'No links or contact details',spam:'That looks like spam',fast:'Too fast — wait a few seconds',fail:'Couldn’t post, try again later'},
  qAgg:(n,lv)=>`${n} report${n===1?'':'s'} in the last 2 h, mostly “${lv}”`,qLast:a=>`latest ${a}`,qDemo:'Demo mode: reports are saved on this device only',qNote:'Reported by visitors on site; a rough guide only',qWait:'One report per 30 minutes',qThanks:'Thanks for reporting',
- favT:'Saved places',favEmpty:'Nothing saved yet. Tap ☆ on a place page to save it',favN:n=>`Saved ${n}`,rtGo:'Plan the best route',rtFrom:'Start from',rtMe:'Blue dot on the map',rtFree:'Anywhere (auto)',rtFirst:'Start here',rtStn:'Seongsu Stn.',rtSF:'Seoul Forest Stn.',rtNeed:'Save at least 2 places to plan a route',rtT:'Best route',rtSum:(n,km,min)=>`${n} stops · about ${km} on foot · ${min} min`,rtLeg:(m,min)=>`about ${m} · ${min} min walk`,rtNav:'Directions',rtExit:'Exit route',rtNote:'Shortest order by straight-line distance, no doubling back; follow the navigation app for real walking times',rtStart:'Start',rtClosed:'may be closed now',rtRemove:'Remove',
+ aiT:'Route helper',aiHi:'Hi! Tell me what you’d like to see and I’ll pick places and order them so you walk the least without doubling back. Try “3 beauty pop-ups with gifts”, “2 hours of bakeries and coffee” or “route my saved places”.',
+ aiPh:'What do you want? e.g. 2 hours beauty gifts',aiSend:'Send',aiChips:['Route my saved places','Pop-ups with gifts','Beauty & fragrance','Bakery, dessert, coffee','2 hours in Seongsu','4 places from Seongsu Stn.'],
+ aiPick:(n,ks)=>`Here are ${n} places${ks?' ('+ks+')':''} in the order with the least walking:`,aiTot:(km,walk,all)=>`About ${km} on foot (${walk} min walking); with 20 min at each place, about ${all} min in total.`,
+ aiNone:'I couldn’t find a match. Try words like “beauty”, “gifts” or “bakery”, or save places with ☆ first.',aiFew:'You have fewer than 2 saved places, so I added popular places nearby.',
+ aiShow:'Show route on the map',aiSave:'Save all',aiMore:'Show others',aiSaved:'Saved',aiFrom:{stn:'Starting at Seongsu Stn.',sf:'Starting at Seoul Forest Stn.',gps:'Starting where you are',pick:'Starting at your chosen point',free:''},aiNote:'I pick places by keywords — I’m not a person; check each place page for hours and perks.',
+ favT:'Saved places',favEmpty:'Nothing saved yet. Tap ☆ on a place page to save it',favN:n=>`Saved ${n}`,rtGo:'Plan the best route',rtFrom:'Start from',rtMe:'My location (GPS)',rtPick:'Pick on the map',rtPickSet:'Picked start ⚑',rtPickHint:'Tap the map to choose where you start',rtPickDone:'Start point set',rtFree:'Anywhere (auto)',rtFirst:'Start here',rtStn:'Seongsu Stn.',rtSF:'Seoul Forest Stn.',rtNeed:'Save at least 2 places to plan a route',rtT:'Best route',rtSum:(n,km,min)=>`${n} stops · about ${km} on foot · ${min} min`,rtLeg:(m,min)=>`about ${m} · ${min} min walk`,rtNav:'Directions',rtExit:'Exit route',rtNote:'Shortest order by straight-line distance, no doubling back; follow the navigation app for real walking times',rtStart:'Start',rtClosed:'may be closed now',rtRemove:'Remove',
  mtTag:'Machine translated',trBtn:'Translate',trOrig:'Original',allT:'All shops',rvT:'Street view',rvS:'Kakao Roadview · drag to look around',rvNone:'No street view here',webT:'Web photos',webS:'From web search — tap to see the source; some may be unrelated',allKinds:{food:'Restaurants',cafe:'Cafés & desserts',shop:'Fashion & goods',beauty:'Beauty'},allZoom:'Zoom in to see every shop around here',allN:n=>`${n} places here · data from Kakao Map`,allLoading:'Loading nearby places…',allNoKey:'All-shops mode isn’t connected to Kakao Map yet',kakaoOpen:'Photos & reviews on Kakao Map',callShop:'Call',moreShops:'More places on Kakao Map',kpNote:'Name, category and address from Kakao Map; open Kakao Map for hours and waiting',addPhoto:'Add photo',photoBig:'That image is too large or not supported',uploading:'Uploading photo…',ugcBy:'Visitors',ugcHint:'Been there? Add a photo with your comment so others can see what it’s really like',bookT:'Waitlist / booking',bkS:{catchtable:'CatchTable',tabling:'Tabling'},bkW:{waiting:'Join the waitlist',reserve:'Book',search:'Search this place'},bookHint:'CatchTable has a global version for visitors; Tabling’s remote waitlist usually needs a Korean number for the SMS — if you don’t have one, ask staff at the door',phT:'Show the staff',phS:'tap to show the Korean in large type',spotT:'Where to queue',naverHint:'Naver booking usually needs a Naver account, and paid slots use Naver Pay; if you can’t book, ask on site about walk-in places',
  share:'Share',shared:'Copied — paste it anywhere',
  phr:[['Can I go in without a reservation?','예약 안 해도 들어갈 수 있어요?'],['Where do I sign up for the waiting list?','웨이팅 등록은 어디서 해요?'],['How long is the wait right now?','지금 기다리면 얼마나 걸려요?'],['I don’t have a Korean phone number. Can I still join the waiting list?','한국 전화번호가 없는데 웨이팅 등록할 수 있어요?'],['Are there any free gifts left?','사은품 아직 남아 있어요?'],['How do I get the free gift?','사은품은 어떻게 받아요?'],['May I take photos?','사진 찍어도 돼요?'],['Can I get a tax refund? I have my passport.','택스리펀 돼요? 여권 있어요.'],['Can I pay with a foreign card?','해외 카드로 결제돼요?'],['Is there anyone who speaks English or Chinese?','영어나 중국어 하시는 직원분 계세요?']]},
@@ -123,7 +133,12 @@ ko:{photos:'사진',pk:{o:'외관',i:'내부',f:'상품',food:'메뉴',p:'팝업
  report:'신고',reportedC:'신고했어요. 이 댓글은 숨겨져요',posted:'등록했어요',cmtRule:'서로 배려해 주세요 · 광고·연락처 금지 · 신고 3회 시 자동 숨김',
  cerr:{empty:'내용을 입력하세요',long:'최대 200자',link:'링크나 연락처는 쓸 수 없어요',spam:'도배로 보여요',fast:'너무 빨라요. 잠시 후 다시 시도하세요',fail:'등록하지 못했어요. 잠시 후 다시 시도하세요'},
  qAgg:(n,lv)=>`최근 2시간 제보 ${n}건 · 대부분 「${lv}」`,qLast:a=>`최근 제보 ${a}`,qDemo:'데모 모드: 제보는 이 기기에만 저장돼요',qNote:'현장 방문자 제보 · 참고용',qWait:'30분에 한 번만 제보할 수 있어요',qThanks:'제보 감사합니다',
- favT:'저장한 장소',favEmpty:'아직 저장한 곳이 없어요. 장소 페이지에서 ☆를 눌러 저장하세요',favN:n=>`저장 ${n}`,rtGo:'최적 경로 만들기',rtFrom:'출발 위치',rtMe:'지도의 파란 점',rtFree:'자동으로 선택',rtFirst:'여기서 시작',rtStn:'성수역',rtSF:'서울숲역',rtNeed:'경로를 만들려면 2곳 이상 저장하세요',rtT:'최적 경로',rtSum:(n,km,min)=>`${n}곳 · 도보 약 ${km} · ${min}분`,rtLeg:(m,min)=>`도보 약 ${m} · ${min}분`,rtNav:'길찾기',rtExit:'경로 닫기',rtNote:'직선거리 기준 최단 순서, 되돌아가지 않아요. 실제 도보 시간은 지도 앱을 확인하세요',rtStart:'출발',rtClosed:'지금 영업하지 않을 수 있어요',rtRemove:'삭제',
+ aiT:'경로 도우미',aiHi:'안녕하세요! 가고 싶은 곳을 말해 주시면 장소를 골라 되돌아가지 않는 최단 경로로 정리해 드려요. 예: 「증정 있는 뷰티 팝업 3곳」 「빵이랑 커피 2시간」 「저장한 곳으로 경로 만들기」',
+ aiPh:'예: 2시간 뷰티 증정',aiSend:'보내기',aiChips:['저장한 곳으로 경로 만들기','증정 있는 팝업','뷰티·향수','빵·디저트·카페','성수 2시간 코스','성수역 출발 4곳'],
+ aiPick:(n,ks)=>`${n}곳을 골랐어요${ks?' ('+ks+')':''}. 이 순서가 가장 덜 걸어요:`,aiTot:(km,walk,all)=>`도보 약 ${km}, 걷는 시간 ${walk}분. 한 곳에 20분씩 머물면 총 약 ${all}분이에요.`,
+ aiNone:'조건에 맞는 곳을 못 찾았어요. 「뷰티」 「증정」 「빵」처럼 말해 보거나, 먼저 ☆로 저장해 보세요.',aiFew:'저장한 곳이 2곳 미만이라 근처 인기 장소를 함께 넣었어요.',
+ aiShow:'지도에서 경로 보기',aiSave:'모두 저장',aiMore:'다른 곳 보기',aiSaved:'저장했어요',aiFrom:{stn:'성수역 출발',sf:'서울숲역 출발',gps:'내 위치에서 출발',pick:'선택한 출발점에서 출발',free:''},aiNote:'키워드로 장소를 골라 주는 도우미예요. 영업시간과 혜택은 장소 페이지를 확인하세요.',
+ favT:'저장한 장소',favEmpty:'아직 저장한 곳이 없어요. 장소 페이지에서 ☆를 눌러 저장하세요',favN:n=>`저장 ${n}`,rtGo:'최적 경로 만들기',rtFrom:'출발 위치',rtMe:'내 위치 (GPS)',rtPick:'지도에서 선택',rtPickSet:'선택한 출발점 ⚑',rtPickHint:'지도를 눌러 출발점을 고르세요',rtPickDone:'출발점으로 설정했어요',rtFree:'자동으로 선택',rtFirst:'여기서 시작',rtStn:'성수역',rtSF:'서울숲역',rtNeed:'경로를 만들려면 2곳 이상 저장하세요',rtT:'최적 경로',rtSum:(n,km,min)=>`${n}곳 · 도보 약 ${km} · ${min}분`,rtLeg:(m,min)=>`도보 약 ${m} · ${min}분`,rtNav:'길찾기',rtExit:'경로 닫기',rtNote:'직선거리 기준 최단 순서, 되돌아가지 않아요. 실제 도보 시간은 지도 앱을 확인하세요',rtStart:'출발',rtClosed:'지금 영업하지 않을 수 있어요',rtRemove:'삭제',
  mtTag:'기계 번역',trBtn:'번역',trOrig:'원문',allT:'모든 매장',rvT:'로드뷰',rvS:'카카오 로드뷰 · 드래그해서 둘러보기',rvNone:'이 위치는 로드뷰가 없어요',webT:'웹 이미지',webS:'웹 검색 결과 · 눌러서 원문 보기 · 관련 없는 이미지가 있을 수 있어요',allKinds:{food:'음식점',cafe:'카페·디저트',shop:'패션·소품',beauty:'뷰티'},allZoom:'지도를 확대하면 이 근처 모든 매장이 보여요',allN:n=>`이 근처 ${n}곳 · 카카오맵 데이터`,allLoading:'주변 매장 불러오는 중…',allNoKey:'모든 매장 기능이 아직 카카오맵과 연결되지 않았어요',kakaoOpen:'카카오맵에서 사진·리뷰 보기',callShop:'전화',moreShops:'카카오맵 검색 결과',kpNote:'매장명·분류·주소는 카카오맵 기준이에요. 영업시간과 웨이팅은 카카오맵에서 확인하세요',addPhoto:'사진 추가',photoBig:'사진이 너무 크거나 지원하지 않는 형식이에요',uploading:'사진 올리는 중…',ugcBy:'방문자',ugcHint:'다녀오셨나요? 댓글에 사진을 남겨 실제 모습을 공유해 주세요',bookT:'웨이팅 / 예약',bkS:{catchtable:'캐치테이블',tabling:'테이블링'},bkW:{waiting:'원격 웨이팅',reserve:'예약',search:'매장 검색'},bookHint:'',phT:'직원에게 보여주기',phS:'눌러서 크게 보기',spotT:'줄 서는 곳',naverHint:'네이버 예약은 보통 네이버 로그인이 필요하고, 유료 예약은 네이버페이로 결제해요',
  share:'공유',shared:'복사했어요',
  phr:[]}
@@ -261,6 +276,7 @@ const ICON={
  chat:'<svg viewBox="0 0 24 24"><path d="M4 5h16v11H9l-5 4z"/></svg>',
  heart:'<svg viewBox="0 0 24 24"><path d="M12 20s-7-4.4-7-10a4 4 0 0 1 7-2.6A4 4 0 0 1 19 10c0 5.6-7 10-7 10z"/></svg>',
  share:'<svg viewBox="0 0 24 24"><path d="M12 15V4M8 8l4-4 4 4M5 12v7h14v-7"/></svg>',
+ spark:'<svg viewBox="0 0 24 24"><path d="M12 3l1.8 5.2L19 10l-5.2 1.8L12 17l-1.8-5.2L5 10l5.2-1.8z"/><path d="M19 15l.8 2.2L22 18l-2.2.8L19 21l-.8-2.2L16 18l2.2-.8z"/></svg>',
  talk:'<svg viewBox="0 0 24 24"><path d="M5 5h14v10h-6l-4 4v-4H5z"/><path d="M9 10h.01M12 10h.01M15 10h.01"/></svg>'
 };
 let tt; function toast(s){const el=document.getElementById('toast');el.textContent=s;el.hidden=false;clearTimeout(tt);tt=setTimeout(()=>el.hidden=true,2600);}
@@ -333,11 +349,11 @@ function buildMap(adapter){
   meDot=MAP.marker({ll:S.me,html:'<div class="me-host"><span class="me-pulse"></span><span class="me-dot"></span></div>',w:30,h:30,ax:15,ay:15,z:1000,fixed:true});
   MAP.marker({ll:ST_B,html:`<span class="stn"><b>2</b>${t.stB}</span>`,w:96,h:24,ax:48,ay:12,fixed:true});
   MAP.marker({ll:ST_A,html:`<span class="stn y"><b>水</b>${t.stA}</span>`,w:110,h:24,ax:55,ay:12,fixed:true});
-  MAP.onClick(ll=>{setMe(ll,false);toast(t.moved);});
+  MAP.onClick(ll=>{if(S.picking){const back=S.picking;S.picking=null;S.rtPick=ll;S.rtFrom='pick';if(S.ai)S.ai.fr='pick';drawPick();toast(t.rtPickDone);setMin(false);if(back==='ai')openAi();else{S.sheet='fav';renderSheet();}return;}setMe(ll,false);toast(t.moved);});
   MAP.onDrag(()=>{if(!wide()&&!S.min)setMin(true);});
   MAP.onZoom(()=>drawMarkers());
   if(MAP.onIdle)MAP.onIdle(()=>ALL.idle());
-  RT={line:null,ms:[]};setTimeout(drawRoute,80);
+  RT={line:null,ms:[]};PK=null;setTimeout(()=>{drawRoute();drawPick();},80);
   ALL.reset();
   drawMarkers();
   setTimeout(()=>{MAP.resize();centerMe();},60);
@@ -443,11 +459,15 @@ function bestOrder(start,pts){const n=pts.length,d=(a,b)=>meters(a,b),D=pts.map(
   return ord;}
 const WALK=1.3,SPEED=75;   // street detour factor over straight line; metres walked per minute (~4.5 km/h)
 const favPlace=f=>live.find(p=>p.id===f.id)||f;
-function planRoute(){const fs=FAV.all().map(favPlace).filter(p=>p.ll);if(fs.length<2){toast(t.rtNeed);return;}
-  const fr=S.rtFrom||'free',start=fr==='stn'?ST_B:fr==='sf'?ST_A:fr==='me'?S.me:null;const ord=bestOrder(start,fs.map(p=>p.ll)).map(i=>fs[i]);
+function planRoute(list,frIn){const fs=(list||FAV.all().map(favPlace)).filter(p=>p.ll);if(fs.length<2){toast(t.rtNeed);return;}
+  const fr=frIn||S.rtFrom||'free';S.rtFrom=fr;const start=startOf(fr);const ord=bestOrder(start,fs.map(p=>p.ll)).map(i=>fs[i]);
   let prev=start||ord[0].ll;const legs=ord.map(p=>{const m=Math.round(meters(prev,p.ll)*WALK);prev=p.ll;return m;});
-  S.route={start,stops:ord,legs};S.sheet=null;renderSheet();drawRoute();renderNear();setMin(false);}
-let RT={line:null,ms:[]};
+  S.route={start,stops:ord,legs};S.sheet=null;renderSheet();drawRoute();renderNear();setMin(false);return S.route;}
+function startOf(fr){return fr==='stn'?ST_B:fr==='sf'?ST_A:fr==='gps'?S.me:fr==='pick'?(S.rtPick||null):null;}
+function orderOf(list,fr){const start=startOf(fr);const ord=bestOrder(start,list.map(p=>p.ll)).map(i=>list[i]);
+  let prev=start||ord[0].ll;const legs=ord.map(p=>{const m=Math.round(meters(prev,p.ll)*WALK);prev=p.ll;return m;});return {start,stops:ord,legs};}
+let RT={line:null,ms:[]},PK=null;
+function drawPick(){if(!MAP)return;if(PK){MAP.remove(PK);PK=null;}if(S.rtPick)PK=MAP.marker({ll:S.rtPick,html:'<div class="rnum pk">⚑</div>',w:26,h:26,ax:13,ay:13,z:1900,fixed:true});}
 function drawRoute(){if(!MAP)return;if(RT.line)MAP.remove(RT.line);RT.ms.forEach(m=>MAP.remove(m));RT={line:null,ms:[]};if(!S.route)return;
   const lls=[...(S.route.start?[S.route.start]:[]),...S.route.stops.map(p=>p.ll)];RT.line=MAP.line(lls);
   if(S.route.start)RT.ms.push(MAP.marker({ll:S.route.start,html:'<div class="rnum s">●</div>',w:26,h:26,ax:13,ay:13,z:2000,fixed:true}));
@@ -458,14 +478,60 @@ const kakaoTo=p=>`https://map.kakao.com/link/to/${encodeURIComponent((p.name||''
 function routeList(){const r=S.route,tot=r.legs.reduce((a,b)=>a+b,0);
   return `<button class="grabbtn" data-act="sheet" aria-label="${t.details}"><span class="grab"></span></button><div class="sh pad"><h2>${t.rtT}</h2><button class="rtx" data-act="rtexit">${t.rtExit}</button></div>
    <div class="near pad"><p class="rtsum">${esc(t.rtSum(r.stops.length,fmtD(tot),Math.round(tot/SPEED)))}</p>
-   <ol class="rtl">${r.start?`<li class="st0"><b>${t.rtStart}</b><small>${S.rtFrom==='stn'?t.rtStn:S.rtFrom==='sf'?t.rtSF:t.rtMe}</small></li>`:''}
+   <ol class="rtl">${r.start?`<li class="st0"><b>${t.rtStart}</b><small>${S.rtFrom==='stn'?t.rtStn:S.rtFrom==='sf'?t.rtSF:S.rtFrom==='pick'?t.rtPickSet:t.rtMe}</small></li>`:''}
    ${r.stops.map((p,i)=>`<li data-n="${i+1}"><button class="rtn" data-act="favopen" data-id="${esc(p.id)}"><b>${esc(tx(p.t)||p.name)}</b><small>${i===0&&!r.start?t.rtFirst:esc(t.rtLeg(fmtD(r.legs[i]),Math.max(1,Math.round(r.legs[i]/SPEED))))}${!p.kk&&p.endTs&&p.endTs<Date.now()?' · '+t.rtClosed:''}</small></button><a class="rtnav" href="${kakaoTo(p)}" target="_blank" rel="noopener">${ICON.pin}${t.rtNav}</a></li>`).join('')}</ol>
    <p class="datanote">${t.rtNote}</p></div>`;}
 function vFav(){const fs=FAV.all().map(favPlace);const fr=S.rtFrom||'free';
   return `<div class="mask" data-act="close"><div class="vsheet fsheet" role="dialog"><div class="fhead pad"><h3>${t.favT}</h3><button class="x" data-act="close" aria-label="${t.close}">×</button></div>
    <div class="pad">${fs.length?`<div class="favl">${fs.map(p=>`<div class="favi"><button data-act="favopen" data-id="${esc(p.id)}"><b>${esc(tx(p.t)||p.name)}</b><small>${p.ll?fmtD(meters(S.me,p.ll)):''}</small></button><button class="favx" data-act="favdrop" data-id="${esc(p.id)}">${t.rtRemove}</button></div>`).join('')}</div>
-    <h4>${t.rtFrom}</h4><div class="fopts">${[['free',t.rtFree],['stn',t.rtStn],['sf',t.rtSF],['me',t.rtMe]].map(([k,l])=>`<button class="fl${fr===k?' on':''}" data-act="rtfrom" data-v="${k}">${l}</button>`).join('')}</div>
+    <h4>${t.rtFrom}</h4><div class="fopts">${[['free',t.rtFree],['gps',t.rtMe],['pick',S.rtPick?t.rtPickSet:t.rtPick],['stn',t.rtStn],['sf',t.rtSF]].map(([k,l])=>`<button class="fl${fr===k?' on':''}" data-act="rtfrom" data-v="${k}">${l}</button>`).join('')}</div>
     <button class="buy" data-act="rtgo" ${fs.length<2?'disabled':''}>${fs.length<2?t.rtNeed:t.rtGo}</button>`:`<p class="emptyn">${t.favEmpty}</p>`}</div></div></div>`;}
+
+/* ================= route helper (keyword-based, runs on the device; no AI service) ================= */
+const AIK=[[/美妆|化妆|护肤|彩妆|beauty|cosmetic|skincare|뷰티|화장품|스킨케어/i,['beauty']],[/香水|香氛|fragrance|perfume|scent|향수/i,['scent']],[/衣服|服饰|服装|穿搭|时尚|fashion|cloth|옷|패션|의류/i,['fashion']],
+  [/眼镜|墨镜|eyewear|glasses|안경|선글라스/i,['eyewear']],[/饰品|配饰|accessor|액세서리/i,['acc']],[/联名|角色|动漫|蜡笔|character|anime|캐릭터|콜라보/i,['char']],[/k-?pop|爱豆|偶像|明星|아이돌|케이팝/i,['kpop']],
+  [/展览|展|体验|游戏|exhibit|game|전시|체험|게임/i,['exhibit']],[/特产|地方|生活|local|lifestyle|로컬|라이프/i,['life']],[/面包|贝果|盐面包|bakery|bread|bagel|빵|베이글|베이커리/i,['bread']],
+  [/甜品|甜点|蛋挞|甜甜圈|糯米糕|dessert|sweet|donut|디저트|도넛/i,['sweet']],[/咖啡|cafe|café|coffee|카페|커피/i,['cafe']],[/吃饭|正餐|韩餐|餐厅|午饭|晚饭|meal|lunch|dinner|restaurant|식당|밥|점심|저녁/i,['meal']],
+  [/美食|好吃|吃的|food|eat|맛집|먹/i,['meal','bread','sweet','cafe']]];
+const CN={一:1,两:2,二:2,三:3,四:4,五:5,六:6,七:7,八:8,九:9,十:10,한:1,두:2,세:3,네:4,다섯:5,여섯:6};
+function aiParse(q){const r={cats:[],gift:/赠|送|免费|礼|gift|free|증정|사은품|선물/i.test(q),deal:/打折|折扣|优惠|特价|sale|discount|할인/i.test(q),
+  pop:/快闪|pop-?up|팝업/i.test(q),fav:/收藏|saved|저장/i.test(q),n:0,min:0,fr:/圣水站|seongsu st|성수역/i.test(q)?'stn':/首尔林|seoul forest|서울숲/i.test(q)?'sf':/我的位置|定位|这里|my location|here|내 위치|여기/i.test(q)?'gps':''};
+  AIK.forEach(([re,c])=>{if(re.test(q))c.forEach(k=>{if(!r.cats.includes(k))r.cats.push(k);});});
+  let m=q.match(/(\d+|[一两二三四五六七八九十]|한|두|세|네|다섯|여섯)\s*(家|个|站|处|places?|stops?|shops?|곳|군데|개)/i);if(m)r.n=+m[1]||CN[m[1]]||0;
+  m=q.match(/(\d+(?:\.\d+)?|[一两二三四五六七八九十]|한|두|세|네)\s*(个)?\s*(小时|钟头|h\b|hours?|시간)/i);if(m)r.min=(+m[1]||CN[m[1]]||0)*60;
+  m=q.match(/(\d+)\s*(分钟|min|분)/i);if(m)r.min+=+m[1];if(/半天|half.?day|반나절/i.test(q))r.min=240;if(/一天|整天|all day|하루/i.test(q))r.min=480;
+  return r;}
+function aiPick(r,ex){ex=ex||[];const start=startOf(r.fr)||[37.5436,127.0545];
+  let c=live.filter(p=>!ex.includes(p.id)&&(!r.cats.length||r.cats.includes(p.cat))&&(!r.pop||p.grp==='pop')&&(!r.gift||hasPerk(p,'gift'))&&(!r.deal||hasPerk(p,'deal')));
+  const sc=p=>(hasPerk(p,'gift')?3:0)+(hasPerk(p,'deal')?1:0)+(p.rate?p.rate.s-3:0)+(!p.perm&&!p.endUnk&&p.endTs-Date.now()<3*D?1:0)+(p.grp==='pop'?.5:0)-meters(start,p.ll)/800;
+  c.sort((a,b)=>sc(b)-sc(a));if(!c.length)return [];
+  let want=r.n||(r.min?99:4);const out=[];
+  // one of each asked-for category first, then the best of the rest
+  r.cats.forEach(k=>{const x=c.find(p=>p.cat===k&&!out.includes(p));if(x&&out.length<want)out.push(x);});
+  for(const p of c){if(out.length>=want)break;if(!out.includes(p))out.push(p);
+    if(r.min&&out.length>=2){const o=orderOf(out,r.fr||'free');const tot=o.legs.reduce((a,b)=>a+b,0)/SPEED+out.length*20;if(tot>r.min){out.pop();break;}}}
+  return out;}
+function aiAsk(q,ex){const r=aiParse(q);if(r.fr==='gps'&&S.ai.fr!=='gps')locate();if(r.fr)S.ai.fr=r.fr;S.ai.msgs.push({me:1,txt:q});
+  let list=[],note='';
+  if(r.fav){list=FAV.all().map(favPlace).filter(p=>p.ll);if(list.length<2){note=t.aiFew;list=list.concat(aiPick({...r,fav:0},list.map(p=>p.id)).slice(0,Math.max(2,(r.n||4)-list.length)));}}
+  else list=aiPick({...r,fr:r.fr||S.ai.fr||''},ex);
+  if(list.length<2){S.ai.msgs.push({txt:t.aiNone});renderAi();return;}
+  const fr=r.fr||S.ai.fr||'free',o=orderOf(list,fr),tot=o.legs.reduce((a,b)=>a+b,0),walk=Math.round(tot/SPEED);
+  const i=S.ai.plans.push({...o,fr,q,ex})-1;
+  const ks=[...new Set(list.map(p=>catL(p.cat)))].join('、');
+  S.ai.msgs.push({plan:i,html:`${note?`<p>${esc(note)}</p>`:''}<p>${esc((t.aiFrom[fr]?t.aiFrom[fr]+' · ':'')+t.aiPick(list.length,ks))}</p>
+   <ol class="ail">${o.stops.map((p,k)=>`<li><button data-act="favopen" data-id="${esc(p.id)}"><b>${esc(tx(p.t))}</b><small>${esc(tx(p.g))}${k||o.start?' · '+fmtD(o.legs[k]):''}</small></button></li>`).join('')}</ol>
+   <p class="aitot">${esc(t.aiTot(fmtD(tot),walk,walk+list.length*20))}</p>
+   <div class="aibtn"><button class="buy" data-act="aishow" data-v="${i}">${t.aiShow}</button><button class="fl" data-act="aisave" data-v="${i}">${ICON.star}${t.aiSave}</button>${r.fav?'':`<button class="fl" data-act="aimore" data-v="${i}">${t.aiMore}</button>`}</div>`});
+  renderAi();}
+function openAi(){S.ai=S.ai||{msgs:[{txt:t.aiHi}],plans:[],fr:S.rtFrom||'free'};S.sheet='ai';$('sheetHost').innerHTML=vAiFrame();renderAi();}
+function vAiFrame(){return `<div class="mask" data-act="close"><div class="vsheet csheet aisheet" role="dialog" aria-label="${t.aiT}">
+  <div class="chead"><span class="aiav">${ICON.spark}</span><b>${t.aiT}</b><button class="x" data-act="close" aria-label="${t.close}" style="margin-left:auto">×</button></div>
+  <div class="clist" id="aiLog"></div>
+  <div class="cfoot"><div class="aistart" id="aiStart"></div><div class="aichips">${t.aiChips.map((c,i)=>`<button class="fl sub" data-act="aichip" data-v="${i}">${esc(c)}</button>`).join('')}</div>
+   <div class="cform"><textarea id="aiIn" rows="1" placeholder="${esc(t.aiPh)}"></textarea><button class="csend" data-act="aisend">${t.aiSend}</button></div><div class="crule">${t.aiNote}</div></div></div></div>`;}
+function renderAi(){const st=$('aiStart');if(st&&S.ai){const f=S.ai.fr||'free';st.innerHTML=`<span>${t.rtFrom}</span>`+[['free',t.rtFree],['gps',t.rtMe],['pick',S.rtPick?t.rtPickSet:t.rtPick],['stn',t.rtStn],['sf',t.rtSF]].map(([k,l])=>`<button class="${f===k?'on':''}" data-act="aistart" data-v="${k}">${l}</button>`).join('');}
+  const el=$('aiLog');if(!el||!S.ai)return;el.innerHTML=S.ai.msgs.map(m=>m.me?`<div class="msg me">${esc(m.txt)}</div>`:`<div class="msg bot"><span class="aiav sm">${ICON.spark}</span><div>${m.html||`<p>${esc(m.txt)}</p>`}</div></div>`).join('');el.scrollTop=el.scrollHeight;}
 
 /* ================= home ================= */
 function card(p,d){
@@ -635,7 +701,7 @@ function vFacets(){
     <h4>${t.fSec[3]}</h4>${row('other',[['tax','tax'],['rate','r45'],['rate','r40']])}
     <div class="fbtns"><button class="fclear" data-act="fclear">${t.fClear}</button><button class="buy" data-act="close" data-x="1">${t.fShow(cnt)}</button></div>
    </div></div></div>`;}
-function renderSheet(){if(S.sheet==='cmt'){if(!$('cmtList'))$('sheetHost').innerHTML=vCmt();renderCmt();return;}$('sheetHost').innerHTML=S.sheet==='facets'?vFacets():S.sheet==='kp'?vKp():S.sheet==='fav'?vFav():S.sheet!==null?vSheet():'';}
+function renderSheet(){if(S.sheet==='cmt'){if(!$('cmtList'))$('sheetHost').innerHTML=vCmt();renderCmt();return;}if(S.sheet==='ai'){if(!$('aiLog'))$('sheetHost').innerHTML=vAiFrame();renderAi();return;}$('sheetHost').innerHTML=S.sheet==='facets'?vFacets():S.sheet==='kp'?vKp():S.sheet==='fav'?vFav():S.sheet==='ai'?vAiFrame():S.sheet!==null?vSheet():'';}
 /* ================= comments (Douyin-style sheet) ================= */
 const hue=s=>{let h=0;for(const c of String(s))h=(h*31+c.codePointAt(0))%360;return h;};
 const myNick=()=>SO.me.nick()||(()=>{const n=t.nickDef+String(Math.floor(1000+Math.random()*9000));SO.me.setNick(n);return n;})();
@@ -697,7 +763,7 @@ function applyStatic(){
   $('tilewarn').textContent=t.tilewarn;$('map').setAttribute('aria-label',t.mapLabel);
   document.querySelector('.locate').setAttribute('aria-label',t.locate);$('clr').setAttribute('aria-label',t.clear);
   $('langs').innerHTML=LANGS.map(l=>`<button class="${l===lang?'on':''}" data-act="lang" data-v="${l}" lang="${LOCALE[l]}">${T[l].lang}</button>`).join('');}
-function setLang(l){
+function setLang(l){S.ai=null;if(S.sheet==='ai'){S.sheet=null;}
   if(l===lang)return;lang=l;t=T[l];try{localStorage.setItem('ss_lang',l);}catch(e){}
   try{const u=new URL(location.href);u.searchParams.set('lang',l);history.replaceState(null,'',u.pathname+u.search+u.hash);}catch(e){}
   applyStatic();renderChips();$('res').innerHTML=results();
@@ -739,8 +805,15 @@ document.addEventListener('click',e=>{
   else if(a==='favs'){S.sheet='fav';renderSheet();}
   else if(a==='favdrop'){FAV.drop(el.dataset.id);renderSheet();renderChips();}
   else if(a==='favopen'){S.sheet=null;renderSheet();openFav(el.dataset.id);}
-  else if(a==='rtfrom'){S.rtFrom=v;renderSheet();}
+  else if(a==='rtfrom'){S.rtFrom=v;if(v==='gps'){S.rtWas='fav';locate();}if(v==='pick'){S.picking='fav';S.sheet=null;renderSheet();setMin(true);toast(t.rtPickHint);return;}renderSheet();}
+  else if(a==='aistart'){if(v==='gps'){locate();S.ai.fr='gps';}else if(v==='pick'){S.picking='ai';S.sheet=null;renderSheet();setMin(true);toast(t.rtPickHint);return;}else S.ai.fr=v;renderAi();}
   else if(a==='rtgo')planRoute();
+  else if(a==='ai')openAi();
+  else if(a==='aichip')aiAsk(t.aiChips[+v]);
+  else if(a==='aisend'){const i=$('aiIn');if(i&&i.value.trim()){aiAsk(i.value.trim());i.value='';}}
+  else if(a==='aishow'){const r=S.ai.plans[+v];if(r)planRoute(r.stops,r.fr);}
+  else if(a==='aisave'){const r=S.ai.plans[+v];if(r){r.stops.forEach(p=>{if(!FAV.has(p.id))FAV.toggle(p);});renderChips();toast(t.aiSaved);}}
+  else if(a==='aimore'){const r=S.ai.plans[+v];if(r)aiAsk(r.q,r.stops.map(p=>p.id).concat(r.ex||[]));}
   else if(a==='rtexit'){S.route=null;drawRoute();renderNear();}
   else if(a==='ctr'){const id=+v;S.ctr=S.ctr||{};if(S.ctr[id]){delete S.ctr[id];renderCmt();return;}const c=S.cm&&S.cm.list.find(x=>x.id===id);if(!c)return;el.textContent='…';KTR.mt(c.body,lang).then(x=>{if(x)S.ctr[id]=x+' · '+t.mtTag;else toast(t.cerr.fail);renderCmt();});}
   else if(a==='cimg'){$('lbHost').innerHTML=`<div class="lb" data-act="lbclose"><img src="${esc(v)}" alt=""><div class="lbcap">${t.pk.u}</div><button class="lbx" data-act="lbclose" aria-label="${t.close}">×</button></div>`;}
@@ -768,7 +841,7 @@ document.addEventListener('click',e=>{
   else if(a==='buy'){S.member=true;S.sheet=null;renderSheet();renderChips();toast(t.bought);}
 });
 document.addEventListener('change',e=>{if(e.target&&e.target.id==='cFile'){const f=e.target.files&&e.target.files[0];if(!f)return;if(!/^image\//.test(f.type)||f.size>25e6){toast(t.photoBig);e.target.value='';return;}setFile(f);}});
-document.addEventListener('keydown',e=>{if(e.target&&e.target.id==='cBody'&&e.key==='Enter'&&!e.shiftKey&&!e.isComposing){e.preventDefault();sendCmt();return;}if(S.lb==null)return;const n=gallery(P()).length;if(e.key==='Escape'){S.lb=null;lightbox();}else if(e.key==='ArrowRight'&&S.lb<n-1){S.lb++;lightbox();}else if(e.key==='ArrowLeft'&&S.lb>0){S.lb--;lightbox();}});
+document.addEventListener('keydown',e=>{if(e.target&&e.target.id==='cBody'&&e.key==='Enter'&&!e.shiftKey&&!e.isComposing){e.preventDefault();sendCmt();return;}if(e.target&&e.target.id==='aiIn'&&e.key==='Enter'&&!e.isComposing){e.preventDefault();const v=e.target.value.trim();if(v){aiAsk(v);e.target.value='';}return;}if(S.lb==null)return;const n=gallery(P()).length;if(e.key==='Escape'){S.lb=null;lightbox();}else if(e.key==='ArrowRight'&&S.lb<n-1){S.lb++;lightbox();}else if(e.key==='ArrowLeft'&&S.lb>0){S.lb--;lightbox();}});
 window.addEventListener('hashchange',()=>{const id=location.hash.slice(1);if(LINE.some(x=>x.id===id))openPop(id);});
 setInterval(()=>{if(S.sheet==='cmt')renderCmt();document.querySelectorAll('[data-end]').forEach(el=>{el.textContent=left(+el.dataset.end);});},30000);
 applyStatic();renderChips();renderNear();startMap();
