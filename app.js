@@ -401,7 +401,7 @@ const KCAT={food:['meal','korean','food'],cafe:['cafe','cafe','sweet'],shop:['fa
 function kPlace(d){const k=KCAT[d.kind]||KCAT.shop,cat=(d.category_name||'').split('>').map(x=>x.trim());const nm=d.place_name;
   const grp=d.kind==='food'||d.kind==='cafe'?'eat':'shop';const lab=cat.slice(-1)[0]||'';
   const C=l=>KTR.cat(cat.slice(1).join(' > '),l).split(' > ').join(' · '),G=l=>KTR.cat(lab,l);
-  return {id:'k'+d.id,kk:true,grp,sub:k[1],cat:k[0],name:nm,t:{zh:nm,en:KTR.roman(nm),ko:nm},brand:nm,addr:d.road_address_name||d.address_name,ll:d.ll,dl:d.ll,perm:true,endTs:Infinity,h:'',entry:'unk',type:k[2],
+  return {id:'k'+d.id,kk:true,grp,sub:k[1],cat:k[0],name:nm,t:{zh:nm,en:nm,ko:nm},brand:nm,addr:d.road_address_name||d.address_name,ll:d.ll,dl:d.ll,perm:true,endTs:Infinity,h:'',entry:'unk',type:k[2],
     g:{zh:G('zh'),en:G('en'),ko:lab},perks:cat.length>1?[[{zh:C('zh'),en:C('en'),ko:C('ko')},'tip']]:[],src:d.place_url,src2:d.phone?'☎ '+d.phone:'',phone:d.phone,pics:{}};}
 function openKp(id){const d=ALL.get(id);if(!d)return;S.xp=kPlace(d);S.view='detail';S.mode='live';S.sheet=null;S.cm=null;S.cfile=null;$('sheetHost').innerHTML='';
   homeEl.hidden=true;detEl.hidden=false;renderDetail();scrollTo(0,0);loadQueue(S.xp.id);loadUgc(S.xp.id);}
@@ -568,7 +568,7 @@ function vSheet(){
      ${t.rows.map((r,i)=>`<tr><td>${r}</td><td${i<3?' class="y"':''}>${i<3?'✓':'—'}</td><td class="y">✓</td></tr>`).join('')}</table>
     <button class="buy" data-act="buy">${esc(t.buy(pl[0],t.price[S.sel]))}</button><div class="fine">${t.fine}</div></div></div></div>`;}
 const homeEl=$('home'),detEl=$('detail');
-function nameMt(p){if(!p.kk||lang==='ko'||p.mtd&&p.mtd[lang])return;(p.mtd=p.mtd||{})[lang]=1;KTR.mt(p.name,lang).then(x=>{if(!x)return;p.t[lang]=x;p.mt=1;if(S.view==='detail'&&P()===p)rerender();});}
+function nameMt(p){if(!p.kk||lang==='ko'||p.mtd&&p.mtd[lang])return;(p.mtd=p.mtd||{})[lang]=1;KTR.name(p.name,lang).then(x=>{if(!x)return;p.t[lang]=x;p.mt=1;if(S.view==='detail'&&P()===p)rerender();});}
 function renderDetail(){detEl.innerHTML=vDetail();const pp=P();mountRv(pp);loadWeb(pp);nameMt(pp);const c=document.querySelector('.st.cur');if(c){const sc=c.closest('.mapscroll');sc.scrollLeft=c.offsetLeft-sc.clientWidth/2+46;}}
 function vFacets(){
   const f=S.f,on=(sec,k)=>sec==='perk'?f.perk.includes(k):sec==='tax'?f.tax:sec==='rate'?f.rate===(k==='r45'?4.5:4.0):f[sec]===k;

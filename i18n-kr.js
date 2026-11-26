@@ -37,17 +37,28 @@ function roman(s){let out='',prev=false;for(const ch of String(s)){const c=ch.co
   else{out+=ch;prev=false;}}
   return out.replace(/(^|\s)([a-z])/g,(m,a,b)=>a+b.toUpperCase());}
 
-/* machine translation with a device cache */
-const KEY='ss_mt1';let cache={};try{cache=JSON.parse(localStorage.getItem(KEY))||{};}catch(e){}
+/* machine translation with a device cache: Google's free web endpoint first (much better Korean→Chinese),
+   MyMemory as a fallback. Branch suffixes (성수점, 본점…) use the fixed table so they read the same everywhere. */
+const KEY='ss_mt2';let cache={};try{cache=JSON.parse(localStorage.getItem(KEY))||{};}catch(e){}
 const save=()=>{try{const ks=Object.keys(cache);if(ks.length>800)ks.slice(0,200).forEach(k=>delete cache[k]);localStorage.setItem(KEY,JSON.stringify(cache));}catch(e){}};
 const src=s=>/[가-힣]/.test(s)?'ko':/[一-鿿]/.test(s)?'zh-CN':/[぀-ヿ]/.test(s)?'ja':'en';
 const TL={zh:'zh-CN',en:'en',ko:'ko'};
 const busy={};
-function mt(text,lang){text=String(text||'').trim();const to=TL[lang],from=src(text);if(!text||!to||from===to)return Promise.resolve(null);
+async function google(text,from,to){const r=await fetch('https://translate.googleapis.com/translate_a/single?client=gtx&dt=t&sl='+from+'&tl='+to+'&q='+encodeURIComponent(text));
+  const j=await r.json();return (j&&j[0]||[]).map(x=>x[0]).join('').trim()||null;}
+async function mymemory(text,from,to){const r=await fetch('https://api.mymemory.translated.net/get?q='+encodeURIComponent(text)+'&langpair='+from+'|'+to);
+  const j=await r.json();const x=j&&j.responseStatus==200&&j.responseData&&j.responseData.translatedText;
+  if(!x||/MYMEMORY WARNING|QUERY LENGTH/i.test(x))return null;return x.replace(/&#39;/g,"'").replace(/&quot;/g,'"').replace(/&amp;/g,'&');}
+function mt(text,lang){text=String(text||'').trim().slice(0,450);const to=TL[lang],from=src(text);if(!text||!to||from===to)return Promise.resolve(null);
   const k=from+'|'+to+'|'+text;if(cache[k])return Promise.resolve(cache[k]);if(busy[k])return busy[k];
-  return busy[k]=fetch('https://api.mymemory.translated.net/get?q='+encodeURIComponent(text.slice(0,450))+'&langpair='+from+'|'+to)
-    .then(r=>r.json()).then(j=>{const x=j&&j.responseStatus==200&&j.responseData&&j.responseData.translatedText;
-      if(!x||/MYMEMORY WARNING|QUERY LENGTH/i.test(x))return null;const y=x.replace(/&#39;/g,"'").replace(/&quot;/g,'"').replace(/&amp;/g,'&');cache[k]=y;save();return y;})
-    .catch(()=>null).finally(()=>{delete busy[k];});}
-window.KTR={cat,roman,mt,src};
+  return busy[k]=google(text,from,to).catch(()=>null).then(x=>x||mymemory(text,from,to).catch(()=>null))
+    .then(x=>{if(x){cache[k]=x;save();}return x;}).finally(()=>{delete busy[k];});}
+const SUF=[['성수역점',['圣水站店','Seongsu Station']],['성수본점',['圣水总店','Seongsu flagship']],['서울숲점',['首尔林店','Seoul Forest']],['성수점',['圣水店','Seongsu']],
+  ['본점',['总店','main branch']],['직영점',['直营店','direct store']],['플래그십스토어',['旗舰店','flagship store']],['플래그십',['旗舰店','flagship']],['팝업스토어',['快闪店','pop-up store']],['팝업',['快闪','pop-up']],['성수',['圣水','Seongsu']]];
+/* translate a place name: core by machine, branch suffix by table; null if nothing could be translated */
+async function name(nm,lang){if(lang==='ko')return null;const i=({zh:0,en:1})[lang];let core=String(nm).trim(),suf='';
+  for(const [k,v] of SUF){const re=new RegExp('\\s*'+k+'$');if(re.test(core)){core=core.replace(re,'');suf=v[i];break;}}
+  const c=core?await mt(core,lang):'';if(core&&!c)return null;
+  return [(c||'').trim(),suf].filter(Boolean).join(lang==='zh'?' ':' ');}
+window.KTR={cat,roman,mt,src,name};
 })();
