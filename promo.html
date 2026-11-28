@@ -129,7 +129,7 @@ body.playing.peek #ctl{opacity:1;pointer-events:auto}
     <div class="date"><div class="y" id="dy">2026.06.01</div><div class="l">时间快进中</div></div>
     <div class="big"><div class="n" id="bn">0</div><div class="u">场新快闪开幕</div><div class="live"><i></i><span id="live">此刻同时在开 0 家</span></div></div>
     <div class="bars" id="bars"></div>
-    <div class="legend"><span><i style="background:#e2412e"></i>刚开幕</span><span><i style="background:#2ea84a"></i>正在开</span><span><i style="background:#b8c2bc"></i>已结束</span></div>
+    <div class="legend"><span><i style="background:#e2412e"></i>刚开幕</span><span><i style="background:#2ea84a"></i>正在开</span><span><i style="background:#97a39c"></i>已结束</span></div>
   </div>
 
   <div class="layer" id="s3">
@@ -295,7 +295,7 @@ function render(t){
     if(active)live++;
     const sc = fresh ? 1.35 : active ? 1 : 0.55;
     p.el.className = 'dot'+(fresh?' new':'');
-    p.el.style.background = fresh?'#e2412e':active?'#2ea84a':'#b8c2bc';
+    p.el.style.background = fresh?'#e2412e':active?'#2ea84a':'#97a39c';
     p.el.style.transform=`scale(${sc})`;
     p.el.style.opacity = (active?1:0.75)*(1-seg(t,14.6,15.4));
     const rk=seg(day,p.s,p.s+5); p.ring.style.opacity = fresh? (1-rk)*0.9:0; p.ring.style.transform=`scale(${1+rk*2.6})`;
