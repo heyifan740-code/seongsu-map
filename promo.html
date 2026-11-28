@@ -16,9 +16,10 @@ html,body{height:100%;background:#0f1211;overflow:hidden}
 #wrap{position:fixed;inset:0;display:flex;align-items:center;justify-content:center}
 #stage{position:absolute;left:0;top:0;width:1920px;height:1080px;transform-origin:0 0;overflow:hidden;background:#eef2ef;font-family:var(--sans);color:var(--ink)}
 #cam{position:absolute;inset:0;transform-origin:1380px 610px}
-#map{position:absolute;inset:0;background:#eef2ef}
-#ov{position:absolute;inset:0;pointer-events:none}
-#map .leaflet-tile-pane{filter:saturate(.7) brightness(1.04) contrast(.95)}
+#map{position:absolute;inset:0;background:#eef2ef;z-index:0}
+#veil{position:absolute;inset:0;background:rgba(246,250,247,.42);z-index:1}
+#ov{position:absolute;inset:0;pointer-events:none;z-index:2}
+#map .leaflet-tile-pane{filter:saturate(.55) brightness(1.05) contrast(.9)}
 #wash{position:absolute;inset:0;background:linear-gradient(90deg,rgba(255,255,255,.92) 0%,rgba(255,255,255,.7) 30%,rgba(255,255,255,0) 52%)}
 #dim{position:absolute;inset:0;background:#141816;opacity:0}
 .layer{position:absolute;inset:0;pointer-events:none}
@@ -112,7 +113,7 @@ body.playing.peek #ctl{opacity:1;pointer-events:auto}
 </head>
 <body>
 <div id="wrap"><div id="stage">
-  <div id="cam"><div id="map"></div><div id="ov"></div></div>
+  <div id="cam"><div id="map"></div><div id="veil"></div><div id="ov"></div></div>
   <div id="wash"></div>
   <div id="dim"></div>
 
