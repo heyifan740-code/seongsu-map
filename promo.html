@@ -15,9 +15,10 @@
 html,body{height:100%;background:#0f1211;overflow:hidden}
 #wrap{position:fixed;inset:0;display:flex;align-items:center;justify-content:center}
 #stage{position:absolute;left:0;top:0;width:1920px;height:1080px;transform-origin:0 0;overflow:hidden;background:#eef2ef;font-family:var(--sans);color:var(--ink)}
-#cam{position:absolute;inset:0;transform-origin:62% 55%}
+#cam{position:absolute;inset:0;transform-origin:1380px 610px}
 #map{position:absolute;inset:0;background:#eef2ef}
 #ov{position:absolute;inset:0;pointer-events:none}
+#map .leaflet-tile-pane{filter:saturate(.7) brightness(1.04) contrast(.95)}
 #wash{position:absolute;inset:0;background:linear-gradient(90deg,rgba(255,255,255,.92) 0%,rgba(255,255,255,.7) 30%,rgba(255,255,255,0) 52%)}
 #dim{position:absolute;inset:0;background:#141816;opacity:0}
 .layer{position:absolute;inset:0;pointer-events:none}
@@ -26,8 +27,8 @@ html,body{height:100%;background:#0f1211;overflow:hidden}
 .pin .ph{position:absolute;left:-32px;top:-32px;width:64px;height:64px;border-radius:50%;border:4px solid #fff;box-shadow:0 6px 18px rgba(0,0,0,.22);overflow:hidden;background:var(--green-soft)}
 .pin .ph img{width:100%;height:100%;object-fit:cover;display:block}
 .pin .ph b{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;font:800 22px var(--sans);color:var(--green-deep)}
-.pin .lb{position:absolute;left:50%;top:40px;transform:translateX(-50%);white-space:nowrap;background:var(--ink);color:#fff;font:700 18px var(--sans);padding:5px 12px;border-radius:99px}
-.dot{position:absolute;width:16px;height:16px;margin:-8px 0 0 -8px;border-radius:50%;background:var(--green);border:2.5px solid #fff;box-shadow:0 1px 4px rgba(0,0,0,.25)}
+.pin .lb{position:absolute;left:50%;top:38px;transform:translateX(-50%);white-space:nowrap;background:var(--ink);color:#fff;font:700 17px var(--sans);padding:4px 11px;border-radius:99px}
+.dot{position:absolute;width:18px;height:18px;margin:-9px 0 0 -9px;border-radius:50%;background:var(--green);border:2.5px solid #fff;box-shadow:0 1px 4px rgba(0,0,0,.25)}
 .dot.new{background:var(--red)}
 .ring{position:absolute;width:16px;height:16px;margin:-8px 0 0 -8px;border-radius:50%;border:3px solid var(--red)}
 /* scene 1 */
@@ -62,6 +63,7 @@ html,body{height:100%;background:#0f1211;overflow:hidden}
 .post{aspect-ratio:3/4;border-radius:14px;overflow:hidden;background:#2a302d;box-shadow:0 10px 24px rgba(0,0,0,.35)}
 .post img{width:100%;height:100%;object-fit:cover;display:block}
 .cap3{position:absolute;left:0;right:0;top:420px;text-align:center;color:#fff}
+.cap3:before{content:'';position:absolute;left:50%;top:50%;width:1500px;height:700px;transform:translate(-50%,-50%);background:radial-gradient(closest-side,rgba(12,16,14,.92),rgba(12,16,14,.75) 55%,rgba(12,16,14,0));z-index:-1}
 .cap3 .a{font:900 120px/1 'Archivo','Noto Sans SC',sans-serif;letter-spacing:-2px}
 .cap3 .b{font:700 40px var(--sans);margin-top:22px;opacity:.9}
 .chip3{display:inline-block;background:var(--green);color:#fff;padding:8px 26px;border-radius:99px;font:800 34px var(--sans);margin-bottom:26px}
@@ -162,9 +164,9 @@ body.playing.peek #ctl{opacity:1;pointer-events:auto}
     <div class="logo"><div class="badge">S</div><div class="w">seopup</div></div>
     <div class="tag">首尔快闪地图 · Seoul pop-up map</div>
     <div class="url">heyifan740-code.github.io/seongsu-map</div>
-    <div class="cr">地图 © OpenStreetMap © CARTO · 图片 Popply / DiningCode / Kakao Map · 数据 Popply</div>
+    <div class="cr">地图 © OpenStreetMap · 图片 Popply / DiningCode / Kakao Map · 数据 Popply</div>
   </div>
-  <div class="attr" id="attr">© OpenStreetMap © CARTO</div>
+  <div class="attr" id="attr">© OpenStreetMap</div>
 </div></div>
 
 <div id="ctl">
@@ -198,7 +200,7 @@ addEventListener('resize',fit);fit();
 /* ---------- map ---------- */
 const map=L.map('map',{zoomControl:false,attributionControl:false,zoomSnap:0,dragging:false,scrollWheelZoom:false,doubleClickZoom:false,boxZoom:false,keyboard:false,touchZoom:false,fadeAnimation:false})
   .setView([37.5440,127.0475],15.95);
-const tiles=L.tileLayer('https://{s}.basemaps.cartocdn.com/rastertiles/voyager/{z}/{x}/{y}{r}.png',{subdomains:'abcd',maxZoom:20,detectRetina:true}).addTo(map);
+const tiles=L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png',{maxZoom:19}).addTo(map);
 const px=(lat,lng)=>map.latLngToContainerPoint([lat,lng]);
 const B={w:1920,h:1080};
 const inView=p=>p.x>-40&&p.x<B.w+40&&p.y>-40&&p.y<B.h+40;
@@ -207,25 +209,23 @@ const inView=p=>p.x>-40&&p.x<B.w+40&&p.y>-40&&p.y<B.h+40;
 const POP=(typeof POPS!=='undefined'?POPS:[]);
 const pic=p=>{const g=(typeof PICS!=='undefined'&&PICS[p.id])||{};return p.img||(g.o&&g.o[0])||(g.p&&g.p[0])||(g.f&&g.f[0])||(g.i&&g.i[0])||''};
 const WORDS=[
-  {w:'Olive Young',re:/olive\s?young|올리브영/i},
-  {w:'MUSINSA',re:/musinsa|무신사/i},
-  {w:'Gentle Monster',re:/gentle\s?monster|젠틀몬스터/i},
-  {w:'NYUNYU',re:/nyunyu|뉴뉴/i},
+  {w:'美妆快闪',f:p=>p.grp==='pop'&&/beauty|scent/.test(p.sub)},
+  {w:'时尚 · 眼镜 · 饰品',f:p=>/fashion|eyewear|acc|fstore/.test(p.sub)},
+  {w:'有赠品',f:p=>!!p.gk},
+  {w:'面包 · 甜品',f:p=>p.grp==='eat'&&/bakery|saltbread|bagel|donut|eggtart|dessert/.test(p.sub)},
 ];
-const T1=0.9, SLOT=1.45;           // when typing starts, seconds per brand
+const T1=0.9, SLOT=1.45;           // when typing starts, seconds per search
 const pins=[];
 POP.forEach(p=>{
   if(!p.ll)return;const q=px(p.ll[0],p.ll[1]);if(!inView(q))return;
-  const hay=[p.brand,p.name,p.t&&p.t.zh,p.t&&p.t.en].join(' ');
-  let k=WORDS.findIndex(w=>w.re.test(hay));
+  const ks=WORDS.map((w,k)=>w.f(p)?k:-1).filter(k=>k>=0);
   const el=document.createElement('div');el.className='pin';el.style.left=q.x+'px';el.style.top=q.y+'px';
-  const u=pic(p);
-  el.innerHTML=`<div class="ph">${u?`<img src="${u}" referrerpolicy="no-referrer" alt="">`:`<b>${(p.brand||p.name||'?').slice(0,1)}</b>`}</div>`+(k>=0?`<div class="lb">${WORDS[k].w}</div>`:'');
+  const u=pic(p);const nm=(p.brand||(p.t&&p.t.zh)||p.name||'').slice(0,16);
+  el.innerHTML=`<div class="ph"${p.gk?' style="border-color:#e2412e"':''}>${u?`<img src="${u}" referrerpolicy="no-referrer" alt="">`:`<b>${nm.slice(0,1)}</b>`}</div><div class="lb">${nm}</div>`;
   const img=el.querySelector('img');if(img)img.onerror=()=>{img.remove()};
   $('ov').appendChild(el);
-  pins.push({el,k,i:pins.length,lab:el.querySelector('.lb')});
+  pins.push({el,ks,k:ks.length?ks[0]:-1,lab:el.querySelector('.lb')});
 });
-// brand order inside each slot
 WORDS.forEach((w,k)=>{let j=0;pins.filter(p=>p.k===k).forEach(p=>p.j=j++)});
 let r=0;pins.filter(p=>p.k<0).forEach(p=>p.j=r++);
 const others=pins.filter(p=>p.k<0).length;
@@ -255,7 +255,7 @@ function show(el,o,extra){el.style.opacity=o;el.style.visibility=o>0.001?'visibl
 function render(t){
   $('tm').textContent=t.toFixed(1)+' s';
   // camera: slow push-in, then settle
-  const z = 1.0 + 0.05*eio(seg(t,0,7)) - 0.05*eio(seg(t,7,8.2)) + 0.04*seg(t,8.2,15);
+  const z = 1.22 + 0.06*seg(t,0,7) - 0.16*eio(seg(t,7,8.2)) + 0.05*seg(t,8.2,15);
   $('cam').style.transform=`scale(${z})`;
   $('cam').style.filter = t>14.6 && t<26 ? `blur(${6*seg(t,14.6,15.6)}px)` : 'none';
   $('dim').style.opacity = 0.78*seg(t,14.6,15.4);
@@ -269,16 +269,17 @@ function render(t){
   const blink = typing || Math.floor(t*2.2)%2===0;
   $('q').innerHTML = (q?`<span>${q}</span>`:`<span class="ph">搜索快闪、美食、品牌店</span>`)+(blink?'<i class="caret"></i>':'');
   const burstA=T1+WORDS.length*SLOT;   // ≈6.7s: all places pop
+  const hk = typing ? cur-1 : cur;
   const found = pins.filter(p=>p.k>=0&&p.k<=cur).length;
-  $('c1').innerHTML = t<burstA ? (cur>=0?`找到 <b>${pins.filter(p=>p.k===cur).length}</b> 家 ${WORDS[cur].w}`:'') : `seopup 已收录 <b>${pins.length}</b> 家：快闪 · 美食 · 品牌店`;
+  $('c1').innerHTML = t<burstA ? (cur>=0&&!typing?`找到 <b>${pins.filter(p=>p.ks.includes(cur)).length}</b> 家`:'') : `seopup 已收录 <b>${pins.length}</b> 家：快闪 · 美食 · 品牌店`;
   pins.forEach(p=>{
     let s=0,o=0;
-    if(p.k>=0){const a=T1+p.k*SLOT+0.55+p.j*0.08; s=back(seg(t,a,a+0.35)); if(p.k<cur||t>=burstA) s*=0.72}
+    if(p.k>=0){const a=T1+p.k*SLOT+0.55+p.j*0.04; s=back(seg(t,a,a+0.35)); if(!p.ks.includes(hk)||t>=burstA) s*=0.62}
     else{const a=burstA+(p.j/Math.max(1,others))*0.5; s=0.62*back(seg(t,a,a+0.3))}
-    o = s>0 ? 1 : 0;
+    o = s>0.01 ? 1 : 0;
     const out=1-seg(t,7.0,7.6); s*=out;
     p.el.style.transform=`scale(${s})`;p.el.style.opacity=o*out;
-    if(p.lab)p.lab.style.opacity=(p.k===cur&&t<burstA)?1:0;
+    p.lab.style.opacity=(p.ks.includes(hk)&&t<burstA&&s>0.5)?1:0;p.el.style.zIndex=p.ks.includes(hk)?2:1;
   });
 
   /* scene 2 (7.4–15.2): time-lapse of Popply pop-ups */
@@ -304,6 +305,7 @@ function render(t){
 
   /* scene 3 (15.0–20.4): poster wall */
   show(S[2], fade(t,15.0,15.3,19.9,20.4));
+  wall.style.opacity=1-0.45*seg(t,16.2,16.8);
   wall.style.transform=`rotate(-7deg) translateX(${-120*seg(t,15,20.4)}px)`;
   POST.forEach(p=>{const a=15.1+p.o*1.4; const k=eo(seg(t,a,a+0.4)); p.d.style.opacity=k; p.d.style.transform=`translateY(${(1-k)*60}px) scale(${0.9+0.1*k})`});
   const cap=document.querySelector('.cap3');cap.style.opacity=seg(t,16.4,16.9);cap.style.transform=`translateY(${(1-eo(seg(t,16.4,16.9)))*30}px)`;
