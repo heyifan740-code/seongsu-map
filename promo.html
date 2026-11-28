@@ -1,0 +1,376 @@
+<!doctype html>
+<html lang="zh">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>seopup 宣传片</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wght@500;700;800;900&family=Noto+Sans+SC:wght@500;700;900&display=swap">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.min.css">
+<style>
+/* Stage is 1920×1080 and scaled to fit the window. Everything is drawn from the time t, so any moment can be shown with ?t=seconds. */
+:root{--green:#2ea84a;--green-deep:#1d7d35;--green-soft:#e6f5ea;--ink:#1c201e;--muted:#6c756f;--red:#e2412e;--paper:#ffffff;
+  --sans:'Archivo','Noto Sans SC','PingFang SC','Microsoft YaHei',sans-serif}
+*{box-sizing:border-box;margin:0;padding:0}
+html,body{height:100%;background:#0f1211;overflow:hidden}
+#wrap{position:fixed;inset:0;display:flex;align-items:center;justify-content:center}
+#stage{position:absolute;left:0;top:0;width:1920px;height:1080px;transform-origin:0 0;overflow:hidden;background:#eef2ef;font-family:var(--sans);color:var(--ink)}
+#cam{position:absolute;inset:0;transform-origin:62% 55%}
+#map{position:absolute;inset:0;background:#eef2ef}
+#ov{position:absolute;inset:0;pointer-events:none}
+#wash{position:absolute;inset:0;background:linear-gradient(90deg,rgba(255,255,255,.92) 0%,rgba(255,255,255,.7) 30%,rgba(255,255,255,0) 52%)}
+#dim{position:absolute;inset:0;background:#141816;opacity:0}
+.layer{position:absolute;inset:0;pointer-events:none}
+/* pins */
+.pin{position:absolute;width:0;height:0}
+.pin .ph{position:absolute;left:-32px;top:-32px;width:64px;height:64px;border-radius:50%;border:4px solid #fff;box-shadow:0 6px 18px rgba(0,0,0,.22);overflow:hidden;background:var(--green-soft)}
+.pin .ph img{width:100%;height:100%;object-fit:cover;display:block}
+.pin .ph b{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;font:800 22px var(--sans);color:var(--green-deep)}
+.pin .lb{position:absolute;left:50%;top:40px;transform:translateX(-50%);white-space:nowrap;background:var(--ink);color:#fff;font:700 18px var(--sans);padding:5px 12px;border-radius:99px}
+.dot{position:absolute;width:16px;height:16px;margin:-8px 0 0 -8px;border-radius:50%;background:var(--green);border:2.5px solid #fff;box-shadow:0 1px 4px rgba(0,0,0,.25)}
+.dot.new{background:var(--red)}
+.ring{position:absolute;width:16px;height:16px;margin:-8px 0 0 -8px;border-radius:50%;border:3px solid var(--red)}
+/* scene 1 */
+.h1{position:absolute;left:120px;top:150px;font:900 76px/1.15 var(--sans);letter-spacing:-.5px}
+.h1 em{font-style:normal;color:var(--green)}
+.sub{position:absolute;left:124px;font:500 28px var(--sans);color:var(--muted)}
+.search{position:absolute;left:120px;top:270px;width:760px;height:84px;background:#fff;border-radius:42px;box-shadow:0 10px 30px rgba(0,0,0,.12),0 0 0 3px var(--green) inset;display:flex;align-items:center;padding:0 34px;gap:18px;font:700 34px var(--sans)}
+.search svg{flex:none}
+.search .ph{color:#a9b1ac;font-weight:500}
+.caret{display:inline-block;width:3px;height:38px;background:var(--green);vertical-align:-6px;margin-left:3px}
+.count1{position:absolute;left:120px;top:390px;font:700 30px var(--sans)}
+.count1 b{color:var(--green);font-size:44px}
+/* scene 2 */
+.date{position:absolute;right:110px;top:110px;text-align:right}
+.date .y{font:800 104px/1 'Archivo',sans-serif;font-variant-numeric:tabular-nums;letter-spacing:-2px}
+.date .l{font:500 26px var(--sans);color:var(--muted);margin-top:10px}
+.big{position:absolute;left:120px;top:420px}
+.big .n{font:900 200px/0.9 'Archivo',sans-serif;font-variant-numeric:tabular-nums;letter-spacing:-6px}
+.big .u{font:900 54px var(--sans);margin-top:16px}
+.big .live{font:700 30px var(--sans);margin-top:18px;display:flex;align-items:center;gap:12px}
+.big .live i{width:16px;height:16px;border-radius:50%;background:var(--green);display:inline-block}
+.bars{position:absolute;left:124px;top:860px;display:flex;align-items:flex-end;gap:18px;height:120px}
+.bar{width:54px;display:flex;flex-direction:column;align-items:center;justify-content:flex-end;height:100%}
+.bar i{display:block;width:100%;background:var(--green);border-radius:6px 6px 0 0}
+.bar span{font:700 18px var(--sans);color:var(--muted);margin-top:8px}
+.bar b{font:800 20px 'Archivo',sans-serif;margin-bottom:6px}
+.legend{position:absolute;right:110px;bottom:60px;display:flex;gap:28px;font:600 22px var(--sans);color:var(--muted);align-items:center}
+.legend span{display:flex;align-items:center;gap:10px}
+.legend i{width:16px;height:16px;border-radius:50%;display:inline-block;border:2px solid #fff;box-shadow:0 0 0 1px rgba(0,0,0,.1)}
+/* scene 3 */
+#wall{position:absolute;left:-140px;top:-120px;width:2400px;transform:rotate(-7deg);display:grid;grid-template-columns:repeat(12,1fr);gap:18px}
+.post{aspect-ratio:3/4;border-radius:14px;overflow:hidden;background:#2a302d;box-shadow:0 10px 24px rgba(0,0,0,.35)}
+.post img{width:100%;height:100%;object-fit:cover;display:block}
+.cap3{position:absolute;left:0;right:0;top:420px;text-align:center;color:#fff}
+.cap3 .a{font:900 120px/1 'Archivo','Noto Sans SC',sans-serif;letter-spacing:-2px}
+.cap3 .b{font:700 40px var(--sans);margin-top:22px;opacity:.9}
+.chip3{display:inline-block;background:var(--green);color:#fff;padding:8px 26px;border-radius:99px;font:800 34px var(--sans);margin-bottom:26px}
+/* scene 4 */
+.stats{position:absolute;left:0;right:0;top:250px;display:flex;justify-content:center;gap:40px}
+.st{width:470px;background:#fff;border-radius:28px;padding:46px 44px 40px;box-shadow:0 20px 50px rgba(0,0,0,.3)}
+.st .v{font:900 128px/1 'Archivo','Noto Sans SC',sans-serif;letter-spacing:-3px;color:var(--ink)}
+.st .v small{font-size:52px;letter-spacing:0;margin-left:6px}
+.st .k{font:700 30px/1.4 var(--sans);margin-top:20px;color:var(--ink)}
+.st .k2{font:500 22px var(--sans);color:var(--muted);margin-top:8px}
+.st.hot .v{color:var(--red)}
+.punch{position:absolute;left:0;right:0;top:720px;text-align:center;color:#fff;font:900 64px var(--sans)}
+.punch em{font-style:normal;color:#7fe08f}
+.foot{position:absolute;left:0;right:0;bottom:46px;text-align:center;color:rgba(255,255,255,.65);font:500 20px var(--sans)}
+/* scene 5 */
+#s5{background:var(--green-soft)}
+.phone{position:absolute;left:1120px;top:60px;width:430px;height:930px;border-radius:64px;background:#111;padding:16px;box-shadow:0 40px 80px rgba(20,60,30,.35)}
+.phone .scr{width:100%;height:100%;border-radius:50px;overflow:hidden;background:#fff;position:relative}
+.phone iframe{position:absolute;left:0;top:0;width:398px;height:898px;border:0}
+.phone .notch{position:absolute;left:50%;top:26px;width:120px;height:34px;margin-left:-60px;background:#111;border-radius:20px;z-index:2}
+.s5t{position:absolute;left:150px;top:230px}
+.logo{display:flex;align-items:center;gap:18px}
+.badge{width:76px;height:76px;border-radius:22px;background:var(--green);color:#fff;display:flex;align-items:center;justify-content:center;font:900 46px 'Archivo',sans-serif}
+.logo .w{font:900 72px 'Archivo',sans-serif;letter-spacing:-1.5px}
+.s5t h2{font:900 84px/1.15 var(--sans);margin-top:46px;letter-spacing:-1px}
+.s5t ul{list-style:none;margin-top:44px;display:grid;gap:22px}
+.s5t li{font:700 36px var(--sans);display:flex;align-items:center;gap:18px}
+.s5t li i{width:42px;height:42px;border-radius:50%;background:var(--green);color:#fff;display:flex;align-items:center;justify-content:center;font:900 24px 'Archivo',sans-serif;font-style:normal;flex:none}
+/* scene 6 */
+#s6{background:#fff;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center}
+#s6 .logo{transform:scale(1.9)}
+#s6 .tag{font:700 46px var(--sans);margin-top:90px}
+#s6 .url{font:600 30px 'Archivo',sans-serif;color:var(--green-deep);margin-top:26px;background:var(--green-soft);padding:12px 30px;border-radius:99px}
+#s6 .cr{position:absolute;bottom:40px;font:500 18px var(--sans);color:#9aa39d}
+.attr{position:absolute;right:16px;bottom:10px;font:500 14px var(--sans);color:rgba(0,0,0,.45)}
+/* controls (outside the stage) */
+#ctl{position:fixed;left:50%;bottom:18px;transform:translateX(-50%);display:flex;gap:10px;align-items:center;background:rgba(20,24,22,.86);padding:10px 12px;border-radius:16px;font:600 15px var(--sans);color:#fff;z-index:9;transition:opacity .3s}
+#ctl button{font:inherit;color:#fff;background:#2f3632;border:0;border-radius:10px;padding:10px 16px;cursor:pointer}
+#ctl button.pri{background:var(--green)}
+#ctl button:focus-visible{outline:3px solid #7fe08f}
+#ctl span{color:#b9c2bc;padding:0 6px;font-variant-numeric:tabular-nums}
+body.playing #ctl{opacity:0;pointer-events:none}
+body.playing.peek #ctl{opacity:1;pointer-events:auto}
+#load{position:fixed;inset:0;display:flex;align-items:center;justify-content:center;color:#fff;font:600 20px var(--sans);background:#0f1211;z-index:10}
+</style>
+</head>
+<body>
+<div id="wrap"><div id="stage">
+  <div id="cam"><div id="map"></div><div id="ov"></div></div>
+  <div id="wash"></div>
+  <div id="dim"></div>
+
+  <div class="layer" id="s1">
+    <div class="h1">圣水的快闪和品牌店，<em>一搜就有</em></div>
+    <div class="search"><svg width="34" height="34" viewBox="0 0 24 24" fill="none" stroke="#2ea84a" stroke-width="2.6" stroke-linecap="round"><circle cx="11" cy="11" r="7"/><path d="M20 20l-3.5-3.5"/></svg><span id="q"></span></div>
+    <div class="count1" id="c1"></div>
+  </div>
+
+  <div class="layer" id="s2">
+    <div class="h1">圣水的快闪，<em>天天在换</em></div>
+    <div class="sub" style="top:258px">Popply 上登记、地址在圣水洞的快闪 · 2026 年 6 月起</div>
+    <div class="date"><div class="y" id="dy">2026.06.01</div><div class="l">时间快进中</div></div>
+    <div class="big"><div class="n" id="bn">0</div><div class="u">场新快闪开幕</div><div class="live"><i></i><span id="live">此刻同时在开 0 家</span></div></div>
+    <div class="bars" id="bars"></div>
+    <div class="legend"><span><i style="background:#e2412e"></i>刚开幕</span><span><i style="background:#2ea84a"></i>正在开</span><span><i style="background:#b8c2bc"></i>已结束</span></div>
+  </div>
+
+  <div class="layer" id="s3">
+    <div id="wall"></div>
+    <div class="cap3"><div class="chip3">半年 · 圣水洞</div><div class="a" id="c3a">396 场快闪</div><div class="b">平均每周开 15 场新的</div></div>
+  </div>
+
+  <div class="layer" id="s4">
+    <div class="stats">
+      <div class="st" id="st1"><div class="v">10<small>天</small></div><div class="k">一场快闪通常只开这么久</div><div class="k2">开放天数中位数</div></div>
+      <div class="st hot" id="st2"><div class="v">45<small>%</small></div><div class="k">开放不超过一周</div><div class="k2">≤ 7 天的快闪占比</div></div>
+      <div class="st" id="st3"><div class="v">51<small>家</small></div><div class="k">同一天最多同时在开</div><div class="k2">2026 年 11 月 21 日</div></div>
+    </div>
+    <div class="punch" id="punch">刷到的时候，<em>可能已经结束了</em></div>
+    <div class="foot">数据：Popply 上 2026.6.1–11.28 开幕、地址在圣水洞的快闪，共 396 场，seopup 团队整理</div>
+  </div>
+
+  <div class="layer" id="s5">
+    <div class="s5t">
+      <div class="logo"><div class="badge">S</div><div class="w">seopup</div></div>
+      <h2>一张地图，<br>跟上圣水的节奏</h2>
+      <ul>
+        <li><i>1</i>正在开的快闪，结束倒计时</li>
+        <li><i>2</i>有赠品的快闪，地图上一眼看到</li>
+        <li><i>3</i>美食评分、品牌店一起逛</li>
+        <li><i>4</i>中文 / English / 한국어</li>
+      </ul>
+    </div>
+    <div class="phone"><div class="scr"><div class="notch"></div><iframe id="app" src="index.html?lang=zh" title="seopup" tabindex="-1"></iframe></div></div>
+  </div>
+
+  <div class="layer" id="s6">
+    <div class="logo"><div class="badge">S</div><div class="w">seopup</div></div>
+    <div class="tag">首尔快闪地图 · Seoul pop-up map</div>
+    <div class="url">heyifan740-code.github.io/seongsu-map</div>
+    <div class="cr">地图 © OpenStreetMap © CARTO · 图片 Popply / DiningCode / Kakao Map · 数据 Popply</div>
+  </div>
+  <div class="attr" id="attr">© OpenStreetMap © CARTO</div>
+</div></div>
+
+<div id="ctl">
+  <button class="pri" id="bPlay">▶ 播放</button>
+  <button id="bFull">⛶ 全屏</button>
+  <button id="bRec">● 录成视频</button>
+  <span id="tm">0.0 s</span>
+</div>
+<div id="load">加载地图和图片…</div>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.min.js"></script>
+<script src="pics.js"></script>
+<script src="data.js"></script>
+<script src="promo-data.js"></script>
+<script>
+(function(){
+const DUR = 35;
+const $ = id => document.getElementById(id);
+const clamp = (v,a=0,b=1)=>Math.max(a,Math.min(b,v));
+const seg = (t,a,b)=>clamp((t-a)/(b-a));
+const eo = x=>1-Math.pow(1-x,3);            // ease out
+const eio = x=>x<.5?4*x*x*x:1-Math.pow(-2*x+2,3)/2;
+const back = x=>{const c=1.70158,c3=c+1;return 1+c3*Math.pow(x-1,3)+c*Math.pow(x-1,2)};
+const fade = (t,a,b,c,d)=>Math.min(seg(t,a,b), 1-seg(t,c,d)); // in a→b, out c→d
+
+/* ---------- stage scaling ---------- */
+const stage=$('stage');
+function fit(){const s=Math.min(innerWidth/1920,innerHeight/1080);stage.style.transform=`translate(${(innerWidth-1920*s)/2}px,${(innerHeight-1080*s)/2}px) scale(${s})`}
+addEventListener('resize',fit);fit();
+
+/* ---------- map ---------- */
+const map=L.map('map',{zoomControl:false,attributionControl:false,zoomSnap:0,dragging:false,scrollWheelZoom:false,doubleClickZoom:false,boxZoom:false,keyboard:false,touchZoom:false,fadeAnimation:false})
+  .setView([37.5440,127.0475],15.95);
+const tiles=L.tileLayer('https://{s}.basemaps.cartocdn.com/rastertiles/voyager/{z}/{x}/{y}{r}.png',{subdomains:'abcd',maxZoom:20,detectRetina:true}).addTo(map);
+const px=(lat,lng)=>map.latLngToContainerPoint([lat,lng]);
+const B={w:1920,h:1080};
+const inView=p=>p.x>-40&&p.x<B.w+40&&p.y>-40&&p.y<B.h+40;
+
+/* ---------- scene 1: brand search over our own places ---------- */
+const POP=(typeof POPS!=='undefined'?POPS:[]);
+const pic=p=>{const g=(typeof PICS!=='undefined'&&PICS[p.id])||{};return p.img||(g.o&&g.o[0])||(g.p&&g.p[0])||(g.f&&g.f[0])||(g.i&&g.i[0])||''};
+const WORDS=[
+  {w:'Olive Young',re:/olive\s?young|올리브영/i},
+  {w:'MUSINSA',re:/musinsa|무신사/i},
+  {w:'Gentle Monster',re:/gentle\s?monster|젠틀몬스터/i},
+  {w:'NYUNYU',re:/nyunyu|뉴뉴/i},
+];
+const T1=0.9, SLOT=1.45;           // when typing starts, seconds per brand
+const pins=[];
+POP.forEach(p=>{
+  if(!p.ll)return;const q=px(p.ll[0],p.ll[1]);if(!inView(q))return;
+  const hay=[p.brand,p.name,p.t&&p.t.zh,p.t&&p.t.en].join(' ');
+  let k=WORDS.findIndex(w=>w.re.test(hay));
+  const el=document.createElement('div');el.className='pin';el.style.left=q.x+'px';el.style.top=q.y+'px';
+  const u=pic(p);
+  el.innerHTML=`<div class="ph">${u?`<img src="${u}" referrerpolicy="no-referrer" alt="">`:`<b>${(p.brand||p.name||'?').slice(0,1)}</b>`}</div>`+(k>=0?`<div class="lb">${WORDS[k].w}</div>`:'');
+  const img=el.querySelector('img');if(img)img.onerror=()=>{img.remove()};
+  $('ov').appendChild(el);
+  pins.push({el,k,i:pins.length,lab:el.querySelector('.lb')});
+});
+// brand order inside each slot
+WORDS.forEach((w,k)=>{let j=0;pins.filter(p=>p.k===k).forEach(p=>p.j=j++)});
+let r=0;pins.filter(p=>p.k<0).forEach(p=>p.j=r++);
+const others=pins.filter(p=>p.k<0).length;
+
+/* ---------- scene 2: Popply dots ---------- */
+const D=PROMO.pts.map((a,i)=>{const q=px(a[1],a[0]);
+  // spread pop-ups that share an address a little, so repeats stay visible
+  const ang=i*2.399, rr=(i%5)*3; q.x+=Math.cos(ang)*rr; q.y+=Math.sin(ang)*rr;
+  const el=document.createElement('div');el.className='dot';el.style.left=q.x+'px';el.style.top=q.y+'px';
+  const ring=document.createElement('div');ring.className='ring';ring.style.left=q.x+'px';ring.style.top=q.y+'px';
+  $('ov').appendChild(el);$('ov').appendChild(ring);
+  return {s:a[2],e:a[3],el,ring}});
+const bars=$('bars');const MB=PROMO.months.map((m,i)=>{const d=document.createElement('div');d.className='bar';d.innerHTML=`<b>0</b><i style="height:0"></i><span>${m[0]}</span>`;bars.appendChild(d);return {d,b:d.querySelector('b'),i:d.querySelector('i'),k:i}});
+const monthOf=day=>{const dt=new Date(Date.UTC(2026,5,1)+day*864e5);return dt.getUTCMonth()-5};
+const fmtDay=day=>{const dt=new Date(Date.UTC(2026,5,1)+Math.round(day)*864e5);return `${dt.getUTCFullYear()}.${String(dt.getUTCMonth()+1).padStart(2,'0')}.${String(dt.getUTCDate()).padStart(2,'0')}`};
+const maxMonth=Math.max(...PROMO.months.map(m=>m[1]));
+
+/* ---------- scene 3: poster wall ---------- */
+const wall=$('wall');const POST=[];
+for(let i=0;i<60;i++){const id=PROMO.post[i%PROMO.post.length];const d=document.createElement('div');d.className='post';
+  d.innerHTML=`<img src="https://d8nffddmkwqeq.cloudfront.net/store/${id}" referrerpolicy="no-referrer" alt="">`;wall.appendChild(d);
+  POST.push({d,o:((i*37)%60)/60})}
+
+/* ---------- render(t) ---------- */
+const S=['s1','s2','s3','s4','s5','s6'].map($);
+function show(el,o,extra){el.style.opacity=o;el.style.visibility=o>0.001?'visible':'hidden';if(extra!==undefined)el.style.transform=extra}
+function render(t){
+  $('tm').textContent=t.toFixed(1)+' s';
+  // camera: slow push-in, then settle
+  const z = 1.0 + 0.05*eio(seg(t,0,7)) - 0.05*eio(seg(t,7,8.2)) + 0.04*seg(t,8.2,15);
+  $('cam').style.transform=`scale(${z})`;
+  $('cam').style.filter = t>14.6 && t<26 ? `blur(${6*seg(t,14.6,15.6)}px)` : 'none';
+  $('dim').style.opacity = 0.78*seg(t,14.6,15.4);
+  $('wash').style.opacity = 1-seg(t,14.6,15.4);
+  $('attr').style.opacity = t<15.4?1:0;
+
+  /* scene 1 (0–7.4) */
+  show(S[0], fade(t,0,.5,6.9,7.4), `translateY(${-14*seg(t,6.9,7.4)}px)`);
+  let q='', typing=false, cur=-1;
+  WORDS.forEach((w,k)=>{const a=T1+k*SLOT; if(t>=a){cur=k; const n=Math.round(w.w.length*seg(t,a,a+0.55)); q=w.w.slice(0,n); typing=t<a+0.55}});
+  const blink = typing || Math.floor(t*2.2)%2===0;
+  $('q').innerHTML = (q?`<span>${q}</span>`:`<span class="ph">搜索快闪、美食、品牌店</span>`)+(blink?'<i class="caret"></i>':'');
+  const burstA=T1+WORDS.length*SLOT;   // ≈6.7s: all places pop
+  const found = pins.filter(p=>p.k>=0&&p.k<=cur).length;
+  $('c1').innerHTML = t<burstA ? (cur>=0?`找到 <b>${pins.filter(p=>p.k===cur).length}</b> 家 ${WORDS[cur].w}`:'') : `seopup 已收录 <b>${pins.length}</b> 家：快闪 · 美食 · 品牌店`;
+  pins.forEach(p=>{
+    let s=0,o=0;
+    if(p.k>=0){const a=T1+p.k*SLOT+0.55+p.j*0.08; s=back(seg(t,a,a+0.35)); if(p.k<cur||t>=burstA) s*=0.72}
+    else{const a=burstA+(p.j/Math.max(1,others))*0.5; s=0.62*back(seg(t,a,a+0.3))}
+    o = s>0 ? 1 : 0;
+    const out=1-seg(t,7.0,7.6); s*=out;
+    p.el.style.transform=`scale(${s})`;p.el.style.opacity=o*out;
+    if(p.lab)p.lab.style.opacity=(p.k===cur&&t<burstA)?1:0;
+  });
+
+  /* scene 2 (7.4–15.2): time-lapse of Popply pop-ups */
+  show(S[1], fade(t,7.4,7.9,14.6,15.2));
+  const day = PROMO.days*eio(seg(t,8.0,13.6));
+  const dOn = t>=7.6 && t<15.6;
+  let opened=0, live=0;
+  D.forEach(p=>{
+    if(!dOn||p.s>day){p.el.style.opacity=0;p.ring.style.opacity=0;return}
+    opened++;
+    const fresh=day-p.s<4, active=day<=p.e+0.5;
+    if(active)live++;
+    const sc = fresh ? 1.35 : active ? 1 : 0.55;
+    p.el.className = 'dot'+(fresh?' new':'');
+    p.el.style.background = fresh?'#e2412e':active?'#2ea84a':'#b8c2bc';
+    p.el.style.transform=`scale(${sc})`;
+    p.el.style.opacity = (active?1:0.75)*(1-seg(t,14.6,15.4));
+    const rk=seg(day,p.s,p.s+5); p.ring.style.opacity = fresh? (1-rk)*0.9:0; p.ring.style.transform=`scale(${1+rk*2.6})`;
+  });
+  $('bn').textContent=opened; $('live').textContent=`此刻同时在开 ${live} 家`; $('dy').textContent=fmtDay(day);
+  const cnt=PROMO.months.map(()=>0); if(dOn) PROMO.pts.forEach(a=>{if(a[2]<=day)cnt[monthOf(a[2])]++});
+  MB.forEach(m=>{m.b.textContent=cnt[m.k]||'';m.i.style.height=(84*cnt[m.k]/maxMonth)+'px'});
+
+  /* scene 3 (15.0–20.4): poster wall */
+  show(S[2], fade(t,15.0,15.3,19.9,20.4));
+  wall.style.transform=`rotate(-7deg) translateX(${-120*seg(t,15,20.4)}px)`;
+  POST.forEach(p=>{const a=15.1+p.o*1.4; const k=eo(seg(t,a,a+0.4)); p.d.style.opacity=k; p.d.style.transform=`translateY(${(1-k)*60}px) scale(${0.9+0.1*k})`});
+  const cap=document.querySelector('.cap3');cap.style.opacity=seg(t,16.4,16.9);cap.style.transform=`translateY(${(1-eo(seg(t,16.4,16.9)))*30}px)`;
+  $('c3a').textContent=Math.round(396*eo(seg(t,16.4,17.6)))+' 场快闪';
+  // wall stays faintly behind scene 4
+  if(t>=20.4&&t<26){S[2].style.visibility='visible';S[2].style.opacity=.25*(1-seg(t,25.4,26));cap.style.opacity=0}
+
+  /* scene 4 (20.4–26) */
+  show(S[3], fade(t,20.3,20.6,25.4,26));
+  ['st1','st2','st3'].forEach((id,i)=>{const a=20.6+i*0.55;const k=back(seg(t,a,a+0.45));$(id).style.opacity=seg(t,a,a+0.2);$(id).style.transform=`translateY(${(1-k)*80}px)`});
+  const pk=seg(t,22.9,23.4);$('punch').style.opacity=pk;$('punch').style.transform=`translateY(${(1-eo(pk))*30}px)`;
+
+  /* scene 5 (26–31.6) */
+  show(S[4], fade(t,25.8,26.3,31.2,31.6));
+  const ph=document.querySelector('.phone');const pkk=eo(seg(t,26.1,26.9));ph.style.transform=`translateY(${(1-pkk)*160}px) rotate(${(1-pkk)*4}deg)`;
+  document.querySelectorAll('.s5t li').forEach((li,i)=>{const a=26.7+i*0.35;li.style.opacity=seg(t,a,a+0.3);li.style.transform=`translateX(${(1-eo(seg(t,a,a+0.3)))*-30}px)`});
+
+  /* scene 6 (31.4–35) */
+  show(S[5], seg(t,31.3,31.8));
+  const lg=S[5].querySelector('.logo');const k6=back(seg(t,31.5,32.1));lg.style.transform=`scale(${1.9*(0.7+0.3*k6)})`;
+}
+
+/* ---------- playback ---------- */
+let t0=null, playing=false, rec=null, curT=0;
+const qs=new URLSearchParams(location.search);
+function frame(now){
+  if(!playing)return;
+  if(t0===null)t0=now-curT*1000;
+  curT=(now-t0)/1000;
+  if(curT>=DUR){curT=DUR;render(DUR);stop();return}
+  render(curT);requestAnimationFrame(frame);
+}
+function play(from=0){curT=from;t0=null;playing=true;document.body.classList.add('playing');$('bPlay').textContent='■ 停止';requestAnimationFrame(frame)}
+function stop(){playing=false;document.body.classList.remove('playing');$('bPlay').textContent='▶ 重新播放';if(rec&&rec.state==='recording')setTimeout(()=>rec.stop(),600)}
+$('bPlay').onclick=()=>playing?stop():play(0);
+$('bFull').onclick=()=>{const d=document.documentElement;(d.requestFullscreen||d.webkitRequestFullscreen).call(d).catch?.(()=>{})};
+addEventListener('keydown',e=>{if(e.code==='Space'){e.preventDefault();playing?stop():play(0)}});
+let peekT;addEventListener('mousemove',()=>{document.body.classList.add('peek');clearTimeout(peekT);peekT=setTimeout(()=>document.body.classList.remove('peek'),1500)});
+
+// Record this tab (Chrome / Edge): pick "this tab", the film plays once, then a video file downloads.
+$('bRec').onclick=async()=>{
+  try{
+    const stream=await navigator.mediaDevices.getDisplayMedia({video:{frameRate:60,displaySurface:'browser'},audio:false,preferCurrentTab:true,selfBrowserSurface:'include'});
+    const types=['video/mp4;codecs=avc1.640033','video/mp4;codecs=avc1','video/mp4','video/webm;codecs=vp9','video/webm'];
+    const mime=types.find(m=>window.MediaRecorder&&MediaRecorder.isTypeSupported(m))||'';
+    const chunks=[];rec=new MediaRecorder(stream,{mimeType:mime,videoBitsPerSecond:16e6});
+    rec.ondataavailable=e=>e.data.size&&chunks.push(e.data);
+    rec.onstop=()=>{stream.getTracks().forEach(tr=>tr.stop());const ext=mime.includes('mp4')?'mp4':'webm';
+      const a=document.createElement('a');a.href=URL.createObjectURL(new Blob(chunks,{type:mime||'video/webm'}));a.download=`seopup_宣传片.${ext}`;document.body.appendChild(a);a.click();a.remove()};
+    render(0);
+    setTimeout(()=>{rec.start(200);setTimeout(()=>play(0),400)},700);
+  }catch(e){alert('没能开始录制：请用 Chrome 打开本页，点「录成视频」后选「此标签页」。也可以用 Mac 自带的 Shift+Cmd+5 录屏。')}
+};
+
+/* ---------- wait for tiles and pictures, then show ---------- */
+function ready(){
+  $('load').remove();
+  if(qs.has('t')){curT=+qs.get('t');render(curT);document.body.classList.add('still')}
+  else{render(0); if(qs.has('auto'))play(0)}
+  window.__render=render;
+}
+let tilesOk=false;tiles.once('load',()=>tilesOk=true);
+const imgs=[...document.querySelectorAll('#ov img,#wall img')];
+const imgOk=Promise.all(imgs.map(im=>im.complete?1:new Promise(r=>{im.addEventListener('load',r,{once:true});im.addEventListener('error',r,{once:true})})));
+const tilesP=new Promise(r=>{const c=()=>tilesOk?r():setTimeout(c,100);c()});
+Promise.race([Promise.all([imgOk,tilesP]),new Promise(r=>setTimeout(r,8000))]).then(ready);
+})();
+</script>
+</body>
+</html>
